@@ -1,2 +1,3 @@
-# cocosLua_GameBox
-cocosLua's Demo
+# GameBox
+# Version: cocos 3.10
+# language: lua
