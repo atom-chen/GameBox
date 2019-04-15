@@ -1,9 +1,0 @@
-# for Mac OSX System Files
-.DS_Store
-Thumbs.db
-
-# for Xcode
-.*.swp
-.clang_complete
-*.xcodeproj/project.xcoworkspace
-*.xcodeproj/xcuserdata/
