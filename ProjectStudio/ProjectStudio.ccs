@@ -1,0 +1,15 @@
+<Solution>
+  <PropertyGroup Name="ProjectStudio" Version="3.10.0.0" Type="CocosStudio" />
+  <SolutionFolder>
+    <Group ctype="ResourceGroup">
+      <RootFolder Name=".">
+        <Folder Name="art">
+          <Image Name="HelloWorld.png" />
+        </Folder>
+        <Folder Name="csd">
+          <Project Name="MainScene.csd" Type="Scene" />
+        </Folder>
+      </RootFolder>
+    </Group>
+  </SolutionFolder>
+</Solution>
