@@ -888,21 +888,33 @@ int LuaStack::luaLoadBuffer(lua_State *L, const char *chunk, int chunkSize, cons
     {
         switch (r)
         {
-            case LUA_ERRSYNTAX:
+            case LUA_ERRSYNTAX: 
+				// 语法错误
                 CCLOG("[LUA ERROR] load \"%s\", error: syntax error during pre-compilation.", chunkName);
                 break;
-
             case LUA_ERRMEM:
+				// 内存分配错误
                 CCLOG("[LUA ERROR] load \"%s\", error: memory allocation error.", chunkName);
                 break;
-
+			case LUA_ERRRUN: 
+				// 运行错误
+				CCLOG("[LUA ERROR] load \"%s\", error: run error.", chunkName);
+				break;
             case LUA_ERRFILE:
+				// 文件错误
                 CCLOG("[LUA ERROR] load \"%s\", error: cannot open/read file.", chunkName);
                 break;
-
+			case LUA_ERRERR:           
+				// 运行错误处理函数时发生错误
+				CCLOG("[LUA ERROR] load \"%s\", while running the error handler function.", chunkName);
             default:
+				// 未知错误
                 CCLOG("[LUA ERROR] load \"%s\", error: unknown.", chunkName);
         }
+		// 通过lua的堆栈，获取栈顶的错误信息，将错误日志打印出来（-1表示栈顶，lua_tostring用于获取栈中数据，然后转换为string）
+		const char* error = lua_tostring(L, -1);
+		CCLOG("[LUA ERROR] Error Result: %s", error);
+		lua_pop(L, 1);
     }
 #endif
     return r;
