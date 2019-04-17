@@ -30,7 +30,8 @@ THE SOFTWARE.
 #include "ui/GUIExport.h"
 #include "2d/CCNode.h"
 
-NS_CC_BEGIN
+NS_CC_BEGIN;
+USING_NS_CC;
 
 /**
  * @addtogroup ui
@@ -55,16 +56,16 @@ public:
      * @return Widget instance pointer.
      */
     static Widget* seekWidgetByTag(Widget* root, int tag);
+	static Widget* seekWidgetByName(Widget* root, const std::string& name);
     
-    /**
-     * Find a widget with a specific name from root widget.
-     * This search will be recursive through all child widgets.
-     *
-     * @param root      The be searched root widget.
-     * @param name      The widget name.
-     * @return Widget instance pointer.
-     */
-    static Widget* seekWidgetByName(Widget* root, const std::string& name);
+	/*
+	在cocostudio 2.x版本以后，studio创建的节点不仅包含于Widget，而且也包含Node的节点
+	因此，获取子节点使用seekWidgetByTag或者seekWidgetByName会出现错误：
+	invalid arguments in function 'lua_cocos2dx_ui_Helper_seekWidgetByName'
+	因此要创建新的接口
+	*/
+	static Node* seekNodeByTag(Node* root, int tag);
+	static Node* seekNodeByName(Node* root, const std::string& name);
     
     /**
      * Find a widget with a specific action tag from root widget
