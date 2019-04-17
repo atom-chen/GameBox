@@ -12,7 +12,7 @@ local targetPlatform = cc.Application:getInstance():getTargetPlatform()
 
 local function lazy_init()
     if not dp_initialized then
-        dp_shader = cc.ShaderCache:getInstance():getProgram(SHADER_NAME_POSITION_U_COLOR)
+        dp_shader = cc.GLProgramCache:getInstance():getProgram(SHADER_NAME_POSITION_U_COLOR)
         --dp_shader:retain()
         if nil ~= dp_shader then
             dp_colorLocation = gl.getUniformLocation( dp_shader:getProgram(), "u_color")

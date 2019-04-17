@@ -1,8 +1,32 @@
+require("cocos/init")
+require("cocos/framework/init")
 
 local MyApp = class("MyApp", cc.load("mvc").AppBase)
 
-function MyApp:onCreate()
-    math.randomseed(os.time())
+function MyApp:ctor()
+	local eventDispatcher = cc.Director:getInstance():getEventDispatcher()
+	local customListenerBg = cc.EventListenerCustom:create("APP_ENTER_BACKGROUND_EVENT",
+								handler(self, self.onEnterBackground))
+	eventDispatcher:addEventListenerWithFixedPriority(customListenerBg, 1)
+	local customListenerFg = cc.EventListenerCustom:create("APP_ENTER_FOREGROUND_EVENT",
+								handler(self, self.onEnterForeground))
+	eventDispatcher:addEventListenerWithFixedPriority(customListenerFg, 1)
+
+end
+
+function MyApp:run()
+	local loginScene = require("app.views.LogoScene"):create()
+    if loginScene then 
+	    cc.Director:getInstance():replaceScene(loginScene)
+    end 
+end
+
+function MyApp:onEnterBackground()
+	-- 
+end
+
+function MyApp:onEnterForeground()
+	-- 
 end
 
 return MyApp

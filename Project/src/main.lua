@@ -1,26 +1,36 @@
-
+-- 设置加载图像失败时是否弹出消息框
 cc.FileUtils:getInstance():setPopupNotify(false)
 
 require "config"
 require "cocos.init"
 
---添加调试代码
-local breakInfoFun,xpcallFun = require("LuaDebug")("localhost", 7003)
--- 添加断点定时器
-cc.Director:getInstance():getScheduler():scheduleScriptFunc(breakInfoFun, 0.5, false)
-
 local function main()
+    if CC_SHOW_FPS then
+        cc.Director:getInstance():setDisplayStats(true)
+    end
+	cc.Director:getInstance():setAnimationInterval(1/60)
+
     require("app.MyApp"):create():run()
 end
 
---2.程序异常监听            
-__G__TRACKBACK__ = function(msg)
-    debugXpCall()
-    local msg = debug.traceback(msg, 3)       
-    print(msg)                     
+--[[
+-- 断点不能使用
+-- 参考：https://github.com/k0204/LuaIde/wiki
+local breakInfoFun,xpcallFun = require("LuaDebug")("localhost", 7003)
+-- 1.断点定时器添加
+cc.Director:getInstance():getScheduler():scheduleScriptFunc(breakInfoFun, 0.3, false)
+-- 2.程序异常监听
+__G__TRACKBACK__ = function(errorMessage)
+    debugXpCall();
+    print("----------------------------------------")
+    local msg = debug.traceback(errorMessage, 3)
+    print(msg)
+    print("----------------------------------------")
 end
+]]
 
 local status, msg = xpcall(main, __G__TRACKBACK__)
 if not status then
     print(msg)
 end
+
