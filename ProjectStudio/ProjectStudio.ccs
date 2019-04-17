@@ -4,10 +4,19 @@
     <Group ctype="ResourceGroup">
       <RootFolder Name=".">
         <Folder Name="art">
+          <Folder Name="font">
+            <Image Name="num_yellow.png" />
+          </Folder>
+          <Folder Name="res">
+            <Image Name="login.png" />
+            <Image Name="start_btn1.png" />
+            <Image Name="start_btn2.png" />
+          </Folder>
           <Image Name="HelloWorld.png" />
         </Folder>
         <Folder Name="csd">
           <Project Name="MainScene.csd" Type="Scene" />
+          <Project Name="UILogin.csd" Type="Scene" />
         </Folder>
       </RootFolder>
     </Group>
