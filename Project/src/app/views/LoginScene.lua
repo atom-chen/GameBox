@@ -28,7 +28,6 @@ function UILoginScene:_initUI()
     self:addChild(self._root)
 
     self._startBtn = ccui.Helper:seekNodeByName(self._root, "Button_Start")
-    --self._startBtn = self._root:getChildByName("Button_Start")
     self._startBtn:addTouchEventListener(handler(self, self._onClickStartEvent))
 end 
 

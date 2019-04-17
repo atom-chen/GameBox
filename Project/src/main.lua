@@ -5,15 +5,10 @@ require "config"
 require "cocos.init"
 
 local function main()
-    if CC_SHOW_FPS then
-        cc.Director:getInstance():setDisplayStats(true)
-    end
-	cc.Director:getInstance():setAnimationInterval(1/60)
-
     require("app.MyApp"):create():run()
 end
 
---[[
+
 -- 断点不能使用
 -- 参考：https://github.com/k0204/LuaIde/wiki
 local breakInfoFun,xpcallFun = require("LuaDebug")("localhost", 7003)
@@ -21,13 +16,12 @@ local breakInfoFun,xpcallFun = require("LuaDebug")("localhost", 7003)
 cc.Director:getInstance():getScheduler():scheduleScriptFunc(breakInfoFun, 0.3, false)
 -- 2.程序异常监听
 __G__TRACKBACK__ = function(errorMessage)
-    debugXpCall();
+    xpcallFun()
     print("----------------------------------------")
     local msg = debug.traceback(errorMessage, 3)
     print(msg)
     print("----------------------------------------")
 end
-]]
 
 local status, msg = xpcall(main, __G__TRACKBACK__)
 if not status then
