@@ -1,4 +1,5 @@
 -- 登录页面
+
 local UILoginScene = class("UILoginScene", function()
     return cc.Scene:create()
 end) 
@@ -35,7 +36,13 @@ function UILoginScene:_onClickStartEvent(sender, eventType)
     if eventType ~= ccui.TouchEventType.ended then 
         return 
     end 
-    print("您点击了开始游戏按钮")
+    
+    local layer = require("app.views.login.UISelectRole"):create()
+    if not layer then 
+        print("Error: require UISelectRole Failed!!!")
+        return 
+    end 
+    self:addChild(layer)
 end 
 
 return UILoginScene 

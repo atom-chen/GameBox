@@ -33,7 +33,7 @@ function LogoScene:init()
     local act4 = cc.DelayTime:create(0.5)
     local act5 = cc.CallFunc:create(function()
         -- 进入登录场景
-        local loginScene = require("app.views.LoginScene"):create()
+        local loginScene = require("app.views.login.UILoginScene"):create()
         if loginScene then 
 		    cc.Director:getInstance():replaceScene(loginScene)
         end 

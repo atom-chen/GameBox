@@ -8,15 +8,24 @@
             <Image Name="num_yellow.png" />
           </Folder>
           <Folder Name="res">
+            <Image Name="hall_bg1.png" />
+            <Image Name="hall_bg2.png" />
+            <Image Name="input_bg.png" />
             <Image Name="login.png" />
+            <Image Name="person_select.png" />
+            <Image Name="person1.png" />
+            <Image Name="person2.png" />
+            <Image Name="person3.png" />
+            <Image Name="public_btn1.png" />
             <Image Name="start_btn1.png" />
             <Image Name="start_btn2.png" />
           </Folder>
           <Image Name="HelloWorld.png" />
         </Folder>
         <Folder Name="csd">
-          <Project Name="MainScene.csd" Type="Scene" />
+          <Project Name="UIHall.csd" Type="Scene" />
           <Project Name="UILogin.csd" Type="Scene" />
+          <Project Name="UISelectRole.csd" Type="Scene" />
         </Folder>
       </RootFolder>
     </Group>
