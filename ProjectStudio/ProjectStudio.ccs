@@ -22,6 +22,9 @@
           </Folder>
         </Folder>
         <Folder Name="csd">
+          <Folder Name="test">
+            <Project Name="UITest.csd" Type="Scene" />
+          </Folder>
           <Project Name="UIHall.csd" Type="Scene" />
           <Project Name="UILogin.csd" Type="Scene" />
           <Project Name="UISelectRole.csd" Type="Scene" />

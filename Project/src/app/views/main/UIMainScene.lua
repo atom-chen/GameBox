@@ -42,7 +42,8 @@ function UIMainScene:_onDebugDemoEvt(sender, eventType)
     if eventType ~= ccui.TouchEventType.ended then 
         return 
     end 
-    print("您点击了个人示例按钮")
+    local testScene = require("app.personTest.TestScene"):create()
+    cc.Director:getInstance():replaceScene(testScene)
 end 
 
 function UIMainScene:_onPhoneDemoEvt(sender, eventType)

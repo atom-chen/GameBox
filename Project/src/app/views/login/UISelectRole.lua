@@ -42,16 +42,10 @@ function UISelectRole:_initUI()
     end 
 
     self._sureBtn = ccui.Helper:seekNodeByName(self, "Button_Sure")
-
     self._backBtn = ccui.Helper:seekNodeByName(self, "Button_Back")
-    print(tolua.type(self._backBtn))
-    
     self._noticeText = ccui.Helper:seekNodeByName(self, "Text_Notice")
-    print(tolua.type(self._noticeText))
     self._inputNameField = ccui.Helper:seekNodeByName(self, "TextField_Name")
-    print(tolua.type(self._inputNameField))
     
-
     self._inputNameField:addEventListener(handler(self, self._onTextFieldChanged))
     self._sureBtn:addTouchEventListener(handler(self, self._onSureEvt))
     self._backBtn:addTouchEventListener(handler(self, self._onBackEvt))
