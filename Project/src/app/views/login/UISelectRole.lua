@@ -1,6 +1,8 @@
 -- 选角色页面
+local shileConfig = require("app.config.shieldConfig")
+
 local UISelectRole = class("UISelectRole", function()
-    return cc.CSLoader:createNode("res/csd/UILogin.csb")
+    return cc.CSLoader:createNode("res/csd/UISelectRole.csb")
 end) 
 
 function UISelectRole:ctor()
@@ -24,19 +26,49 @@ function UISelectRole:_initData()
     self._inputNameField = nil  -- 输入昵称
     self._noticeText = nil      -- 警告文本
     self._sureBtn = nil         -- 确认按钮
+    self._backBtn = nil         -- 返回按钮
 end 
 
 function UISelectRole:_initUI()
-    self._sureBtn = ccui.Helper:seekNodeByName(self, "Button_Sure")
-    
-    self._noticeText = ccui.Helper:seekNodeByName(self, "Text_Notice")
-    self._inputNameField = ccui.Helper:seekNodeByName(self, "TextField_Name")
     for i = 1, 3 do 
         self._rolePanels[i] = ccui.Helper:seekNodeByName(self, "Panel_" .. i)
+        self._rolePanels[i]:addTouchEventListener(handler(self, self._onSelectRoleEvt))
+        self._rolePanels[i]:setTag(i)
+
+        -- 
+        local tagImg = self._rolePanels[i]:getChildByName("Image_select")
+        local isShow = i == 1 and true or false 
+        tagImg:setVisible(isShow)
     end 
 
+    self._sureBtn = ccui.Helper:seekNodeByName(self, "Button_Sure")
+
+    self._backBtn = ccui.Helper:seekNodeByName(self, "Button_Back")
+    print(tolua.type(self._backBtn))
+    
+    self._noticeText = ccui.Helper:seekNodeByName(self, "Text_Notice")
+    print(tolua.type(self._noticeText))
+    self._inputNameField = ccui.Helper:seekNodeByName(self, "TextField_Name")
+    print(tolua.type(self._inputNameField))
+    
+
     self._inputNameField:addEventListener(handler(self, self._onTextFieldChanged))
-    self._sureBtn:addTouchEventListener(handler(self, self._onClickSureEvent))
+    self._sureBtn:addTouchEventListener(handler(self, self._onSureEvt))
+    self._backBtn:addTouchEventListener(handler(self, self._onBackEvt))
+end 
+
+function UISelectRole:_onSelectRoleEvt(sender, eventType)
+    if eventType ~= ccui.TouchEventType.ended then 
+        return 
+    end 
+
+    local tag = sender:getTag()
+    print("你选择的角色为:", tag)
+    for i = 1, 3 do 
+        local tagImg = self._rolePanels[i]:getChildByName("Image_select")
+        local isShow = i == tag and true or false 
+        tagImg:setVisible(isShow)
+    end 
 end 
 
 function UISelectRole:_onTextFieldChanged(sender, eventType)
@@ -47,7 +79,7 @@ function UISelectRole:_onTextFieldChanged(sender, eventType)
 	end
 end 
 
-function UISelectRole:_onClickSureEvent(sender, eventType)
+function UISelectRole:_onSureEvt(sender, eventType)
     if eventType ~= ccui.TouchEventType.ended then 
         return 
     end 
@@ -59,14 +91,18 @@ function UISelectRole:_onClickSureEvent(sender, eventType)
     elseif string.len(strName) > 10 then 
         print("您输入的昵称过长")
         return 
+    elseif shileConfig.CheckShield(strName) then 
+        print("您输入了非法字符，请重新输入")
+        self._inputNameField:setString("")
+        return 
     end 
 
-    -- 注： 记得添加非法字符的判定
+    self:_destory()
+    --
     local UIMainScene = require("app.views.main.UIMainScene"):create()
     if UIMainScene then 
         cc.Director:getInstance():replaceScene(UIMainScene)
     end 
-    self:_destory()
 end 
 
 function UISelectRole:_onBackEvt(sernder, eventType)

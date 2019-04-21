@@ -30,15 +30,14 @@ function LogoScene:init()
     local act3 = cc.CallFunc:create(function(sender)
         -- 启动Lua垃圾回收器
     end)
-    local act4 = cc.DelayTime:create(0.5)
-    local act5 = cc.CallFunc:create(function()
+    local act4 = cc.CallFunc:create(function()
         -- 进入登录场景
         local loginScene = require("app.views.login.UILoginScene"):create()
         if loginScene then 
 		    cc.Director:getInstance():replaceScene(loginScene)
         end 
     end)
-    local action = cc.Sequence:create(act1, act2, act3, act4, act5)
+    local action = cc.Sequence:create(act1, act2, act3, act4)
     logoSprite:runAction(action)
 end 
 

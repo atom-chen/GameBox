@@ -1,7 +1,7 @@
 -- 大厅页面
 
 local UIMainScene = class("UIMainScene", function()
-    return cc.CSLoader:createNode("res/csd/UILogin.csb")
+    return cc.Scene:create()
 end) 
 
 function UIMainScene:ctor()
@@ -26,9 +26,12 @@ function UIMainScene:_initData()
 end 
 
 function UIMainScene:_initUI()
-    self._debugDemoBtn = ccui.Helper:seekNodeByName(self, "Button_Debug")
-    self._phoneDemoBtn = ccui.Helper:seekNodeByName(self, "Button_phone")
-    self._EliminateDemoBtn = ccui.Helper:seekNodeByName(self, "Button_Diamond")
+    self._root = cc.CSLoader:createNode("res/csd/UIHall.csb")
+    self:addChild(self._root)
+
+    self._debugDemoBtn = ccui.Helper:seekNodeByName(self._root, "Button_Debug")
+    self._phoneDemoBtn = ccui.Helper:seekNodeByName(self._root, "Button_phone")
+    self._eliminateDemoBtn = ccui.Helper:seekNodeByName(self._root, "Button_Diamond")
 
     self._debugDemoBtn:addTouchEventListener(handler(self, self._onDebugDemoEvt))
     self._phoneDemoBtn:addTouchEventListener(handler(self, self._onPhoneDemoEvt))

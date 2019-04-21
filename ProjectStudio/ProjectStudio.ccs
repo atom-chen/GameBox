@@ -20,7 +20,6 @@
             <Image Name="start_btn1.png" />
             <Image Name="start_btn2.png" />
           </Folder>
-          <Image Name="HelloWorld.png" />
         </Folder>
         <Folder Name="csd">
           <Project Name="UIHall.csd" Type="Scene" />
