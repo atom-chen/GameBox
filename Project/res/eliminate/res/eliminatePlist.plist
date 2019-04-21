@@ -1,0 +1,203 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>eliminate/res/board.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,2},{320,320}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{320,320}</string>
+			</dict>
+			<key>eliminate/res/bonus.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{176,418},{55,30}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{55,30}</string>
+			</dict>
+			<key>eliminate/res/bonusbar.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{443,2},{310,14}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{310,14}</string>
+			</dict>
+			<key>eliminate/res/bonusbar_fill.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,500},{308,10}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{308,10}</string>
+			</dict>
+			<key>eliminate/res/btn_about_normal.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{314,326},{125,42}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{125,42}</string>
+			</dict>
+			<key>eliminate/res/btn_about_select.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{314,455},{125,42}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{125,42}</string>
+			</dict>
+			<key>eliminate/res/btn_play_normal.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{176,326},{125,42}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{125,42}</string>
+			</dict>
+			<key>eliminate/res/btn_play_selected.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{176,372},{125,42}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{125,42}</string>
+			</dict>
+			<key>eliminate/res/jewel1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{210,418},{40,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{40,40}</string>
+			</dict>
+			<key>eliminate/res/jewel2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{254,418},{40,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{40,40}</string>
+			</dict>
+			<key>eliminate/res/jewel3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{443,316},{40,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{40,40}</string>
+			</dict>
+			<key>eliminate/res/jewel4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{443,360},{40,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{40,40}</string>
+			</dict>
+			<key>eliminate/res/jewel5.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{443,404},{40,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{40,40}</string>
+			</dict>
+			<key>eliminate/res/jewel6.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{443,448},{40,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{40,40}</string>
+			</dict>
+			<key>eliminate/res/jewel7.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{461,2},{40,40}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{40,40}</string>
+			</dict>
+			<key>eliminate/res/logo.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{2,326},{170,170}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{170,170}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>eliminatePlist.png</string>
+			<key>realTextureFileName</key>
+			<string>eliminatePlist.png</string>
+			<key>size</key>
+			<string>{512,512}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>512</integer>
+			<key>height</key>
+			<integer>512</integer>
+		</dict>
+	</dict>
+</plist>

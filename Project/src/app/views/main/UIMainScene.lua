@@ -57,8 +57,8 @@ function UIMainScene:_onEliminateDemoEvt(sender, eventType)
     if eventType ~= ccui.TouchEventType.ended then 
         return 
     end 
-
-    print("您点击了Eliminate示例按钮")
+    local testScene = require("app.eliminate.EliminateScene"):create()
+    cc.Director:getInstance():replaceScene(testScene)
 end 
 
 return UIMainScene 

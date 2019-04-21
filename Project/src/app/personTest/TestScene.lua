@@ -33,11 +33,9 @@ function TestScene:_initUI()
     self._listView:setScrollBarEnabled(true)                                  -- 设置滚动条是否显示
     self._listView:setBounceEnabled(true)                                     -- 设置滑动惯性
     self._listView:setItemsMargin(0.1)                                        -- 设置Item间隔
-
     self._item = self._listView:getChildByName("Image_listTitle")
     self._item:removeFromParent(false)
-
-    --self._listView:removeAllItems()
+    -- 预建
     for i = 1, LOADNUM do 
         local item = self._item:clone()
         item:setVisible(false)
@@ -59,23 +57,34 @@ end
 
 function TestScene:_updateItems()
     local itemNum = #config
-    if itemNum <= 0 then
-        return 
-    end 
+    if itemNum <= 0 then return end 
 
     for i = 1, itemNum do 
         local item = nil 
+        -- 如果数目大于预创建数目，则新建
         if i <= LOADNUM then 
             item = self._listView:getItem(i)
         else 
             item = self._item:clone()
             self._listView:pushBackCustomItem(item)
         end 
-
-        item:getChildByName("Text_title"):setString(config[i].title)
-        item:getChildByName("Text_State"):setString(config[i].state)
+        if item ~= nil then 
+            item:getChildByName("Text_title"):setString(config[i].title)
+            item:getChildByName("Text_State"):setString(config[i].state)
+            item:addTouchEventListener(handler(self, self._onLayerEvt))
+            item:setTouchEnabled(true)
+            item:setTag(i)
+            item:setVisible(true)
+        end 
     end 
+end 
 
+function TestScene:_onLayerEvt(sender,eventType)
+    if eventType ~= ccui.TouchEventType.ended then 
+        return 
+    end 
+    local index = sender:getTag()
+    print("您选择的Demo的索引为：", index)
 end 
 
 return TestScene 
