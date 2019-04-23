@@ -46,14 +46,15 @@ bool AppDelegate::applicationDidFinishLaunching()
     // set default FPS
     Director::getInstance()->setAnimationInterval(1.0 / 60.0f);
 
-    // register lua module
+    // 初始化LuaEngine，用于构建Lua环境并注册cocos相关的API到lua环境中
     auto engine = LuaEngine::getInstance();
+	// 将LuaEngine设置到ScriptEngine中
     ScriptEngineManager::getInstance()->setScriptEngine(engine);
     lua_State* L = engine->getLuaStack()->getLuaState();
     lua_module_register(L);
-
+	// 注册拓展的C++的API
     register_all_packages();
-
+	// 加密相关
     LuaStack* stack = engine->getLuaStack();
     stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
 
@@ -64,6 +65,12 @@ bool AppDelegate::applicationDidFinishLaunching()
 #if CC_64BITS
     FileUtils::getInstance()->addSearchPath("src/64bit");
 #endif
+	/*
+	添加搜索路径，在lua中，可以
+	cc.FileUtils:getInstance():setSearchPaths({...})
+	或者
+	cc.FileUtils:getInstance():addSearchPath("")
+	*/
     FileUtils::getInstance()->addSearchPath("src");
     FileUtils::getInstance()->addSearchPath("res");
     if (engine->executeScriptFile("main.lua"))

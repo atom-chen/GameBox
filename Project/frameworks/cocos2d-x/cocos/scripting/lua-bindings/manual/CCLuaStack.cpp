@@ -130,11 +130,12 @@ LuaStack *LuaStack::attach(lua_State *L)
 
 bool LuaStack::init(void)
 {
+	// 初始化Lua环境并打开标准库
     _state = lua_open();
     luaL_openlibs(_state);
     toluafix_open(_state);
 
-    // Register our version of the global "print" function
+    // 注册全局函数print到lua中，它会覆盖lua库中的print方法
     const luaL_reg global_functions [] = {
         {"print", lua_print},
         {"release_print",lua_release_print},
@@ -142,6 +143,7 @@ bool LuaStack::init(void)
     };
     luaL_register(_state, "_G", global_functions);
 
+	// 注册cocos2d-x引擎的API到lua环境中
     g_luaType.clear();
     register_all_cocos2dx(_state);
     tolua_opengl_open(_state);
@@ -153,23 +155,33 @@ bool LuaStack::init(void)
 
     register_glnode_manual(_state);
 #if CC_USE_PHYSICS
+	// 物理引擎相关API
     register_all_cocos2dx_physics(_state);
     register_all_cocos2dx_physics_manual(_state);
 #endif
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_IOS || CC_TARGET_PLATFORM == CC_PLATFORM_MAC)
+	// ios下用于操作object-c下的API
     LuaObjcBridge::luaopen_luaoc(_state);
 #endif
 
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	// android下用于操作java的API
     LuaJavaBridge::luaopen_luaj(_state);
 #endif
+	// 被废弃的cocos2d API
     register_all_cocos2dx_deprecated(_state);
     register_all_cocos2dx_manual_deprecated(_state);
-
     tolua_script_handler_mgr_open(_state);
 
-    // add cocos2dx loader
+    /*
+	添加cocos2d Lua加载器
+	该方法将cocos2dx_lua_loader方法添加到Lua的全局变量package下的loaders成员中
+	当使用require加载文件时，Lua会使用package下的loaders成员中的加载器来加载脚本
+
+	默认情况下，Lua的文件搜索会在当前路径以及系统特定路径下，而通过cocos2dx_lua_loader可以
+	使程序自己的搜索规则来查找脚本，以及实现对脚本的加密和解密
+	*/
     addLuaLoader(cocos2dx_lua_loader);
 
     return true;
