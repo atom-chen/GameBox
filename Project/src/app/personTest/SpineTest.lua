@@ -3,7 +3,7 @@ require "cocos.spine.SpineConstants"
 local winSize = cc.Director:getInstance():getWinSize()
 
 local SpineTest = class("SpineTest",function()
-    return cc.Layer:create()
+    return cc.LayerColor:create(cc.c4b(0,0,0,255), winSize.width, winSize.height)
 end)
 
 function SpineTest:ctor()
@@ -17,10 +17,25 @@ end
 end
 
 function SpineTest:init()
+    -- 返回按钮相关
+    local backBtn = ccui.Button:create("Default/Button_Normal.png", "Default/Button_Press.png", "Default/Button_Disable.png")
+    backBtn:setPosition(cc.p(winSize.width - 30, 30))
+    backBtn:setTitleFontSize(18)
+    backBtn:setTitleColor(cc.c3b(0,0,0))
+    backBtn:setTitleText("返 回")
+    backBtn:addTouchEventListener(function(sender, eventType)
+        if eventType ~= ccui.TouchEventType.ended then 
+            return 
+        end 
+        self:removeFromParent()
+    end)
+    self:addChild(backBtn)
+
+    -- 
     local item = ccui.Text:create()
     item:setFontSize(24)
     item:setString("骨骼动画")
-    item:setPosition(cc.p(winSize.width/2, winSize.height/2))
+    item:setPosition(cc.p(winSize.width/2, winSize.height*4/5))
     self:addChild(item)
     --[[
     帧动画与骨骼动画的区别：

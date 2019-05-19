@@ -1,5 +1,7 @@
 -- 
+local ClipTest = require("app.personTest.ClipTest")
 local DrawGraphTest = require("app.personTest.DrawGraphTest")
+local DrawLineTest = require("app.personTest.DrawLineTest")
 local OpenGLTest = require("app.personTest.OpenGLTest")
 local ProcessorTest = require("app.personTest.ProcessorTest")
 local SpineTest = require("app.personTest.SpineTest")
@@ -7,10 +9,12 @@ local SpineTest = require("app.personTest.SpineTest")
 local LOADNUM = 10      -- 进度条预加载数目
 
 local config = {
-    [1] = {title = "DrawGraphTest", layer = DrawGraphTest, state = "cocos自带的绘制图形相关"},
-    [2] = {title = "OpenGLTest", layer = OpenGLTest, state = "shaderDemo相关"},
-    [3] = {title = "ProcessorTest", layer = ProcessorTest, state = "进度条动画"},
-    [4] = {title = "SpineTest", layer = DrawGraphSpineTestTest, state = "骨骼动画"},
+    {title = "ClipTest", layer = ClipTest, state = "裁切图形相关"},
+    {title = "DrawLineTest", layer = DrawLineTest, state = "cocos自带的绘制线段相关"},
+    --{title = "OpenGLTest", layer = OpenGLTest, state = "shaderDemo相关"},
+    --{title = "ProcessorTest", layer = ProcessorTest, state = "进度条动画相关"},       -- 缺少资源
+    --{title = "SpineTest", layer = SpineTest, state = "骨骼动画相关"},                 -- 读取资源失败
+    --{title = "DrawGraphTest", layer = DrawGraphTest, state = "cocos自带的绘制图形相关"}, Demo代码不对
 }
 
 local TestScene = class("TestScene", function()
@@ -84,7 +88,12 @@ function TestScene:_onLayerEvt(sender,eventType)
         return 
     end 
     local index = sender:getTag()
-    print("您选择的Demo的索引为：", index)
+    print("您选择的Demo的索引为：", config[index].title)
+
+    local layer = config[index].layer.create()
+    if layer ~= nil then 
+        self:addChild(layer)
+    end 
 end 
 
 return TestScene 
