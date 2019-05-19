@@ -78,18 +78,13 @@ public:
      */
     static AssetsManagerEx* create(const std::string &manifestUrl, const std::string &storagePath);
     
-    /** @brief  Check out if there is a new version of manifest.
-     *          You may use this method before updating, then let user determine whether
-     *          he wants to update resources.
-     */
+    // 检测是否有更新
     void checkUpdate();
     
-    /** @brief Update with the current local manifest.
-     */
+    // 检测是否有更新，有则自动更新
     void update();
     
-    /** @brief Reupdate all failed assets under the current AssetsManagerEx context
-     */
+    // 下载更新失败的部分资源
     void downloadFailedAssets();
     
     /** @brief Gets the current update state.
@@ -100,8 +95,7 @@ public:
      */
     const std::string& getStoragePath() const;
     
-    /** @brief Function for retrieve the local manifest object
-     */
+    // 获取本地的Manifest对象
     const Manifest* getLocalManifest() const;
     
     /** @brief Function for retrieve the remote manifest object

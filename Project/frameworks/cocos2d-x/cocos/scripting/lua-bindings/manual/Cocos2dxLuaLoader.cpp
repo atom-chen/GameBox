@@ -36,12 +36,12 @@ extern "C"
 {
     int cocos2dx_lua_loader(lua_State *L)
     {
-		// 后缀相关
+		// 后缀为luac和lua
         static const std::string BYTECODE_FILE_EXT    = ".luac";
         static const std::string NOT_BYTECODE_FILE_EXT = ".lua";
 		// require传入的要加载的文件名，比如：require "cocos.init" 中的"cocos.init"
         std::string filename(luaL_checkstring(L, 1));
-		// 去掉后缀
+		// 去掉后缀名luac或lua
         size_t pos = filename.rfind(BYTECODE_FILE_EXT);
         if (pos != std::string::npos)
         {

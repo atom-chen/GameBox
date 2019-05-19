@@ -43,17 +43,17 @@ public:
     //! Update events code
     enum class EventCode
     {
-        ERROR_NO_LOCAL_MANIFEST,
-        ERROR_DOWNLOAD_MANIFEST,
-        ERROR_PARSE_MANIFEST,
-        NEW_VERSION_FOUND,
-        ALREADY_UP_TO_DATE,
-        UPDATE_PROGRESSION,
-        ASSET_UPDATED,
-        ERROR_UPDATING,
-        UPDATE_FINISHED,
-        UPDATE_FAILED,
-        ERROR_DECOMPRESS
+        ERROR_NO_LOCAL_MANIFEST,        // 本地manifest错误
+        ERROR_DOWNLOAD_MANIFEST,        // 下载manifest失败
+        ERROR_PARSE_MANIFEST,           // 解析manifest失败
+        NEW_VERSION_FOUND,              // 检测到新版本
+        ALREADY_UP_TO_DATE,             // 已经是最新版本
+        UPDATE_PROGRESSION,             // 更新进度
+        ASSET_UPDATED,                  // 资源下载成功
+        ERROR_UPDATING,                 // 下载文件失败
+        UPDATE_FINISHED,                // 更新完成
+        UPDATE_FAILED,                  // 更新失败
+        ERROR_DECOMPRESS                // 解压文件失败
     };
     
     EventCode getEventCode() const { return _code; }
