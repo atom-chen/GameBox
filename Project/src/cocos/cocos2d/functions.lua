@@ -41,7 +41,7 @@ function printInfo(fmt, ...)
     if type(DEBUG) ~= "number" or DEBUG < 2 then return end
     printLog("INFO", fmt, ...)
 end
-
+≠≠
 local function dump_value_(v)
     if type(v) == "string" then
         v = "\"" .. v .. "\""
@@ -173,21 +173,25 @@ function clone(object)
 end
 
 function class(classname, ...)
+    -- 创建一个新的table作为类
     local cls = {__cname = classname}
 
+    -- 是否有继承的父类
     local supers = {...}
     for _, super in ipairs(supers) do
         local superType = type(super)
+        -- 判断父类是否有效
         assert(superType == "nil" or superType == "table" or superType == "function",
             string.format("class() - create class \"%s\" with invalid super class type \"%s\"",
                 classname, superType))
-
+        
         if superType == "function" then
             assert(cls.__create == nil,
                 string.format("class() - create class \"%s\" with more than one creating function",
                     classname));
-            -- if super is function, set it to __create
+            -- 如果父类是一个函数，则将该方法设置到__create字段
             cls.__create = super
+        -- 如果父类是个表，则设置构造方法
         elseif superType == "table" then
             if super[".isclass"] then
                 -- super is native class
@@ -210,6 +214,7 @@ function class(classname, ...)
         end
     end
 
+    -- 设置__index元方法
     cls.__index = cls
     if not cls.__supers or #cls.__supers == 1 then
         setmetatable(cls, {__index = cls.super})
@@ -223,10 +228,11 @@ function class(classname, ...)
         end})
     end
 
+    -- 添加默认的构造方法
     if not cls.ctor then
-        -- add default constructor
         cls.ctor = function() end
     end
+    -- 
     cls.new = function(...)
         local instance
         if cls.__create then
@@ -236,9 +242,11 @@ function class(classname, ...)
         end
         setmetatableindex(instance, cls)
         instance.class = cls
+        -- 调用ctor方法
         instance:ctor(...)
         return instance
     end
+    -- 
     cls.create = function(_, ...)
         return cls.new(...)
     end

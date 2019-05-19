@@ -143,6 +143,7 @@ function Node:onNodeEvent(eventName, callback)
 end
 
 function Node:enableNodeEvents()
+    -- 添加判定，避免重复注册
     if self.isNodeEventEnabled_ then
         return self
     end
