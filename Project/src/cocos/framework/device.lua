@@ -27,6 +27,7 @@ local device = {}
 device.platform    = "unknown"
 device.model       = "unknown"
 
+-- 获取平台
 local app = cc.Application:getInstance()
 local target = app:getTargetPlatform()
 if target == cc.PLATFORM_OS_WINDOWS then
@@ -60,6 +61,7 @@ elseif target == cc.PLATFORM_OS_WP8 then
     device.platform = "wp8"
 end
 
+-- 获取地区语言
 local language_ = app:getCurrentLanguage()
 if language_ == cc.LANGUAGE_CHINESE then
     language_ = "cn"

@@ -1,7 +1,7 @@
 --[[
 Cocos2d目录下的文件：
 	Cocos2d.lua: 常用结构体的操作接口
-	functions.lua: 常用方法
+	functions.lua: 常用方法,以及对lua标准库的扩展等
 	json.lua: JSON编码和解码接口
 	luaj.lua: lua调用Java的接口
 	luaoc.lua: lua调用Object-c的接口

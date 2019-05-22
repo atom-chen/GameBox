@@ -41,7 +41,7 @@ function printInfo(fmt, ...)
     if type(DEBUG) ~= "number" or DEBUG < 2 then return end
     printLog("INFO", fmt, ...)
 end
-≠≠
+
 local function dump_value_(v)
     if type(v) == "string" then
         v = "\"" .. v .. "\""
@@ -110,7 +110,13 @@ function printf(fmt, ...)
     print(string.format(tostring(fmt), ...))
 end
 
+--[[
+检查是否为数字，返回十进制的数字或0
+value: 数字或者可转换为数字的字符串
+base：value的进制类型，可为二，八，十，十六进制，默认为十进制
+]]
 function checknumber(value, base)
+    -- 将base进制的value转换为十进制数字
     return tonumber(value, base) or 0
 end
 
@@ -320,15 +326,26 @@ function handler(obj, method)
     end
 end
 
+-- 设置随机数种子
 function math.newrandomseed()
     local ok, socket = pcall(function()
         return require("socket")
     end)
 
     if ok then
-        math.randomseed(socket.gettime() * 1000)
+        --[[
+        关于*1000,在32位机器上，可能数值超过机器的最大值限定，而使得设置种子无效
+        ]]
+        math.randomseed(socket.gettime() * 1000)        -- 使用毫秒作为种子
     else
-        math.randomseed(os.time())
+        --[[
+        如果使用秒作为随机种子，如果程序在一秒内进行操作获取的数值依然是伪随机,因此有人推荐的方式是:
+
+        -- 将数值低位变高位，使其数值变化很大，这样的效果会好些
+        local next = tostring(os.time()):reverse():sub(1, 6)
+        math.randomseed(next)
+        ]] 
+        math.randomseed(os.time())                      -- 使用秒作为种子
     end
     math.random()
     math.random()
@@ -336,20 +353,27 @@ function math.newrandomseed()
     math.random()
 end
 
+-- 对数值进行四舍五入
 function math.round(value)
     value = checknumber(value)
+    -- 向负无穷取整，比如:
+    -- math.floor(10.14) --> 10
+    -- math.floor(-10.14) --> -11
     return math.floor(value + 0.5)
 end
 
 local pi_div_180 = math.pi / 180
+-- 角度转弧度
 function math.angle2radian(angle)
     return angle * pi_div_180
 end
 
+-- 弧度转角度
 function math.radian2angle(radian)
     return radian * 180 / math.pi
 end
 
+-- 判定文件是否存在
 function io.exists(path)
     local file = io.open(path, "r")
     if file then
@@ -359,6 +383,7 @@ function io.exists(path)
     return false
 end
 
+-- 读取文件
 function io.readfile(path)
     local file = io.open(path, "r")
     if file then
@@ -369,6 +394,16 @@ function io.readfile(path)
     return nil
 end
 
+--[[
+将content写入指定文件中,mode为写入模式，其相关的值有:
+    w: 只写文件，若文件内容存在，则清空，若文件不存在，则创建
+    a: 附加方式写文件，若文件不存在，则创建，若内容存在，则附加到文件尾
+    r+: 可读写，文件必须存在
+    w+: 可读写，
+    a+: 与a类似，但是可读可写
+    b: 以二进制写入文件，这样可避免内容写入不完整
+    +: 对文件可读可写
+]]
 function io.writefile(path, content, mode)
     mode = mode or "w+b"
     local file = io.open(path, mode)
@@ -381,6 +416,13 @@ function io.writefile(path, content, mode)
     end
 end
 
+--[[
+    拆分路径字符串，比如："F:/GitLab/client/src/cocos/cocos2d/functions.lua"
+    dirname: F:/GitLab/client/src/cocos/cocos2d/
+    filename: functions.lua
+    basename: functions
+    extname: .lua
+]]
 function io.pathinfo(path)
     local pos = string.len(path)
     local extpos = pos + 1
@@ -394,19 +436,23 @@ function io.pathinfo(path)
         pos = pos - 1
     end
 
+    --[[
+    string.sub(str,i,j)将字符串从第i位置截取到第j位置，若j为空，将默认为-1
+    ]]
     local dirname = string.sub(path, 1, pos)
     local filename = string.sub(path, pos + 1)
     extpos = extpos - pos
     local basename = string.sub(filename, 1, extpos - 1)
     local extname = string.sub(filename, extpos)
     return {
-        dirname = dirname,
+        dirname = dirname,      -- 路径名
         filename = filename,
         basename = basename,
         extname = extname
     }
 end
 
+-- 获取指定文件大小
 function io.filesize(path)
     local size = false
     local file = io.open(path, "r")
@@ -419,6 +465,7 @@ function io.filesize(path)
     return size
 end
 
+-- 计算table中不为nil的值的个数
 function table.nums(t)
     local count = 0
     for k, v in pairs(t) do
@@ -427,6 +474,7 @@ function table.nums(t)
     return count
 end
 
+-- 返回table中key列表
 function table.keys(hashtable)
     local keys = {}
     for k, v in pairs(hashtable) do
@@ -435,6 +483,7 @@ function table.keys(hashtable)
     return keys
 end
 
+-- 返回table中value列表
 function table.values(hashtable)
     local values = {}
     for k, v in pairs(hashtable) do
@@ -443,6 +492,9 @@ function table.values(hashtable)
     return values
 end
 
+--[[
+合并两个列表，存在一个问题，如果两个列表中存在同名key，则其值会被覆盖
+]]
 function table.merge(dest, src)
     for k, v in pairs(src) do
         dest[k] = v
@@ -461,6 +513,7 @@ function table.insertto(dest, src, begin)
     end
 end
 
+-- 从array中查找某值，若存在，则返回索引，否则返回false; begin是开始的位置，默认为1
 function table.indexof(array, value, begin)
     for i = begin or 1, #array do
         if array[i] == value then return i end
@@ -468,6 +521,7 @@ function table.indexof(array, value, begin)
     return false
 end
 
+-- 从table中查找指定的value，若存在返回key，否则返回nil
 function table.keyof(hashtable, value)
     for k, v in pairs(hashtable) do
         if v == value then return k end
@@ -475,6 +529,7 @@ function table.keyof(hashtable, value)
     return nil
 end
 
+-- 从array中删除指定的value，返回删除的个数
 function table.removebyvalue(array, value, removeall)
     local c, i, max = 0, 1, #array
     while i <= max do
@@ -490,12 +545,14 @@ function table.removebyvalue(array, value, removeall)
     return c
 end
 
+-- 对表的每个值执行一次fn方法，并更新表的内容
 function table.map(t, fn)
     for k, v in pairs(t) do
         t[k] = fn(v, k)
     end
 end
 
+-- 对表的每个值执行一次fn方法，但不改变表内容
 function table.walk(t, fn)
     for k,v in pairs(t) do
         fn(v, k)
@@ -508,6 +565,7 @@ function table.filter(t, fn)
     end
 end
 
+-- 遍历表，确保其中的值唯一
 function table.unique(t, bArray)
     local check = {}
     local n = {}
@@ -533,6 +591,7 @@ string._htmlspecialchars_set["'"] = "&#039;"
 string._htmlspecialchars_set["<"] = "&lt;"
 string._htmlspecialchars_set[">"] = "&gt;"
 
+-- 将特殊字符转为HTML转义符
 function string.htmlspecialchars(input)
     for k, v in pairs(string._htmlspecialchars_set) do
         input = string.gsub(input, k, v)
@@ -540,6 +599,7 @@ function string.htmlspecialchars(input)
     return input
 end
 
+-- 将HTML转义符转为特殊字符
 function string.restorehtmlspecialchars(input)
     for k, v in pairs(string._htmlspecialchars_set) do
         input = string.gsub(input, v, k)
@@ -573,14 +633,25 @@ function string.split(input, delimiter)
     return arr
 end
 
+--[[
+string.gsub(str,pattern,reps): 将str通过pattern模式串替换为reps
+    模式字符串相关:
+    ^ : 匹配字符串开头
+    $ : 匹配字符串杰伟
+    + : 匹配前一字符1次或多次 
+]]
+
+-- 移除字符串左侧的空白字符
 function string.ltrim(input)
     return string.gsub(input, "^[ \t\n\r]+", "")
 end
 
+-- 移除字符串右侧的空白字符
 function string.rtrim(input)
     return string.gsub(input, "[ \t\n\r]+$", "")
 end
 
+-- 移除字符串两侧的空白字符
 function string.trim(input)
     input = string.gsub(input, "^[ \t\n\r]+", "")
     return string.gsub(input, "[ \t\n\r]+$", "")
@@ -629,6 +700,8 @@ function string.utf8len(input)
     return cnt
 end
 
+-- 将数值格式化为包含千分位分割符的字符串，比如：
+-- 123456789 -> 123,456,789
 function string.formatnumberthousands(num)
     local formatted = tostring(checknumber(num))
     local k
