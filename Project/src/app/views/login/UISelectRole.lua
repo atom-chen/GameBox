@@ -81,14 +81,14 @@ function UISelectRole:_onSureEvt(sender, eventType)
     local strName = string.trim(self._inputNameField:getString())
     if string.len(strName) <= 0 then 
         print("请输入昵称")
-        return 
+        --return 
     elseif string.len(strName) > 10 then 
         print("您输入的昵称过长")
-        return 
+        --return 
     elseif shileConfig.CheckShield(strName) then 
         print("您输入了非法字符，请重新输入")
         self._inputNameField:setString("")
-        return 
+        --return 
     end 
 
     self:_destory()
