@@ -5,12 +5,14 @@ local DrawLineTest = require("app.personTest.DrawLineTest")
 local OpenGLTest = require("app.personTest.OpenGLTest")
 local ProcessorTest = require("app.personTest.ProcessorTest")
 local SpineTest = require("app.personTest.SpineTest")
+local KeyboardTest = require("app.personTest.KeyboardTest")
 
 local LOADNUM = 10      -- 进度条预加载数目
 
 local config = {
     {title = "ClipTest", layer = ClipTest, state = "裁切图形相关"},
     {title = "DrawLineTest", layer = DrawLineTest, state = "cocos自带的绘制线段相关"},
+    {title = "KeyboardTest", layer = KeyboardTest, state = "键盘事件相关"},
     --{title = "OpenGLTest", layer = OpenGLTest, state = "shaderDemo相关"},
     --{title = "ProcessorTest", layer = ProcessorTest, state = "进度条动画相关"},       -- 缺少资源
     --{title = "SpineTest", layer = SpineTest, state = "骨骼动画相关"},                 -- 读取资源失败
