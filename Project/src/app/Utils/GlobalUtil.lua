@@ -1,5 +1,10 @@
 local winSize = cc.Director:getInstance():getWinSize()
 
+local GlobalUtil = cc.exports.GlobalUtil
+GlobalUtil = {
+	-- 
+}
+
 -- @func:创建触摸屏蔽层
 -- @param: _size 大小
 -- @param: _opacity 层级
@@ -33,8 +38,8 @@ end
 -- @param: callback 回调接口
 -- @param: eventType 事件类型
 -- @param: scale 缩放
-cc.exports.ButtonTouchListener = function(node,callback,eventType,scale)
-	if tolua.isnull(node) then 
+cc.exports.ButtonTouchEvent = function(register,callback,eventType,scale)
+	if tolua.isnull(register) then 
 		print("buttonTouchListener failed, the cboj is nill")
 		return 
 	end 
@@ -47,7 +52,9 @@ cc.exports.ButtonTouchListener = function(node,callback,eventType,scale)
 
 	-- 设置按钮缩放
 	if scale then
+		-- 设置按钮开启按下缩放效果
 		node:setPressedActionEnabled(true)
+		-- 设置按钮缩放
 		node:setZoomScale(scale)
 	end
 
@@ -60,3 +67,22 @@ cc.exports.ButtonTouchListener = function(node,callback,eventType,scale)
 	end 
 	node:addTouchEventListener(touchEvent)
 end
+
+-- @function: 切换场景
+-- @param: _transition 可参考：display.SCENE_TRANSITIONS
+-- @param: _time 过渡时间，以秒为单位
+cc.exports.ChangeScene = function(_scene, _transition, _time)
+	if tolua.isnull(_scene) then 
+		error("ERROR: ChangeScene the param _scene is nil")
+		return 
+	end 
+
+	local runScene = cc.Director:getInstance():getRunningScene()
+	runScene:stopAllActions()
+	runScene:pause()
+
+	-- 运行场景
+	display.runScene(_scene, _transition, _time)
+end 
+
+return GlobalUtil

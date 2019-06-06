@@ -1,5 +1,7 @@
 require("cocos/init")
 require("cocos/framework/init")
+require("app.Utils.GlobalRequire")
+
 
 local MyApp = class("MyApp", cc.load("mvc").AppBase)
 

@@ -67,16 +67,16 @@
       <ObjectData Name="Scene" Tag="31" ctype="GameNodeObjectData">
         <Size X="854.0000" Y="480.0000" />
         <Children>
-          <AbstractNodeData Name="Panel_1" ActionTag="-643476100" Tag="33" IconVisible="False" LeftMargin="4.3448" RightMargin="629.6552" TopMargin="9.1385" BottomMargin="10.8615" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_left" ActionTag="-643476100" Tag="33" IconVisible="False" LeftMargin="4.3448" RightMargin="629.6552" TopMargin="9.1385" BottomMargin="10.8615" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="220.0000" Y="460.0000" />
             <Children>
-              <AbstractNodeData Name="Image_1" ActionTag="1719296060" Tag="34" IconVisible="False" LeftMargin="2.7012" RightMargin="-0.7012" TopMargin="2.7586" BottomMargin="0.2414" LeftEage="71" RightEage="71" TopEage="150" BottomEage="150" Scale9OriginX="71" Scale9OriginY="150" Scale9Width="76" Scale9Height="157" ctype="ImageViewObjectData">
+              <AbstractNodeData Name="Image_1" ActionTag="1719296060" Tag="34" IconVisible="False" LeftMargin="1.7012" RightMargin="0.2988" TopMargin="3.7586" BottomMargin="-0.7586" LeftEage="71" RightEage="71" TopEage="150" BottomEage="150" Scale9OriginX="71" Scale9OriginY="150" Scale9Width="76" Scale9Height="157" ctype="ImageViewObjectData">
                 <Size X="218.0000" Y="457.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="111.7012" Y="228.7414" />
+                <Position X="110.7012" Y="227.7414" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.5077" Y="0.4973" />
+                <PrePosition X="0.5032" Y="0.4951" />
                 <PreSize X="0.9909" Y="0.9935" />
                 <FileData Type="MarkedSubImage" Path="art/role/zuo.png" Plist="art/_selectrole.plist" />
               </AbstractNodeData>
@@ -90,7 +90,7 @@
                 <PreSize X="1.0909" Y="0.5935" />
                 <FileData Type="MarkedSubImage" Path="art/role/xue.png" Plist="art/_selectrole.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Button_1" ActionTag="1104124535" Tag="39" IconVisible="False" LeftMargin="13.6865" RightMargin="88.3135" TopMargin="4.0691" BottomMargin="403.9309" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="88" Scale9Height="30" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_Select" ActionTag="1104124535" Tag="39" IconVisible="False" LeftMargin="13.6865" RightMargin="88.3135" TopMargin="4.0691" BottomMargin="403.9309" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="88" Scale9Height="30" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="118.0000" Y="52.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="72.6865" Y="429.9309" />
@@ -112,8 +112,8 @@
                 <Scale ScaleX="0.5000" ScaleY="0.5000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.2469" Y="0.6375" />
-                <PreSize X="0.2091" Y="0.1000" />
-                <FileData Type="MarkedSubImage" Path="art/role/a6.png" Plist="art/_selectrole.plist" />
+                <PreSize X="0.2682" Y="0.4370" />
+                <FileData Type="MarkedSubImage" Path="art/role/a4.png" Plist="art/_selectrole.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
             </Children>
@@ -128,7 +128,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_2" ActionTag="1705476136" Tag="36" IconVisible="False" LeftMargin="629.7448" RightMargin="4.2552" TopMargin="3.2753" BottomMargin="16.7247" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_right" ActionTag="1705476136" Tag="36" IconVisible="False" LeftMargin="629.7448" RightMargin="4.2552" TopMargin="3.2753" BottomMargin="16.7247" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="220.0000" Y="460.0000" />
             <Children>
               <AbstractNodeData Name="Image_1" ActionTag="599768256" Tag="37" IconVisible="False" LeftMargin="5.2012" RightMargin="1.7988" TopMargin="2.7586" BottomMargin="0.2414" LeftEage="71" RightEage="71" TopEage="150" BottomEage="150" Scale9OriginX="71" Scale9OriginY="150" Scale9Width="71" Scale9Height="157" ctype="ImageViewObjectData">
@@ -151,7 +151,7 @@
                 <PreSize X="0.8909" Y="0.8087" />
                 <FileData Type="MarkedSubImage" Path="art/role/xue2.png" Plist="art/_selectrole.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Button_1_0" ActionTag="-1781475392" Tag="40" IconVisible="False" LeftMargin="89.2036" RightMargin="12.7964" TopMargin="4.2923" BottomMargin="403.7077" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="88" Scale9Height="30" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+              <AbstractNodeData Name="Button_Select" ActionTag="-1781475392" Tag="40" IconVisible="False" LeftMargin="89.2036" RightMargin="12.7964" TopMargin="4.2923" BottomMargin="403.7077" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="88" Scale9Height="30" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
                 <Size X="118.0000" Y="52.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                 <Position X="148.2036" Y="429.7077" />
@@ -173,8 +173,8 @@
                 <Scale ScaleX="0.5000" ScaleY="0.5000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.8196" Y="0.2172" />
-                <PreSize X="0.2091" Y="0.1000" />
-                <FileData Type="MarkedSubImage" Path="art/role/b6.png" Plist="art/_selectrole.plist" />
+                <PreSize X="0.2500" Y="0.4370" />
+                <FileData Type="MarkedSubImage" Path="art/role/b4.png" Plist="art/_selectrole.plist" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
             </Children>
@@ -189,7 +189,7 @@
             <EndColor A="255" R="255" G="255" B="255" />
             <ColorVector ScaleY="1.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_3" ActionTag="324268899" Tag="41" IconVisible="False" LeftMargin="279.1335" RightMargin="274.8665" TopMargin="6.9652" BottomMargin="13.0348" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
+          <AbstractNodeData Name="Panel_mid" ActionTag="324268899" Tag="41" IconVisible="False" LeftMargin="279.1335" RightMargin="274.8665" TopMargin="6.9652" BottomMargin="13.0348" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" Scale9Width="1" Scale9Height="1" ctype="PanelObjectData">
             <Size X="300.0000" Y="460.0000" />
             <Children>
               <AbstractNodeData Name="Image_5" ActionTag="1978112114" Tag="42" IconVisible="False" LeftMargin="-29.5227" RightMargin="-31.4773" TopMargin="-0.1044" BottomMargin="400.1044" LeftEage="119" RightEage="119" TopEage="19" BottomEage="19" Scale9OriginX="119" Scale9OriginY="19" Scale9Width="123" Scale9Height="22" ctype="ImageViewObjectData">
@@ -274,8 +274,8 @@
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
                 <PrePosition X="0.5108" Y="0.4406" />
-                <PreSize X="0.1533" Y="0.1000" />
-                <FileData Type="Normal" Path="art/role/jixie/yi5.png" Plist="" />
+                <PreSize X="1.1400" Y="0.8109" />
+                <FileData Type="Normal" Path="art/role/jixie/yi4.png" Plist="" />
                 <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
               <AbstractNodeData Name="Image_7" ActionTag="1138092121" Tag="44" IconVisible="False" LeftMargin="311.7611" RightMargin="-37.7611" TopMargin="139.0664" BottomMargin="143.9336" LeftEage="8" RightEage="8" TopEage="58" BottomEage="58" Scale9OriginX="8" Scale9OriginY="58" Scale9Width="10" Scale9Height="61" ctype="ImageViewObjectData">

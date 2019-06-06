@@ -25,11 +25,9 @@ function UILoginScene:_initData()
 end 
 
 function UILoginScene:_initUI()    
-    self._root = cc.CSLoader:createNode("res/csd/UILogin.csb")
-    self:addChild(self._root)
-
-    self._startBtn = ccui.Helper:seekNodeByName(self._root, "Button_Start")
-    self._startBtn:addTouchEventListener(handler(self, self._onClickStartEvent))
+    local tmxMap = cc.TMXTiledMap:create("Tile/0_1.tmx")
+    tmxMap:setPosition(cc.p(0,0))
+    self:addChild(tmxMap)
 end 
 
 function UILoginScene:_onClickStartEvent(sender, eventType)
