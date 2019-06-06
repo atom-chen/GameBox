@@ -36,8 +36,8 @@ end
 -- @func:按钮注册事件
 -- @param: node 注册节点
 -- @param: callback 回调接口
--- @param: eventType 事件类型
--- @param: scale 缩放
+-- @param: eventType 事件类型,可为nil
+-- @param: scale 缩放, 可为nil
 cc.exports.ButtonTouchEvent = function(register,callback,eventType,scale)
 	if tolua.isnull(register) then 
 		print("buttonTouchListener failed, the cboj is nill")
@@ -65,7 +65,7 @@ cc.exports.ButtonTouchEvent = function(register,callback,eventType,scale)
 			callback(sender)
 		end 
 	end 
-	node:addTouchEventListener(touchEvent)
+	register:addTouchEventListener(touchEvent)
 end
 
 -- @function: 切换场景
