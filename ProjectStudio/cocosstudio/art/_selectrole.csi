@@ -1,0 +1,38 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="_selectrole" Type="Plist" ID="ecb1224e-668d-443d-a7b3-33120beae730" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="True" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="art/role/a1.png" />
+      <FilePathData Path="art/role/a2.png" />
+      <FilePathData Path="art/role/a3.png" />
+      <FilePathData Path="art/role/a4.png" />
+      <FilePathData Path="art/role/a5.png" />
+      <FilePathData Path="art/role/a6.png" />
+      <FilePathData Path="art/role/b1.png" />
+      <FilePathData Path="art/role/b2.png" />
+      <FilePathData Path="art/role/b3.png" />
+      <FilePathData Path="art/role/b4.png" />
+      <FilePathData Path="art/role/b5.png" />
+      <FilePathData Path="art/role/b6.png" />
+      <FilePathData Path="art/role/di.png" />
+      <FilePathData Path="art/role/gangtie.png" />
+      <FilePathData Path="art/role/guan.png" />
+      <FilePathData Path="art/role/guang.png" />
+      <FilePathData Path="art/role/liji.png" />
+      <FilePathData Path="art/role/liji2.png" />
+      <FilePathData Path="art/role/lijikaiqi.png" />
+      <FilePathData Path="art/role/lijikaiqi2.png" />
+      <FilePathData Path="art/role/shang.png" />
+      <FilePathData Path="art/role/xuan.png" />
+      <FilePathData Path="art/role/xuan2.png" />
+      <FilePathData Path="art/role/xuanze.png" />
+      <FilePathData Path="art/role/xuanze2.png" />
+      <FilePathData Path="art/role/xue.png" />
+      <FilePathData Path="art/role/xue2.png" />
+      <FilePathData Path="art/role/you.png" />
+      <FilePathData Path="art/role/zuo.png" />
+      <FilePathData Path="art/role/xian.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

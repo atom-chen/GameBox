@@ -1,0 +1,33 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="_main" Type="Plist" ID="5f0b36cf-baec-45fd-a714-9ccb476f78b0" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="art/main/bangzhu.png" />
+      <FilePathData Path="art/main/bangzhu2.png" />
+      <FilePathData Path="art/main/chengjiu.png" />
+      <FilePathData Path="art/main/chengjiu2.png" />
+      <FilePathData Path="art/main/daily_1.png" />
+      <FilePathData Path="art/main/daily_2.png" />
+      <FilePathData Path="art/main/daily_3.png" />
+      <FilePathData Path="art/main/di_.png" />
+      <FilePathData Path="art/main/guanyu.png" />
+      <FilePathData Path="art/main/guanyu2.png" />
+      <FilePathData Path="art/main/kaishiyouxi.png" />
+      <FilePathData Path="art/main/kaishiyouxi2.png" />
+      <FilePathData Path="art/main/shangdian.png" />
+      <FilePathData Path="art/main/shangdian2.png" />
+      <FilePathData Path="art/main/tui.png" />
+      <FilePathData Path="art/main/tui2.png" />
+      <FilePathData Path="art/main/xiamian.png" />
+      <FilePathData Path="art/main/yuan.png" />
+      <FilePathData Path="art/main/zi1.png" />
+      <FilePathData Path="art/main/zi2.png" />
+      <FilePathData Path="art/main/zi3.png" />
+      <FilePathData Path="art/main/zi4.png" />
+      <FilePathData Path="art/main/zi5.png" />
+      <FilePathData Path="art/main/zi6.png" />
+      <FilePathData Path="art/main/zuo.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

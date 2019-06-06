@@ -1,0 +1,67 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="_battleUI" Type="Plist" ID="73e2e97e-2264-423f-aae4-9755ee4b585a" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="art/battle/an.png" />
+      <FilePathData Path="art/battle/bian.png" />
+      <FilePathData Path="art/battle/board.png" />
+      <FilePathData Path="art/battle/buji.png" />
+      <FilePathData Path="art/battle/buji_1.png" />
+      <FilePathData Path="art/battle/buji_2.png" />
+      <FilePathData Path="art/battle/buji_3.png" />
+      <FilePathData Path="art/battle/buji_4.png" />
+      <FilePathData Path="art/battle/buji_5.png" />
+      <FilePathData Path="art/battle/buji_6.png" />
+      <FilePathData Path="art/battle/buji2.png" />
+      <FilePathData Path="art/battle/change1.png" />
+      <FilePathData Path="art/battle/change2.png" />
+      <FilePathData Path="art/battle/chongwan.png" />
+      <FilePathData Path="art/battle/chongwan2.png" />
+      <FilePathData Path="art/battle/di.png" />
+      <FilePathData Path="art/battle/gongji.png" />
+      <FilePathData Path="art/battle/gongji2.png" />
+      <FilePathData Path="art/battle/goumai.png" />
+      <FilePathData Path="art/battle/gu1.png" />
+      <FilePathData Path="art/battle/gu2.png" />
+      <FilePathData Path="art/battle/gu3.png" />
+      <FilePathData Path="art/battle/guang1.png" />
+      <FilePathData Path="art/battle/guang2.png" />
+      <FilePathData Path="art/battle/guang3.png" />
+      <FilePathData Path="art/battle/hong.png" />
+      <FilePathData Path="art/battle/jingqian.png" />
+      <FilePathData Path="art/battle/jixu.png" />
+      <FilePathData Path="art/battle/jixu2.png" />
+      <FilePathData Path="art/battle/limitM.png" />
+      <FilePathData Path="art/battle/limitT.png" />
+      <FilePathData Path="art/battle/shengying.png" />
+      <FilePathData Path="art/battle/shengying2.png" />
+      <FilePathData Path="art/battle/shijian.png" />
+      <FilePathData Path="art/battle/shoulei.png" />
+      <FilePathData Path="art/battle/shoulei2.png" />
+      <FilePathData Path="art/battle/shouleishu.png" />
+      <FilePathData Path="art/battle/shuzidi.png" />
+      <FilePathData Path="art/battle/skill1.png" />
+      <FilePathData Path="art/battle/skillbtn1.png" />
+      <FilePathData Path="art/battle/skillbtn2.png" />
+      <FilePathData Path="art/battle/tao.png" />
+      <FilePathData Path="art/battle/tao2.png" />
+      <FilePathData Path="art/battle/tuichu.png" />
+      <FilePathData Path="art/battle/tuichu2.png" />
+      <FilePathData Path="art/battle/xue1.png" />
+      <FilePathData Path="art/battle/xue2.png" />
+      <FilePathData Path="art/battle/xue3.png" />
+      <FilePathData Path="art/battle/xuebao.png" />
+      <FilePathData Path="art/battle/xuebao2.png" />
+      <FilePathData Path="art/battle/you.png" />
+      <FilePathData Path="art/battle/you2.png" />
+      <FilePathData Path="art/battle/zhanting1.png" />
+      <FilePathData Path="art/battle/zhanting2.png" />
+      <FilePathData Path="art/battle/zhengchang.png" />
+      <FilePathData Path="art/battle/zhuti.png" />
+      <FilePathData Path="art/battle/zidanshu.png" />
+      <FilePathData Path="art/battle/zuo.png" />
+      <FilePathData Path="art/battle/zuo2.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>
