@@ -1,0 +1,23 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="_lottery" Type="Plist" ID="e40a6b8e-09a9-488c-ad7c-9e4e28ea04fa" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="art/lottery/lottery_1.png" />
+      <FilePathData Path="art/lottery/lottery_10.png" />
+      <FilePathData Path="art/lottery/lottery_12.png" />
+      <FilePathData Path="art/lottery/lottery_2.png" />
+      <FilePathData Path="art/lottery/lottery_3.png" />
+      <FilePathData Path="art/lottery/lottery_4.png" />
+      <FilePathData Path="art/lottery/lottery_6.png" />
+      <FilePathData Path="art/lottery/lottery_7.png" />
+      <FilePathData Path="art/lottery/lottery_8.png" />
+      <FilePathData Path="art/lottery/lottery_9.png" />
+      <FilePathData Path="art/lottery/lottery_back1.png" />
+      <FilePathData Path="art/lottery/lottery_back2.png" />
+      <FilePathData Path="art/lottery/lottery_start_2.png" />
+      <FilePathData Path="art/lottery/lottery_start1.png" />
+      <FilePathData Path="art/lottery/lottery_11.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

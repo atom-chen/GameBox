@@ -1,0 +1,192 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>art/lottery/lottery_1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{539,547},{206,480}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{206,480}</string>
+			</dict>
+			<key>art/lottery/lottery_10.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{259,687},{112,71}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{112,71}</string>
+			</dict>
+			<key>art/lottery/lottery_12.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{959,247},{89,22}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{89,22}</string>
+			</dict>
+			<key>art/lottery/lottery_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{373,755},{550,130}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{550,130}</string>
+			</dict>
+			<key>art/lottery/lottery_3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{959,185},{62,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{62,60}</string>
+			</dict>
+			<key>art/lottery/lottery_4.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,355},{536,330}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{536,330}</string>
+			</dict>
+			<key>art/lottery/lottery_6.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{543,352}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{543,352}</string>
+			</dict>
+			<key>art/lottery/lottery_7.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{900,1},{394,57}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{394,57}</string>
+			</dict>
+			<key>art/lottery/lottery_8.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,687},{127,147}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{127,147}</string>
+			</dict>
+			<key>art/lottery/lottery_9.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{130,687},{127,147}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{127,147}</string>
+			</dict>
+			<key>art/lottery/lottery_back1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{959,1},{90,52}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{90,52}</string>
+			</dict>
+			<key>art/lottery/lottery_back2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{959,93},{90,52}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{90,52}</string>
+			</dict>
+			<key>art/lottery/lottery_start_2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{900,397},{123,73}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{123,73}</string>
+			</dict>
+			<key>art/lottery/lottery_start1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{900,472},{123,73}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{123,73}</string>
+			</dict>
+			<key>art/lottery/lottery_11.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{546,1},{543,352}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{543,352}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>_lottery.png</string>
+			<key>realTextureFileName</key>
+			<string>_lottery.png</string>
+			<key>size</key>
+			<string>{1024,1024}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1024</integer>
+			<key>height</key>
+			<integer>1024</integer>
+		</dict>
+	</dict>
+</plist>

@@ -4,158 +4,436 @@
     <Content>
       <Animation Duration="0" Speed="1.0000" />
       <ObjectData Name="Scene" Tag="27" ctype="GameNodeObjectData">
-        <Size X="854.0000" Y="480.0000" />
+        <Size X="800.0000" Y="480.0000" />
         <Children>
-          <AbstractNodeData Name="Image_bg" ActionTag="419692907" Tag="28" IconVisible="False" LeftMargin="23.0000" RightMargin="31.0000" TopMargin="1.0000" BottomMargin="-1.0000" LeftEage="264" RightEage="264" TopEage="158" BottomEage="158" Scale9OriginX="264" Scale9OriginY="158" Scale9Width="272" Scale9Height="164" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_bg" CanEdit="False" ActionTag="419692907" Tag="28" IconVisible="False" LeftMargin="23.0000" RightMargin="-23.0000" TopMargin="1.0000" BottomMargin="-1.0000" LeftEage="264" RightEage="264" TopEage="158" BottomEage="158" Scale9OriginX="264" Scale9OriginY="158" Scale9Width="272" Scale9Height="164" ctype="ImageViewObjectData">
             <Size X="800.0000" Y="480.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="423.0000" Y="239.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4953" Y="0.4979" />
-            <PreSize X="0.9368" Y="1.0000" />
+            <PrePosition X="0.5288" Y="0.4979" />
+            <PreSize X="1.0000" Y="1.0000" />
             <FileData Type="Normal" Path="art/chapter/chapter_bg_1.jpg" Plist="" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Image_bottombg1" ActionTag="464381279" Tag="37" IconVisible="False" LeftMargin="173.5000" RightMargin="191.5000" TopMargin="292.5000" BottomMargin="0.5000" LeftEage="161" RightEage="161" TopEage="61" BottomEage="61" Scale9OriginX="161" Scale9OriginY="61" Scale9Width="167" Scale9Height="65" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_bottombg1" ActionTag="464381279" Tag="37" IconVisible="False" LeftMargin="173.5000" RightMargin="137.5000" TopMargin="292.5000" BottomMargin="0.5000" LeftEage="161" RightEage="161" TopEage="61" BottomEage="61" Scale9OriginX="161" Scale9OriginY="61" Scale9Width="167" Scale9Height="65" ctype="ImageViewObjectData">
             <Size X="489.0000" Y="187.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="418.0000" Y="94.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4895" Y="0.1958" />
-            <PreSize X="0.5726" Y="0.3896" />
-            <FileData Type="MarkedSubImage" Path="art/chapter/chapter_dizuo.png" Plist="art/chapter/chapterUI.plist" />
+            <PrePosition X="0.5225" Y="0.1958" />
+            <PreSize X="0.6112" Y="0.3896" />
+            <FileData Type="MarkedSubImage" Path="art/chapter/chapter_dizuo.png" Plist="art/_chapter.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Image_6" ActionTag="1565347559" Tag="38" IconVisible="False" LeftMargin="172.5000" RightMargin="192.5000" TopMargin="293.5000" BottomMargin="-0.5000" LeftEage="161" RightEage="161" TopEage="61" BottomEage="61" Scale9OriginX="161" Scale9OriginY="61" Scale9Width="167" Scale9Height="65" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_6" ActionTag="1565347559" Tag="38" IconVisible="False" LeftMargin="172.5000" RightMargin="138.5000" TopMargin="293.5000" BottomMargin="-0.5000" LeftEage="161" RightEage="161" TopEage="61" BottomEage="61" Scale9OriginX="161" Scale9OriginY="61" Scale9Width="167" Scale9Height="65" ctype="ImageViewObjectData">
             <Size X="489.0000" Y="187.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="417.0000" Y="93.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4883" Y="0.1937" />
-            <PreSize X="0.5726" Y="0.3896" />
-            <FileData Type="MarkedSubImage" Path="art/chapter/chapter_dizuo1.png" Plist="art/chapter/chapterUI.plist" />
+            <PrePosition X="0.5213" Y="0.1937" />
+            <PreSize X="0.6112" Y="0.3896" />
+            <FileData Type="MarkedSubImage" Path="art/chapter/chapter_dizuo1.png" Plist="art/_chapter.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Image_upbg1" ActionTag="-218673937" Tag="32" IconVisible="False" LeftMargin="22.0000" RightMargin="32.0000" TopMargin="-9.0000" BottomMargin="319.0000" LeftEage="264" RightEage="264" TopEage="56" BottomEage="56" Scale9OriginX="264" Scale9OriginY="56" Scale9Width="272" Scale9Height="58" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_upbg1" ActionTag="-218673937" Tag="32" IconVisible="False" LeftMargin="22.0000" RightMargin="-22.0000" TopMargin="-9.0000" BottomMargin="319.0000" LeftEage="264" RightEage="264" TopEage="56" BottomEage="56" Scale9OriginX="264" Scale9OriginY="56" Scale9Width="272" Scale9Height="58" ctype="ImageViewObjectData">
             <Size X="800.0000" Y="170.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="422.0000" Y="404.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.4941" Y="0.8417" />
-            <PreSize X="0.9368" Y="0.3542" />
-            <FileData Type="MarkedSubImage" Path="art/chapter/shang.png" Plist="art/chapter/chapterUI.plist" />
+            <PrePosition X="0.5275" Y="0.8417" />
+            <PreSize X="1.0000" Y="0.3542" />
+            <FileData Type="MarkedSubImage" Path="art/chapter/shang.png" Plist="art/_chapter.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Image_2" ActionTag="1522228953" Tag="29" IconVisible="False" LeftMargin="24.0000" RightMargin="620.0000" TopMargin="372.5000" BottomMargin="0.5000" LeftEage="69" RightEage="69" TopEage="35" BottomEage="35" Scale9OriginX="69" Scale9OriginY="35" Scale9Width="72" Scale9Height="37" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_2" ActionTag="1522228953" Tag="29" IconVisible="False" LeftMargin="24.0000" RightMargin="566.0000" TopMargin="372.5000" BottomMargin="0.5000" LeftEage="69" RightEage="69" TopEage="35" BottomEage="35" Scale9OriginX="69" Scale9OriginY="35" Scale9Width="72" Scale9Height="37" ctype="ImageViewObjectData">
             <Size X="210.0000" Y="107.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="129.0000" Y="54.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1511" Y="0.1125" />
-            <PreSize X="0.2459" Y="0.2229" />
-            <FileData Type="MarkedSubImage" Path="art/chapter/chapter_left_1.png" Plist="art/chapter/chapterUI.plist" />
+            <PrePosition X="0.1612" Y="0.1125" />
+            <PreSize X="0.2625" Y="0.2229" />
+            <FileData Type="MarkedSubImage" Path="art/chapter/chapter_left_1.png" Plist="art/_chapter.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Image_2_0" ActionTag="-968438132" Tag="30" IconVisible="False" LeftMargin="618.0000" RightMargin="26.0000" TopMargin="368.5000" BottomMargin="4.5000" FlipX="True" LeftEage="69" RightEage="69" TopEage="35" BottomEage="35" Scale9OriginX="69" Scale9OriginY="35" Scale9Width="72" Scale9Height="37" ctype="ImageViewObjectData">
+          <AbstractNodeData Name="Image_2_0" ActionTag="-968438132" Tag="30" IconVisible="False" LeftMargin="618.0000" RightMargin="-28.0000" TopMargin="368.5000" BottomMargin="4.5000" FlipX="True" LeftEage="69" RightEage="69" TopEage="35" BottomEage="35" Scale9OriginX="69" Scale9OriginY="35" Scale9Width="72" Scale9Height="37" ctype="ImageViewObjectData">
             <Size X="210.0000" Y="107.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="723.0000" Y="58.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8466" Y="0.1208" />
-            <PreSize X="0.2459" Y="0.2229" />
-            <FileData Type="MarkedSubImage" Path="art/chapter/chapter_left_1.png" Plist="art/chapter/chapterUI.plist" />
+            <PrePosition X="0.9038" Y="0.1208" />
+            <PreSize X="0.2625" Y="0.2229" />
+            <FileData Type="MarkedSubImage" Path="art/chapter/chapter_left_1.png" Plist="art/_chapter.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_1" ActionTag="1244759439" Tag="31" IconVisible="False" LeftMargin="31.0000" RightMargin="709.0000" TopMargin="415.0000" BottomMargin="19.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="84" Scale9Height="24" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_1" ActionTag="1244759439" Tag="31" IconVisible="False" LeftMargin="31.0000" RightMargin="655.0000" TopMargin="415.0000" BottomMargin="19.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="84" Scale9Height="24" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="114.0000" Y="46.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="88.0000" Y="42.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1030" Y="0.0875" />
-            <PreSize X="0.1335" Y="0.0958" />
+            <PrePosition X="0.1100" Y="0.0875" />
+            <PreSize X="0.1425" Y="0.0958" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-            <PressedFileData Type="MarkedSubImage" Path="art/chapter/fanhui2.png" Plist="art/chapter/chapterUI.plist" />
-            <NormalFileData Type="MarkedSubImage" Path="art/chapter/fanhui1.png" Plist="art/chapter/chapterUI.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="art/chapter/fanhui2.png" Plist="art/_chapter.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="art/chapter/fanhui1.png" Plist="art/_chapter.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_2" ActionTag="640766087" Tag="33" IconVisible="False" LeftMargin="703.0000" RightMargin="37.0000" TopMargin="410.0000" BottomMargin="24.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="84" Scale9Height="24" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_2" ActionTag="640766087" Tag="33" IconVisible="False" LeftMargin="703.0000" RightMargin="-17.0000" TopMargin="410.0000" BottomMargin="24.0000" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="84" Scale9Height="24" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="114.0000" Y="46.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="760.0000" Y="47.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.8899" Y="0.0979" />
-            <PreSize X="0.1335" Y="0.0958" />
+            <PrePosition X="0.9500" Y="0.0979" />
+            <PreSize X="0.1425" Y="0.0958" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-            <PressedFileData Type="MarkedSubImage" Path="art/chapter/shangdian2.png" Plist="art/chapter/chapterUI.plist" />
-            <NormalFileData Type="MarkedSubImage" Path="art/chapter/shangdian.png" Plist="art/chapter/chapterUI.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="art/chapter/shangdian2.png" Plist="art/_chapter.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="art/chapter/shangdian.png" Plist="art/_chapter.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_1" ActionTag="513118952" Tag="40" IconVisible="False" LeftMargin="61.0000" RightMargin="283.0000" TopMargin="108.0000" BottomMargin="72.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="167" RightEage="167" TopEage="90" BottomEage="90" Scale9OriginX="-167" Scale9OriginY="-90" Scale9Width="334" Scale9Height="180" ctype="PanelObjectData">
-            <Size X="510.0000" Y="300.0000" />
+          <AbstractNodeData Name="Node_1" Visible="False" ActionTag="588532932" Tag="46" IconVisible="True" LeftMargin="436.0000" RightMargin="364.0000" TopMargin="251.0000" BottomMargin="229.0000" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
             <Children>
-              <AbstractNodeData Name="Sprite_2" ActionTag="-642600063" Tag="42" IconVisible="False" LeftMargin="179.0000" RightMargin="-9.0000" TopMargin="-6.5000" BottomMargin="3.5000" ctype="SpriteObjectData">
+              <AbstractNodeData Name="Image_1" ActionTag="-227776973" Tag="47" IconVisible="False" LeftMargin="-170.0000" RightMargin="-170.0000" TopMargin="-151.5000" BottomMargin="-151.5000" LeftEage="112" RightEage="112" TopEage="99" BottomEage="99" Scale9OriginX="112" Scale9OriginY="99" Scale9Width="116" Scale9Height="105" ctype="ImageViewObjectData">
                 <Size X="340.0000" Y="303.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="349.0000" Y="155.0000" />
+                <Position />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.6843" Y="0.5167" />
-                <PreSize X="0.6667" Y="1.0100" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
                 <FileData Type="Normal" Path="art/chapter/chapter_1.png" Plist="" />
-                <BlendFunc Src="1" Dst="771" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Sprite_3" ActionTag="2127392569" Tag="43" IconVisible="False" LeftMargin="-1.0000" RightMargin="3.0000" TopMargin="12.5000" BottomMargin="14.5000" ctype="SpriteObjectData">
+              <AbstractNodeData Name="Image_3" ActionTag="-1479027826" Tag="48" IconVisible="False" LeftMargin="-358.0000" RightMargin="-150.0000" TopMargin="-136.5000" BottomMargin="-136.5000" LeftEage="167" RightEage="167" TopEage="90" BottomEage="90" Scale9OriginX="167" Scale9OriginY="90" Scale9Width="174" Scale9Height="93" ctype="ImageViewObjectData">
                 <Size X="508.0000" Y="273.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="253.0000" Y="151.0000" />
+                <Position X="-104.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.4961" Y="0.5033" />
-                <PreSize X="0.9961" Y="0.9100" />
-                <FileData Type="MarkedSubImage" Path="art/chapter/kuanggai.png" Plist="art/chapter/chapterUI.plist" />
-                <BlendFunc Src="1" Dst="771" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="art/chapter/kuanggai.png" Plist="art/_chapter.plist" />
               </AbstractNodeData>
-              <AbstractNodeData Name="Sprite_1" ActionTag="720385521" Tag="41" IconVisible="False" LeftMargin="79.0000" RightMargin="341.0000" TopMargin="91.0000" BottomMargin="181.0000" ctype="SpriteObjectData">
+              <AbstractNodeData Name="Image_4" ActionTag="1349845054" Tag="49" IconVisible="False" LeftMargin="-283.0000" RightMargin="193.0000" TopMargin="-61.0000" BottomMargin="33.0000" LeftEage="29" RightEage="29" TopEage="9" BottomEage="9" Scale9OriginX="29" Scale9OriginY="9" Scale9Width="32" Scale9Height="10" ctype="ImageViewObjectData">
                 <Size X="90.0000" Y="28.0000" />
                 <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
-                <Position X="124.0000" Y="195.0000" />
+                <Position X="-238.0000" Y="47.0000" />
                 <Scale ScaleX="1.0000" ScaleY="1.0000" />
                 <CColor A="255" R="255" G="255" B="255" />
-                <PrePosition X="0.2431" Y="0.6500" />
-                <PreSize X="0.1765" Y="0.0933" />
-                <FileData Type="MarkedSubImage" Path="art/chapter/tiaozhan.png" Plist="art/chapter/chapterUI.plist" />
-                <BlendFunc Src="1" Dst="771" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="art/chapter/tiaozhan.png" Plist="art/_chapter.plist" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Text_1" ActionTag="1589445270" Tag="50" IconVisible="False" LeftMargin="-244.0000" RightMargin="205.0000" TopMargin="-25.5000" BottomMargin="2.5000" FontSize="20" LabelText="1/10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                <Size X="39.0000" Y="23.0000" />
+                <AnchorPoint ScaleY="0.5000" />
+                <Position X="-244.0000" Y="14.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <OutlineColor A="255" R="255" G="0" B="0" />
+                <ShadowColor A="255" R="110" G="110" B="110" />
               </AbstractNodeData>
             </Children>
             <AnchorPoint />
-            <Position X="61.0000" Y="72.0000" />
+            <Position X="436.0000" Y="229.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.0714" Y="0.1500" />
-            <PreSize X="0.5972" Y="0.6250" />
-            <SingleColor A="255" R="150" G="200" B="255" />
-            <FirstColor A="255" R="150" G="200" B="255" />
-            <EndColor A="255" R="255" G="255" B="255" />
-            <ColorVector ScaleY="1.0000" />
+            <PrePosition X="0.5450" Y="0.4771" />
+            <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Panel_2" CanEdit="False" Visible="False" ActionTag="2019569300" Tag="44" IconVisible="False" LeftMargin="119.0000" RightMargin="135.0000" TopMargin="114.0000" BottomMargin="66.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ComboBoxIndex="1" ColorAngle="90.0000" ctype="PanelObjectData">
-            <Size X="600.0000" Y="300.0000" />
+          <AbstractNodeData Name="Node_2" ActionTag="-1576351206" Tag="51" IconVisible="True" LeftMargin="412.0000" RightMargin="388.0000" TopMargin="250.0000" BottomMargin="230.0000" ctype="SingleNodeObjectData">
+            <Size X="0.0000" Y="0.0000" />
+            <Children>
+              <AbstractNodeData Name="Panel_1" ActionTag="293107756" Tag="52" IconVisible="False" LeftMargin="-308.0000" RightMargin="108.0000" TopMargin="-103.0000" BottomMargin="3.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="PanelObjectData">
+                <Size X="200.0000" Y="100.0000" />
+                <Children>
+                  <AbstractNodeData Name="Image_Icon" ActionTag="1311248136" Tag="53" IconVisible="False" LeftMargin="-3.5000" RightMargin="0.5000" TopMargin="-9.5000" BottomMargin="4.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="98.0000" Y="57.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4900" Y="0.5700" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_head.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_7" ActionTag="1556534907" Tag="54" IconVisible="False" LeftMargin="-3.5000" RightMargin="0.5000" TopMargin="-4.5000" BottomMargin="-0.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="98.0000" Y="52.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4900" Y="0.5200" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_shang1.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_8" ActionTag="-1414011074" Tag="55" IconVisible="False" LeftMargin="28.0000" RightMargin="130.0000" TopMargin="14.5000" BottomMargin="70.5000" LeftEage="13" RightEage="13" TopEage="4" BottomEage="4" Scale9OriginX="13" Scale9OriginY="4" Scale9Width="16" Scale9Height="7" ctype="ImageViewObjectData">
+                    <Size X="42.0000" Y="15.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="49.0000" Y="78.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2450" Y="0.7800" />
+                    <PreSize X="0.2100" Y="0.1500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_title1.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="-308.0000" Y="3.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="art/chapter/each_bg1.png" Plist="art/_chapter.plist" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_2" ActionTag="-1417735852" Tag="56" IconVisible="False" LeftMargin="-83.0000" RightMargin="-117.0000" TopMargin="-103.0000" BottomMargin="3.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="PanelObjectData">
+                <Size X="200.0000" Y="100.0000" />
+                <Children>
+                  <AbstractNodeData Name="Image_Icon" ActionTag="-1815406353" Tag="57" IconVisible="False" LeftMargin="-3.5000" RightMargin="0.5000" TopMargin="-9.5000" BottomMargin="4.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="98.0000" Y="57.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4900" Y="0.5700" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_head.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_7" ActionTag="-1902486623" Tag="58" IconVisible="False" LeftMargin="0.5000" RightMargin="-3.5000" TopMargin="-4.5000" BottomMargin="-0.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="102.0000" Y="52.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.5100" Y="0.5200" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_shang1.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_8" ActionTag="795814393" Tag="59" IconVisible="False" LeftMargin="28.0000" RightMargin="130.0000" TopMargin="14.5000" BottomMargin="70.5000" LeftEage="13" RightEage="13" TopEage="4" BottomEage="4" Scale9OriginX="13" Scale9OriginY="4" Scale9Width="16" Scale9Height="7" ctype="ImageViewObjectData">
+                    <Size X="42.0000" Y="15.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="49.0000" Y="78.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2450" Y="0.7800" />
+                    <PreSize X="0.2100" Y="0.1500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_title2.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="-83.0000" Y="3.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="art/chapter/each_bg1.png" Plist="art/_chapter.plist" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_3" ActionTag="-1414503952" Tag="60" IconVisible="False" LeftMargin="142.0000" RightMargin="-342.0000" TopMargin="-103.0000" BottomMargin="3.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="PanelObjectData">
+                <Size X="200.0000" Y="100.0000" />
+                <Children>
+                  <AbstractNodeData Name="Image_Icon" ActionTag="579229916" Tag="61" IconVisible="False" LeftMargin="-3.5000" RightMargin="0.5000" TopMargin="-9.5000" BottomMargin="4.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="98.0000" Y="57.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4900" Y="0.5700" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_head.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_7" ActionTag="1563244834" Tag="62" IconVisible="False" LeftMargin="0.5000" RightMargin="-3.5000" TopMargin="-4.5000" BottomMargin="-0.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="102.0000" Y="52.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.5100" Y="0.5200" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_shang1.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_8" ActionTag="-190378801" Tag="63" IconVisible="False" LeftMargin="28.0000" RightMargin="130.0000" TopMargin="14.5000" BottomMargin="70.5000" LeftEage="13" RightEage="13" TopEage="4" BottomEage="4" Scale9OriginX="13" Scale9OriginY="4" Scale9Width="16" Scale9Height="7" ctype="ImageViewObjectData">
+                    <Size X="42.0000" Y="15.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="49.0000" Y="78.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2450" Y="0.7800" />
+                    <PreSize X="0.2100" Y="0.1500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_title3.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="142.0000" Y="3.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="art/chapter/each_bg1.png" Plist="art/_chapter.plist" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_4" ActionTag="-385232617" Tag="64" IconVisible="False" LeftMargin="-312.0000" RightMargin="112.0000" TopMargin="18.0000" BottomMargin="-118.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="PanelObjectData">
+                <Size X="200.0000" Y="100.0000" />
+                <Children>
+                  <AbstractNodeData Name="Image_Icon" ActionTag="105112125" Tag="65" IconVisible="False" LeftMargin="-3.5000" RightMargin="0.5000" TopMargin="-9.5000" BottomMargin="4.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="98.0000" Y="57.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4900" Y="0.5700" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_head.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_7" ActionTag="2136186996" Tag="66" IconVisible="False" LeftMargin="0.5000" RightMargin="-3.5000" TopMargin="-4.5000" BottomMargin="-0.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="102.0000" Y="52.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.5100" Y="0.5200" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_shang1.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_8" ActionTag="1910873308" Tag="67" IconVisible="False" LeftMargin="28.0000" RightMargin="130.0000" TopMargin="14.5000" BottomMargin="70.5000" LeftEage="13" RightEage="13" TopEage="4" BottomEage="4" Scale9OriginX="13" Scale9OriginY="4" Scale9Width="16" Scale9Height="7" ctype="ImageViewObjectData">
+                    <Size X="42.0000" Y="15.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="49.0000" Y="78.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2450" Y="0.7800" />
+                    <PreSize X="0.2100" Y="0.1500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_title4.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="-312.0000" Y="-118.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="art/chapter/each_bg1.png" Plist="art/_chapter.plist" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_5" ActionTag="-964800448" Tag="68" IconVisible="False" LeftMargin="-86.0000" RightMargin="-114.0000" TopMargin="18.0000" BottomMargin="-118.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="PanelObjectData">
+                <Size X="200.0000" Y="100.0000" />
+                <Children>
+                  <AbstractNodeData Name="Image_Icon" ActionTag="-1016135070" Tag="69" IconVisible="False" LeftMargin="-3.5000" RightMargin="0.5000" TopMargin="-9.5000" BottomMargin="4.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="98.0000" Y="57.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4900" Y="0.5700" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_head.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_7" ActionTag="484434664" Tag="70" IconVisible="False" LeftMargin="0.5000" RightMargin="-3.5000" TopMargin="-4.5000" BottomMargin="-0.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="102.0000" Y="52.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.5100" Y="0.5200" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_shang1.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_8" ActionTag="-2091808769" Tag="71" IconVisible="False" LeftMargin="28.0000" RightMargin="130.0000" TopMargin="14.5000" BottomMargin="70.5000" LeftEage="13" RightEage="13" TopEage="4" BottomEage="4" Scale9OriginX="13" Scale9OriginY="4" Scale9Width="16" Scale9Height="7" ctype="ImageViewObjectData">
+                    <Size X="42.0000" Y="15.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="49.0000" Y="78.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2450" Y="0.7800" />
+                    <PreSize X="0.2100" Y="0.1500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_title5.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="-86.0000" Y="-118.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="art/chapter/each_bg1.png" Plist="art/_chapter.plist" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+              <AbstractNodeData Name="Panel_6" ActionTag="2127046256" Tag="72" IconVisible="False" LeftMargin="140.0000" RightMargin="-340.0000" TopMargin="18.0000" BottomMargin="-118.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="PanelObjectData">
+                <Size X="200.0000" Y="100.0000" />
+                <Children>
+                  <AbstractNodeData Name="Image_Icon" ActionTag="-1035255936" Tag="73" IconVisible="False" LeftMargin="-3.5000" RightMargin="0.5000" TopMargin="-9.5000" BottomMargin="4.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="98.0000" Y="57.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.4900" Y="0.5700" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_boss1.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_7" ActionTag="-793760722" Tag="74" IconVisible="False" LeftMargin="0.5000" RightMargin="-3.5000" TopMargin="-4.5000" BottomMargin="-0.5000" LeftEage="66" RightEage="66" TopEage="34" BottomEage="34" Scale9OriginX="66" Scale9OriginY="34" Scale9Width="71" Scale9Height="37" ctype="ImageViewObjectData">
+                    <Size X="203.0000" Y="105.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="102.0000" Y="52.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.5100" Y="0.5200" />
+                    <PreSize X="1.0150" Y="1.0500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_shang1.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                  <AbstractNodeData Name="Image_8" ActionTag="-2005671764" Tag="75" IconVisible="False" LeftMargin="28.0000" RightMargin="130.0000" TopMargin="14.5000" BottomMargin="70.5000" LeftEage="13" RightEage="13" TopEage="4" BottomEage="4" Scale9OriginX="13" Scale9OriginY="4" Scale9Width="16" Scale9Height="7" ctype="ImageViewObjectData">
+                    <Size X="42.0000" Y="15.0000" />
+                    <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
+                    <Position X="49.0000" Y="78.0000" />
+                    <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                    <CColor A="255" R="255" G="255" B="255" />
+                    <PrePosition X="0.2450" Y="0.7800" />
+                    <PreSize X="0.2100" Y="0.1500" />
+                    <FileData Type="MarkedSubImage" Path="art/chapter/each_title6.png" Plist="art/_chapter.plist" />
+                  </AbstractNodeData>
+                </Children>
+                <AnchorPoint />
+                <Position X="140.0000" Y="-118.0000" />
+                <Scale ScaleX="1.0000" ScaleY="1.0000" />
+                <CColor A="255" R="255" G="255" B="255" />
+                <PrePosition />
+                <PreSize X="0.0000" Y="0.0000" />
+                <FileData Type="MarkedSubImage" Path="art/chapter/each_bg1.png" Plist="art/_chapter.plist" />
+                <SingleColor A="255" R="150" G="200" B="255" />
+                <FirstColor A="255" R="150" G="200" B="255" />
+                <EndColor A="255" R="255" G="255" B="255" />
+                <ColorVector ScaleY="1.0000" />
+              </AbstractNodeData>
+            </Children>
             <AnchorPoint />
-            <Position X="119.0000" Y="66.0000" />
+            <Position X="412.0000" Y="230.0000" />
             <Scale ScaleX="1.0000" ScaleY="1.0000" />
             <CColor A="255" R="255" G="255" B="255" />
-            <PrePosition X="0.1393" Y="0.1375" />
-            <PreSize X="0.7026" Y="0.6250" />
-            <SingleColor A="255" R="150" G="200" B="255" />
-            <FirstColor A="255" R="150" G="200" B="255" />
-            <EndColor A="255" R="255" G="255" B="255" />
-            <ColorVector ScaleY="1.0000" />
+            <PrePosition X="0.5150" Y="0.4792" />
+            <PreSize X="0.0000" Y="0.0000" />
           </AbstractNodeData>
         </Children>
       </ObjectData>

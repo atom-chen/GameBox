@@ -56,7 +56,7 @@ function TestScene:_initUI()
             return 
         end 
     
-        local scene = require("app.views.main.UIMainScene"):create()
+        local scene = require("app.views.main.MainScene"):create()
         cc.Director:getInstance():replaceScene(scene)
     end)
 end 

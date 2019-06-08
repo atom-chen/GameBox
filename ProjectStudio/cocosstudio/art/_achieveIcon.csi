@@ -1,0 +1,47 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="_achieveIcon" Type="Plist" ID="d72c580f-5d77-4c60-a991-065bd0e04078" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="True" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="art/achievement/icon/achieve_title1.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title10.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title11.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title12.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title13.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title14.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title15.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title16.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title17.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title18.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title19.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title2.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title20.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title21.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title22.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title23.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title24.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title25.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title26.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title27.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title28.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title29.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title3.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title30.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title31.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title32.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title33.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title34.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title35.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title36.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title37.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title38.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title39.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title4.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title5.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title6.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title7.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title8.png" />
+      <FilePathData Path="art/achievement/icon/achieve_title9.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

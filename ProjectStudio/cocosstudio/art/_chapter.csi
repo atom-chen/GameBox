@@ -1,0 +1,40 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="_chapter" Type="Plist" ID="6762a811-6d4b-4a28-82ce-58cf9cbdfff0" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="False" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="art/chapter/chapter_left_1.png" />
+      <FilePathData Path="art/chapter/each_bg1.png" />
+      <FilePathData Path="art/chapter/each_boss1.png" />
+      <FilePathData Path="art/chapter/each_boss2.png" />
+      <FilePathData Path="art/chapter/each_boss3.png" />
+      <FilePathData Path="art/chapter/each_boss4.png" />
+      <FilePathData Path="art/chapter/each_boss5.png" />
+      <FilePathData Path="art/chapter/each_boss6.png" />
+      <FilePathData Path="art/chapter/each_head.png" />
+      <FilePathData Path="art/chapter/each_shang1.png" />
+      <FilePathData Path="art/chapter/each_title1.png" />
+      <FilePathData Path="art/chapter/each_title2.png" />
+      <FilePathData Path="art/chapter/each_title3.png" />
+      <FilePathData Path="art/chapter/each_title4.png" />
+      <FilePathData Path="art/chapter/each_title5.png" />
+      <FilePathData Path="art/chapter/each_title6.png" />
+      <FilePathData Path="art/chapter/fangxiang1.png" />
+      <FilePathData Path="art/chapter/fangxiang12.png" />
+      <FilePathData Path="art/chapter/fangxiang2.png" />
+      <FilePathData Path="art/chapter/fangxiang22.png" />
+      <FilePathData Path="art/chapter/fanhui1.png" />
+      <FilePathData Path="art/chapter/fanhui2.png" />
+      <FilePathData Path="art/chapter/shangdian.png" />
+      <FilePathData Path="art/chapter/shangdian2.png" />
+      <FilePathData Path="art/chapter/tiaozhan.png" />
+      <FilePathData Path="art/chapter/tiaozhan22.png" />
+      <FilePathData Path="art/chapter/weikaiqi.png" />
+      <FilePathData Path="art/chapter/weikaiqi2.png" />
+      <FilePathData Path="art/chapter/shang.png" />
+      <FilePathData Path="art/chapter/kuanggai.png" />
+      <FilePathData Path="art/chapter/chapter_dizuo.png" />
+      <FilePathData Path="art/chapter/chapter_dizuo1.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

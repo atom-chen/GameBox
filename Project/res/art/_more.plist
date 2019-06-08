@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>art/more/about_btn.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{773,1},{133,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{133,60}</string>
+			</dict>
+			<key>art/more/about_btn1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{908,1},{133,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{133,60}</string>
+			</dict>
+			<key>art/more/help_btn.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{773,63},{133,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{133,60}</string>
+			</dict>
+			<key>art/more/help_btn1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{387,99},{133,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{133,60}</string>
+			</dict>
+			<key>art/more/name_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{387,1},{384,96}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{384,96}</string>
+			</dict>
+			<key>art/more/set_btn.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{522,99},{133,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{133,60}</string>
+			</dict>
+			<key>art/more/set_btn1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{657,99},{133,60}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{133,60}</string>
+			</dict>
+			<key>art/more/set_open.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{970,1},{141,51}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{141,51}</string>
+			</dict>
+			<key>art/more/set_open1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{719,99},{141,51}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{141,51}</string>
+			</dict>
+			<key>art/more/sound_bg.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{384,104}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{384,104}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>_more.png</string>
+			<key>realTextureFileName</key>
+			<string>_more.png</string>
+			<key>size</key>
+			<string>{1022,241}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1022</integer>
+			<key>height</key>
+			<integer>241</integer>
+		</dict>
+	</dict>
+</plist>

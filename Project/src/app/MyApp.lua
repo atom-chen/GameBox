@@ -17,7 +17,7 @@ function MyApp:ctor()
 end
 
 function MyApp:run()
-	local loginScene = require("app.views.LogoScene"):create()
+	local loginScene = require("app.UI.LogoScene"):create()
     if loginScene then 
 	    cc.Director:getInstance():replaceScene(loginScene)
     end 

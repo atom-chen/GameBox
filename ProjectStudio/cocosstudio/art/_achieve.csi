@@ -1,0 +1,18 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="_achieve" Type="Plist" ID="2377f201-14da-49ba-8ed2-98ab77ce50ce" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="True" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="art/achievement/achieve_bar1.png" />
+      <FilePathData Path="art/achievement/achieve_bar2.png" />
+      <FilePathData Path="art/achievement/achieve_finish0.png" />
+      <FilePathData Path="art/achievement/achieve_finish1.png" />
+      <FilePathData Path="art/achievement/achieve_finish2.png" />
+      <FilePathData Path="art/achievement/achieve_finish3.png" />
+      <FilePathData Path="art/achievement/achieve_finish5.png" />
+      <FilePathData Path="art/achievement/achieve_finish6.png" />
+      <FilePathData Path="art/achievement/achieve_star.png" />
+      <FilePathData Path="art/achievement/achiveboard.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>

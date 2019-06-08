@@ -6,83 +6,57 @@
         <Folder Name="art">
           <Folder Name="achievement">
             <Folder Name="icon">
-              <Image Name="1.png" />
-              <Image Name="10.png" />
-              <Image Name="11.png" />
-              <Image Name="12.png" />
-              <Image Name="13.png" />
-              <Image Name="14.png" />
-              <Image Name="15.png" />
-              <Image Name="16.png" />
-              <Image Name="17.png" />
-              <Image Name="18.png" />
-              <Image Name="19.png" />
-              <Image Name="2.png" />
-              <Image Name="20.png" />
-              <Image Name="21.png" />
-              <Image Name="22.png" />
-              <Image Name="23.png" />
-              <Image Name="24.png" />
-              <Image Name="25.png" />
-              <Image Name="26.png" />
-              <Image Name="27.png" />
-              <Image Name="28.png" />
-              <Image Name="29.png" />
-              <Image Name="3.png" />
-              <Image Name="30.png" />
-              <Image Name="31.png" />
-              <Image Name="32.png" />
-              <Image Name="33.png" />
-              <Image Name="34.png" />
-              <Image Name="35.png" />
-              <Image Name="36.png" />
-              <Image Name="37.png" />
-              <Image Name="38.png" />
-              <Image Name="39.png" />
-              <Image Name="4.png" />
-              <Image Name="40.png" />
-              <Image Name="41.png" />
-              <Image Name="42.png" />
-              <Image Name="43.png" />
-              <Image Name="44.png" />
-              <Image Name="45.png" />
-              <Image Name="46.png" />
-              <Image Name="47.png" />
-              <Image Name="48.png" />
-              <Image Name="49.png" />
-              <Image Name="5.png" />
-              <Image Name="50.png" />
-              <Image Name="51.png" />
-              <Image Name="52.png" />
-              <Image Name="53.png" />
-              <Image Name="54.png" />
-              <Image Name="55.png" />
-              <Image Name="56.png" />
-              <Image Name="57.png" />
-              <Image Name="58.png" />
-              <Image Name="59.png" />
-              <Image Name="6.png" />
-              <Image Name="7.png" />
-              <Image Name="8.png" />
-              <Image Name="9.png" />
+              <Image Name="achieve_title1.png" />
+              <Image Name="achieve_title10.png" />
+              <Image Name="achieve_title11.png" />
+              <Image Name="achieve_title12.png" />
+              <Image Name="achieve_title13.png" />
+              <Image Name="achieve_title14.png" />
+              <Image Name="achieve_title15.png" />
+              <Image Name="achieve_title16.png" />
+              <Image Name="achieve_title17.png" />
+              <Image Name="achieve_title18.png" />
+              <Image Name="achieve_title19.png" />
+              <Image Name="achieve_title2.png" />
+              <Image Name="achieve_title20.png" />
+              <Image Name="achieve_title21.png" />
+              <Image Name="achieve_title22.png" />
+              <Image Name="achieve_title23.png" />
+              <Image Name="achieve_title24.png" />
+              <Image Name="achieve_title25.png" />
+              <Image Name="achieve_title26.png" />
+              <Image Name="achieve_title27.png" />
+              <Image Name="achieve_title28.png" />
+              <Image Name="achieve_title29.png" />
+              <Image Name="achieve_title3.png" />
+              <Image Name="achieve_title30.png" />
+              <Image Name="achieve_title31.png" />
+              <Image Name="achieve_title32.png" />
+              <Image Name="achieve_title33.png" />
+              <Image Name="achieve_title34.png" />
+              <Image Name="achieve_title35.png" />
+              <Image Name="achieve_title36.png" />
+              <Image Name="achieve_title37.png" />
+              <Image Name="achieve_title38.png" />
+              <Image Name="achieve_title39.png" />
+              <Image Name="achieve_title4.png" />
+              <Image Name="achieve_title5.png" />
+              <Image Name="achieve_title6.png" />
+              <Image Name="achieve_title7.png" />
+              <Image Name="achieve_title8.png" />
+              <Image Name="achieve_title9.png" />
             </Folder>
+            <Image Name="achieve_bar1.png" />
+            <Image Name="achieve_bar2.png" />
+            <Image Name="achieve_bg1.png" />
+            <Image Name="achieve_finish0.png" />
+            <Image Name="achieve_finish1.png" />
+            <Image Name="achieve_finish2.png" />
+            <Image Name="achieve_finish3.png" />
+            <Image Name="achieve_finish5.png" />
+            <Image Name="achieve_finish6.png" />
+            <Image Name="achieve_star.png" />
             <Image Name="achiveboard.png" />
-            <Image Name="di.png" />
-            <Image Name="jindi2.png" />
-            <Image Name="jindu1.png" />
-            <Image Name="suzi.png" />
-            <Image Name="suzi2.png" />
-            <Image Name="waikuang.png" />
-            <Image Name="weidacheng.png" />
-            <Image Name="weilingqu.png" />
-            <Image Name="weilingqu2.png" />
-            <Image Name="xianshikelingqu.png" />
-            <Image Name="xianshikelingqu2.png" />
-            <Image Name="xianshiquanbu.png" />
-            <Image Name="xianshiquanbu2.png" />
-            <Image Name="xie.png" />
-            <Image Name="xunzhang.png" />
-            <Image Name="yilingqu.png" />
           </Folder>
           <Folder Name="battle">
             <Image Name="an.png" />
@@ -152,7 +126,6 @@
             <Image Name="chapter_4.png" />
             <Image Name="chapter_5.png" />
             <Image Name="chapter_6.png" />
-            <Image Name="chapter_left_1.png" />
             <Image Name="chapter_bg_1.jpg" />
             <Image Name="chapter_bg_2.jpg" />
             <Image Name="chapter_bg_3.jpg" />
@@ -160,21 +133,7 @@
             <Image Name="chapter_bg_5.jpg" />
             <Image Name="chapter_dizuo.png" />
             <Image Name="chapter_dizuo1.png" />
-            <Image Name="fangxiang1.png" />
-            <Image Name="fangxiang12.png" />
-            <Image Name="fangxiang2.png" />
-            <Image Name="fangxiang22.png" />
-            <Image Name="fanhui1.png" />
-            <Image Name="fanhui2.png" />
-            <Image Name="kuanggai.png" />
-            <Image Name="shang.png" />
-            <Image Name="shangdian.png" />
-            <Image Name="shangdian2.png" />
-            <Image Name="tiaozhan.png" />
-            <Image Name="tiaozhan21.png" />
-            <Image Name="tiaozhan22.png" />
-            <Image Name="weikaiqi.png" />
-            <Image Name="weikaiqi2.png" />
+            <Image Name="chapter_left_1.png" />
             <Image Name="each_bg1.png" />
             <Image Name="each_boss1.png" />
             <Image Name="each_boss2.png" />
@@ -190,7 +149,21 @@
             <Image Name="each_title4.png" />
             <Image Name="each_title5.png" />
             <Image Name="each_title6.png" />
-            <PlistInfo Name="chapterUI.csi" Type="Plist" />
+            <Image Name="fangxiang1.png" />
+            <Image Name="fangxiang12.png" />
+            <Image Name="fangxiang2.png" />
+            <Image Name="fangxiang22.png" />
+            <Image Name="fanhui1.png" />
+            <Image Name="fanhui2.png" />
+            <Image Name="kuanggai.png" />
+            <Image Name="shang.png" />
+            <Image Name="shangdian.png" />
+            <Image Name="shangdian2.png" />
+            <Image Name="tiaozhan.png" />
+            <Image Name="tiaozhan21.png" />
+            <Image Name="tiaozhan22.png" />
+            <Image Name="weikaiqi.png" />
+            <Image Name="weikaiqi2.png" />
           </Folder>
           <Folder Name="effect">
             <Folder Name="boss_skill1">
@@ -232,6 +205,17 @@
               <Image Name="fire_dead_6.png" />
               <Image Name="fire_dead_7.png" />
             </Folder>
+            <Folder Name="chapterEffect">
+              <Image Name="chapterEffect_1.png" />
+              <Image Name="chapterEffect_2.png" />
+              <Image Name="chapterEffect_3.png" />
+              <Image Name="chapterEffect_4.png" />
+              <Image Name="chapterEffect_5.png" />
+              <Image Name="chapterEffect_6.png" />
+              <Image Name="chapterEffect_7.png" />
+              <Image Name="chapterEffect_8.png" />
+              <Image Name="chapterEffect_9.png" />
+            </Folder>
             <Folder Name="drops">
               <Image Name="a1.png" />
               <Image Name="a2.png" />
@@ -245,16 +229,17 @@
               <Image Name="b5.png" />
               <Image Name="b6.png" />
             </Folder>
-            <Folder Name="chapterEffect">
-              <Image Name="chapterEffect_1.png" />
-              <Image Name="chapterEffect_2.png" />
-              <Image Name="chapterEffect_3.png" />
-              <Image Name="chapterEffect_4.png" />
-              <Image Name="chapterEffect_5.png" />
-              <Image Name="chapterEffect_6.png" />
-              <Image Name="chapterEffect_7.png" />
-              <Image Name="chapterEffect_8.png" />
-              <Image Name="chapterEffect_9.png" />
+            <Folder Name="lottery">
+              <Image Name="chou1.png" />
+              <Image Name="chou2.png" />
+              <Image Name="chou3.png" />
+              <Image Name="chou4.png" />
+              <Image Name="chou5.png" />
+              <Image Name="chou6.png" />
+              <Image Name="san1.png" />
+              <Image Name="san2.png" />
+              <Image Name="xuanzhong1.png" />
+              <Image Name="xuanzhong2.png" />
             </Folder>
           </Folder>
           <Folder Name="exit">
@@ -269,6 +254,8 @@
             <Image Name="limitN2.png" />
             <Image Name="num_yellow.png" />
             <Image Name="suzi.png" />
+            <Image Name="suzi_1.png" />
+            <Image Name="suzi_2.png" />
           </Folder>
           <Folder Name="load">
             <Image Name="10.png" />
@@ -284,111 +271,21 @@
             <Image Name="ye2.png" />
           </Folder>
           <Folder Name="lottery">
-            <Folder Name="item">
-              <Image Name="0.png" />
-              <Image Name="1.png" />
-              <Image Name="10.png" />
-              <Image Name="11.png" />
-              <Image Name="12.png" />
-              <Image Name="13.png" />
-              <Image Name="14.png" />
-              <Image Name="15.png" />
-              <Image Name="16.png" />
-              <Image Name="17.png" />
-              <Image Name="18.png" />
-              <Image Name="19.png" />
-              <Image Name="2.png" />
-              <Image Name="20.png" />
-              <Image Name="21.png" />
-              <Image Name="22.png" />
-              <Image Name="23.png" />
-              <Image Name="24.png" />
-              <Image Name="25.png" />
-              <Image Name="26.png" />
-              <Image Name="27.png" />
-              <Image Name="28.png" />
-              <Image Name="29.png" />
-              <Image Name="3.png" />
-              <Image Name="30.png" />
-              <Image Name="31.png" />
-              <Image Name="32.png" />
-              <Image Name="33.png" />
-              <Image Name="34.png" />
-              <Image Name="35.png" />
-              <Image Name="4.png" />
-              <Image Name="5.png" />
-              <Image Name="6.png" />
-              <Image Name="7.png" />
-              <Image Name="8.png" />
-              <Image Name="9.png" />
-            </Folder>
-            <Image Name="1.png" />
-            <Image Name="2.png" />
-            <Image Name="500.png" />
-            <Image Name="500_1.png" />
-            <Image Name="an.png" />
-            <Image Name="ban.png" />
-            <Image Name="chou1.png" />
-            <Image Name="chou2.png" />
-            <Image Name="chou3.png" />
-            <Image Name="chou4.png" />
-            <Image Name="chou5.png" />
-            <Image Name="chou6.png" />
-            <Image Name="denglu.png" />
-            <Image Name="di.png" />
-            <Image Name="fanhui.png" />
-            <Image Name="fanhui2.png" />
-            <Image Name="jiangci.png" />
-            <Image Name="jiangli500.png" />
-            <Image Name="kaishi.png" />
-            <Image Name="kaishi2.png" />
-            <Image Name="lankuang.png" />
-            <Image Name="limian.png" />
-            <Image Name="mianfei.png" />
-            <Image Name="pao.png" />
-            <Image Name="qian.png" />
-            <Image Name="qiang1.png" />
-            <Image Name="qiang2.png" />
-            <Image Name="san1.png" />
-            <Image Name="san2.png" />
-            <Image Name="santian.png" />
-            <Image Name="waikuang.png" />
-            <Image Name="xuanzhong1.png" />
-            <Image Name="xuanzhong2.png" />
-          </Folder>
-          <Folder Name="lotteryresult">
-            <Image Name="0.png" />
-            <Image Name="1.png" />
-            <Image Name="10.png" />
-            <Image Name="11.png" />
-            <Image Name="12.png" />
-            <Image Name="13.png" />
-            <Image Name="14.png" />
-            <Image Name="15.png" />
-            <Image Name="16.png" />
-            <Image Name="17.png" />
-            <Image Name="18.png" />
-            <Image Name="19.png" />
-            <Image Name="2.png" />
-            <Image Name="20.png" />
-            <Image Name="21.png" />
-            <Image Name="22.png" />
-            <Image Name="23.png" />
-            <Image Name="24.png" />
-            <Image Name="3.png" />
-            <Image Name="32.png" />
-            <Image Name="4.png" />
-            <Image Name="5.png" />
-            <Image Name="6.png" />
-            <Image Name="7.png" />
-            <Image Name="8.png" />
-            <Image Name="9.png" />
-            <Image Name="de.png" />
-            <Image Name="di.png" />
-            <Image Name="gong.png" />
-            <Image Name="guang.png" />
-            <Image Name="huo.png" />
-            <Image Name="xi.png" />
+            <Image Name="lottery_12.png" />
+            <Image Name="lottery_3.png" />
+            <Image Name="lottery_1.png" />
+            <Image Name="lottery_2.png" />
+            <Image Name="lottery_back1.png" />
+            <Image Name="lottery_back2.png" />
+            <Image Name="lottery_4.png" />
+            <Image Name="lottery_start1.png" />
+            <Image Name="lottery_start_2.png" />
+            <Image Name="lottery_6.png" />
+            <Image Name="lottery_7.png" />
+            <Image Name="lottery_8.png" />
+            <Image Name="lottery_9.png" />
+            <Image Name="lottery_10.png" />
+            <Image Name="lottery_11.png" />
           </Folder>
           <Folder Name="main">
             <Image Name="bangzhu.png" />
@@ -420,55 +317,30 @@
             <Image Name="zuo.png" />
           </Folder>
           <Folder Name="more">
-            <Image Name="1.png" />
-            <Image Name="2.png" />
-            <Image Name="3.png" />
-            <Image Name="4.png" />
-            <Image Name="5.png" />
-            <Image Name="about.png" />
-            <Image Name="about1.png" />
-            <Image Name="about2.png" />
-            <Image Name="di.png" />
-            <Image Name="guan.png" />
-            <Image Name="help1.png" />
-            <Image Name="help2.png" />
-            <Image Name="kai.png" />
-            <Image Name="kuai.png" />
-            <Image Name="kuangkuang.png" />
-            <Image Name="shezhi.png" />
-            <Image Name="shezhi2.png" />
-            <Image Name="xiao1.png" />
-            <Image Name="xiao2.png" />
-            <Image Name="xiao3.png" />
-            <Image Name="xiao4.png" />
-            <Image Name="xiao5.png" />
-            <Image Name="xiao6.png" />
-            <Image Name="xiugai.png" />
-            <Image Name="ying.png" />
+            <Image Name="about_btn.png" />
+            <Image Name="about_btn1.png" />
+            <Image Name="help_1.png" />
+            <Image Name="help_2.png" />
+            <Image Name="help_3.png" />
+            <Image Name="help_4.png" />
+            <Image Name="help_5.png" />
+            <Image Name="help_btn.png" />
+            <Image Name="help_btn1.png" />
+            <Image Name="more_bg1.png" />
+            <Image Name="name_bg.png" />
+            <Image Name="set_btn.png" />
+            <Image Name="set_btn1.png" />
+            <Image Name="set_open.png" />
+            <Image Name="set_open1.png" />
+            <Image Name="sound_bg.png" />
           </Folder>
           <Folder Name="public">
+            <Image Name="public_back1.png" />
+            <Image Name="public_back2.png" />
             <Image Name="shang.png" />
             <Image Name="xia.png" />
             <Image Name="xiamian2.png" />
-          </Folder>
-          <Folder Name="rank">
-            <Image Name="1.png" />
-            <Image Name="2.png" />
-            <Image Name="3.png" />
-            <Image Name="chengjiu.png" />
-            <Image Name="chengjiu2.png" />
-            <Image Name="di.png" />
-            <Image Name="gaofu.png" />
-            <Image Name="gaofu2.png" />
-            <Image Name="help.png" />
-            <Image Name="jiangshi.png" />
-            <Image Name="jiangshi2.png" />
-            <Image Name="paiming.png" />
-            <Image Name="suzi2.png" />
-            <Image Name="xiaokuang.png" />
-            <Image Name="xingxing.png" />
-            <Image Name="xingxing2.png" />
-            <Image Name="zhongkuang.png" />
+            <Image Name="public_bg1.png" />
           </Folder>
           <Folder Name="res">
             <Image Name="hall_bg1.png" />
@@ -531,31 +403,84 @@
             <Image Name="you.png" />
             <Image Name="zuo.png" />
           </Folder>
+          <PlistInfo Name="_achieve.csi" Type="Plist" />
+          <PlistInfo Name="_achieveIcon.csi" Type="Plist" />
           <PlistInfo Name="_battleUI.csi" Type="Plist" />
           <PlistInfo Name="_main.csi" Type="Plist" />
+          <PlistInfo Name="_more.csi" Type="Plist" />
           <PlistInfo Name="_selectrole.csi" Type="Plist" />
+          <PlistInfo Name="_chapter.csi" Type="Plist" />
+          <Folder Name="item">
+            <Image Name="item_0.png" />
+            <Image Name="item_1.png" />
+            <Image Name="item_10.png" />
+            <Image Name="item_11.png" />
+            <Image Name="item_12.png" />
+            <Image Name="item_13.png" />
+            <Image Name="item_14.png" />
+            <Image Name="item_15.png" />
+            <Image Name="item_16.png" />
+            <Image Name="item_17.png" />
+            <Image Name="item_18.png" />
+            <Image Name="item_19.png" />
+            <Image Name="item_2.png" />
+            <Image Name="item_20.png" />
+            <Image Name="item_21.png" />
+            <Image Name="item_22.png" />
+            <Image Name="item_23.png" />
+            <Image Name="item_24.png" />
+            <Image Name="item_25.png" />
+            <Image Name="item_26.png" />
+            <Image Name="item_27.png" />
+            <Image Name="item_28.png" />
+            <Image Name="item_29.png" />
+            <Image Name="item_3.png" />
+            <Image Name="item_30.png" />
+            <Image Name="item_31.png" />
+            <Image Name="item_32.png" />
+            <Image Name="item_33.png" />
+            <Image Name="item_34.png" />
+            <Image Name="item_35.png" />
+            <Image Name="item_4.png" />
+            <Image Name="item_5.png" />
+            <Image Name="item_6.png" />
+            <Image Name="item_7.png" />
+            <Image Name="item_8.png" />
+            <Image Name="item_9.png" />
+            <Image Name="item_bg1.png" />
+          </Folder>
+          <PlistInfo Name="_lottery.csi" Type="Plist" />
+          <Folder Name="lotteryresult">
+            <Image Name="result_1.png" />
+            <Image Name="result_2.png" />
+            <Image Name="result_4.png" />
+            <Image Name="result_3.png" />
+            <Image Name="result_5.png" />
+          </Folder>
         </Folder>
         <Folder Name="csd">
           <Folder Name="effect">
             <Project Name="Effect_Boss_SkillRock.csd" Type="Node" />
             <Project Name="Effect_bullet_fire.csd" Type="Node" />
             <Project Name="Effect_bullet_fire_Dead.csd" Type="Node" />
-            <Project Name="Node.csd" Type="Node" />
             <Project Name="Effect_Chapter.csd" Type="Node" />
+            <Project Name="Effect_crule.csd" Type="Node" />
           </Folder>
           <Folder Name="test">
             <Project Name="UITest.csd" Type="Scene" />
           </Folder>
+          <Project Name="ChapterScene.csd" Type="Scene" />
           <Project Name="mainScene.csd" Type="Scene" />
           <Project Name="RoleScene.csd" Type="Scene" />
+          <Project Name="UIAchievement.csd" Type="Layer" />
           <Project Name="UIBattle.csd" Type="Layer" />
-          <Project Name="UIHall.csd" Type="Scene" />
           <Project Name="UILoading.csd" Type="Layer" />
           <Project Name="UILogin.csd" Type="Scene" />
+          <Project Name="UIMore.csd" Type="Layer" />
           <Project Name="UIPause.csd" Type="Layer" />
           <Project Name="UIQuit.csd" Type="Layer" />
-          <Project Name="UISelectRole.csd" Type="Scene" />
-          <Project Name="ChapterScene.csd" Type="Scene" />
+          <Project Name="UILottery.csd" Type="Layer" />
+          <Project Name="UIlotteryReward.csd" Type="Layer" />
         </Folder>
         <Folder Name="eliminate">
           <Folder Name="csd">

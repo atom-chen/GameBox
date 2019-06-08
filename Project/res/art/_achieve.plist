@@ -1,0 +1,137 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+	<dict>
+		<key>frames</key>
+		<dict>
+			<key>art/achievement/achieve_bar1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{999,1},{151,17}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<true />
+				<key>sourceSize</key>
+				<string>{151,17}</string>
+			</dict>
+			<key>art/achievement/achieve_bar2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{567,80},{151,17}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{151,17}</string>
+			</dict>
+			<key>art/achievement/achieve_finish0.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{857,65},{68,61}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{68,61}</string>
+			</dict>
+			<key>art/achievement/achieve_finish1.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{927,65},{68,61}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{68,61}</string>
+			</dict>
+			<key>art/achievement/achieve_finish2.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{857,1},{69,62}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{69,62}</string>
+			</dict>
+			<key>art/achievement/achieve_finish3.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{928,1},{69,62}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{69,62}</string>
+			</dict>
+			<key>art/achievement/achieve_finish5.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{567,1},{143,77}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{143,77}</string>
+			</dict>
+			<key>art/achievement/achieve_finish6.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{712,1},{143,77}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{143,77}</string>
+			</dict>
+			<key>art/achievement/achieve_star.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{720,80},{52,38}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{52,38}</string>
+			</dict>
+			<key>art/achievement/achiveboard.png</key>
+			<dict>
+				<key>frame</key>
+				<string>{{1,1},{564,103}}</string>
+				<key>offset</key>
+				<string>{0,0}</string>
+				<key>rotated</key>
+				<false />
+				<key>sourceSize</key>
+				<string>{564,103}</string>
+			</dict>
+		</dict>
+		<key>metadata</key>
+		<dict>
+			<key>format</key>
+			<integer>2</integer>
+			<key>textureFileName</key>
+			<string>_achieve.png</string>
+			<key>realTextureFileName</key>
+			<string>_achieve.png</string>
+			<key>size</key>
+			<string>{1017,153}</string>
+		</dict>
+		<key>texture</key>
+		<dict>
+			<key>width</key>
+			<integer>1017</integer>
+			<key>height</key>
+			<integer>153</integer>
+		</dict>
+	</dict>
+</plist>

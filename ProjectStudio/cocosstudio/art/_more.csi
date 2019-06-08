@@ -1,0 +1,18 @@
+<PlistInfoProjectFile>
+  <PropertyGroup Name="_more" Type="Plist" ID="8aa61a1b-98ea-43e9-b9ea-488b8eb5af64" Version="3.10.0.0" />
+  <Content ExportType="Png" SortAlgorithm="MaxRects" PicturePadding="1" AllowRotation="True" AllowAnySize="True" AllowTrim="False" ctype="PlistInfoData">
+    <ImageFiles>
+      <FilePathData Path="art/more/about_btn.png" />
+      <FilePathData Path="art/more/about_btn1.png" />
+      <FilePathData Path="art/more/help_btn.png" />
+      <FilePathData Path="art/more/help_btn1.png" />
+      <FilePathData Path="art/more/name_bg.png" />
+      <FilePathData Path="art/more/set_btn.png" />
+      <FilePathData Path="art/more/set_btn1.png" />
+      <FilePathData Path="art/more/set_open.png" />
+      <FilePathData Path="art/more/set_open1.png" />
+      <FilePathData Path="art/more/sound_bg.png" />
+    </ImageFiles>
+    <MaxSize Width="1024" Height="1024" />
+  </Content>
+</PlistInfoProjectFile>
