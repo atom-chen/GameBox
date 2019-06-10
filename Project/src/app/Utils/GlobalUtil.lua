@@ -85,4 +85,27 @@ cc.exports.ChangeScene = function(_scene, _transition, _time)
 	display.runScene(_scene, _transition, _time)
 end 
 
+cc.exports.MsgTip = function(_content, _bgRes)
+	local root = cc.CSLoader:createNode("res/csd/UIMsgTip.csb")
+	local _panel = root:getChildByName("Panel")
+	cc.Director:getInstance():getRunningScene():addChild(root, 1000) 
+
+	if _bgRes ~= nil then 
+        _panel:getChildByName("Image_1"):setTexture(_bgRes)
+    end 
+    _panel:getChildByName("Text_1"):setString(_content)
+	
+	--
+	local delay = cc.DelayTime:create(1)
+	local fadeout = cc.FadeOut:create(1)
+	local move = cc.MoveTo:create(1, cc.p(winSize.width/2, winSize.height))
+    local move_ease_out = cc.EaseSineIn:create(move)
+	local spawn = cc.Spawn:create(move_ease_out, fadeout)
+    local callback = cc.CallFunc:create(function()
+        root:removeFromParent()
+    end)
+    local action = cc.Sequence:create(delay, spawn, callback)
+	_panel:runAction(action)
+end 
+
 return GlobalUtil
