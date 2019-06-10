@@ -140,7 +140,7 @@
               <AbstractNodeData Name="panel" ActionTag="551538335" Tag="61" IconVisible="False" RightMargin="-15.0000" BottomMargin="297.0000" TouchEnable="True" ClipAble="False" BackColorAlpha="102" ColorAngle="90.0000" LeftEage="186" RightEage="186" TopEage="33" BottomEage="33" Scale9OriginX="-186" Scale9OriginY="-33" Scale9Width="372" Scale9Height="66" ctype="PanelObjectData">
                 <Size X="565.0000" Y="103.0000" />
                 <Children>
-                  <AbstractNodeData Name="Image_bg" CanEdit="False" ActionTag="1112306423" Tag="62" IconVisible="False" LeftMargin="-5.0746" RightMargin="6.0746" TopMargin="0.1581" BottomMargin="-0.1581" LeftEage="186" RightEage="186" TopEage="33" BottomEage="33" Scale9OriginX="186" Scale9OriginY="33" Scale9Width="192" Scale9Height="37" ctype="ImageViewObjectData">
+                  <AbstractNodeData Name="Image_bg" ActionTag="1112306423" Tag="62" IconVisible="False" LeftMargin="-5.0746" RightMargin="6.0746" TopMargin="0.1581" BottomMargin="-0.1581" LeftEage="186" RightEage="186" TopEage="33" BottomEage="33" Scale9OriginX="186" Scale9OriginY="33" Scale9Width="192" Scale9Height="37" ctype="ImageViewObjectData">
                     <Size X="564.0000" Y="103.0000" />
                     <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
                     <Position X="276.9254" Y="51.3419" />
@@ -160,25 +160,25 @@
                     <PreSize X="0.1982" Y="0.9612" />
                     <FileData Type="MarkedSubImage" Path="art/achievement/icon/achieve_title1.png" Plist="art/_achieveIcon.plist" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_task" ActionTag="1325307387" Tag="64" IconVisible="False" LeftMargin="131.4595" RightMargin="214.5405" TopMargin="20.4212" BottomMargin="61.5788" FontSize="18" LabelText="使用近身武器消灭10个僵尸" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="219.0000" Y="21.0000" />
+                  <AbstractNodeData Name="Text_task" ActionTag="1325307387" Tag="64" IconVisible="False" LeftMargin="131.4595" RightMargin="217.5405" TopMargin="21.9212" BottomMargin="63.0788" FontSize="18" LabelText="使用近身武器消灭10个僵尸" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="216.0000" Y="18.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="131.4595" Y="72.0788" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="255" B="255" />
                     <PrePosition X="0.2327" Y="0.6998" />
-                    <PreSize X="0.3876" Y="0.2039" />
+                    <PreSize X="0.3823" Y="0.1748" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>
-                  <AbstractNodeData Name="Text_process" ActionTag="-1781663449" Tag="67" IconVisible="False" LeftMargin="300.1600" RightMargin="228.8400" TopMargin="50.9397" BottomMargin="31.0603" FontSize="18" LabelText="1/10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
-                    <Size X="36.0000" Y="21.0000" />
+                  <AbstractNodeData Name="Text_process" ActionTag="-1781663449" Tag="67" IconVisible="False" LeftMargin="300.1600" RightMargin="228.8400" TopMargin="52.4397" BottomMargin="32.5603" FontSize="18" LabelText="1/10" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
+                    <Size X="36.0000" Y="18.0000" />
                     <AnchorPoint ScaleY="0.5000" />
                     <Position X="300.1600" Y="41.5603" />
                     <Scale ScaleX="1.0000" ScaleY="1.0000" />
                     <CColor A="255" R="255" G="165" B="0" />
                     <PrePosition X="0.5313" Y="0.4035" />
-                    <PreSize X="0.0637" Y="0.2039" />
+                    <PreSize X="0.0637" Y="0.1748" />
                     <OutlineColor A="255" R="255" G="0" B="0" />
                     <ShadowColor A="255" R="110" G="110" B="110" />
                   </AbstractNodeData>

@@ -257,6 +257,45 @@
             <Image Name="suzi_1.png" />
             <Image Name="suzi_2.png" />
           </Folder>
+          <Folder Name="item">
+            <Image Name="item_0.png" />
+            <Image Name="item_1.png" />
+            <Image Name="item_10.png" />
+            <Image Name="item_11.png" />
+            <Image Name="item_12.png" />
+            <Image Name="item_13.png" />
+            <Image Name="item_14.png" />
+            <Image Name="item_15.png" />
+            <Image Name="item_16.png" />
+            <Image Name="item_17.png" />
+            <Image Name="item_18.png" />
+            <Image Name="item_19.png" />
+            <Image Name="item_2.png" />
+            <Image Name="item_20.png" />
+            <Image Name="item_21.png" />
+            <Image Name="item_22.png" />
+            <Image Name="item_23.png" />
+            <Image Name="item_24.png" />
+            <Image Name="item_25.png" />
+            <Image Name="item_26.png" />
+            <Image Name="item_27.png" />
+            <Image Name="item_28.png" />
+            <Image Name="item_29.png" />
+            <Image Name="item_3.png" />
+            <Image Name="item_30.png" />
+            <Image Name="item_31.png" />
+            <Image Name="item_32.png" />
+            <Image Name="item_33.png" />
+            <Image Name="item_34.png" />
+            <Image Name="item_35.png" />
+            <Image Name="item_4.png" />
+            <Image Name="item_5.png" />
+            <Image Name="item_6.png" />
+            <Image Name="item_7.png" />
+            <Image Name="item_8.png" />
+            <Image Name="item_9.png" />
+            <Image Name="item_bg1.png" />
+          </Folder>
           <Folder Name="load">
             <Image Name="10.png" />
             <Image Name="2.png" />
@@ -271,21 +310,28 @@
             <Image Name="ye2.png" />
           </Folder>
           <Folder Name="lottery">
-            <Image Name="lottery_12.png" />
-            <Image Name="lottery_3.png" />
             <Image Name="lottery_1.png" />
+            <Image Name="lottery_10.png" />
+            <Image Name="lottery_11.png" />
+            <Image Name="lottery_12.png" />
             <Image Name="lottery_2.png" />
-            <Image Name="lottery_back1.png" />
-            <Image Name="lottery_back2.png" />
+            <Image Name="lottery_3.png" />
             <Image Name="lottery_4.png" />
-            <Image Name="lottery_start1.png" />
-            <Image Name="lottery_start_2.png" />
             <Image Name="lottery_6.png" />
             <Image Name="lottery_7.png" />
             <Image Name="lottery_8.png" />
             <Image Name="lottery_9.png" />
-            <Image Name="lottery_10.png" />
-            <Image Name="lottery_11.png" />
+            <Image Name="lottery_back1.png" />
+            <Image Name="lottery_back2.png" />
+            <Image Name="lottery_start_2.png" />
+            <Image Name="lottery_start1.png" />
+          </Folder>
+          <Folder Name="lotteryresult">
+            <Image Name="result_1.png" />
+            <Image Name="result_2.png" />
+            <Image Name="result_3.png" />
+            <Image Name="result_4.png" />
+            <Image Name="result_5.png" />
           </Folder>
           <Folder Name="main">
             <Image Name="bangzhu.png" />
@@ -335,12 +381,13 @@
             <Image Name="sound_bg.png" />
           </Folder>
           <Folder Name="public">
+            <Image Name="Img_tip.png" />
             <Image Name="public_back1.png" />
             <Image Name="public_back2.png" />
+            <Image Name="public_bg1.png" />
             <Image Name="shang.png" />
             <Image Name="xia.png" />
             <Image Name="xiamian2.png" />
-            <Image Name="public_bg1.png" />
           </Folder>
           <Folder Name="res">
             <Image Name="hall_bg1.png" />
@@ -406,57 +453,11 @@
           <PlistInfo Name="_achieve.csi" Type="Plist" />
           <PlistInfo Name="_achieveIcon.csi" Type="Plist" />
           <PlistInfo Name="_battleUI.csi" Type="Plist" />
+          <PlistInfo Name="_chapter.csi" Type="Plist" />
+          <PlistInfo Name="_lottery.csi" Type="Plist" />
           <PlistInfo Name="_main.csi" Type="Plist" />
           <PlistInfo Name="_more.csi" Type="Plist" />
           <PlistInfo Name="_selectrole.csi" Type="Plist" />
-          <PlistInfo Name="_chapter.csi" Type="Plist" />
-          <Folder Name="item">
-            <Image Name="item_0.png" />
-            <Image Name="item_1.png" />
-            <Image Name="item_10.png" />
-            <Image Name="item_11.png" />
-            <Image Name="item_12.png" />
-            <Image Name="item_13.png" />
-            <Image Name="item_14.png" />
-            <Image Name="item_15.png" />
-            <Image Name="item_16.png" />
-            <Image Name="item_17.png" />
-            <Image Name="item_18.png" />
-            <Image Name="item_19.png" />
-            <Image Name="item_2.png" />
-            <Image Name="item_20.png" />
-            <Image Name="item_21.png" />
-            <Image Name="item_22.png" />
-            <Image Name="item_23.png" />
-            <Image Name="item_24.png" />
-            <Image Name="item_25.png" />
-            <Image Name="item_26.png" />
-            <Image Name="item_27.png" />
-            <Image Name="item_28.png" />
-            <Image Name="item_29.png" />
-            <Image Name="item_3.png" />
-            <Image Name="item_30.png" />
-            <Image Name="item_31.png" />
-            <Image Name="item_32.png" />
-            <Image Name="item_33.png" />
-            <Image Name="item_34.png" />
-            <Image Name="item_35.png" />
-            <Image Name="item_4.png" />
-            <Image Name="item_5.png" />
-            <Image Name="item_6.png" />
-            <Image Name="item_7.png" />
-            <Image Name="item_8.png" />
-            <Image Name="item_9.png" />
-            <Image Name="item_bg1.png" />
-          </Folder>
-          <PlistInfo Name="_lottery.csi" Type="Plist" />
-          <Folder Name="lotteryresult">
-            <Image Name="result_1.png" />
-            <Image Name="result_2.png" />
-            <Image Name="result_4.png" />
-            <Image Name="result_3.png" />
-            <Image Name="result_5.png" />
-          </Folder>
         </Folder>
         <Folder Name="csd">
           <Folder Name="effect">
@@ -476,11 +477,12 @@
           <Project Name="UIBattle.csd" Type="Layer" />
           <Project Name="UILoading.csd" Type="Layer" />
           <Project Name="UILogin.csd" Type="Scene" />
+          <Project Name="UILottery.csd" Type="Layer" />
+          <Project Name="UIlotteryReward.csd" Type="Layer" />
           <Project Name="UIMore.csd" Type="Layer" />
           <Project Name="UIPause.csd" Type="Layer" />
           <Project Name="UIQuit.csd" Type="Layer" />
-          <Project Name="UILottery.csd" Type="Layer" />
-          <Project Name="UIlotteryReward.csd" Type="Layer" />
+          <Project Name="UIMsgTip.csd" Type="Layer" />
         </Folder>
         <Folder Name="eliminate">
           <Folder Name="csd">
