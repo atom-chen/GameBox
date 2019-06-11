@@ -1,11 +1,14 @@
 -- 成就页面
+local AchieveConfig = require("app.config.AchieveConfig")
+local AchieveService = require("app.Service.AcheiveService")
+
 local UIAchieve = class("UIAchieve", function()
     return newLayerColor(cc.size(display.width, display.height), 120)
 end) 
 
 ---
 local UIAchieveItem = class("UIAchieveItem")
-function UIAchieveItem:ctor(root, data)
+function UIAchieveItem:ctor(root)
     self._root = root
     self._itemBg = nil              -- 背景
     self._iconImg = nil             -- icon
@@ -17,10 +20,10 @@ function UIAchieveItem:ctor(root, data)
     self._notendImg = nil           -- 未达成
     self._finishBtn = nil           -- 可领取
     
-    self:_show(data)
+    self:_init()
 end 
 
-function UIAchieveItem:_show(data)
+function UIAchieveItem:_init()
     self._itemBg = self._root:getChildByName("Image_bg")
     self._iconImg = self._root:getChildByName("Image_Icon")
     self._stateText = self._root:getChildByName("Text_task")
@@ -34,14 +37,39 @@ function UIAchieveItem:_show(data)
     self._finishBtn = self._root:getChildByName("Button_finish")
 end 
 
+function UIAchieveItem:_setData(data)
+    -- 背景
+    -- icon
+    -- 描述
+    self._stateText:setString(data.itemName or "")
+    -- 进度
+    local cur, total = data.curprocess or 0, data.totalprocess or 100
+    local percent = math.floor(cur * 100/total)
+    self._barText:setString(cur .. "/" .. total)
+    self._bar:setPercent(percent)
+    -- 奖励
+    self._rewardText:setString(data.rewardnum)
+    -- 状态
+    self:updateFinishState(data.rewardstate)
+end 
+
 -- 刷新进度
 function UIAchieveItem:updateProcess(newProcess)
     --
 end 
 
 -- 刷新状态
-function UIAchieveItem:updateFinishState(newState)
-    --
+function UIAchieveItem:updateFinishState(state)
+    self._endImg:setVisible(false)
+    self._notendImg:setVisible(false)
+    self._finishBtn:setVisible(false)
+    if state == AchieveConfig.NO_FINISH then 
+        self._notendImg:setVisible(true)
+    elseif state == AchieveConfig.NO_FINISH then 
+        self._finishBtn:setVisible(true)
+    elseif state == AchieveConfig.NO_FINISH then 
+        self._endImg:setVisible(true)
+    end 
 end 
 
 --- 
@@ -63,6 +91,9 @@ function UIAchieve:_initData()
     self._listBar = {}
     self._showAllBtn = nil      -- 显示全部按钮
     self._showBtn = nil         -- 显示可领取按钮
+
+    self._AchieveService = AchieveService:getInstance()
+    self._AchieveService:init()
 end 
 
 function UIAchieve:_initUI()
@@ -95,11 +126,9 @@ end
 
 function UIAchieve:_onEnter()
     -- 播放动画
-    --[[
     local action = cc.CSLoader:createTimeline("res/csd/UIAchievement.csb")
     self._root:runAction(action)
     action:gotoFrameAndPlay(0, false)
-    ]]
 
     -- 刷新列表
     self:_updateAchieve()
@@ -107,22 +136,16 @@ end
 
 -- 刷新列表
 function UIAchieve:_updateAchieve()
-    --[[
-    -- 获取成就列表数据
-    local _dataList = AchieveService:getInstance():getAchieveList()
-    if not _dataList then 
+   local datalist = self._AchieveService:getAchieveList()
+   if not datalist then 
         return 
     end 
-    local num = #_dataList
-    if not num then 
-        return 
-    end 
-    ]]
 
-    local num = 10
+    local num = #datalist
     for i = 1, num do 
         local item = self._tmpItem:clone()
         self._listBar[i] = UIAchieveItem.new(item)
+        self._listBar[i]:_setData(datalist[i])
         self._listView:pushBackCustomItem(item)
     end  
 end 

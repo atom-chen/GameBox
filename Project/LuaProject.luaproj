@@ -28,10 +28,9 @@
     <Folder Include="src\app\config\" />
     <Folder Include="src\app\eliminate\" />
     <Folder Include="src\app\personTest\" />
-    <Folder Include="src\app\tool\" />
-    <Folder Include="src\app\views\" />
-    <Folder Include="src\app\views\login\" />
-    <Folder Include="src\app\views\main\" />
+    <Folder Include="src\app\Service\" />
+    <Folder Include="src\app\UI\" />
+    <Folder Include="src\app\Utils\" />
     <Folder Include="src\cocos\" />
     <Folder Include="src\cocos\3d\" />
     <Folder Include="src\cocos\cocos2d\" />
@@ -51,9 +50,8 @@
     <Folder Include="src\packages\mvc\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="src\.vscode\launch.json" />
-  </ItemGroup>
-  <ItemGroup>
+    <Compile Include="src\app\config\AchieveConfig.lua" />
+    <Compile Include="src\app\config\chapterConfig.lua" />
     <Compile Include="src\app\config\expressionConfig.lua" />
     <Compile Include="src\app\config\gobalConfig.lua" />
     <Compile Include="src\app\config\nickConfig.lua" />
@@ -64,16 +62,27 @@
     <Compile Include="src\app\eliminate\EliminatePlay.lua" />
     <Compile Include="src\app\eliminate\EliminateScene.lua" />
     <Compile Include="src\app\MyApp.lua" />
+    <Compile Include="src\app\personTest\ClipTest.lua" />
     <Compile Include="src\app\personTest\DrawGraphTest.lua" />
+    <Compile Include="src\app\personTest\DrawLineTest.lua" />
+    <Compile Include="src\app\personTest\KeyboardTest.lua" />
     <Compile Include="src\app\personTest\OpenGLTest.lua" />
     <Compile Include="src\app\personTest\ProcessorTest.lua" />
     <Compile Include="src\app\personTest\SpineTest.lua" />
     <Compile Include="src\app\personTest\TestScene.lua" />
-    <Compile Include="src\app\tool\Tool_String.lua" />
-    <Compile Include="src\app\views\login\UILoginScene.lua" />
-    <Compile Include="src\app\views\login\UISelectRole.lua" />
-    <Compile Include="src\app\views\LogoScene.lua" />
-    <Compile Include="src\app\views\main\UIMainScene.lua" />
+    <Compile Include="src\app\Service\AcheiveService.lua" />
+    <Compile Include="src\app\Service\ChapterService.lua" />
+    <Compile Include="src\app\Service\RoleService.lua" />
+    <Compile Include="src\app\UI\LogoScene.lua" />
+    <Compile Include="src\app\UI\MainScene.lua" />
+    <Compile Include="src\app\UI\UIAchieve.lua" />
+    <Compile Include="src\app\UI\UIMore.lua" />
+    <Compile Include="src\app\UI\UIQuit.lua" />
+    <Compile Include="src\app\UI\UISelectRole.lua" />
+    <Compile Include="src\app\Utils\GlobalRequire.lua" />
+    <Compile Include="src\app\Utils\GlobalUtil.lua" />
+    <Compile Include="src\app\Utils\NumUtil.lua" />
+    <Compile Include="src\app\Utils\StringUtil.lua" />
     <Compile Include="src\cocos\3d\3dConstants.lua" />
     <Compile Include="src\cocos\cocos2d\bitExtend.lua" />
     <Compile Include="src\cocos\cocos2d\Cocos2d.lua" />
@@ -134,6 +143,7 @@
     <Compile Include="src\cocos\ui\DeprecatedUIFunc.lua" />
     <Compile Include="src\cocos\ui\experimentalUIConstants.lua" />
     <Compile Include="src\cocos\ui\GuiConstants.lua" />
+    <Compile Include="src\cocos\说明.lua" />
     <Compile Include="src\config.lua" />
     <Compile Include="src\LuaDebug.lua" />
     <Compile Include="src\main.lua" />
