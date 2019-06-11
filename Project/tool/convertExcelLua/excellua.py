@@ -34,6 +34,24 @@ def getHeadDict(sheet):
     return headdict
 
 
+# 获取注释文本内容
+def getAnnotationContent(headdict):
+    cols = len(headdict[0])
+    newStr = ''
+    for index in range(cols):
+        lineStr = ''
+        _var = headdict[1][index]       # 变量
+        _type = headdict[2][index]      # 类型
+        _state = headdict[0][index]     # 注释
+        lineStr = '\t{var}:[{type}] {state}\n'.format(var=_var, type=_type, state=_state)
+        newStr += lineStr
+
+    content = '--[[\n'
+    content += newStr
+    content += ']]\n'
+    return content
+
+
 # 解析每行数据
 def getRowList(rowIndex, sheet, headdict):
     row_list = []
@@ -58,8 +76,14 @@ def getRowList(rowIndex, sheet, headdict):
                     v = 'true'
                 else:
                     v = 'false'
-        elif head_type == 'number':
-            # 数字
+        elif head_type == 'float':
+            # 浮点型
+            if ctype == 0:
+                v = 'nil'
+            else:
+                v = float(cell.value)
+        elif head_type == 'int':
+            # 整型
             if ctype == 0:
                 v = 'nil'
             else:
@@ -118,13 +142,22 @@ def excel2lua(root, filename):
             # 获取指定行数据，并将数据存储到列表中
             excel_dict[value] = getRowList(row, sheet, headdict)
 
-        # 写入文件
+        #----------------------- 写入文件 -----------------------#
+        # 命名
         if(sheetnum > 1):
             outname = os.path.splitext(filename)[0] + '_' + sheetNames[index] + 'Config'
         else:
             outname = os.path.splitext(filename)[0] + 'Config'
         outpath = os.path.join(OUT_PATH, outname + '.lua')
+
+        # 打开文件
         newfile = open(outpath, 'w')
+
+        # 写入注释
+        annotation = getAnnotationContent(headdict)
+        newfile.write(annotation)
+
+        # 写入脚本
         newfile.write('local {0}'.format(outname))
         newfile.write(' = {\n')
         for k, v in excel_dict.items():
