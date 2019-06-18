@@ -1,0 +1,358 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="include">
+      <UniqueIdentifier>{6934042e-79ca-4713-8797-cbf5cd87983a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libs">
+      <UniqueIdentifier>{22cb9a2c-4b05-4649-9062-1a945c7795b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="class">
+      <UniqueIdentifier>{8829f14a-c10a-4f9a-a82b-09da9fdc8aae}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="include\abstract.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\asdl.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ast.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bitset.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\boolobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bufferobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bytearrayobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bytes_methods.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\bytesobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cellobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ceval.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\classobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\code.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\codecs.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\compile.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\complexobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\cStringIO.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\datetime.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\descrobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dictobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\dtoa.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\enumobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\errcode.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\eval.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\fileobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\floatobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\frameobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\funcobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\genobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\graminit.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\grammar.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\import.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\intobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\intrcheck.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\iterobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\listobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\longintrepr.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\longobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\marshal.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\memoryobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\metagrammar.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\methodobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\modsupport.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\moduleobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\node.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\object.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\objimpl.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\opcode.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\osdefs.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\parsetok.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\patchlevel.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pgen.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pgenheaders.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\py_curses.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pyarena.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pycapsule.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pyconfig.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pyctype.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pydebug.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pyerrors.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pyexpat.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pyfpe.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pygetopt.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pymacconfig.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pymactoolbox.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pymath.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pymem.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pyport.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pystate.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pystrcmp.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pystrtod.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Python.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Python-ast.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pythonrun.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\pythread.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\rangeobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\setobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sliceobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\stringobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\structmember.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\structseq.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\symtable.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\sysmodule.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\timefuncs.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\token.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\traceback.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\tupleobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\ucnhash.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\unicodeobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\warnings.h">
+      <Filter>include</Filter>
+    </ClInclude>
+    <ClInclude Include="include\weakrefobject.h">
+      <Filter>include</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="libs\_bsddb.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_ctypes.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_ctypes_test.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_elementtree.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_hashlib.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_msi.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_multiprocessing.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_socket.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_sqlite3.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_ssl.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_testcapi.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\_tkinter.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\bz2.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\pyexpat.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\python27.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\select.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\unicodedata.lib">
+      <Filter>libs</Filter>
+    </Library>
+    <Library Include="libs\winsound.lib">
+      <Filter>libs</Filter>
+    </Library>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="libs\libpython27.a">
+      <Filter>libs</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="class\main.cpp">
+      <Filter>class</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
