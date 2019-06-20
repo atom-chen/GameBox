@@ -82,7 +82,7 @@ def getRowList(rowIndex, sheet, headdict):
                 v = 'nil'
             else:
                 v = float(cell.value)
-        elif head_type == 'int':
+        elif head_type == 'int' or head_type == 'number':
             # 整型
             if ctype == 0:
                 v = 'nil'
@@ -108,6 +108,7 @@ def getRowList(rowIndex, sheet, headdict):
 
         # 加入列表
         row_list.append([k, v])
+    print(row_list)
     return row_list
 
 
@@ -125,7 +126,7 @@ def excel2lua(root, filename):
         sheet = workbook.sheet_by_index(index)
         rows = sheet.nrows  # 获取指定工作表的有效行数
         cols = sheet.ncols  # 获取指定工作表中的有效列数
-        print('[excel] sheetname:{0} (row:{1}, col:{2})'.format(sheet.name, rows, cols))
+        print(u'[excel] Sheet名:{0} (行:{1}, 列:{2})'.format(sheet.name, rows, cols))
 
         # 获取头文件数据
         headdict = getHeadDict(sheet)
@@ -158,8 +159,7 @@ def excel2lua(root, filename):
         newfile.write(annotation)
 
         # 写入脚本
-        newfile.write('local {0}'.format(outname))
-        newfile.write(' = {\n')
+        newfile.write('local config = {\n')
         for k, v in excel_dict.items():
             newfile.write('\t[' + str(int(k)) + '] = {')
             for row_data in v:
@@ -176,6 +176,7 @@ def excel2lua(root, filename):
 def walkFiles():
     for root, dirs, files in os.walk(SRC_PATH):
         for filename in fnmatch.filter(files, "*.xlsx"):
+            print(u'遍历文件名为:' + filename)
             excel2lua(root, filename)
 
 

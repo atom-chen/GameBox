@@ -39,9 +39,11 @@ end
 
 function UIAchieveItem:_setData(data)
     -- 背景
+    -- self._itemBg
     -- icon
+    self._iconImg:loadTexture(data.iconRes, ccui.TextureResType.plistType)
     -- 描述
-    self._stateText:setString(data.itemName or "")
+    self._stateText:setString(data.state or "")
     -- 进度
     local cur, total = data.curprocess or 0, data.totalprocess or 100
     local percent = math.floor(cur * 100/total)
@@ -122,6 +124,9 @@ function UIAchieve:_initUI()
         MsgTip("您点击了返回按钮")
         self:removeFromParent()
     end)
+
+    --
+    cc.SpriteFrameCache:getInstance():addSpriteFrames("res/art/_achieveIcon.plist")
 end 
 
 function UIAchieve:_onEnter()
