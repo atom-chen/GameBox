@@ -54,6 +54,22 @@ function ChapterConfig.getChapterList()
 	return config 
 end 
 
+-- 获取章ID列表
+function ChapterConfig.getChapterIdList()
+	local _idTab = {}
+	table.foreach(config, function(key,data)
+		local id = data.chapterId
+		if table.indexof(_idTab, id) == nil then
+			table.insert(idTab, id)
+		end  
+	end)
+
+	table.sort(idTab,function(a,b)
+		return a < b 
+	end)
+	return _idTab 
+end 
+
 -- 获取指定章节数据
 function ChapterConfig.getEachChapterData(chapterId)
 	chapterId = tonumber(chapterId)
@@ -75,19 +91,23 @@ function ChapterConfig.getEachChapterData(chapterId)
 	return chapterData 
 end 
 
--- 获取章节数目
-function ChapterConfig.getChapterNum()
-	local _tab = {}
-	table.foreach(config,function(key,data)
-		if _tab[data.chapterId] == nil then 
-			_tab[data.chapterId] = 1 
+-- 获取指定章的节数
+function ChapterConfig.getChapterEachNum(chapterId)
+	chapterId = tonumber(chapterId)
+	if not chapterId then 
+		return 
+	end
+
+	local num = 0
+	table.foreach(config, function(key, data)
+		if data.chapterId == chapterId then 
+			num = num + 1
 		end 
 	end)
-
-	return #_tab 
+	return num 
 end 
 
--- 获取每章标题资源
+-- 获取每章标题，背景资源
 function ChapterConfig.getChapterTitleRes(chapterId)
 	chapterId = tonumber(chapterId)
 	if not chapterId then 
@@ -95,8 +115,9 @@ function ChapterConfig.getChapterTitleRes(chapterId)
 	end 
 	
 	local index = chapterId % 100
-	local resName = string.format("res/art/chapter/chaptertitle%d.png", index)
-	return resName
+	local titleRes = string.format("res/art/chapter/chaptertitle%d.png", index)
+	local bgRes = string.format("res/art/chapter/chapter_bg_%d.png", index)
+	return titleRes, bgRes
 end 
 
 -- 获取每节模式资源

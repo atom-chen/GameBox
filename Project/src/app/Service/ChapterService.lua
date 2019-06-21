@@ -10,38 +10,68 @@ function ChapterService:getInstance()
     return _instance
 end 
 
+function ChapterService:destroy()
+    _instance = nil 
+end 
+
 function ChapterService:ctor()
-    self._curChapter = nil                                      -- 进行到第几章
+    self._curChapterId = nil                                    -- 进行到第几章
     self._curEach = nil                                         -- 进行到第几节
     self._medalNun = nil                                        -- 勋章总数目
-    self._totalChapter = ChapterConfig.getChapterNum()          -- 总章节数目
+    self._chapterIdTab = {}                                     -- 章ID列表
+    self._chapterNum = nil                                      -- 总章数目
 end 
 
--- 请求章节数据
-function ChapterService:requestChapterData()
-    -- do something
+function ChapterService:_initService()
+    self._chapterIdTab = ChapterConfig.getChapterIdList()
+    self._chapterNum = #_chapterIdTab
+    self._curChapterId = 101            -- 应从server获取，先使用测试数据
+    self._curEach = 1                   -- 应从server获取，先使用测试数据
+    self._medalNun = 30                 -- 应从server获取，先使用测试数据
 end 
 
--- 回复章节数据
-function ChapterService:responseChapterData(data)
-    self._curChapter = 101
-    self._curEach = 1
-    self._medalNun = 30
+-- 获取章数目
+function ChapterService:getChapterNum()
+    return self._chapterNum
+end 
+
+-- 获取当前为第几章
+function ChapterService:getCurChapterId()
+    return self._curChapterId
+end 
+
+-- 根据章ID获取节数目
+function ChapterService:getEachNumByChapterId(chapterId)
+    local num = ChapterConfig.getChapterEachNum(chapterId)
+    return num 
+end 
+
+-- 判定该章节是否开启
+function ChapterService:checkChapterIsOpen(chapterId)
+    -- 应该从server中获取，暂且使用测试数据吧
+    local isTabs = {
+        [101] = true,
+        [102] = true,
+        [103] = true,
+        [104] = false,
+        [105] = false,
+        [106] = false,
+    }
+    return isTab[chapterId]
 end 
 
 -- 获取指定章数据
-function ChapterService:getChpaterData(chapterId)
+function ChapterService:getChapterData(chapterId)
     chapterId = tonumber(chapterId)
     if not chapterId then 
         print("参数错误")
         return 
     end 
 
-    if chapterId < self._curChapter then 
+    if not self:checkChapterIsOpen(chapterId) then 
         print("该章未开启")
         return 
     end 
-
 
     local chapterData = ChapterConfig.getEachChapterData(chapterId)
     if not chapterData then 
@@ -49,14 +79,10 @@ function ChapterService:getChpaterData(chapterId)
     end 
 
     local data = chapterData
-    data.titleRes = ChapterConfig.getChapterTitleRes(chapterId)
-end 
+    data.titleRes, data.bgRes = ChapterConfig.getChapterTitleRes(chapterId)
 
--- 获取指定章节数据
-function ChapterService:getEachChapterData(chapterId)
-    -- do something
+    return data 
 end 
-
 
 
 
