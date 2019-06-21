@@ -1,5 +1,5 @@
-local shileConfig = {}
 -- 非法字符屏蔽表
+local shileConfig = {}
 local config = {
 	"王八蛋","草","操","干","gan","滚",
 }
