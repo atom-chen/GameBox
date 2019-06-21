@@ -120,6 +120,12 @@
             <Image Name="zuo2.png" />
           </Folder>
           <Folder Name="chapter">
+            <Image Name="boss1.png" />
+            <Image Name="boss2.png" />
+            <Image Name="boss3.png" />
+            <Image Name="boss4.png" />
+            <Image Name="boss5.png" />
+            <Image Name="boss6.png" />
             <Image Name="chapter_1.png" />
             <Image Name="chapter_2.png" />
             <Image Name="chapter_3.png" />
@@ -134,6 +140,18 @@
             <Image Name="chapter_dizuo.png" />
             <Image Name="chapter_dizuo1.png" />
             <Image Name="chapter_left_1.png" />
+            <Image Name="chaptertitle1.png" />
+            <Image Name="chaptertitle2.png" />
+            <Image Name="chaptertitle3.png" />
+            <Image Name="chaptertitle4.png" />
+            <Image Name="chaptertitle5.png" />
+            <Image Name="chaptertitle6.png" />
+            <Image Name="close1.png" />
+            <Image Name="close2.png" />
+            <Image Name="close3.png" />
+            <Image Name="close4.png" />
+            <Image Name="close5.png" />
+            <Image Name="close6.png" />
             <Image Name="each_bg1.png" />
             <Image Name="each_boss1.png" />
             <Image Name="each_boss2.png" />
@@ -141,7 +159,16 @@
             <Image Name="each_boss4.png" />
             <Image Name="each_boss5.png" />
             <Image Name="each_boss6.png" />
+            <Image Name="each_bossinfo1.png" />
+            <Image Name="each_bossinfo2.png" />
+            <Image Name="each_bossinfo3.png" />
+            <Image Name="each_bossinfo4.png" />
+            <Image Name="each_bossinfo5.png" />
+            <Image Name="each_bossinfo6.png" />
             <Image Name="each_head.png" />
+            <Image Name="each_mode1.png" />
+            <Image Name="each_mode2.png" />
+            <Image Name="each_mode3.png" />
             <Image Name="each_shang1.png" />
             <Image Name="each_title1.png" />
             <Image Name="each_title2.png" />
@@ -480,9 +507,9 @@
           <Project Name="UILottery.csd" Type="Layer" />
           <Project Name="UIlotteryReward.csd" Type="Layer" />
           <Project Name="UIMore.csd" Type="Layer" />
+          <Project Name="UIMsgTip.csd" Type="Layer" />
           <Project Name="UIPause.csd" Type="Layer" />
           <Project Name="UIQuit.csd" Type="Layer" />
-          <Project Name="UIMsgTip.csd" Type="Layer" />
         </Folder>
         <Folder Name="eliminate">
           <Folder Name="csd">
