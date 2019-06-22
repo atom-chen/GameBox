@@ -20,11 +20,13 @@ function ChapterService:ctor()
     self._medalNun = nil                                        -- 勋章总数目
     self._chapterIdTab = {}                                     -- 章ID列表
     self._chapterNum = nil                                      -- 总章数目
+
+    self:_initService()
 end 
 
 function ChapterService:_initService()
     self._chapterIdTab = ChapterConfig.getChapterIdList()
-    self._chapterNum = #_chapterIdTab
+    self._chapterNum = #self._chapterIdTab 
     self._curChapterId = 101            -- 应从server获取，先使用测试数据
     self._curEach = 1                   -- 应从server获取，先使用测试数据
     self._medalNun = 30                 -- 应从server获取，先使用测试数据
@@ -57,7 +59,12 @@ function ChapterService:checkChapterIsOpen(chapterId)
         [105] = false,
         [106] = false,
     }
-    return isTab[chapterId]
+    return isTabs[chapterId]
+end 
+
+-- 根据选择索引获取指定章ID
+function ChapterService:getChapterIdByIndex(index)
+    return index + 100
 end 
 
 -- 获取指定章数据
@@ -68,21 +75,23 @@ function ChapterService:getChapterData(chapterId)
         return 
     end 
 
-    if not self:checkChapterIsOpen(chapterId) then 
-        print("该章未开启")
-        return 
-    end 
+    local data = ChapterConfig.getEachChapterData(chapterId) 
+    data.chapterId = chapterId
+    data.isopen = self:checkChapterIsOpen(chapterId)
+    data.chaptercurMedal = 0
+    data.chaptertotalMedal = chapterId  
 
-    local chapterData = ChapterConfig.getEachChapterData(chapterId)
-    if not chapterData then 
-        return 
-    end 
-
-    local data = chapterData
-    data.titleRes, data.bgRes = ChapterConfig.getChapterTitleRes(chapterId)
-
-    return data 
+    return data
 end 
+
+-- 获取指定章资源
+function ChapterService:getChapterRes(chapterId)
+    local titleRes, bgRes, chapterRes, closeRes = ChapterConfig.getChapterRes(chapterId)
+
+    return titleRes, bgRes, chapterRes, closeRes
+end 
+
+return ChapterService
 
 
 

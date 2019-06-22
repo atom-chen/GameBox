@@ -1,6 +1,18 @@
 -- 设置加载图像失败时是否弹出消息框
 cc.FileUtils:getInstance():setPopupNotify(false)
 
+local writePath = cc.FileUtils:getInstance():getWritablePath()
+local resSearchPaths = {
+	writePath,
+	writePath .. "lua_classes/",
+	writePath .. "src/",
+	writePath .. "res/",
+	"lua_classes/",
+	"src/",
+	"res/"
+}
+cc.FileUtils:getInstance():setSearchPaths(resSearchPaths)
+
 require "config"
 require "cocos.init"
 

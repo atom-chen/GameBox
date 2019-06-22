@@ -1,4 +1,5 @@
 -- 
+local ChapterService = require("app.Service.ChapterService")
 local UIChapterEach = class("UIChapterEach") 
 
 ---
@@ -12,7 +13,7 @@ function eachItem:ctor(root)
 end 
 
 function eachItem:_init()
-    --
+    self._eachroot = nil 
 end 
 
 function eachItem:setData()

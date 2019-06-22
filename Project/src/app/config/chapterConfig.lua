@@ -58,15 +58,15 @@ end
 function ChapterConfig.getChapterIdList()
 	local _idTab = {}
 	table.foreach(config, function(key,data)
-		local id = data.chapterId
-		if table.indexof(_idTab, id) == nil then
-			table.insert(idTab, id)
+		if not table.indexof(_idTab, data.chapterId) then
+			table.insert(_idTab, data.chapterId)
 		end  
 	end)
 
-	table.sort(idTab,function(a,b)
+	table.sort(_idTab,function(a,b)
 		return a < b 
 	end)
+	dump(_idTab)
 	return _idTab 
 end 
 
@@ -80,7 +80,7 @@ function ChapterConfig.getEachChapterData(chapterId)
 	local chapterData = {}
 	for i, v in pairs(config) do 
 		if v.chapterId == chapterId then 
-			table.insert(v)
+			table.insert(chapterData,v)
 		end 
 	end 
 
@@ -108,16 +108,18 @@ function ChapterConfig.getChapterEachNum(chapterId)
 end 
 
 -- 获取每章标题，背景资源
-function ChapterConfig.getChapterTitleRes(chapterId)
+function ChapterConfig.getChapterRes(chapterId)
 	chapterId = tonumber(chapterId)
 	if not chapterId then 
 		return 
 	end 
 	
 	local index = chapterId % 100
-	local titleRes = string.format("res/art/chapter/chaptertitle%d.png", index)
-	local bgRes = string.format("res/art/chapter/chapter_bg_%d.png", index)
-	return titleRes, bgRes
+	local titleRes = string.format("art/chapter/chaptertitle%d.png", index)
+	local bgRes = string.format("art/chapter/chapter_bg_%d.jpg", index)
+	local chapterRes = string.format("art/chapter/chapter_%d.png", index)
+	local closeRes = string.format("art/chapter/close%d.png", index)
+	return titleRes, bgRes, chapterRes, closeRes
 end 
 
 -- 获取每节模式资源

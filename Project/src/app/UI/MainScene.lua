@@ -57,7 +57,6 @@ function MainScene:_initUI()
 end 
 
 function MainScene:_onStartEvent(sender)
-    print("您点击了开始游戏按钮")
     local layer = require("app.UI.UISelectRole"):create()
     self:addChild(layer)
 end 
@@ -67,7 +66,8 @@ function MainScene:_onShopEvent(sender)
 end 
 
 function MainScene:_onRankEvent(sender)
-    print("您点击了排行榜按钮")
+    local scene = require("app.UI.chapter.ChapterScene"):create()
+    cc.Director:getInstance():replaceScene(scene)
 end 
 
 function MainScene:_onAchieveEvent(sender)
