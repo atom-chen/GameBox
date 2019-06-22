@@ -87,6 +87,8 @@ end
 
 cc.exports.MsgTip = function(_content, _bgRes)
 	local root = cc.CSLoader:createNode("res/csd/UIMsgTip.csb")
+	local size = root:getContentSize()
+    root:setPosition(cc.p((winSize.width-size.width)/2, (winSize.height-size.height)/2))
 	local _panel = root:getChildByName("Panel")
 	cc.Director:getInstance():getRunningScene():addChild(root, 1000) 
 
@@ -98,7 +100,8 @@ cc.exports.MsgTip = function(_content, _bgRes)
 	--
 	local delay = cc.DelayTime:create(1)
 	local fadeout = cc.FadeOut:create(1)
-	local move = cc.MoveTo:create(1, cc.p(winSize.width/2, winSize.height))
+	local move = cc.MoveBy:create(1, cc.p(0, winSize.height))
+	-- 动作由慢到快
     local move_ease_out = cc.EaseSineIn:create(move)
 	local spawn = cc.Spawn:create(move_ease_out, fadeout)
     local callback = cc.CallFunc:create(function()
