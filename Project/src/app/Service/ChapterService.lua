@@ -75,13 +75,43 @@ function ChapterService:getChapterData(chapterId)
         return 
     end 
 
-    local data = ChapterConfig.getEachChapterData(chapterId) 
+    local data = {}
     data.chapterId = chapterId
     data.isopen = self:checkChapterIsOpen(chapterId)
     data.chaptercurMedal = 0
     data.chaptertotalMedal = chapterId  
 
     return data
+end 
+
+-- 获取章节数据
+function ChapterService:getChapterEachDatas(chapterId)
+    local tabs = ChapterConfig.getEachChapterData(chapterId) 
+
+    local eachTabs = {}
+    for i , data in ipairs(tabs) do 
+        local newdata = {}
+        local newIndex = 1
+        if data.index%6 ~= 0 then 
+            newIndex = data.index%6
+        else 
+            newIndex = 6
+        end 
+        newdata.index = data.index                                          -- 索引
+        newdata.eachId = data.eachId                                        -- 节ID
+        newdata.eachOpen = true                                             -- 是否开启该节，从server获取
+        newdata.eachmode = data.eachmode                                    -- 模式
+        newdata.starnum = 0                                                 -- 当前星星，从server获取
+        newdata.totalstar = 3                                               -- 总星星
+        newdata.titleRes = ChapterConfig.getEachTitleRes(newIndex)          -- 标题资源
+        if newIndex == 6 then 
+            newdata.headRes = ChapterConfig.getEachBossRes(chapterId)       -- 头像资源
+            newdata.bossId = data.bossId or -1                              -- bossId
+        end 
+        table.insert(eachTabs, newdata)
+    end 
+
+    return eachTabs
 end 
 
 -- 获取指定章资源

@@ -121,7 +121,6 @@ function UIAchieve:_initUI()
     -- 返回按钮
     local backBtn = ccui.Helper:seekNodeByName(self._root, "Button_back")
     BindTouchEvent(backBtn, function(sender)
-        MsgTip("您点击了返回按钮")
         self:removeFromParent()
     end)
 

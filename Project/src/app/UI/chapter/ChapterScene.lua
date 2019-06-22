@@ -68,9 +68,9 @@ function ChapterScene:_initUI()
     BindTouchEvent(self._shopBtn, handler(self, self._clickShopEvent))
     BindTouchEvent(self._leftBtn, handler(self, self._clickLeftEvent))
     BindTouchEvent(self._rightBtn, handler(self, self._clickRightEvent))
-
-    --
-    --cc.SpriteFrameCache:getInstance():addSpriteFrames("res/art/_chapter.plist")
+    
+    self._chapterBgImg:setTouchEnabled(true)
+    self._chapterBgImg:addTouchEventListener(handler(self, self._clickChapterEvent))
 end 
 
 function ChapterScene:onEnter()
@@ -111,8 +111,8 @@ function ChapterScene:_updateUI(selectIndex)
     self._chapterMedalLabel:setString(curNum .. "/" .. maxnum)
 
     -- 是否开启
-    print("是否开启：", data.isopen)
     self._chapterClosepanel:setVisible(not data.isopen)
+    self._chapterBgImg:setTouchEnabled(data.isopen)
     if not data.isopen and closeRes then 
         self._chapterClosepanel:setBackGroundImage(closeRes, ccui.TextureResType.plistType)
     end 
@@ -140,46 +140,44 @@ function ChapterScene:_clickRightEvent(sender)
 end 
 
 -- 点击章事件
-function ChapterScene:_clickEvent(sender)
-    -- 判定该章是否开启， 若未开启直接弹窗
-    --[[
-    local isOpen = self:getIsOpen(self._chapterId)
-    if not isOpen then 
+function ChapterScene:_clickChapterEvent(sender, eventType)
+    if eventType ~= ccui.TouchEventType.ended then
         return 
     end 
-    ]]
+    -- 判定该章是否开启， 若未开启直接弹窗
+    local isOpen = self._chapterClosepanel:isVisible()
+    if isOpen then 
+        MsgTip("该章未开启哦")
+        return 
+    end 
 
-    -- 打开节目录
+    -- 显示相关
+    local chapterId = self._chapterService:getChapterIdByIndex(self._curSelectIndex)
+    self._eachNode:updateUI(chapterId)
+    self._eachNode:setEachShow(true)
+    self._curLayer = "each"
+    self._chapterNode:setVisible(false)
 end 
 
 -- 返回事件
 function ChapterScene:_clickBackEvent(sender)
-    -- 在main页面可返回大厅，在each页面可返回到main页面
+    print("_curLayer name", self._curLayer)
     if self._curLayer == "main" then 
         -- 返回大厅场景
+        local mainScene = require("app.UI.MainScene"):create()
+        cc.Director:getInstance():replaceScene(mainScene)
     elseif self._curLayer == "each" then 
         -- 返回章页面
+        self._curLayer = "main"
+        self._chapterNode:setVisible(true)
+        self._eachNode:setEachShow(false)
     end 
-    local mainScene = require("app.UI.MainScene"):create()
-    cc.Director:getInstance():replaceScene(mainScene)
+    
 end 
 
 -- 商店事件
 function ChapterScene:_clickShopEvent(sender)
-    --
-end 
-
--- 点击章事件
-function ChapterScene:_clickChapterEvent(sender, eventType)
-    -- 按下显示章信息
-    -- 松开进入节目录
-end 
-
--- 更新章UI
-function ChapterScene:_updateChapterUI(selectIndex)
-    -- 切换背景res
-    -- 切换标题res
-    -- 切换章目录数据
+    MsgTip("您点击了商店按钮哦")
 end 
 
 return ChapterScene

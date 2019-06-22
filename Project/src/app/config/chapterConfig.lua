@@ -140,21 +140,19 @@ function ChapterConfig.getEachTitleRes(eachIndex)
 		return 
 	end 
 
-	local resName = string.format("res/art/chapter/each_title%d.png", eachIndex)
+	local resName = string.format("art/chapter/each_title%d.png", eachIndex)
 	return resName 
 end 
 
--- 获取每节boss头像，介绍资源
-function ChapterConfig.getEachBossRes(bossId)
-	bossId = tonumber(bossId)
-	if not bossId then 
+-- 获取每节boss头像资源
+function ChapterConfig.getEachBossRes(index)
+	index = tonumber(index)
+	if not index then 
 		return 
-	end 
+	end
 	
-	local index = bossId % 10000
-	local headres = string.format("res/art/chapter/each_boss%d.png", index)
-	local infores = string.format("res/art/chapter/each_bossinfo%d.png", index)
-	return headres,infores 
+	local headres = string.format("art/chapter/each_boss%d.png", index%100)
+	return headres 
 end 
 
 return ChapterConfig
