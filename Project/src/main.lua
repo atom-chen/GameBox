@@ -9,7 +9,7 @@ local resSearchPaths = {
 	writePath .. "res/",
 	"lua_classes/",
 	"src/",
-	"res/"
+    "res/",
 }
 cc.FileUtils:getInstance():setSearchPaths(resSearchPaths)
 
@@ -17,13 +17,16 @@ require "config"
 require "cocos.init"
 
 local function main()
+    local ss1 = cc.FileUtils:getInstance():getWritablePath()
+    print("写入路径为 ", ss1)
+    local ss = cc.FileUtils:getInstance():getSearchPaths()
     require("app.MyApp"):create():run()
 end
 
 
 -- 断点不能使用
 -- 参考：https://github.com/k0204/LuaIde/wiki
-local breakInfoFun,xpcallFun = require("LuaDebug")("localhost", 7003)
+local breakInfoFun,xpcallFun = require("LuaDebugjit")("localhost", 7003)
 -- 1.断点定时器添加
 cc.Director:getInstance():getScheduler():scheduleScriptFunc(breakInfoFun, 0.3, false)
 -- 2.程序异常监听
