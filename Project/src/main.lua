@@ -1,6 +1,7 @@
 -- 设置加载图像失败时是否弹出消息框
 cc.FileUtils:getInstance():setPopupNotify(false)
 
+-- 添加搜索路径，为了避免运行时获取不到目录文件，将其置顶
 local writePath = cc.FileUtils:getInstance():getWritablePath()
 local resSearchPaths = {
 	writePath,
@@ -17,17 +18,22 @@ require "config"
 require "cocos.init"
 
 local function main()
-    local ss1 = cc.FileUtils:getInstance():getWritablePath()
-    print("写入路径为 ", ss1)
-    local ss = cc.FileUtils:getInstance():getSearchPaths()
     require("app.MyApp"):create():run()
 end
 
-
--- 断点不能使用
--- 参考：https://github.com/k0204/LuaIde/wiki
-local breakInfoFun,xpcallFun = require("LuaDebugjit")("localhost", 7003)
--- 1.断点定时器添加
+-- 添加ludIde调试代码,GitHub: https://github.com/k0204/LuaIde
+-- 在cocos2.x中使用LuaDebug；在cocos3.x中使用LuaDebugjit
+-- breakInfoFunc: 断点及时刷新函数，需要在定时器中调用，该函数用于确保断点能够及时的发送到lua client
+-- xpcallFun: 程序异常监听函数,用于当程序出现异常时调试器定位错误代码
+-- 7003在lauch.json中的port端口中配置，一致即可
+local breakInfoFun,xpcallFun = nil, nil 
+if device.platform == "windows" then 
+    breakInfoFun,xpcallFun = require("debug.window.LuaDebug")("localhost", 7003)
+else 
+    -- 最新版本
+    breakInfoFun,xpcallFun = require("debug.ios.LuaDebugjit")("localhost", 7003)
+end  
+-- 1.断点定时器添加，
 cc.Director:getInstance():getScheduler():scheduleScriptFunc(breakInfoFun, 0.3, false)
 -- 2.程序异常监听
 __G__TRACKBACK__ = function(errorMessage)
