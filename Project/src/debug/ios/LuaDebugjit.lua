@@ -1,8 +1,8 @@
 local debugger_reLoadFile =nil
 xpcall(function() 
-    --debugger_reLoadFile = require("luaideReLoadFile")
+    debugger_reLoadFile = require("luaideReLoadFile")
 end,function() 
-    --debugger_reLoadFile = function() print("未实现代码重载") end
+    debugger_reLoadFile = function() print("未实现代码重载") end
 end)
 local sethook = debug.sethook
 local debugger_stackInfo = nil
