@@ -3,7 +3,7 @@
 
 语言： c++, lua
 
-开发环境： visual Studio 2013, Visual Studio Code, BabeLua等
+编译环境： visual Studio 2013, Visual Studio Code, BabeLua等
 
 说明：
 ```
