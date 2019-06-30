@@ -76,18 +76,23 @@ function UIChapterEach:_clickEachEvent(sender, eventType)
         return 
     end 
     -- 判定该节是否开启， 若未开启直接弹窗
-    local isOpen = self._chapterClosepanel:isVisible()
+    local isOpen = false  
     if isOpen then 
         MsgTip("该章未开启哦")
         return 
     end 
 
     -- 显示相关
+    --[[
     local chapterId = self._chapterService:getChapterIdByIndex(self._curSelectIndex)
     self._eachNode:updateUI(chapterId)
     self._eachNode:setEachShow(true)
     self._curLayer = "each"
     self._chapterNode:setVisible(false)
+    ]]
+
+    local _scene = require("app.UI.battle.BattleScene"):create()
+    cc.Director:getInstance():replaceScene(_scene)
 end 
 
 function UIChapterEach:setEachShow(b)

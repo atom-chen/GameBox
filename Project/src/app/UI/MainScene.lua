@@ -66,8 +66,7 @@ function MainScene:_onShopEvent(sender)
 end 
 
 function MainScene:_onRankEvent(sender)
-    local scene = require("app.UI.chapter.ChapterScene"):create()
-    cc.Director:getInstance():replaceScene(scene)
+    MsgTip("您点击了排行榜事件")
 end 
 
 function MainScene:_onAchieveEvent(sender)

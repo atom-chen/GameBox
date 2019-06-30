@@ -71,7 +71,7 @@
             <FileData Type="MarkedSubImage" Path="art/battle/guang3.png" Plist="art/_battleUI.plist" />
             <BlendFunc Src="1" Dst="771" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_1" ActionTag="-1075314884" Tag="83" IconVisible="False" LeftMargin="604.6174" RightMargin="68.3826" TopMargin="52.9409" BottomMargin="268.0591" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="151" Scale9Height="137" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_onekey" ActionTag="-1075314884" Tag="83" IconVisible="False" LeftMargin="604.6174" RightMargin="68.3826" TopMargin="52.9409" BottomMargin="268.0591" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="151" Scale9Height="137" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="181.0000" Y="159.0000" />
             <Children>
               <AbstractNodeData Name="Sprite_2" CanEdit="False" ActionTag="-1101178447" Tag="84" IconVisible="False" LeftMargin="-0.4368" RightMargin="0.4368" TopMargin="0.2989" BottomMargin="-0.2989" ctype="SpriteObjectData">
@@ -110,7 +110,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_2" ActionTag="-810186842" Tag="86" IconVisible="False" LeftMargin="296.4128" RightMargin="405.5872" TopMargin="111.0396" BottomMargin="236.9604" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="122" Scale9Height="110" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_reset" ActionTag="-810186842" Tag="86" IconVisible="False" LeftMargin="296.4128" RightMargin="405.5872" TopMargin="111.0396" BottomMargin="236.9604" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="122" Scale9Height="110" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="152.0000" Y="132.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="372.4128" Y="302.9604" />
@@ -125,7 +125,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_2_0" ActionTag="1043196042" Tag="87" IconVisible="False" LeftMargin="182.6008" RightMargin="519.3992" TopMargin="46.0941" BottomMargin="301.9059" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="122" Scale9Height="110" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_continue" ActionTag="1043196042" Tag="87" IconVisible="False" LeftMargin="182.6008" RightMargin="519.3992" TopMargin="46.0941" BottomMargin="301.9059" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="122" Scale9Height="110" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="152.0000" Y="132.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="258.6008" Y="367.9059" />
@@ -140,7 +140,7 @@
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>
-          <AbstractNodeData Name="CheckBox_1" ActionTag="1546991954" Tag="92" IconVisible="False" LeftMargin="296.7112" RightMargin="405.2888" TopMargin="248.7365" BottomMargin="99.2635" TouchEnable="True" ctype="CheckBoxObjectData">
+          <AbstractNodeData Name="CheckBox_sound" ActionTag="1546991954" Tag="92" IconVisible="False" LeftMargin="296.7112" RightMargin="405.2888" TopMargin="248.7365" BottomMargin="99.2635" TouchEnable="True" ctype="CheckBoxObjectData">
             <Size X="152.0000" Y="132.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="372.7112" Y="165.2635" />
@@ -154,7 +154,7 @@
             <NodeNormalFileData Type="MarkedSubImage" Path="art/battle/shengying2.png" Plist="art/_battleUI.plist" />
             <NodeDisableFileData Type="MarkedSubImage" Path="art/battle/shengying2.png" Plist="art/_battleUI.plist" />
           </AbstractNodeData>
-          <AbstractNodeData Name="Button_2_2" ActionTag="87095824" Tag="89" IconVisible="False" LeftMargin="416.5616" RightMargin="285.4385" TopMargin="313.7302" BottomMargin="34.2698" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="122" Scale9Height="110" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
+          <AbstractNodeData Name="Button_exit" ActionTag="87095824" Tag="89" IconVisible="False" LeftMargin="416.5616" RightMargin="285.4384" TopMargin="313.7302" BottomMargin="34.2698" TouchEnable="True" FontSize="14" Scale9Enable="True" LeftEage="15" RightEage="15" TopEage="11" BottomEage="11" Scale9OriginX="15" Scale9OriginY="11" Scale9Width="122" Scale9Height="110" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="ButtonObjectData">
             <Size X="152.0000" Y="132.0000" />
             <AnchorPoint ScaleX="0.5000" ScaleY="0.5000" />
             <Position X="492.5616" Y="100.2698" />
@@ -164,8 +164,8 @@
             <PreSize X="0.1780" Y="0.2750" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-            <PressedFileData Type="MarkedSubImage" Path="art/battle/chongwan2.png" Plist="art/_battleUI.plist" />
-            <NormalFileData Type="MarkedSubImage" Path="art/battle/chongwan.png" Plist="art/_battleUI.plist" />
+            <PressedFileData Type="MarkedSubImage" Path="art/battle/tuichu2.png" Plist="art/_battleUI.plist" />
+            <NormalFileData Type="MarkedSubImage" Path="art/battle/tuichu.png" Plist="art/_battleUI.plist" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

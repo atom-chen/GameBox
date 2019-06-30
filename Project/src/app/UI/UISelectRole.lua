@@ -71,7 +71,9 @@ end
 -- 角色选择事件
 function RoleScene:_onRoleSelectEvent(sender)
     local tag = sender:getTag()
-    print("你选择的角色为:", tag)
+    
+    local scene = require("app.UI.chapter.ChapterScene"):create()
+    cc.Director:getInstance():replaceScene(scene)
 end 
 
 -- 返回主场景事件
