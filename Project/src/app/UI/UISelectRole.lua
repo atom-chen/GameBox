@@ -26,8 +26,6 @@ end
 
 function RoleScene:_initUI()
     self._root = cc.CSLoader:createNode("res/csd/RoleScene.csb")
-    local size = self._root:getContentSize()
-    self._root:setPosition(cc.p((display.width-size.width)/2, (display.height-size.height)/2))
     self:addChild(self._root)
     
     --     

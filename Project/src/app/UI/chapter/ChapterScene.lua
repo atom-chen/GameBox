@@ -42,8 +42,6 @@ end
 
 function ChapterScene:_initUI()
     self._root = cc.CSLoader:createNode("res/csd/ChapterScene.csb")
-    local size = self._root:getContentSize()
-    self._root:setPosition(cc.p((display.width-size.width)/2, (display.height-size.height)/2))
     self:addChild(self._root)
 
     self._bgImg = ccui.Helper:seekNodeByName(self._root, "Image_bg")
