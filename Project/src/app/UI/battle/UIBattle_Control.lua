@@ -1,9 +1,10 @@
 -- 战斗控制UI
 
 local UIBattle_Control = class("UIBattle_Control")
-function UIBattle_Control:ctor(parent)
-    self._parentNode = parent 
-    self._rootNode = nil 
+function UIBattle_Control:ctor(node, parent)
+    self._parent = parent 
+    self._rootNode = node 
+
     self._leftBtn = nil 
     self._rightBtn = nil 
     self._jumpBtn = nil 
@@ -13,16 +14,21 @@ function UIBattle_Control:ctor(parent)
 
     self._gunImg = nil 
     self._knifeImg = nil 
+    self._rotation = 0          -- 旋转角度
 
     self:_initUI()
 end 
 
 function UIBattle_Control:_initUI()
-    self._rootNode = ccui.Helper:seekNodeByName(self._parentNode, "Node_Control")
+    -- 默认显示枪
+    self._knifeImg = self._rootNode:getChildByName("Image_knife")
+    self._knifeImg:setTouchEnabled(true)
+    self._knifeImg:setVisible(false)
 
     self._gunImg = self._rootNode:getChildByName("Image_gun")
-    self._knifeImg = self._rootNode:getChildByName("Image_knife")
-
+    self._gunImg:setTouchEnabled(true)
+    self._gunImg:setVisible(true)
+    
     self._leftBtn = self._rootNode:getChildByName("Button_left")
     self._rightBtn = self._rootNode:getChildByName("Button_right")
     self._jumpBtn = self._rootNode:getChildByName("Button_jump")
@@ -36,6 +42,9 @@ function UIBattle_Control:_initUI()
     BindTouchEvent(self._shootBtn, handler(self, self._onShootEvent))
     BindTouchEvent(self._bombBtn, handler(self, self._onBombEvent))
     BindTouchEvent(self._skillBtn, handler(self, self._onSkillEvent))
+
+    self._gunImg:addTouchEventListener(handler(self, self._onChangeKnifeEvent))
+    self._knifeImg:addTouchEventListener(handler(self, self._onChangeGunEvent))
 end
 
 function UIBattle_Control:_onClickLeftEvent(sender)
@@ -61,5 +70,32 @@ end
 function UIBattle_Control:_onSkillEvent(sender)
     MsgTip("您点击了技能按钮")
 end
+
+-- 
+function UIBattle_Control:_onChangeKnifeEvent(sender, eventType)
+    if eventType ~= ccui.TouchEventType.ended then 
+        return 
+    end 
+    self._gunImg:setVisible(false)
+    self._knifeImg:setVisible(true) 
+
+    -- 切换
+    local heroNode = self._parent:getHeroNode()
+    heroNode:ChangeWeapon("KNIFE")
+end 
+
+--
+function UIBattle_Control:_onChangeGunEvent(sender, eventType)
+    if eventType ~= ccui.TouchEventType.ended then 
+        return 
+    end 
+
+    self._gunImg:setVisible(true)
+    self._knifeImg:setVisible(false) 
+
+    -- 切换
+    local heroNode = self._parent:getHeroNode()
+    heroNode:ChangeWeapon("GUN")
+end 
 
 return UIBattle_Control

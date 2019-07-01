@@ -3,10 +3,10 @@
 local BLOOD_NUM = 3         -- 血包数目
 
 local UIBattle_Main = class("UIBattle_Main")
-function UIBattle_Main:ctor(parent)
+function UIBattle_Main:ctor(node,parent)
+    self._rootNode = node 
     self._parent = parent 
-
-    self._rootNode = nil 
+    
     self._headIcon = nil        -- 头像
     self._moneyText = nil       -- 金钱数目
     self._timeText = nil        -- 时间文本
@@ -21,8 +21,6 @@ function UIBattle_Main:ctor(parent)
 end 
 
 function UIBattle_Main:_initUI()
-    self._rootNode = ccui.Helper:seekNodeByName(self._parent, "Panel_Main")
-
     self._headIcon = self._rootNode:getChildByName("Image_head")
     self._moneyText = ccui.Helper:seekNodeByName(self._rootNode, "AtlasLabel_moneyNum")
     self._bombText = ccui.Helper:seekNodeByName(self._rootNode, "Altas_BombNum")

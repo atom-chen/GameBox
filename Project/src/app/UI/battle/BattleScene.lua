@@ -1,4 +1,5 @@
 -- 战斗场景
+local Hero = require("app.UI.battle.Hero")
 local UIBattle_Map = require("app.UI.battle.UIBattle_Map")
 local UIBattle_Main = require("app.UI.battle.UIBattle_Main")
 local UIBattle_Control = require("app.UI.battle.UIBattle_Control")
@@ -19,17 +20,29 @@ end
 
 function BattleScene:_initUI()
     self._root = cc.CSLoader:createNode("csd/UIBattle.csb")
-    local size = self._root:getContentSize()
-    self._root:setPosition(cc.p((display.width-size.width)/2, (display.height-size.height)/2))
     self:addChild(self._root)
 
-    self._mainUI = UIBattle_Main.new(self._root)
-    self._controlUI = UIBattle_Control.new(self._root)
+    -- 创建主界面UI
+    local panelMain = ccui.Helper:seekNodeByName(self._root, "Panel_Main")
+    self._mainUI = UIBattle_Main.new(panelMain, self)
+    -- 创建控制UI
+    local controlNode = ccui.Helper:seekNodeByName(self._root, "Node_Control")
+    self._controlUI = UIBattle_Control.new(controlNode, self)
+    -- 创建地图UI
     self._mapUI = UIBattle_Map.new(self)
+    -- 创建英雄
+    self._hero = Hero.new(self)
+    self._hero:CreateHero()
 end 
 
-function BattleScene:onEnter()
-    --
+-- 获取英雄节点
+function BattleScene:getHeroNode()
+    return self._hero 
+end 
+
+-- 获取地图节点
+function BattleScene:getMapNode()
+    return self._mapUI:getFrontMap()
 end 
 
 return BattleScene
