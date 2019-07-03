@@ -1,5 +1,5 @@
 --[[
-英雄类，可参考Hero.h/Hero.cpp,  
+英雄类
 ]]
 
 -- 枪械资源
@@ -28,25 +28,25 @@ end
 
 -- 创建英雄
 function Hero:CreateHero(_heroType)
-    local _heroType = _heroType or 0
+    local _heroType = _heroType or ENUM.HERO_TAIJI
     self._heroType = _heroType
     local ArmatureMgr = ccs.ArmatureDataManager:getInstance()
-    if _heroType == 0 then 
+    if _heroType == ENUM.HERO_ZOMBIE then 
         ArmatureMgr:addSpriteFrameFromFile("zhujiao_1.plist", "zhujiao_1.png")
         ArmatureMgr:addArmatureFileInfo("zhujiao.png", "zhujiao.plist", "zhujiao.json")
         ArmatureMgr:addArmatureFileInfo("qiangqiang.png", "qiangqiang.plist", "qiangqiang.json")
         ArmatureMgr:addArmatureFileInfo("tulongdao.png", "tulongdao.plist", "tulongdao.json")
-    elseif _heroType == 1 then 
+    elseif _heroType == ENUM.HERO_TAIJI then 
         ArmatureMgr:addArmatureFileInfo("zhujiao2.png", "zhujiao2.plist", "zhujiao2.json")
         ArmatureMgr:addArmatureFileInfo("qiangqiang2.png", "qiangqiang2.plist", "qiangqiang2.json")
         ArmatureMgr:addArmatureFileInfo("tulongdao2.png", "tulongdao2.plist", "tulongdao2.json")
-    elseif _heroType == 2 then 
+    elseif _heroType == ENUM.HERO_ROBOT then 
         ArmatureMgr:addArmatureFileInfo("bot.png", "bot.plist", "bot.json")
         ArmatureMgr:addSpriteFrameFromFile("bot1.plist", "bot1.png")
     end 
 
     -- 创建英雄
-    if _heroType == 0 then 
+    if _heroType == ENUM.HERO_ZOMBIE then 
         self._hero = ccs.Armature:create("dongzuo1")
     else 
         self._hero = ccs.Armature:create("dongzuo")
@@ -56,7 +56,7 @@ function Hero:CreateHero(_heroType)
     self._parent:getMapNode():addChild(self._hero, 4)
 
     -- 创建枪械，道具(机器人是没有切换武器的)
-    if _heroType ~= 2 then 
+    if _heroType ~= ENUM.HERO_ROBOT then 
         -- 获取手的骨骼节点
         local handBone = self._hero:getBone("shou1")
         handBone:setScale(1.25)
@@ -79,7 +79,7 @@ end
 -- 改变武器，刀具类型
 function Hero:ChangeWeapon(changeType)
     -- 判定英雄类型
-    if self._heroType == 2 then 
+    if self._heroType == ENUM.HERO_ROBOT then 
         return 
     end 
 

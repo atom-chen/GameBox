@@ -2,7 +2,7 @@ local winSize = cc.Director:getInstance():getWinSize()
 
 local GlobalUtil = cc.exports.GlobalUtil
 GlobalUtil = {
-	-- 
+	--
 }
 
 -- @func:创建触摸屏蔽层
