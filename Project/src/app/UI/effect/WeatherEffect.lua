@@ -1,8 +1,10 @@
 --[[
 天气效果
-1. 若天气类型为 NONE， 等级类型不为 NONE, 表示阴天
-2. 若天气类型为雷雨， 等级类型默认为 MID
-3. 若天气类型为雷暴，等级类型默认为 BIG 
+
+针对于粒子效果，写了三种：
+1. 手动创建
+2. 通过cocos2d 自带的粒子系统创建
+3. 通过plist创建，推荐
 ]]
 
 local TYPE = {
@@ -43,54 +45,90 @@ function WeatherEffect:_initData()
     self._thunderScheduler = nil    
 end 
 
--- 播放气象效果
-function WeatherEffect:_playWeatherColorAni(level)
-    do return end 
-    level = level or LEVEL.NONE
-    -- 设置透明度
-    local opacityTab = {0,100,120,200}
-    self:setOpacity(opacityTab[level + 1])
-end 
+-- 手动创建的粒子示例
+function WeatherEffect:_initCustomParticle()
+    --[[
+    通过 ParticleSystemQuad 手动创建
+    ]]
+    -- 缓存纹理
+    local texture = cc.Director:getInstance():getTextureCache():addImage("effect/stars.png")
 
--- 初始化下雨
-function WeatherEffect:_initRain(level)
-    local texture = cc.Director:getInstance():getTextureCache():addImage("effect/snow.png")
-    local emitter = cc.ParticleRain:create()
-    emitter:setPosition(cc.p(display.width/2, display.height - 100))
+    -- 创建粒子数目
+    local emitter = cc.ParticleSystemQuad:createWithTotalParticles(1000)
+    self:addChild(emitter, 10)
+
+    -- 设置纹理
     emitter:setTexture(texture)
 
-    local _totalNum = 100           -- 最大粒子数目
-    local _speed = 100              -- 速度
-    local _speedVar = 0             -- 
-    local _life = 4                 -- 
-    local _rate = 250               -- 发射粒子间隔
-    if level == LEVEL.SMALL then 
-        _totalNum = 100
-        _speed = 100
-        _speedVar = 10
-        _rate = 50
-    elseif level == LEVEL.MID then 
-        _totalNum = 500
-        _speed = 130
-        _speedVar = 20
-        _rate = 150
-    elseif level == LEVEL.BIG then 
-        _totalNum = emitter:getTotalParticles()
-        _speed = emitter:getSpeed()
-        _speedVar = emitter:getSpeedVar()
-        _rate = 250
-    end 
-    emitter:setEmissionRate(_rate)
-    emitter:setTotalParticles(_totalNum)
-    emitter:setSpeed(_speed)
-    emitter:setSpeedVar(_speedVar)
-    emitter:setLife(_life)
+    -- 设置粒子持续时间
+    emitter:setDuration(-1)
 
-    self:addChild(emitter, 10)
+    -- 设置重力方向
+    emitter:setGravity(cc.p(0,0))
+
+    -- 设置角度，角度变化率
+    emitter:setAngle(0)
+    emitter:setAngleVar(360)
+
+    -- 设置径向加速度，径向加速度变化率 
+    emitter:setRadialAccel(70)
+    emitter:setRadialAccelVar(10)
+
+    -- 设置切向加速度，切向加速度变化率 
+    emitter:setTangentialAccel(80)
+    emitter:setTangentialAccelVar(0)
+
+    -- 设置运动速度，运动速度变化率
+    emitter:setSpeed(50)
+    emitter:setSpeedVar(10)
+
+    -- 设置粒子位置，粒子位置变化率
+    emitter:setPosition(display.width/2, display.height/2)
+    emitter:setPosVar(cc.p(0, 0))
+
+    -- 设置粒子存在时间，存在时间变化率 
+    emitter:setLife(2.0)
+    emitter:setLifeVar(0.3)
+
+    -- -- 设置每秒产生的粒子数目： 每秒产生的粒子数 = 粒子总数 / 存活时间
+    emitter:setEmissionRate(emitter:getTotalParticles() / emitter:getLife())
+
+    -- 设置粒子开始时候颜色，粒子开始时颜色变化率
+	emitter:setStartColor(cc.c4f(0.5, 0.5, 0.5, 1.0))
+    emitter:setStartColorVar(cc.c4f(0.5, 0.5, 0.5, 1.0))
+
+    -- 设置粒子结束时候颜色，粒子结束时颜色变化率 
+    emitter:setEndColor(cc.c4f(0.1, 0.1, 0.1, 0.2))
+    emitter:setEndColorVar(cc.c4f(0.1, 0.1, 0.1, 0.2))
+
+    -- 设置粒子开始时候大小，粒子开始时大小变化率 
+    emitter:setStartSize(1.0)
+    emitter:setStartSizeVar(1.0)
+
+    -- 设置粒子结束时候大小，粒子结束时大小变化率 
+    emitter:setEndSize(32.0)
+    emitter:setEndSizeVar(8.0)
+
+    -- additive
+    emitter:setBlendAdditive(false)
 end 
 
 -- 初始化雪
 function WeatherEffect:_initSnow()
+    --[[
+    通过cocos2d 自带的 粒子系统创建， 其它的还有:
+        ParticleExplosion:爆炸粒子效果
+        ParticleFireworks:烟花粒子效果
+        CCParticleFire:火焰粒子效果
+        CCParticleFlower:花束粒子效果
+        CCParticleGalaxy:星系粒子效果  
+        CCParticleMeteor:流星粒子效果
+        ParticleSpiral:漩涡粒子效果
+        ParticleSnow:雪粒子效果
+        ParticleSmoke:烟粒子效果
+        ParticleSun:太阳粒子效果
+        ParticleRain:雨粒子效果 
+    ]]
     local texture = cc.Director:getInstance():getTextureCache():addImage("effect/snow.png")
 
     local emitter = cc.ParticleSnow:create()
@@ -98,96 +136,48 @@ function WeatherEffect:_initSnow()
     emitter:setTexture(texture)
     self:addChild(emitter, 10)
     
+    -- 设置粒子存在时间及存在时间变化率
     emitter:setLife(3)
     emitter:setLifeVar(1)
 
-    -- gravity
+    -- 设置重力方向
     emitter:setGravity(cc.p(0, -10))
 
-    -- speed of particles
+    -- 设置运动速度及运动速度变化率
     emitter:setSpeed(130)
     emitter:setSpeedVar(30)
 
+    -- 设置粒子开始时候的颜色
     local startColor = emitter:getStartColor()
     startColor.r, startColor.g, startColor.b = 0.9, 0.9, 0.9
     emitter:setStartColor(startColor)
-
+    -- 设置粒子开始时的颜色变化率
     local startColorVar = emitter:getStartColorVar()
     startColorVar.b = 0.1
     emitter:setStartColorVar(startColorVar)
-
+    -- 设置每秒产生的粒子数目： 每秒产生的粒子数 = 粒子总数 / 存活时间
     emitter:setEmissionRate(emitter:getTotalParticles() / emitter:getLife())
 end 
 
--- 初始化雷电
-function WeatherEffect:_initThunder()
-    self.curDetail = 5
-    self._count = 0
-    local pos1 = cc.p(100, display.height/2)
-    local pos2 = cc.p(display.width - 100, display.height/2)
-
-    self._drawNode = cc.DrawNode:create()
-    self:addChild(self._drawNode, 10)
-
+-- 初始化图形特效
+function WeatherEffect:_initGraph()
     --[[
-    local Scheduler = cc.Director:getInstance():getScheduler()
-    local delayTime = 0.1
-    local function update()
-        self:_drawThunder(pos1.x, pos1.y, pos2.x, pos2.y, 200)
-    end 
-    self._thunderScheduler = Scheduler:scheduleScriptFunc(update, 0.05, false)
+    使用.plist 文件加载粒子是最常用也最灵活的方式，其文件内容包含了相关的参数数据以及图片的存储等
+    线上工具： http://www.effecthub.com/particle2dx
     ]]
-    self:_drawThunder(pos1.x, pos1.y, pos2.x, pos2.y, 200)
-end 
-
-function WeatherEffect:_drawThunder(x1, y1, x2, y2, displace)
-    if displace < self.curDetail then 
-        self._drawNode:drawSegment(cc.p(x1,y1), cc.p(x2, y2), 1, cc.c4f(1,1,0,1))
-    else 
-        local mid_x = (x1 + x2)/2
-        local mid_y = (y1 + y2)/2
-        mid_x = mid_x + (math.random() - 0.5) * displace
-        mid_y = mid_y + (math.random() - 0.5) * displace
-        self:_drawThunder(x1, y1, mid_x, mid_y, displace/2)
-        self:_drawThunder(x2, y2, mid_x, mid_y, displace/2)
-    end 
+    local emitter = cc.ParticleSystemQuad:create("effect/particle_graph.plist")
+    -- 设置发射粒子的位置
+    emitter:setPosition(cc.p(display.width/2, 0))
+    -- 完成后移除
+    emitter:setAutoRemoveOnFinish(true)
+    -- 设置粒子持续的时间秒数
+    emitter:setDuration(10)
+    self:addChild(emitter)
 end 
 
 -- 初始化雷电动画
 function WeatherEffect:_initThunderAni(level)
     -- 添加图片播放闪烁动画，然后消失即可
-end 
-
--- 初始化繁星
-function WeatherEffect:_initSun()
-    local texture = cc.Director:getInstance():getTextureCache():addImage("effect/fire.png")
-    local emitter = cc.ParticleSun:create()       -- 太阳效果
-    emitter:setTexture(texture)
-    self:addChild(emitter, 10)
-end 
-
--- 初始化繁星
-function WeatherEffect:_initStar(level)
-    local texture = cc.Director:getInstance():getTextureCache():addImage("effect/fire.png")
-    local emitter = cc.ParticleGalaxy:create()
-    emitter:setTexture(texture)
-    self:addChild(emitter, 10)
-end 
-
--- 初始化流星
-function WeatherEffect:_initMeteor(level)
-    local texture = cc.Director:getInstance():getTextureCache():addImage("effect/fire.png")
-    local emitter = cc.ParticleMeteor:create()
-    emitter:setTexture(texture)
-    self:addChild(emitter, 10)
-end 
-
--- 初始化云
-function WeatherEffect:_initCloud(level)
-    local texture = cc.Director:getInstance():getTextureCache():addImage("effect/fire.png")
-    local emitter = cc.ParticleSmoke:create()
-    emitter:setTexture(texture)
-    self:addChild(emitter, 10)
 end 
 
 --[[
@@ -197,21 +187,7 @@ end
 @pram: 是否播放气象效果, 默认为false
 ]]
 function WeatherEffect:onEnter(_type,level,isPlay)
-    if _type == TYPE.RAIN then 
-        -- 雨
-        self:_initRain(level)
-    elseif _type == TYPE.SNOW then 
-        -- 雪
-        self:_initSnow(level)
-    elseif _type == TYPE.THUNDER then 
-        -- 雷
-        self:_initThunderAni()
-    end 
-
-    -- 播放气象效果, 天气类型不可为NULL
-    if _type ~= TYPE.NONE and isPlay then 
-        self:_playWeatherColorAni(level)
-    end 
+    self:_initCustomParticle()
 end 
 
 function WeatherEffect:onExit()
@@ -227,5 +203,5 @@ return WeatherEffect
 local layer = require("app.UI.effect.WeatherEffect"):create()
     self:addChild(layer,1)
 
-    layer:onEnter(2,3)
+    layer:onEnter()
 ]]
