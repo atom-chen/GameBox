@@ -26,10 +26,13 @@ local WeatherEffect = class("WeatherEffect", function()
 end)
 
 function WeatherEffect:ctor()
+    --self:setPosition(display.center)
+    --self:setAnchorPoint(cc.p(0,0))
+
     self:_initData()
     local function onNodeEvent(event)
         if event == "enter" then
-            --self:onEnter()
+            self:onEnter()
         elseif event == "exit" then 
             self:onExit()
         end
@@ -176,8 +179,46 @@ function WeatherEffect:_initGraph()
 end 
 
 -- 初始化雷电动画
-function WeatherEffect:_initThunderAni(level)
-    -- 添加图片播放闪烁动画，然后消失即可
+function WeatherEffect:_initThunderAni()
+    -- 加深背景透明度
+    self:setOpacity(200)
+    
+    local thunderSpr = cc.Sprite:create("effect/thunder/thunder_1.png")
+    thunderSpr:setScale(0.8)
+    thunderSpr:setOpacity(100)
+    local size = thunderSpr:getContentSize()
+    thunderSpr:setPosition(cc.p(display.width - size.width/3 * 0.8, display.height - size.height/2 * 0.8))
+    self:addChild(thunderSpr)
+
+    local action1 = cc.FadeIn:create(0.5)           -- 渐现
+    local action2 = cc.Blink:create(1.0, 5)         -- 闪烁
+    local action3 = cc.FadeOut:create(1)            -- 渐隐
+    local action = cc.Sequence:create(action0, action1,action2, action3)
+    thunderSpr:runAction(action)
+end 
+
+-- 初始化雨
+function WeatherEffect:_initRain()
+    local texture = cc.Director:getInstance():getTextureCache():addImage("effect/rain.png")
+
+    local emitter = cc.ParticleSnow:create()
+    emitter:setPosition(cc.p(display.width/2, display.height))
+    emitter:setTexture(texture)
+    self:addChild(emitter, 10)
+    
+    -- 设置粒子存在时间及存在时间变化率
+    emitter:setLife(4)
+    emitter:setLifeVar(1)
+
+    -- 设置重力方向
+    emitter:setGravity(cc.p(-10, -50))
+
+    -- 设置运动速度及运动速度变化率
+    emitter:setSpeed(130)
+    emitter:setSpeedVar(30)
+
+    -- 设置每秒产生的粒子数目： 每秒产生的粒子数 = 粒子总数 / 存活时间
+    emitter:setEmissionRate(emitter:getTotalParticles() / emitter:getLife())
 end 
 
 --[[
@@ -187,7 +228,7 @@ end
 @pram: 是否播放气象效果, 默认为false
 ]]
 function WeatherEffect:onEnter(_type,level,isPlay)
-    self:_initCustomParticle()
+    self:_initRain()
 end 
 
 function WeatherEffect:onExit()
@@ -200,8 +241,7 @@ end
 return WeatherEffect
 
 --[[
+-- 示例程序：
 local layer = require("app.UI.effect.WeatherEffect"):create()
-    self:addChild(layer,1)
-
-    layer:onEnter()
+self:addChild(layer,1)
 ]]
