@@ -22,13 +22,20 @@ function Hero:ctor(parent)
     self._rotation = nil        -- 翻转类型(1-脸向右，2-脸向左)
     self._bAttack = false       -- 是否可攻击
 
+    -- 
+    self._bomb = nil            -- 手雷
+    self._bombIsMove = false    -- 手雷是否在移动中
+    -- 
     self._gunIndex = 1          -- 枪械选择索引
     self._knifeIndex = 1        -- 刀具选择索引
+
+    --
+    self._bulletCache = {}
 end 
 
 -- 创建英雄
 function Hero:CreateHero(_heroType)
-    local _heroType = _heroType or ENUM.HERO_TAIJI
+    _heroType = _heroType or ENUM.HERO_TAIJI
     self._heroType = _heroType
     local ArmatureMgr = ccs.ArmatureDataManager:getInstance()
     if _heroType == ENUM.HERO_ZOMBIE then 
@@ -53,7 +60,7 @@ function Hero:CreateHero(_heroType)
     end 
     
     self._hero:setPosition(cc.p(100, 120))
-    self._parent:getMapNode():addChild(self._hero, 4)
+    self._parent:getMapUI():getFrontMap():addChild(self._hero, 4)
 
     -- 创建枪械，道具(机器人是没有切换武器的)
     if _heroType ~= ENUM.HERO_ROBOT then 
@@ -98,15 +105,36 @@ function Hero:ChangeWeapon(changeType)
     end 
 end 
 
--- 监测玩家攻击
-function Hero:AttackCheck()
-    --
-end 
-
 -- 播放指定类型的动作
 function Hero:playHeroAction(_type, _frame)
     _frame = _frame or 10
     self._hero:getAnimation():playWithIndex(_type, 0,_frame)
+end 
+
+-- 创建子弹
+function Hero:_createBullet()
+    local bullet = cc.Sprite:create("art/role/bullet/bullet_0.png")
+    bullet:setPosition(cc.p(14, 52))
+    self._hero:addChild(bullet)
+
+    -- 移动动作
+    local bulletSize = bullet:getContentSize()
+    local act1 = cc.MoveBy:create(2.0, cc.p(display.width + bulletSize.width, 0))
+    local act2 = cc.CallFunc:create(function()
+        bullet:removeFromParent()
+    end)
+    local action = cc.Sequence:create(act1, act2)
+    bullet:runAction(action)
+end 
+
+-- 开始射击
+function Hero:StartShoot()
+    self:_createBullet()
+end
+
+-- 停止射击
+function Hero:StopShoot()
+    --
 end 
 
 -- 暂停英雄
@@ -122,6 +150,127 @@ end
 -- 获取翻转类型
 function Hero:getRotationType()
     return self._rotation
+end 
+
+-- 获取英雄节点
+function Hero:getHeroNode()
+    return self._hero
+end 
+
+------------------------------------------------------------------------
+-- 创建手雷
+function Hero:GrenadeCreate()
+    if self._bombIsMove then 
+        return 
+    end 
+    self._bombIsMove = true 
+
+    self._bomb = cc.Sprite:create("art/role/bomb/grenade_bomb1.png")
+    self._bomb:setPosition(cc.p(14, 52))
+    self._hero:addChild(self._bomb)
+    
+    -- 
+    self:GrenadeMove()
+end 
+
+-- 手雷移动
+function Hero:GrenadeMove()
+    local bombposx, bombposy = self._bomb:getPosition()
+    local len = 200                                         -- 长度
+    local startpos = cc.p(bombposx, bombposy)               -- 起始点
+    local endpos = cc.p(bombposx + 200, 0)                  -- 结束点
+    local height = 50                                       -- 高度
+    local angle = 60                                        -- 角度
+
+    -- 将角度转换为弧度
+    local radian = angle * math.pi/180
+    -- 第一个控制点
+    local point1_x = startpos.x + len/4
+    local point1 = cc.p(point1_x, height + startpos.y + math.cos(radian) * point1_x)
+    -- 第二个控制点
+    local point2_x = startpos.x + len/2
+    local point2 = cc.p(point2_x, height + startpos.y + math.cos(radian) * point2_x)
+
+    -- 曲线配置
+    local bezier = {point1, point2, endpos}
+    local act1 = cc.BezierTo:create(3, bezier)
+    local act2 = cc.EaseInOut:create(act1, 0.5)
+    local act3 = cc.RotateBy:create(1, 360)
+    local act4 = cc.CallFunc:create(function()
+        -- 移除手雷
+        self._bomb:setVisible(false)
+        -- 播放爆炸动画
+        self:GrenadeBomb()
+    end)
+    local action = cc.Spawn:create(act3, act2)
+    self._bomb:runAction(action)
+
+    ----------------------------------------
+    do return end 
+    -- 注意监测是否碰撞到地面
+    local isInWall = self:_checkInWall()
+    if isInWall then 
+        self:Bomb()
+        return 
+    end 
+    -- 注意监测是否掉落地面下
+    if posy <= -100 then 
+        self:GrenadeBomb()
+        return
+    end 
+    -- 注意监测是否碰撞到怪物
+    local isInMonster = self:_checkInMonster()
+    if isInMonster then 
+        self:GrenadeBomb()
+        return 
+    end 
+end
+
+-- 手雷爆炸
+function Hero:GrenadeBomb()
+    self._bomb:setRotation(0)
+
+    local animation = cc.Animation:create()
+    for i = 1, 6 do 
+        local strName = string.format("art/effect/grenade/grenade_%d.png", i)
+        animation:addSpriteFrameWithFile(strName) 
+    end 
+    -- 设置两帧之间的播放时间
+    animation:setDelayPerUnit(0.15)
+    -- 设置动画播放后还原到初始状态
+    animation:setRestoreOriginalFrame(true)
+
+    local action1 = cc.Animate:create(animation)
+    local action2 = cc.CallFunc:create(handler(self, self.GrenadeDel))
+    local action = cc.Sequence:create(action1, action2)
+    self._bomb:runAction(action)
+end 
+
+-- 手雷销毁
+function Hero:GrenadeDel()
+    self._bombIsMove = false 
+    self._bomb:stopAllActions()
+end 
+
+------------------------------------------------------------------------
+-- 创建子弹
+function Hero:createBullet()
+    self._bullet = cc.Sprite:create("")
+end 
+
+-- 检测是否与地面接触 CheckInWall
+function Hero:_checkInWall()
+    return false 
+end 
+
+-- 检测是否与怪物碰撞
+function Hero:_checkInMonster()
+    return false 
+end 
+
+-- 检测玩家是否被攻击
+function Hero:_checkBeAttack()
+    return false 
 end 
 
 return Hero

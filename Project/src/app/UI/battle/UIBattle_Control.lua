@@ -16,6 +16,8 @@ function UIBattle_Control:ctor(node, parent)
     self._knifeImg = nil 
     self._rotation = 0          -- 旋转角度
 
+    self._shootScheduler = nil      -- 射击定时器
+
     self:_initUI()
 end 
 
@@ -39,32 +41,52 @@ function UIBattle_Control:_initUI()
     BindTouchEvent(self._leftBtn, handler(self, self._onClickLeftEvent))
     BindTouchEvent(self._rightBtn, handler(self, self._onClickRightEvent))
     BindTouchEvent(self._jumpBtn, handler(self, self._onClickJumpEvent))
-    BindTouchEvent(self._shootBtn, handler(self, self._onShootEvent))
+    
     BindTouchEvent(self._bombBtn, handler(self, self._onBombEvent))
     BindTouchEvent(self._skillBtn, handler(self, self._onSkillEvent))
 
+    self._shootBtn:addTouchEventListener(handler(self, self._onShootEvent))
     self._gunImg:addTouchEventListener(handler(self, self._onChangeKnifeEvent))
     self._knifeImg:addTouchEventListener(handler(self, self._onChangeGunEvent))
 end
 
 function UIBattle_Control:_onClickLeftEvent(sender)
     MsgTip("您点击了左按钮")
+    -- 地图移动
+    self._parent:getMapUI():moveMap(-1)
 end
 
 function UIBattle_Control:_onClickRightEvent(sender)
     MsgTip("您点击了右按钮")
+    self._parent:getMapUI():moveMap(1)
 end
 
 function UIBattle_Control:_onClickJumpEvent(sender)
-    MsgTip("您点击了左按钮")
+    MsgTip("您点击了跳跃按钮")
 end
 
-function UIBattle_Control:_onShootEvent(sender)
-    MsgTip("您点击了射击按钮")
+-- 射击
+function UIBattle_Control:_onShootEvent(sender, eventType)
+    if eventType == ccui.TouchEventType.began then 
+        if self._shootScheduler == nil then 
+            local function start()
+                self._parent:getHeroUI():StartShoot()
+            end 
+            -- param: 刷新方法
+            -- param: 刷新时间间隔
+            -- param: 是否只执行一次
+            self._shootScheduler = cc.Director:getInstance():getScheduler():scheduleScriptFunc(start, 0.1, false)
+        end 
+    else 
+        if self._shootScheduler ~= nil then 
+            cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._shootScheduler)
+            self._shootScheduler = nil 
+        end 
+    end 
 end
 
 function UIBattle_Control:_onBombEvent(sender)
-    MsgTip("您点击了炸弹按钮")
+    self._parent:getHeroUI():GrenadeCreate()
 end
 
 function UIBattle_Control:_onSkillEvent(sender)
@@ -96,6 +118,13 @@ function UIBattle_Control:_onChangeGunEvent(sender, eventType)
     -- 切换
     local heroNode = self._parent:getHeroNode()
     heroNode:ChangeWeapon("GUN")
+end 
+
+function UIBattle_Control:dispose()
+    if self._shootScheduler ~= nil then 
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._shootScheduler)
+        self._shootScheduler = nil 
+    end 
 end 
 
 return UIBattle_Control
