@@ -160,25 +160,18 @@ end
 ------------------------------------------------------------------------
 -- 创建手雷
 function Hero:GrenadeCreate()
-    if self._bombIsMove then 
-        return 
-    end 
-    self._bombIsMove = true 
-
-    self._bomb = cc.Sprite:create("art/role/bomb/grenade_bomb1.png")
-    self._bomb:setPosition(cc.p(14, 52))
-    self._hero:addChild(self._bomb)
-    
-    -- 
-    self:GrenadeMove()
+    local _bomb = cc.Sprite:create("art/role/bomb/grenade_bomb1.png")
+    _bomb:setPosition(cc.p(14, 52))
+    self._hero:addChild(_bomb)
+    self:GrenadeMove(_bomb)
 end 
 
 -- 手雷移动
-function Hero:GrenadeMove()
-    local bombposx, bombposy = self._bomb:getPosition()
+function Hero:GrenadeMove(node)
+    local bombposx, bombposy = node:getPosition()
     local len = 200                                         -- 长度
     local startpos = cc.p(bombposx, bombposy)               -- 起始点
-    local endpos = cc.p(bombposx + 200, 0)                  -- 结束点
+    local endpos = cc.p(bombposx + 200, 50)                 -- 结束点
     local height = 50                                       -- 高度
     local angle = 60                                        -- 角度
 
@@ -192,47 +185,25 @@ function Hero:GrenadeMove()
     local point2 = cc.p(point2_x, height + startpos.y + math.cos(radian) * point2_x)
 
     -- 曲线配置
+    local MOVETIME = 1.5                        -- 移动时间
     local bezier = {point1, point2, endpos}
-    local act1 = cc.BezierTo:create(3, bezier)
-    local act2 = cc.EaseInOut:create(act1, 0.5)
-    local act3 = cc.RotateBy:create(1, 360)
+    local act1 = cc.BezierTo:create(MOVETIME, bezier)
+    local act2 = cc.RotateBy:create(MOVETIME, 360 * 3)
+    local act3 = cc.Spawn:create(act1, act2)
     local act4 = cc.CallFunc:create(function()
-        -- 移除手雷
-        self._bomb:setVisible(false)
         -- 播放爆炸动画
-        self:GrenadeBomb()
+        self:GrenadeBomb(node)
     end)
-    local action = cc.Spawn:create(act3, act2)
-    self._bomb:runAction(action)
-
-    ----------------------------------------
-    do return end 
-    -- 注意监测是否碰撞到地面
-    local isInWall = self:_checkInWall()
-    if isInWall then 
-        self:Bomb()
-        return 
-    end 
-    -- 注意监测是否掉落地面下
-    if posy <= -100 then 
-        self:GrenadeBomb()
-        return
-    end 
-    -- 注意监测是否碰撞到怪物
-    local isInMonster = self:_checkInMonster()
-    if isInMonster then 
-        self:GrenadeBomb()
-        return 
-    end 
+    
+    local action = cc.Sequence:create(act3, act4)
+    node:runAction(action)
 end
 
--- 手雷爆炸
-function Hero:GrenadeBomb()
-    self._bomb:setRotation(0)
-
+-- 手雷爆炸动画
+function Hero:GrenadeBomb(node)
     local animation = cc.Animation:create()
     for i = 1, 6 do 
-        local strName = string.format("art/effect/grenade/grenade_%d.png", i)
+        local strName = string.format("art/role/bomb/grenade_%d.png", i)
         animation:addSpriteFrameWithFile(strName) 
     end 
     -- 设置两帧之间的播放时间
@@ -241,15 +212,22 @@ function Hero:GrenadeBomb()
     animation:setRestoreOriginalFrame(true)
 
     local action1 = cc.Animate:create(animation)
-    local action2 = cc.CallFunc:create(handler(self, self.GrenadeDel))
+    local action2 = cc.CallFunc:create(function()
+        self:GrenadeDel(node)
+    end)
     local action = cc.Sequence:create(action1, action2)
-    self._bomb:runAction(action)
+
+    node:runAction(action)
 end 
 
 -- 手雷销毁
-function Hero:GrenadeDel()
+function Hero:GrenadeDel(node)
     self._bombIsMove = false 
-    self._bomb:stopAllActions()
+
+    if node ~= nil then 
+        node:stopAllActions()
+        node:removeFromParent()
+    end     
 end 
 
 ------------------------------------------------------------------------
