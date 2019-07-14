@@ -1,5 +1,5 @@
 --[[
-英雄类
+英雄类, 使用cocos 自带的骨骼动画资源吧，否则调整主角UI存在问题太多了
 ]]
 
 -- 枪械资源
@@ -14,6 +14,24 @@ local GUN_MAXNUM = #gunRes
 local knifeRes = {"tulongdao2.png", "tulongdao111.png", "kaishanfu111.png"}
 local KNIFE_MAXNUM = #knifeRes
 
+-- 英雄动作
+local ACTION = {
+    NONE = 0,               -- 站立
+    RUN = 1,                -- 跑动
+    JUMP_1 = 2,             -- 跳跃1
+    JUMP_2 = 3,             -- 跳跃2
+    ROLL = 4,               -- 滚动 
+    SHOOT = 5,              -- 射击
+    KNIFT_STAND = 6,        -- 拿着刀站立
+    KNIFT_RUN = 7,          -- 拿着刀跑动
+    KNIFT_ATTACK = 8,       -- 拿着刀攻击
+    KNIFT_BE_ATTACK = 13,   -- 拿着刀被攻击
+    GUN_BE_ATTACK = 12,     -- 拿着枪被攻击
+}
+
+-- 英雄移动间隔
+local MOVE_OFFSET_X = 10
+
 local Hero = class("Hero")
 function Hero:ctor(parent)
     self._parent = parent 
@@ -21,6 +39,8 @@ function Hero:ctor(parent)
     self._heroType = nil        -- 英雄类型(0~2)
     self._rotation = nil        -- 翻转类型(1-脸向右，2-脸向左)
     self._bAttack = false       -- 是否可攻击
+    self._bIsMove = false       -- 是否在移动中
+    self._dirIndex = 1          -- 玩家方向： -1 向左  1 向右
 
     -- 
     self._bomb = nil            -- 手雷
@@ -31,11 +51,12 @@ function Hero:ctor(parent)
 
     --
     self._bulletCache = {}
+    self.playIndex = 1
 end 
 
 -- 创建英雄
 function Hero:CreateHero(_heroType)
-    _heroType = _heroType or ENUM.HERO_TAIJI
+    _heroType = _heroType or ENUM.HERO_ZOMBIE
     self._heroType = _heroType
     local ArmatureMgr = ccs.ArmatureDataManager:getInstance()
     if _heroType == ENUM.HERO_ZOMBIE then 
@@ -58,8 +79,13 @@ function Hero:CreateHero(_heroType)
     else 
         self._hero = ccs.Armature:create("dongzuo")
     end 
-    
+    -- 设置动画播放速率
+    self._hero:getAnimation():setSpeedScale(0.5)
+    -- 设置英雄站立
+    self._hero:getAnimation():playWithIndex(ACTION.NONE)
+    -- 设置英雄位置
     self._hero:setPosition(cc.p(100, 120))
+    -- 将英雄添加到地图节点中
     self._parent:getMapUI():getFrontMap():addChild(self._hero, 4)
 
     -- 创建枪械，道具(机器人是没有切换武器的)
@@ -79,11 +105,9 @@ function Hero:CreateHero(_heroType)
             knifeBone:addDisplay(skin, i-1)
         end 
     end
-    self:ChangeWeapon()
-    --self:playHeroAction(1)
 end 
 
--- 改变武器，刀具类型
+-- 改变武器
 function Hero:ChangeWeapon(changeType)
     -- 判定英雄类型
     if self._heroType == ENUM.HERO_ROBOT then 
@@ -95,29 +119,60 @@ function Hero:ChangeWeapon(changeType)
     math.newrandomseed()
 
     if changeType == "GUN" then 
+        -- 获取手的骨骼节点
         local handBone = self._hero:getBone("shou1")
+        -- 根据索引改变显示内容
         self._gunIndex = math.random(1, GUN_MAXNUM-1)
         handBone:changeDisplayWithIndex(self._gunIndex, true)
+        -- 播放英雄动作
+        self._hero:getAnimation():playWithIndex(ACTION.SHOOT)
     elseif changeType == "KNIFE" then 
+        -- 获取刀的骨骼节点
         local knifeBone = self._hero:getBone("dao")
+        -- 根据索引改变显示内容
         self._knifeIndex = math.random(1, KNIFE_MAXNUM-1)
         knifeBone:changeDisplayWithIndex(self._knifeIndex, true)
+        self._hero:getAnimation():playWithIndex(ACTION.KNIFT_STAND)
     end 
 end 
 
--- 播放指定类型的动作
-function Hero:playHeroAction(_type, _frame)
-    _frame = _frame or 10
-    self._hero:getAnimation():playWithIndex(_type, 0,_frame)
+-- 英雄移动
+-- @pram: -1 向左 1 像右
+function Hero:StartMove(direction)
+    if direction < 0 then 
+        direction = -1
+        self._hero:setScaleX(direction)
+    else 
+        direction = 1
+        self._hero:setScaleX(direction)
+    end 
+
+    local heroposx = self._hero:getPositionX()
+    heroposx = heroposx + MOVE_OFFSET_X * direction
+    self._hero:setPositionX(heroposx)
+
+    if not self._bIsMove then 
+        self._bIsMove = true 
+        self._dirIndex  = direction
+        self._hero:getAnimation():playWithIndex(ACTION.RUN)
+        self._hero:getAnimation():setSpeedScale(0.45)
+    end 
 end 
 
--- 创建子弹
-function Hero:_createBullet()
+-- 停止移动
+function Hero:StopMove()
+    self._hero:getAnimation():playWithIndex(ACTION.NONE)
+    self._hero:getAnimation():setSpeedScale(0.5)
+    self._bIsMove = false 
+end 
+
+-- 英雄射击
+function Hero:StartShoot()
     local bullet = cc.Sprite:create("art/role/bullet/bullet_0.png")
     bullet:setPosition(cc.p(14, 52))
     self._hero:addChild(bullet)
 
-    -- 移动动作
+    -- 子弹移动
     local bulletSize = bullet:getContentSize()
     local act1 = cc.MoveBy:create(2.0, cc.p(display.width + bulletSize.width, 0))
     local act2 = cc.CallFunc:create(function()
@@ -125,17 +180,43 @@ function Hero:_createBullet()
     end)
     local action = cc.Sequence:create(act1, act2)
     bullet:runAction(action)
+    -- 
+    self._hero:getAnimation():playWithIndex(ACTION.SHOOT)
 end 
 
--- 开始射击
-function Hero:StartShoot()
-    self:_createBullet()
+-- 英雄跳跃
+function Hero:StartJump()
+    local heroposx, heroposy = self._hero:getPosition()
+    local len = 100                                                         -- 跳跃长度
+    local startpos = cc.p(heroposx, heroposy)                               -- 起始点
+    local endpos = cc.p(heroposx + 200 * self._dirIndex, heroposy)          -- 结束点
+    local height = 30                                                       -- 高度
+    local angle = 40                                                        -- 角度
+
+    -- 将角度转换为弧度
+    local radian = angle * math.pi/180
+    -- 第一个控制点
+    local point1_x = startpos.x + len/4
+    local point1 = cc.p(point1_x, height + startpos.y + math.cos(radian) * point1_x)
+    -- 第二个控制点
+    local point2_x = startpos.x + len/2
+    local point2 = cc.p(point2_x, height + startpos.y + math.cos(radian) * point2_x)
+
+    -- 曲线配置
+    local MOVETIME = 0.8
+    local bezier = {point1, point2, endpos}
+    local act1 = cc.BezierTo:create(MOVETIME, bezier)
+    local act2 = cc.CallFunc:create(function()
+        -- 设定英雄新位置
+        self._hero:setPosition(endpos)
+        -- 设定英雄站立
+        self._hero:getAnimation():playWithIndex(ACTION.NONE)
+    end)
+    
+    local action = cc.Sequence:create(act1, act2)
+    self._hero:runAction(action)
+    self._hero:getAnimation():playWithIndex(ACTION.ROLL)
 end
-
--- 停止射击
-function Hero:StopShoot()
-    --
-end 
 
 -- 暂停英雄
 function Hero:PauseHero()
@@ -231,11 +312,6 @@ function Hero:GrenadeDel(node)
 end 
 
 ------------------------------------------------------------------------
--- 创建子弹
-function Hero:createBullet()
-    self._bullet = cc.Sprite:create("")
-end 
-
 -- 检测是否与地面接触 CheckInWall
 function Hero:_checkInWall()
     return false 
