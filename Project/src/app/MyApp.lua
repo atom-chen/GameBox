@@ -3,8 +3,7 @@ require("cocos/framework/init")
 require("app.Utils.GlobalRequire")
 
 
-local MyApp = class("MyApp", cc.load("mvc").AppBase)
-
+local MyApp = class("MyApp")
 function MyApp:ctor()
 	local eventDispatcher = cc.Director:getInstance():getEventDispatcher()
 	local customListenerBg = cc.EventListenerCustom:create("APP_ENTER_BACKGROUND_EVENT",
@@ -19,7 +18,7 @@ end
 function MyApp:run()
 	local loginScene = require("app.UI.LogoScene"):create()
     if loginScene then 
-	    cc.Director:getInstance():replaceScene(loginScene)
+		display.runScene(loginScene)
     end 
 end
 

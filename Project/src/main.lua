@@ -18,6 +18,10 @@ require "config"
 require "cocos.init"
 
 local function main()
+    if CC_SHOW_FPS then
+        cc.Director:getInstance():setDisplayStats(true)
+    end
+	cc.Director:getInstance():setAnimationInterval(1/60)
     require("app.MyApp"):create():run()
 end
 
