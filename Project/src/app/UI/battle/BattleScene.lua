@@ -13,6 +13,7 @@ function BattleScene:ctor()
     self._mainUI = nil              -- 主界面UI
     self._controlUI = nil           -- 控制UI
     self._mapUI = nil               -- 地图UI
+    self._heroUI = nil              -- 英雄
 
     self:_initUI() 
     
@@ -31,18 +32,18 @@ function BattleScene:_initUI()
     -- 创建地图UI
     self._mapUI = UIBattle_Map.new(self)
     -- 创建英雄
-    self._hero = Hero.new(self)
-    self._hero:CreateHero()
+    self._heroUI = Hero.new(self)
+    self._heroUI:CreateHero()
 end 
 
 -- 获取英雄节点
-function BattleScene:getHeroNode()
-    return self._hero 
+function BattleScene:getHeroUI()
+    return self._heroUI 
 end 
 
 -- 获取地图节点
-function BattleScene:getMapNode()
-    return self._mapUI:getFrontMap()
+function BattleScene:getMapUI()
+    return self._mapUI
 end 
 
 return BattleScene

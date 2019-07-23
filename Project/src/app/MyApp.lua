@@ -16,7 +16,8 @@ function MyApp:ctor()
 end
 
 function MyApp:run()
-	local loginScene = require("app.UI.LogoScene"):create()
+	--local loginScene = require("app.UI.LogoScene"):create()
+	local loginScene = require("app.UI.battle.BattleScene"):create()
     if loginScene then 
 		display.runScene(loginScene)
     end 
