@@ -192,83 +192,6 @@
             <Image Name="weikaiqi.png" />
             <Image Name="weikaiqi2.png" />
           </Folder>
-          <Folder Name="effect">
-            <Folder Name="boss_skill1">
-              <Image Name="rock_1.png" />
-              <Image Name="rock_2.png" />
-              <Image Name="rock_3.png" />
-              <Image Name="rock_4.png" />
-              <Image Name="rockdown_1.png" />
-              <Image Name="rockdown_2.png" />
-              <Image Name="rockdown_3.png" />
-              <Image Name="rockdown_4.png" />
-              <Image Name="rockdown_5.png" />
-              <Image Name="rockdown_6.png" />
-              <Image Name="rockdown_7.png" />
-              <Image Name="rocktag_1.png" />
-              <Image Name="rocktag_2.png" />
-              <Image Name="rocktag_3.png" />
-              <Image Name="rocktag_4.png" />
-              <Image Name="rocktag_5.png" />
-              <Image Name="rocktag_6.png" />
-              <Image Name="rocktag_7.png" />
-            </Folder>
-            <Folder Name="buttle_fire">
-              <Image Name="buttle_fire1.png" />
-              <Image Name="buttle_fire2.png" />
-              <Image Name="buttle_fire3.png" />
-              <Image Name="buttle_fire4.png" />
-              <Image Name="buttle_fire5.png" />
-              <Image Name="buttle_fire6.png" />
-              <Image Name="buttle_fire7.png" />
-              <Image Name="buttle_fire8.png" />
-            </Folder>
-            <Folder Name="buttle_fire_dead">
-              <Image Name="fire_dead_1.png" />
-              <Image Name="fire_dead_2.png" />
-              <Image Name="fire_dead_3.png" />
-              <Image Name="fire_dead_4.png" />
-              <Image Name="fire_dead_5.png" />
-              <Image Name="fire_dead_6.png" />
-              <Image Name="fire_dead_7.png" />
-            </Folder>
-            <Folder Name="chapterEffect">
-              <Image Name="chapterEffect_1.png" />
-              <Image Name="chapterEffect_2.png" />
-              <Image Name="chapterEffect_3.png" />
-              <Image Name="chapterEffect_4.png" />
-              <Image Name="chapterEffect_5.png" />
-              <Image Name="chapterEffect_6.png" />
-              <Image Name="chapterEffect_7.png" />
-              <Image Name="chapterEffect_8.png" />
-              <Image Name="chapterEffect_9.png" />
-            </Folder>
-            <Folder Name="drops">
-              <Image Name="a1.png" />
-              <Image Name="a2.png" />
-              <Image Name="a3.png" />
-              <Image Name="a4.png" />
-              <Image Name="a5.png" />
-              <Image Name="b1.png" />
-              <Image Name="b2.png" />
-              <Image Name="b3.png" />
-              <Image Name="b4.png" />
-              <Image Name="b5.png" />
-              <Image Name="b6.png" />
-            </Folder>
-            <Folder Name="lottery">
-              <Image Name="chou1.png" />
-              <Image Name="chou2.png" />
-              <Image Name="chou3.png" />
-              <Image Name="chou4.png" />
-              <Image Name="chou5.png" />
-              <Image Name="chou6.png" />
-              <Image Name="san1.png" />
-              <Image Name="san2.png" />
-              <Image Name="xuanzhong1.png" />
-              <Image Name="xuanzhong2.png" />
-            </Folder>
-          </Folder>
           <Folder Name="exit">
             <Image Name="fou.png" />
             <Image Name="fou2.png" />
@@ -353,13 +276,6 @@
             <Image Name="lottery_start_2.png" />
             <Image Name="lottery_start1.png" />
           </Folder>
-          <Folder Name="lotteryresult">
-            <Image Name="result_1.png" />
-            <Image Name="result_2.png" />
-            <Image Name="result_3.png" />
-            <Image Name="result_4.png" />
-            <Image Name="result_5.png" />
-          </Folder>
           <Folder Name="main">
             <Image Name="bangzhu.png" />
             <Image Name="bangzhu2.png" />
@@ -408,6 +324,7 @@
             <Image Name="sound_bg.png" />
           </Folder>
           <Folder Name="public">
+            <Image Name="close.png" />
             <Image Name="Img_tip.png" />
             <Image Name="public_back1.png" />
             <Image Name="public_back2.png" />
@@ -415,19 +332,6 @@
             <Image Name="shang.png" />
             <Image Name="xia.png" />
             <Image Name="xiamian2.png" />
-          </Folder>
-          <Folder Name="res">
-            <Image Name="hall_bg1.png" />
-            <Image Name="hall_bg2.png" />
-            <Image Name="input_bg.png" />
-            <Image Name="login.png" />
-            <Image Name="person_select.png" />
-            <Image Name="person1.png" />
-            <Image Name="person2.png" />
-            <Image Name="person3.png" />
-            <Image Name="public_btn1.png" />
-            <Image Name="start_btn1.png" />
-            <Image Name="start_btn2.png" />
           </Folder>
           <Folder Name="role">
             <Folder Name="jixie">
@@ -487,16 +391,6 @@
           <PlistInfo Name="_selectrole.csi" Type="Plist" />
         </Folder>
         <Folder Name="csd">
-          <Folder Name="effect">
-            <Project Name="Effect_Boss_SkillRock.csd" Type="Node" />
-            <Project Name="Effect_bullet_fire.csd" Type="Node" />
-            <Project Name="Effect_bullet_fire_Dead.csd" Type="Node" />
-            <Project Name="Effect_Chapter.csd" Type="Node" />
-            <Project Name="Effect_crule.csd" Type="Node" />
-          </Folder>
-          <Folder Name="test">
-            <Project Name="UITest.csd" Type="Scene" />
-          </Folder>
           <Project Name="ChapterScene.csd" Type="Scene" />
           <Project Name="mainScene.csd" Type="Scene" />
           <Project Name="RoleScene.csd" Type="Scene" />
@@ -510,32 +404,7 @@
           <Project Name="UIMsgTip.csd" Type="Layer" />
           <Project Name="UIPause.csd" Type="Layer" />
           <Project Name="UIQuit.csd" Type="Layer" />
-        </Folder>
-        <Folder Name="eliminate">
-          <Folder Name="csd">
-            <Project Name="EliminateAbout.csd" Type="Layer" />
-            <Project Name="EliminatePlay.csd" Type="Scene" />
-            <Project Name="EliminateStart.csd" Type="Scene" />
-          </Folder>
-          <Folder Name="res">
-            <Image Name="board.png" />
-            <Image Name="bonus.png" />
-            <Image Name="bonusbar.png" />
-            <Image Name="bonusbar_fill.png" />
-            <Image Name="btn_about_normal.png" />
-            <Image Name="btn_about_select.png" />
-            <Image Name="btn_play_normal.png" />
-            <Image Name="btn_play_selected.png" />
-            <PlistInfo Name="eliminatePlist.csi" Type="Plist" />
-            <Image Name="jewel1.png" />
-            <Image Name="jewel2.png" />
-            <Image Name="jewel3.png" />
-            <Image Name="jewel4.png" />
-            <Image Name="jewel5.png" />
-            <Image Name="jewel6.png" />
-            <Image Name="jewel7.png" />
-            <Image Name="logo.png" />
-          </Folder>
+          <Project Name="UITest.csd" Type="Scene" />
         </Folder>
       </RootFolder>
     </Group>
