@@ -4,7 +4,7 @@
     <Content>
       <Animation Duration="0" Speed="1.0000" />
       <ObjectData Name="Scene" Tag="3" ctype="GameNodeObjectData">
-        <Size X="800.0000" Y="480.0000" />
+        <Size X="854.0000" Y="480.0000" />
         <Children>
           <AbstractNodeData Name="Sprite_bg" ActionTag="-653474581" Tag="4" IconVisible="False" PositionPercentXEnabled="True" PositionPercentYEnabled="True" ctype="SpriteObjectData">
             <Size X="960.0000" Y="640.0000" />
@@ -14,7 +14,7 @@
             <CColor A="255" R="255" G="255" B="255" />
             <PrePosition X="0.5000" Y="0.5000" />
             <PreSize X="1.0000" Y="1.0000" />
-            <FileData Type="Normal" Path="art/res/login.png" Plist="" />
+            <FileData Type="Default" Path="Default/Sprite.png" Plist="" />
             <BlendFunc Src="770" Dst="771" />
           </AbstractNodeData>
           <AbstractNodeData Name="Text_Title" ActionTag="-192104764" Tag="6" IconVisible="False" LeftMargin="250.4769" RightMargin="259.5231" TopMargin="188.1087" BottomMargin="401.8913" FontSize="50" LabelText="Cocos GameBox Demo" ShadowOffsetX="2.0000" ShadowOffsetY="-2.0000" ctype="TextObjectData">
@@ -38,8 +38,8 @@
             <PreSize X="0.2896" Y="0.1937" />
             <TextColor A="255" R="65" G="65" B="70" />
             <DisabledFileData Type="Default" Path="Default/Button_Disable.png" Plist="" />
-            <PressedFileData Type="Normal" Path="art/res/start_btn2.png" Plist="" />
-            <NormalFileData Type="Normal" Path="art/res/start_btn1.png" Plist="" />
+            <PressedFileData Type="Default" Path="Default/Button_Press.png" Plist="" />
+            <NormalFileData Type="Default" Path="Default/Button_Normal.png" Plist="" />
             <OutlineColor A="255" R="255" G="0" B="0" />
             <ShadowColor A="255" R="110" G="110" B="110" />
           </AbstractNodeData>

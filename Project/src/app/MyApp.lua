@@ -1,6 +1,6 @@
 require("cocos/init")
 require("cocos/framework/init")
-require("app.Utils.GlobalRequire")
+require("app.Demo_ZombieShoot.Utils.GlobalRequire")
 
 
 local MyApp = class("MyApp")
@@ -16,11 +16,8 @@ function MyApp:ctor()
 end
 
 function MyApp:run()
-	--local loginScene = require("app.UI.LogoScene"):create()
-	local loginScene = require("app.UI.battle.BattleScene"):create()
-    if loginScene then 
-		display.runScene(loginScene)
-    end 
+	local loginScene = require("app.TestScene"):create()
+    display.runScene(loginScene)
 end
 
 function MyApp:onEnterBackground()
