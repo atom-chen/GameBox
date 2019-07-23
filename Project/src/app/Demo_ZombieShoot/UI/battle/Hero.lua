@@ -68,9 +68,6 @@ function Hero:CreateHero(_heroType)
         ArmatureMgr:addArmatureFileInfo("zhujiao2.png", "zhujiao2.plist", "zhujiao2.json")
         ArmatureMgr:addArmatureFileInfo("qiangqiang2.png", "qiangqiang2.plist", "qiangqiang2.json")
         ArmatureMgr:addArmatureFileInfo("tulongdao2.png", "tulongdao2.plist", "tulongdao2.json")
-    elseif _heroType == ENUM.HERO_ROBOT then 
-        ArmatureMgr:addArmatureFileInfo("bot.png", "bot.plist", "bot.json")
-        ArmatureMgr:addSpriteFrameFromFile("bot1.plist", "bot1.png")
     end 
 
     -- 创建英雄
