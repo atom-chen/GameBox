@@ -55,27 +55,16 @@ function Hero:ctor(parent)
 end 
 
 -- 创建英雄
+-- 参数不再使用，只保留一个英雄即可
 function Hero:CreateHero(_heroType)
-    _heroType = _heroType or ENUM.HERO_ZOMBIE
     self._heroType = _heroType
     local ArmatureMgr = ccs.ArmatureDataManager:getInstance()
-    if _heroType == ENUM.HERO_ZOMBIE then 
-        ArmatureMgr:addSpriteFrameFromFile("zhujiao_1.plist", "zhujiao_1.png")
-        ArmatureMgr:addArmatureFileInfo("zhujiao.png", "zhujiao.plist", "zhujiao.json")
-        ArmatureMgr:addArmatureFileInfo("qiangqiang.png", "qiangqiang.plist", "qiangqiang.json")
-        ArmatureMgr:addArmatureFileInfo("tulongdao.png", "tulongdao.plist", "tulongdao.json")
-    elseif _heroType == ENUM.HERO_TAIJI then 
-        ArmatureMgr:addArmatureFileInfo("zhujiao2.png", "zhujiao2.plist", "zhujiao2.json")
-        ArmatureMgr:addArmatureFileInfo("qiangqiang2.png", "qiangqiang2.plist", "qiangqiang2.json")
-        ArmatureMgr:addArmatureFileInfo("tulongdao2.png", "tulongdao2.plist", "tulongdao2.json")
-    end 
+    ArmatureMgr:addArmatureFileInfo("zhujiao2.png", "zhujiao2.plist", "zhujiao2.json")
+    ArmatureMgr:addArmatureFileInfo("qiangqiang2.png", "qiangqiang2.plist", "qiangqiang2.json")
+    ArmatureMgr:addArmatureFileInfo("tulongdao2.png", "tulongdao2.plist", "tulongdao2.json")
 
     -- 创建英雄
-    if _heroType == ENUM.HERO_ZOMBIE then 
-        self._hero = ccs.Armature:create("dongzuo1")
-    else 
-        self._hero = ccs.Armature:create("dongzuo")
-    end 
+    self._hero = ccs.Armature:create("dongzuo")
     -- 设置动画播放速率
     self._hero:getAnimation():setSpeedScale(0.5)
     -- 设置英雄站立
@@ -85,23 +74,21 @@ function Hero:CreateHero(_heroType)
     -- 将英雄添加到地图节点中
     self._parent:getMapUI():getFrontMap():addChild(self._hero, 4)
 
-    -- 创建枪械，道具(机器人是没有切换武器的)
-    if _heroType ~= ENUM.HERO_ROBOT then 
-        -- 获取手的骨骼节点
-        local handBone = self._hero:getBone("shou1")
-        handBone:setScale(1.25)
-        for i, name in ipairs(gunRes) do 
-            local skin = ccs.Skin:createWithSpriteFrameName(name)
-            handBone:addDisplay(skin, i-1)
-        end 
+    -- 创建枪械
+    -- 获取手的骨骼节点
+    local handBone = self._hero:getBone("shou1")
+    handBone:setScale(1.25)
+    for i, name in ipairs(gunRes) do 
+        local skin = ccs.Skin:createWithSpriteFrameName(name)
+        handBone:addDisplay(skin, i-1)
+    end 
 
-        -- 获取刀的骨骼节点
-        local knifeBone = self._hero:getBone("dao")
-        for i, name in ipairs(knifeRes) do 
-            local skin = ccs.Skin:createWithSpriteFrameName(name)
-            knifeBone:addDisplay(skin, i-1)
-        end 
-    end
+    -- 获取刀的骨骼节点
+    local knifeBone = self._hero:getBone("dao")
+    for i, name in ipairs(knifeRes) do 
+        local skin = ccs.Skin:createWithSpriteFrameName(name)
+        knifeBone:addDisplay(skin, i-1)
+    end 
 end 
 
 -- 改变武器
