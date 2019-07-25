@@ -1104,7 +1104,6 @@ local function ResetDebugInfo()
 	LuaDebugger.StepNext = false
 	LuaDebugger.StepOut = false
 	LuaDebugger.StepNextLevel = 0
-	print("ResetDebugInfoResetDebugInfoResetDebugInfoResetDebugInfoResetDebugInfo")
 end
 local function debugger_loop(server)
 	server = debug_server

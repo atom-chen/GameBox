@@ -6,9 +6,12 @@ local SPACE = 2                     -- 每行/列间隔
 -- 左上方格子起始点位置
 local STARTPOS = cc.p(display.width/2 - BOX_W * COLUME/2, display.height - BOX_H)  
 -- 格子颜色
-SHOW_COLOR = cc.c3b(52, 228, 249)
+SHOW_COLOR = cc.c3b(255, 0, 0)
 HIDE_COLOR = cc.c3b(255, 255, 255)
+-- 地图大小
 
+
+local config = require("app.Demo_Tetris.GridConfig")
 local UITetrisMain = class("UITetrisMain", function()
     return newLayerColor(cc.size(display.width, display.height), 255)
 end)
@@ -19,17 +22,20 @@ function UITetrisMain:ctor()
     self._resetBtn = nil            -- 重玩按钮
     self._exitBtn = nil             -- 退出按钮
     self._scoreLabel = nil          -- 分数
-    self._squares = {}              -- 格子精灵集合
+    self._map = {}                  -- 格子精灵集合
+    self._gridImg = nil             -- 当前图形
     self._timeScheduler = nil       -- 时间定时器
 
-    self._squareType = nil          -- 当前方块类型
+    self._gridType = nil            -- 当前方块类型
     self._curLine = nil             -- 方块当前所处的行数
     self._curColume = nil           -- 方块当前所处的列数
+    self._curScore = 0              -- 当前分数
 
     self:_init()
 end 
 
 function UITetrisMain:_init()
+    -- 开始按钮
     self._startBtn = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
     self._startBtn:addTouchEventListener(handler(self, self._startEvent))
     self._startBtn:setTitleColor(cc.c3b(0,0,0))
@@ -37,7 +43,7 @@ function UITetrisMain:_init()
     self._startBtn:setTitleFontSize(18)
     self._startBtn:setTitleText("开 始")
     self:addChild(self._startBtn)
-
+    -- 重玩按钮
     self._resetBtn = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
     self._resetBtn:addTouchEventListener(handler(self, self._resetEvent))
     self._resetBtn:setTitleColor(cc.c3b(0,0,0))
@@ -46,12 +52,12 @@ function UITetrisMain:_init()
     self._resetBtn:setTitleText("重 玩")
     self._resetBtn:setVisible(false)
     self:addChild(self._resetBtn)
-
+    -- 退出按钮
     self._exitBtn = ccui.Button:create(Res.CLOSE_IMG, Res.CLOSE_IMG, Res.CLOSE_IMG)
     self._exitBtn:addTouchEventListener(handler(self, self._exitEvent))
     self._exitBtn:setPosition(cc.p(display.width - 30, 30))
     self:addChild(self._exitBtn)
-
+    -- 分数
     self._scoreLabel = ccui.Text:create()
     self._scoreLabel:setPosition(cc.p(display.width - 20, display.height - 20))
     self._scoreLabel:setAnchorPoint(cc.p(1, 0.5))
@@ -59,17 +65,22 @@ function UITetrisMain:_init()
     self._scoreLabel:setFontSize(30)
     self:addChild(self._scoreLabel)
 
-    -- 初始化格子
+    --[[
+    初始化背景
+    以左上角为起始位置，X轴为列，向右加，范围为[1, COLUME]; Y轴为行，向下加，范围为[1, LINE]
+    每个行列位置默认标记为 0，表示没有格子，颜色显示为HIDE_COLOR
+    若有格子，TAG 标记为 1， 颜色显示为SHOW_COLOR 
+    ]]
     for i = 1, LINE do 
-        self._squares[i] = {}
+        self._map[i] = {}
         for j = 1, COLUME do 
-            self._squares[i][j] = cc.Sprite:create("tetris/square.png")
+            self._map[i][j] = cc.Sprite:create("tetris/square.png")
             local posx = STARTPOS.x + (j-1)*(BOX_W + SPACE) + BOX_W/2
             local posy = STARTPOS.y - (i-1)*(BOX_H + SPACE) - BOX_H/2
-            self._squares[i][j]:setPosition(cc.p(posx, posy))
-            self._squares[i][j]:setColor(cc.c3b(255, 255, 255))
-            self._squares[i][j]:setTag(0)
-            self:addChild(self._squares[i][j])
+            self._map[i][j]:setPosition(cc.p(posx, posy))
+            self._map[i][j]:setColor(HIDE_COLOR)
+            self._map[i][j]:setTag(0)
+            self:addChild(self._map[i][j])
         end 
     end 
 
@@ -87,14 +98,12 @@ function UITetrisMain:_startEvent(sender, eventType)
 
     if self._timeScheduler == nil then 
         local _handler = handler(self, self._updateDown)
-        self._timeScheduler = cc.Director:getInstance():getScheduler():scheduleScriptFunc(_handler, 1.0, false)
+        self._timeScheduler = cc.Director:getInstance():getScheduler():scheduleScriptFunc(_handler, 0.5, false)
     end 
-    -- 设置方块类型
-    self:_newSquareType()
-    
-    -- 隐藏按钮
     self._startBtn:setVisible(false)
     self._resetBtn:setVisible(true)
+    -- 设置新方块
+    self:_newGrid()
 end 
 
 -- 重玩按钮事件
@@ -103,13 +112,20 @@ function UITetrisMain:_resetEvent(sender, eventType)
         return 
     end 
 
+    -- 关闭定时器
+    if self._timeScheduler ~= nil then 
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._timeScheduler)
+        self._timeScheduler = nil 
+    end 
+
     for i = 1, LINE do 
         for j = 1, COLUME do 
-            self._squares[i][j]:setColor(cc.c3b(255, 255, 255))
-            self._squares[i][j]:setTag(0)
+            self._map[i][j]:setColor(HIDE_COLOR)
+            self._map[i][j]:setTag(0)
         end 
     end 
-    self:_newSquareType()
+    self._gridImg:removeFromParent()
+    self:_newGrid()
 end 
 
 -- 结束按钮事件
@@ -123,12 +139,13 @@ function UITetrisMain:_exitEvent(sender, eventType)
         cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._timeScheduler)
         self._timeScheduler = nil 
     end 
+    self:removeFromParent()
 end 
  
 -- 
 function UITetrisMain:_onKeyReleased(keyCode, event)
     if keyCode == cc.KeyCode.KEY_UP_ARROW or keyCode == cc.KeyCode.KEY_W then 
-        -- 上
+        self:_changeGrid()
     elseif keyCode == cc.KeyCode.KEY_DOWN_ARROW or keyCode == cc.KeyCode.KEY_S then 
         self:_updateDown()          -- 下
     elseif keyCode == cc.KeyCode.KEY_LEFT_ARROW or keyCode == cc.KeyCode.KEY_A then 
@@ -138,222 +155,226 @@ function UITetrisMain:_onKeyReleased(keyCode, event)
     end 
 end 
 
--- 新的方块类型
-function UITetrisMain:_newSquareType()
-    math.newrandomseed()
-    self._squareType = math.floor(math.random(1, 19))
-    if not self._squareType then 
+-- 新的方块
+function UITetrisMain:_newGrid()
+    -- 若图形已存在，将图形所在区域颜色设置为SHOW_COLOR 
+    if self._gridImg ~= nil then 
+        self._gridImg:removeFromParent()
+        print("当前行列数:", self._curLine, self._curColume)
+        for gridline = 4, 1, -1 do 
+            for gridcol = 1, 4 do 
+                if self._gridTab[gridline][gridcol] == 1 then 
+                    -- 将图形格子行列坐标转换为地图行列坐标
+                    local mapLine, mapCol = nil, nil 
+                    if gridline == self._gridMaxLine then 
+                        mapLine = self._curLine 
+                    else 
+                        mapLine = self._curLine - (self._gridMaxLine - gridline)
+                    end 
+                    mapCol = self._curColume + gridcol - 1
+                    
+                    local str = string.format("地图新行列(%d:%d); 格子行列(%d：%d)", mapLine, mapCol, gridline, gridcol)
+                    print(str)
+                    if self._map[mapLine][mapCol] then 
+                        self._map[mapLine][mapCol]:setColor(SHOW_COLOR)
+                        self._map[mapLine][mapCol]:setTag(1)
+                    end 
+                end 
+            end 
+        end 
+    end 
+
+    -- 获取新类型
+    local data = config.getNewGridData()
+    if not data then 
+        MsgTip("配置数据出错")
         return 
     end 
-    self._squareType = 1
+    self._gridType = data.type 
+    self._curLine = 1
+    self._curColume = data.startCol
+    self._gridMaxLine = data.maxGridLine
+    self._gridMaxCol = data.maxGridCol
+    self._gridTab = data.gridTab
 
-    print("方块类型为:" .. self._squareType)
-    local typeTab1 = {1,3,4,9,10,11,12,15,16}
-    local typeTab2 = {2,5,6,7,8,13,14,17,18,19} 
-    if table.indexof(typeTab1, self._squareType) then 
-        self._curLine = 1
-        self._curColume = 3
-    elseif table.indexof(typeTab2, self._squareType) then 
-        self._curLine = 1
-        self._curColume = 4
-    end 
+    -- 创建图片
+    self._gridImg = cc.Sprite:create(data.img)
+    self._gridImg:setAnchorPoint(cc.p(0,0))
+    local gridSize = self._gridImg:getContentSize()
+    local posx = STARTPOS.x + (self._curColume - 1) * (BOX_W + SPACE)
+    local posy = STARTPOS.y + SPACE
+    
+    self._gridImg:setPosition(cc.p(posx, posy))
+    self:addChild(self._gridImg, 100)
+end 
+
+-- 变换方块
+function UITetrisMain:_changeGrid()
+    --
 end 
 
 -- 方块下降
-function UITetrisMain:_updateDown(dt)
-    if self._squareType == 1 then 
-        -- 判定是否允许继续下降
-        if self._curLine >= LINE then 
-            self:_clearLine(LINE, LINE)
-            self:_newSquareType()
-            return 
-        end 
-        -- 检测下方一行是否有方块
-        for i = 1, 4 do 
-            local tag = self._squares[self._curLine+1][self._curColume+i]:getTag()
-            if tag == 1 then 
-                self:_clearLine(self._curLine, self._curLine)
-                self:_newSquareType()
-                return 
-            end 
-        end 
-
-        -- 下降一格
-        for i = 1, 4 do 
-            -- 消除原色
-            if self._curLine < LINE and self._curLine - 1 > 0 then 
-                self._squares[self._curLine][self._curColume + i]:setColor(HIDE_COLOR)
-                self._squares[self._curLine][self._curColume + i]:setTag(0)
-            end 
-            -- 显示新色
-            if self._curLine < LINE then 
-                self._squares[self._curLine+1][self._curColume + i]:setColor(SHOW_COLOR)
-                self._squares[self._curLine+1][self._curColume + i]:setTag(1)
-            end 
-        end 
-        self._curLine = self._curLine + 1
-    elseif self._squareType == 2 then 
-        -- 判定是否允许继续下降
-        if self._curLine > LINE then 
-            self:_clearLine(LINE, LINE)
-            self:_newSquareType()
-            return 
-        end 
-        -- 检测下方一行是否有方块
-        local tag = self._squares[self._curLine][self._curColume]
-        if tag == 1 then 
-            self:_clearLine(self._curLine - 4, self._curLine - 1)
-            self:_newSquareType()
-            return 
-        end 
-
-        -- 下降一格
-        if self._curLine < LINE and self._curLine - 4 > 0 then 
-            self._squares[self._curLine - 4][self._curColume]:setColor(HIDE_COLOR)
-            self._squares[self._curLine - 4][self._curColume]:setTag(0)
-        end 
-        if self._curLine < LINE then 
-            self._squares[self._curLine][self._curColume]:setColor(SHOW_COLOR)
-            self._squares[self._curLine][self._curColume]:setTag(1)
-        end 
-        self._curLine = self._curLine + 1
+function UITetrisMain:_updateDown(dt) 
+    -- 判定是否允许继续下降
+    if self._curLine >= LINE then 
+        -- 检测是否可清除一行
+        self:_clearLine(LINE - self._gridMaxLine + 1, LINE)
+        -- 生成新的方块
+        self:_newGrid()
+        return 
     end 
+
+    -- 检测下方一行是否可放置图形格
+    for gridline = 4, 1, -1 do 
+        for gridcol = 1, 4 do 
+            if self._gridTab[gridline][gridcol] == 1 then 
+                -- 将图形格子行列坐标转换为地图行列坐标
+                local mapLine, mapCol = nil, nil 
+                if gridline == self._gridMaxLine then 
+                    mapLine = self._curLine 
+                else 
+                    mapLine = self._curLine - (self._gridMaxLine - gridline)
+                end 
+                mapCol = self._curColume + gridcol - 1
+                if mapLine >= 1 and mapCol >= 1 and self._map[mapLine + 1][mapCol] then 
+                    local maptag = self._map[mapLine + 1][mapCol]:getTag()
+                    if maptag == 1 then 
+                        -- 检测是否可清除一行
+                        self:_clearLine(self._curLine - self._gridMaxLine + 1, self._curLine)
+                        -- 生成新的方块
+                        self:_newGrid()
+                        return 
+                    end 
+                end 
+            end 
+        end 
+    end 
+
+    -- 下降一格
+    local posy = self._gridImg:getPositionY()
+    self._gridImg:setPositionY(posy - BOX_H - SPACE)
+    self._curLine = self._curLine + 1
 end 
 
 -- 方块左移
 function UITetrisMain:_updateLeft()
-    if self._squareType == 1 then 
-        -- 检测是否允许左移动
-        if self._curColume <= 1 then
-            return 
-        end  
-        if self._squares[self._curLine][self._curColume]:getTag() == 1 then 
-            return 
-        end 
-
-        -- 左移动一格
-        for i = self._curColume, self._curColume + 3 do 
-            self._squares[self._curLine][i]:setColor(SHOW_COLOR)
-            self._squares[self._curLine][i]:setTag(1)
-            if i == self._curColume + 3 then 
-                self._squares[self._curLine][i+1]:setColor(HIDE_COLOR)
-                self._squares[self._curLine][i+1]:setTag(0)
-            end 
-        end 
-    elseif self._squareType == 2 then 
-        -- 检测是否允许左移动
-        if self._curColume <= 0 then 
-            return 
-        end 
-        for i = 1, 4 do 
-            if self._curLine - 4 + i <= 1 then 
-                return 
-            end 
-            if self._squares[self._curLine - 4 + i][self._curColume-1]:getTag() == 1 then
-                return 
-            end  
-        end 
-
-        -- 左移动一格
-        for i = 1, 4 do 
-            self._squares[self._curLine-4+i][self._curColume - 1]:setColor(SHOW_COLOR)
-            self._squares[self._curLine-4+i][self._curColume - 1]:setTag(1)
-            self._squares[self._curLine-4+i][self._curColume]:setColor(HIDE_COLOR)
-            self._squares[self._curLine-4+i][self._curColume]:setTag(0)
-        end 
+    -- 检测是否允许左移
+    if self._curColume <= 1 then 
+        return 
     end 
+    -- 检测左移一格是否存在格子
+    if self._map[self._curLine][self._curColume -1]:getTag() == 1 then 
+        return 
+    end 
+
+    -- 左移一格
+    local posx = self._gridImg:getPositionX()
+    self._gridImg:setPositionX(posx - BOX_W - SPACE)
+    -- 当前列数递减
     self._curColume = self._curColume - 1
 end 
 
 -- 方块右移
 function UITetrisMain:_updateRight()
-    if self._squareType == 1 then 
-        -- 检测是否允许向右移动
-        if self._curLine - 1 <= 0 or self._curColume + 4 >= COLUME then 
-            return 
-        end 
-        if self._squares[self._curLine][self._curColume + 4 + 1]:getTag() == 1 then 
-            return 
-        end 
-        
-        -- 右移动一格
-        for i = self._curColume + 4, self._curColume, -1 do 
-            self._squares[self._curLine][i+1]:setColor(SHOW_COLOR)
-            self._squares[self._curLine][i+1]:setTag(1)
-            if i == self._curColume then 
-                self._squares[self._curLine][i+1]:setColor(HIDE_COLOR)
-                self._squares[self._curLine][i+1]:setTag(0)
-            end 
-        end 
-        self._curColume = self._curColume + 1
+    -- 检测是否允许右移
+    if self._curColume - 1 + self._gridMaxCol >= COLUME then 
+        return 
     end 
+    -- 检测右移一格是否存在格子
+    if self._map[self._curLine][self._curColume + self._gridMaxCol]:getTag() == 1 then 
+        return 
+    end 
+    -- 右移一格
+    local posx = self._gridImg:getPositionX()
+    self._gridImg:setPositionX(posx + BOX_W + SPACE)
+    -- 当前列数递加
+    self._curColume = self._curColume + 1
 end
 
 -- 消除整行
 function UITetrisMain:_clearLine(startLine, endLine)
+    print("检测消除的行数为:", startLine, endLine)
     -- 检测是否结束
-    --self:_checkIsEnd()
+    self:_checkIsEnd()
 
-    -- 
+    -- 消除行数
+    local clearLineNum = 0              
     for i = startLine, endLine do 
         for j = 1, COLUME do 
-            local tag = self._squares[i][j]:getTag()
-            if i > -1 and tag == 0 then 
-                break 
-            end 
-
-            -- 清除一行
-            if j == COLUME then 
-                for line = i, 1 -1 do 
-                    self:_copyLine(line)
+            if i >= 1 then 
+                local tag = self._map[i][j]:getTag()
+                if tag == 0 then 
+                    break 
                 end 
-                for x = 1, COLUME do 
-                    self._squares[1][x]:setColor(cc.c3b(255, 255, 255))
-                    self._squares[1][x]:setTag(0)
+
+                -- 清除一行
+                if j == COLUME then 
+                    for line = i, 1 -1 do 
+                        self:_copyLine(line)
+                    end 
+                    for x = 1, COLUME do 
+                        self._map[1][x]:setColor(HIDE_COLOR)
+                        self._map[1][x]:setTag(0)
+                    end 
+                    clearLineNum = clearLineNum + 1
                 end 
             end 
         end 
     end 
+
+    -- 更新分数
+    self:_updateScore(clearLineNum)
 end 
 
 -- 向下拷贝一行
 function UITetrisMain:_copyLine(lineNum)
     for i = 1, COLUME do 
-        local color = self._squares[lineNum][i]:getColor()
-        local tag = self._squares[lineNum][i]:getTag()
-        self._squares[lineNum + 1][i]:setColor(color)
-        self._squares[lineNum + 1][i]:setTag(tag)
+        local color = self._map[lineNum][i]:getColor()
+        local tag = self._map[lineNum][i]:getTag()
+        self._map[lineNum + 1][i]:setColor(color)
+        self._map[lineNum + 1][i]:setTag(tag)
     end 
+end 
+
+-- 更新分数
+function UITetrisMain:_updateScore(clearLineNum)
+    clearLineNum = tonumber(clearLineNum) or 0
+    if clearLineNum <= 0 then 
+        return 
+    end 
+
+    -- 倍率
+    local multis = {1, 1, 1.5, 2}
+    self._curScore = self._curScore + multis[clearLineNum] * 100
+    self._scoreLabel:setString("分数：" .. self._curScore)
 end 
 
 -- 检测是否结束
 function UITetrisMain:_checkIsEnd()
-    if self._squareType == 1 then 
-        if self._curLine - 1 < 0 then 
-            self:_gameOver()
-        end 
-    elseif self._squareType == 2 then
-        if self._curLine - 4 < 0 then 
-            self:_gameOver()
-        end 
-    elseif self._squareType == 3 or self._squareType == 5 or self._squareType == 7 or 
-    self._squareType == 9 or self._squareType == 11 or self._squareType == 13 or 
-    self._squareType == 15 or self._squareType == 17 or self._squareType == 19 then 
-        if self._curLine - 2 < 0 then 
-            self:_gameOver()
-        end 
-    elseif self._squareType == 4 or self._squareType == 6 or self._squareType == 8 or 
-    self._squareType == 10 or self._squareType == 12 or self._squareType == 14 or 
-    self._squareType == 16 or self._squareType == 18 then 
-        if self._curLine - 3 < 0 then 
-            self:_gameOver()
-        end 
+    local isEnd = false 
+    if self._curLine + self._gridMaxLine - 1 <= 0 then 
+        MsgTip("游戏结束")
+        isEnd = true 
     end 
+
+    if not isEnd then 
+        return 
+    end 
+
+    -- 关闭定时器
+    if self._timeScheduler ~= nil then 
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._timeScheduler)
+        self._timeScheduler = nil 
+    end 
+
+    -- 显示开始按钮
+    self._startBtn:setVisible(true)
+    self._resetBtn:setVisible(false)
 end 
 
 -- 游戏结束
 function UITetrisMain:_gameOver()
-    MsgTip("游戏结束")
+   
 end 
 
 return UITetrisMain
