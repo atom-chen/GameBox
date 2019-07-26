@@ -160,7 +160,7 @@ function UITetrisMain:_newGrid()
     -- 若图形已存在，将图形所在区域颜色设置为SHOW_COLOR 
     if self._gridImg ~= nil then 
         self._gridImg:removeFromParent()
-        print("当前行列数:", self._curLine, self._curColume)
+        --print("当前行列数:", self._curLine, self._curColume)
         for gridline = 4, 1, -1 do 
             for gridcol = 1, 4 do 
                 if self._gridTab[gridline][gridcol] == 1 then 
@@ -173,15 +173,27 @@ function UITetrisMain:_newGrid()
                     end 
                     mapCol = self._curColume + gridcol - 1
                     
-                    local str = string.format("地图新行列(%d:%d); 格子行列(%d：%d)", mapLine, mapCol, gridline, gridcol)
-                    print(str)
+                    --local str = string.format("地图新行列(%d:%d); 格子行列(%d：%d)", mapLine, mapCol, gridline, gridcol)
+                    --print(str)
                     if self._map[mapLine][mapCol] then 
                         self._map[mapLine][mapCol]:setColor(SHOW_COLOR)
                         self._map[mapLine][mapCol]:setTag(1)
+
+                        -- 创建测试文本
+                        --[[
+                        local tagText = ccui.Text:create()
+                        tagText:setPosition(cc.p(BOX_W/2, BOX_H/2))
+                        tagText:setString(string.format("%d:%d",mapLine, mapCol))
+                        tagText:setFontSize(10)
+                        self._map[mapLine][mapCol]:addChild(tagText)
+                        ]]
                     end 
                 end 
             end 
         end 
+
+        -- 检测清空
+        self:_clearLine(self._curLine - self._gridMaxLine + 1, self._curLine)
     end 
 
     -- 获取新类型
@@ -216,7 +228,6 @@ function UITetrisMain:_changeGrid()
     end 
 
     self._gridType = nextData.type 
-    print("新的类型为:" .. self._gridType)
     self._gridMaxLine = nextData.maxGridLine
     self._gridMaxCol = nextData.maxGridCol
     self._gridTab = nextData.gridTab
@@ -229,9 +240,6 @@ end
 function UITetrisMain:_updateDown(dt) 
     -- 判定是否允许继续下降
     if self._curLine >= LINE then 
-        -- 检测是否可清除一行
-        self:_clearLine(LINE - self._gridMaxLine + 1, LINE)
-        -- 生成新的方块
         self:_newGrid()
         return 
     end 
@@ -251,8 +259,6 @@ function UITetrisMain:_updateDown(dt)
                 if mapLine >= 1 and mapCol >= 1 and self._map[mapLine + 1][mapCol] then 
                     local maptag = self._map[mapLine + 1][mapCol]:getTag()
                     if maptag == 1 then 
-                        -- 检测是否可清除一行
-                        self:_clearLine(self._curLine - self._gridMaxLine + 1, self._curLine)
                         -- 生成新的方块
                         self:_newGrid()
                         return 
@@ -305,28 +311,26 @@ end
 
 -- 消除整行
 function UITetrisMain:_clearLine(startLine, endLine)
-    print("检测消除的行数为:", startLine, endLine)
     -- 检测是否结束
     self:_checkIsEnd()
 
     -- 消除行数
     local clearLineNum = 0              
     for i = startLine, endLine do 
+        print(i)
         for j = 1, COLUME do 
             if i >= 1 then 
                 local tag = self._map[i][j]:getTag()
                 if tag == 0 then 
+                    print(string.format("当前tag：%d 的行列:(%d：%d)",tag, i, j))
                     break 
                 end 
 
                 -- 清除一行
                 if j == COLUME then 
-                    for line = i, 1 -1 do 
-                        self:_copyLine(line)
-                    end 
-                    for x = 1, COLUME do 
-                        self._map[1][x]:setColor(HIDE_COLOR)
-                        self._map[1][x]:setTag(0)
+                    print("开始执行消除,当前行为:", i)
+                    for line = i, 1, -1 do 
+                        self:_copyLine(line,i)
                     end 
                     clearLineNum = clearLineNum + 1
                 end 
@@ -339,12 +343,21 @@ function UITetrisMain:_clearLine(startLine, endLine)
 end 
 
 -- 向下拷贝一行
-function UITetrisMain:_copyLine(lineNum)
+function UITetrisMain:_copyLine(curNum, maxNum)
     for i = 1, COLUME do 
-        local color = self._map[lineNum][i]:getColor()
-        local tag = self._map[lineNum][i]:getTag()
-        self._map[lineNum + 1][i]:setColor(color)
-        self._map[lineNum + 1][i]:setTag(tag)
+        if curNum == maxNum then 
+            -- 当前行清空标记及颜色
+            self._map[curNum][i]:setColor(HIDE_COLOR)
+            self._map[curNum][i]:setTag(0)
+        else 
+            -- 其它行自动下移一行，即改变标记及颜色
+            if self._map[curNum][i]:getTag() == 1 then 
+                self._map[curNum][i]:setColor(HIDE_COLOR)
+                self._map[curNum][i]:setTag(0)
+                self._map[curNum+1][i]:setColor(SHOW_COLOR)
+                self._map[curNum+1][i]:setTag(1)
+            end 
+        end 
     end 
 end 
 
