@@ -210,7 +210,19 @@ end
 
 -- 变换方块
 function UITetrisMain:_changeGrid()
-    --
+    local nextData = config.getNextGridData(self._gridType)
+    if not nextData then 
+        return 
+    end 
+
+    self._gridType = nextData.type 
+    print("新的类型为:" .. self._gridType)
+    self._gridMaxLine = nextData.maxGridLine
+    self._gridMaxCol = nextData.maxGridCol
+    self._gridTab = nextData.gridTab
+
+    -- 替换图片
+    self._gridImg:setTexture(nextData.img)
 end 
 
 -- 方块下降
