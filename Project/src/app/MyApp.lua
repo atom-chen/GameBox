@@ -1,6 +1,6 @@
 require("cocos/init")
 require("cocos/framework/init")
-require("app.Demo_ZombieShoot.Utils.GlobalRequire")
+require("app.Utils.GlobalRequire")
 
 
 local MyApp = class("MyApp")
