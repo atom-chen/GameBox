@@ -1,10 +1,21 @@
 -- 角色类
-local ACTION = require("app.Demo_lolitaParkour.lolitaConst").ACTION
+
+-- 动作状态
+local ACTION = {
+    NONE = 0,
+    RUN = 1,
+    JUMP = 2,
+    HURT = 3,
+    DIE = 4,
+}
+
 local lolitaRole = class("lolitaRole", function()
     return cc.Node:create()
 end)
 
 function lolitaRole:ctor() 
+    cc.SpriteFrameCache:getInstance():addSpriteFrames("lolitaParkour/lolitaRole.plist")
+
     self._role = cc.Sprite:createWithSpriteFrameName("s_1.png")
     local size = self._role:getContentSize()
     self._role:setScale(0.5)
