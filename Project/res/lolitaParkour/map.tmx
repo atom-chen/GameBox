@@ -3,7 +3,7 @@
  <tileset firstgid="1" name="lolitaMap" tilewidth="32" tileheight="32" tilecount="168" columns="7">
   <image source="lolitaMap.png" width="240" height="786"/>
  </tileset>
- <layer id="1" name="main1" width="100" height="20">
+ <layer id="1" name="main1" width="100" height="20" offsetx="-0.5" offsety="0.5">
   <data encoding="base64" compression="zlib">
    eJztjrtOQlEQRflTxEKlQC0UFQrBwkehUPgofBSA/8lqTrJzmzs5mWMs9kpWMlOszAwGxhhjjDHGGGOMMcb8X4Z4gCM8DOx/1Sqv+Ibv+BHYs+4o2tT0erf7g85HeIwnOA7sSstW+cQv/MafwJ51R9Gmpte73R90nuApnuF5YFdatsoGt7jD38CedUfRpqbXu90fdL7AS5ziVWBXWrZZZN3RpqbXu90fdL7GG5zhPLArLdsssu6Uprbv+6PMt7jAJd4FdqVlm0XWndLU9n1/lPkeH/ARnwK70rLNIutOaWr7vj/K/IwvuMJ1YFdatllk3SlNbd/3R5n3Zwf12w==
   </data>
@@ -24,14 +24,13 @@
   <object id="14" x="2446" y="272"/>
  </objectgroup>
  <objectgroup id="5" name="crash">
-  <object id="16" x="0.666667" y="386.667" width="381.333" height="251.333"/>
-  <object id="17" x="482" y="386" width="380.667" height="249.333"/>
-  <object id="18" x="958" y="385.333" width="256.667" height="247.333"/>
-  <object id="19" x="1312" y="385.333" width="381.333" height="92"/>
-  <object id="20" x="1793.33" y="386.667" width="252.667" height="247.333"/>
-  <object id="21" x="2164" y="388.667" width="95.3333" height="84.6667"/>
-  <object id="22" x="2368" y="383.333" width="191.333" height="254.667"/>
-  <object id="23" x="2664.67" y="385.333" width="114" height="100"/>
-  <object id="24" x="2877.33" y="385.333" width="323.333" height="256.667"/>
+  <object id="16" x="384.03" y="384.667" width="95.2421" height="255.401"/>
+  <object id="17" x="866" y="388" width="94.667" height="249.333"/>
+  <object id="18" x="1216" y="387.333" width="94.667" height="247.333"/>
+  <object id="19" x="1698" y="385.333" width="95.333" height="92"/>
+  <object id="20" x="2053.33" y="386.667" width="94.667" height="247.333"/>
+  <object id="21" x="2274" y="382.667" width="95.3333" height="84.6667"/>
+  <object id="22" x="2560" y="381.333" width="89.333" height="254.667"/>
+  <object id="23" x="2782.67" y="381.333" width="92" height="100"/>
  </objectgroup>
 </map>

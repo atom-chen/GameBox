@@ -20,8 +20,9 @@ function lolitaMainScene:ctor()
     self._roleSize = nil                -- 角色大小
     self._starRects = {}                -- 
     self._wallRects = {}                -- 
-    self._scoreLabel = nil          -- 分数
-    self._timeScheduler = nil       -- 定时器
+    self._scoreLabel = nil              -- 分数
+    self._backBtn = nil                 -- 返回按钮
+    self._timeScheduler = nil           -- 定时器
 
     self:_init()
 end 
@@ -38,6 +39,11 @@ function lolitaMainScene:_init()
 
     -- 地图相关
     self._frontMap = ccexp.TMXTiledMap:create("lolitaParkour/map.tmx")
+    local cs = self._frontMap:getContentSize()
+    -- 获取地图的尺寸，单位是瓦片
+    local ms = self._frontMap:getMapSize() 
+    -- 获取瓦片尺寸，单位是像素，因此大小为 ms.width * ts.width = size.width            
+    local ts = self._frontMap:getTileSize()             
     -- 获取星星对象数组
     local starGroup = self._frontMap:getObjectGroup("star")
     local starObjects = starGroup:getObjects()
@@ -63,14 +69,22 @@ function lolitaMainScene:_init()
     self._scoreLabel:setAnchorPoint(cc.p(1, 0.5))
     self._scoreLabel:setString("分数： 0")
     self._scoreLabel:setFontSize(30)
-    self:addChild(self._scoreLabel)
+    self:addChild(self._scoreLabel, 100)
+
+    -- 返回按钮
+    local normal = "lolitaParkour/backB.png"
+    local press = "lolitaParkour/backA.png"
+    self._backBtn = ccui.Button:create(normal, press, normal)
+    local btnSize = self._backBtn:getContentSize()
+    self._backBtn:addTouchEventListener(handler(self, self._backEvent))
+    self._backBtn:setPosition(cc.p(btnSize.width + 10, display.height - btnSize.height/2 - 10))
+    self:addChild(self._backBtn, 101)
 
     -- 角色相关
     self._roleNode = UIRole.new()
-    self._roleNode:setPosition(cc.p(100, 32* 8))
-    self._roleNode:changeRoleAction(ACTION.RUN)
-    self._roleNode:changeRoleAction(ACTION.RUN)
     self._roleSize = self._roleNode:getContentSize()
+    self._roleNode:setPosition(cc.p(100, ts.width * 8 + self._roleSize.height/2))
+    self._roleNode:changeRoleAction(ACTION.RUN)
     self:addChild(self._roleNode, 1)
 
     -- 触摸监听
@@ -125,26 +139,48 @@ function lolitaMainScene:onTouchEnded(sender, event)
     self._roleNode:changeRoleAction(ACTION.JUMP)
 end 
 
+-- 返回按钮事件
+function lolitaMainScene:_backEvent(sender, event)
+    if event ~= ccui.TouchEventType.ended then 
+        return 
+    end 
+    -- 游戏结束
+    self:_gameOver()
+
+    -- 切换场景
+    local scene = require("app.Demo_lolitaParkour.lolitaLoginScene"):create()
+    if scene ~= nil then 
+        display.runScene(scene)
+    end 
+end 
+
 function lolitaMainScene:_update(dt)
     -- 将角色坐标转换为相对于地图的坐标
-    local rolePos = self._voidNode:convertToNodeSpace(cc.p(self._roleNode:getPosition()))
+    local rolePos = self._frontMap:convertToNodeSpace(cc.p(self._roleNode:getPosition()))
     local mapposx = self._voidNode:getPosition()
-    local rolerect = cc.rect(rolePos.x - 100, rolePos.y, self._roleSize.width, self._roleSize.height)
+    local rolerect = cc.rect(rolePos.x, rolePos.y, self._roleSize.width, self._roleSize.height)
+
     ------------------------- 检测玩家是否在地面上 -------------------------
-    local isInWall = false 
+    local isInWall = true 
     for i, wallrect in pairs(self._wallRects) do 
         -- 判定是否在非碰撞区域段
-        if rolerect.x >= wallrect.x and rolerect.x + self._roleSize.width <= wallrect.x + wallrect.width then 
-            isInWall = true 
-            return 
+        if rolerect.x >= wallrect.x and rolerect.x + self._roleSize.width * 0.4 <= wallrect.x + wallrect.width then 
+            isInWall = false 
+            break 
         end 
     end 
 
     if not isInWall then 
-        -- 掉落下去
-        self._roleNode:changeRoleAction(ACTION.DIE)
         -- 游戏结束
         self:_gameOver()
+        -- 掉落下去
+        local function callFunc() 
+            local layer = require("app.Demo_lolitaParkour.lolitaReport"):create()
+            if layer ~= nil then 
+                self:addChild(layer, 1000)
+            end 
+        end 
+        self._roleNode:changeRoleAction(ACTION.DIE, callFunc)
         return 
     end 
 
@@ -162,8 +198,6 @@ function lolitaMainScene:_update(dt)
     end 
 end
 
-
-
 -- 更新分数
 function lolitaMainScene:_updateScore(num)
     local score = num * 100 
@@ -177,6 +211,8 @@ function lolitaMainScene:_gameOver()
         cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._timeScheduler)
         self._timeScheduler = nil 
     end 
+    -- 停止地图移动动作
+    self._voidNode:stopAllActions()
     MsgTip("游戏结束")
 end 
 

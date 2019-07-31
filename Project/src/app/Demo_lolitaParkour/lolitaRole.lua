@@ -10,15 +10,15 @@ function lolitaRole:ctor()
 
     self._role = cc.Sprite:createWithSpriteFrameName("s_1.png")
     local size = self._role:getContentSize()
-    self._role:setScale(0.5)
+    self._role:setScale(0.4)
     self:addChild(self._role)   
 
-    self:setContentSize(cc.size(size.width * 0.5, size.height * 0.5))
-    self:setAnchorPoint(cc.p(0.5, 0.5))
+    self:setContentSize(cc.size(size.width * 0.4, size.height * 0.4))
+    self:setAnchorPoint(cc.p(0, 0.5))
 end 
 
 -- 切换动作
-function lolitaRole:changeRoleAction(state)
+function lolitaRole:changeRoleAction(state, callback)
     -- 停止动画的所有动作
     self._role:stopAllActions()
 
@@ -53,9 +53,12 @@ function lolitaRole:changeRoleAction(state)
         self._role:runAction(action)
     elseif state == ACTION.DIE then 
         self._role:setSpriteFrame("s_hurt.png")
-        local action1 = cc.MoveBy:create(3, cc.p(0, -100))
+        local action1 = cc.MoveBy:create(3, cc.p(0, -400))
         local action2 = cc.CallFunc:create(function()
-            --
+            self._role:stopAllActions()
+            if callback then 
+                callback()
+            end 
         end)
         local action = cc.Sequence:create(action1, action2)
         self._role:runAction(action)
