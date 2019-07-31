@@ -1,13 +1,5 @@
 -- 角色类
-
--- 动作状态
-local ACTION = {
-    NONE = 0,
-    RUN = 1,
-    JUMP = 2,
-    HURT = 3,
-    DIE = 4,
-}
+local ACTION = require("app.Demo_lolitaParkour.LOLITAconst").ACTION
 
 local lolitaRole = class("lolitaRole", function()
     return cc.Node:create()
@@ -19,8 +11,10 @@ function lolitaRole:ctor()
     self._role = cc.Sprite:createWithSpriteFrameName("s_1.png")
     local size = self._role:getContentSize()
     self._role:setScale(0.5)
-    self:setContentSize(cc.size(size.width * 0.5, size.height * 0.5))
     self:addChild(self._role)   
+
+    self:setContentSize(cc.size(size.width * 0.5, size.height * 0.5))
+    self:setAnchorPoint(cc.p(0.5, 0.5))
 end 
 
 -- 切换动作
@@ -54,6 +48,14 @@ function lolitaRole:changeRoleAction(state)
         local action1 = cc.Blink:create(3, 10)
         local action2 = cc.CallFunc:create(function()
             self:changeRoleAction(ACTION.RUN)
+        end)
+        local action = cc.Sequence:create(action1, action2)
+        self._role:runAction(action)
+    elseif state == ACTION.DIE then 
+        self._role:setSpriteFrame("s_hurt.png")
+        local action1 = cc.MoveBy:create(3, cc.p(0, -100))
+        local action2 = cc.CallFunc:create(function()
+            --
         end)
         local action = cc.Sequence:create(action1, action2)
         self._role:runAction(action)

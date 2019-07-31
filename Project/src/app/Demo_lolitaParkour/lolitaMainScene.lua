@@ -1,18 +1,11 @@
 -- 萝莉跑酷主页面
+local ACTION = require("app.Demo_lolitaParkour.LOLITAconst").ACTION
 local UIRole = require("app.Demo_lolitaParkour.lolitaRole")
 
 local BG_WIDTH, BG_HEIGHT = 1024, 516           -- 后，中背景大小
 local BACK_SPEED = 1                            -- 后背景移动速度
 local MID_SPEED = 5                             -- 中背景移动速度
 
--- 动作状态
-local ACTION = {
-    NONE = 0,
-    RUN = 1,
-    JUMP = 2,
-    HURT = 3,
-    DIE = 4,
-}
 
 local lolitaMainScene = class("lolitaMainScene", function()
     return cc.Scene:create()
@@ -24,6 +17,7 @@ function lolitaMainScene:ctor()
     self._frontMap = nil                -- 前背景地图
     self._stars = {}                    -- 星星
     self._role = nil                    -- 角色
+    self._roleSize = nil                -- 角色大小
     self._starRects = {}                -- 
     self._wallRects = {}                -- 
     self._scoreLabel = nil          -- 分数
@@ -63,18 +57,6 @@ function lolitaMainScene:_init()
         self._wallRects[i] = cc.rect(obj.x, obj.y, obj.width, obj.height)
     end 
 
-    -- 获取角色对象(仅有一个)
-    --[[
-    local roleGroup = self._frontMap:getObjectGroup("role")
-    local roleObjects = roleGroup:getObjects()
-    self._role = cc.Sprite:createWithSpriteFrameName("s_1.png")
-    local size = self._role:getContentSize()
-    self._role:setContentSize(cc.size(size.width * 0.5, size.height * 0.5))
-    self._role:setPosition(cc.p(roleObjects[1].x, roleObjects[1].y))
-    self._role:setScale(0.5)
-    self._frontMap:addChild(self._role)
-    ]]
-
     -- 分数相关
     self._scoreLabel = ccui.Text:create()
     self._scoreLabel:setPosition(cc.p(display.width - 20, display.height - 20))
@@ -88,6 +70,7 @@ function lolitaMainScene:_init()
     self._roleNode:setPosition(cc.p(100, 32* 8))
     self._roleNode:changeRoleAction(ACTION.RUN)
     self._roleNode:changeRoleAction(ACTION.RUN)
+    self._roleSize = self._roleNode:getContentSize()
     self:addChild(self._roleNode, 1)
 
     -- 触摸监听
@@ -97,12 +80,10 @@ function lolitaMainScene:_init()
     self:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self)
 
     -- 定时器监听
-    --[[
     if self._timeScheduler == nil then 
         local _hander = handler(self, self._update)
         self._timeScheduler = cc.Director:getInstance():getScheduler():scheduleScriptFunc(_hander, 0.1, false)
     end
-    ]]
 
     self:_updateMapMove()
 end 
@@ -128,10 +109,12 @@ function lolitaMainScene:_updateMapMove()
     local action1 = cc.MoveBy:create(30, cc.p(-ms.width * ts.width/2 + display.width, 0))
     local action2 = cc.CallFunc:create(function()
         -- 游戏结束
-        self:_GameOver()
+        self:_gameOver()
     end)
     local action = cc.Sequence:create(action1, action2)
     voidNode:runAction(action)
+
+    self._voidNode = voidNode
 end 
 
 function lolitaMainScene:onTouchBegan(sender, event)
@@ -143,15 +126,43 @@ function lolitaMainScene:onTouchEnded(sender, event)
 end 
 
 function lolitaMainScene:_update(dt)
-    -- 检测角色与星星的碰撞
-    --[[
-    local roleposx, roleposy = self._roleNode:getPosition()
-    local roleSize = self._roleNode:getContentSize()
-    local roleRect = cc.rect(roleposx, roleposy, roleSize.width, roleSize.height)
-    local num = self._mapNode:checkStarCrash(roleRect)
-    self:_updateScore(num)
-    ]]
+    -- 将角色坐标转换为相对于地图的坐标
+    local rolePos = self._voidNode:convertToNodeSpace(cc.p(self._roleNode:getPosition()))
+    local mapposx = self._voidNode:getPosition()
+    local rolerect = cc.rect(rolePos.x - 100, rolePos.y, self._roleSize.width, self._roleSize.height)
+    ------------------------- 检测玩家是否在地面上 -------------------------
+    local isInWall = false 
+    for i, wallrect in pairs(self._wallRects) do 
+        -- 判定是否在非碰撞区域段
+        if rolerect.x >= wallrect.x and rolerect.x + self._roleSize.width <= wallrect.x + wallrect.width then 
+            isInWall = true 
+            return 
+        end 
+    end 
+
+    if not isInWall then 
+        -- 掉落下去
+        self._roleNode:changeRoleAction(ACTION.DIE)
+        -- 游戏结束
+        self:_gameOver()
+        return 
+    end 
+
+    ------------------------- 检测玩家是否碰到星星 -------------------------
+    local num = 0 
+    for i, startrect in pairs(self._starRects) do 
+        if cc.rectIntersectsRect(startrect, rolerect) then 
+            self._stars[i]:setVisible(false)
+            num = num + 1
+        end 
+    end 
+
+    if num > 0 then 
+        self:_updateScore(num)
+    end 
 end
+
+
 
 -- 更新分数
 function lolitaMainScene:_updateScore(num)
@@ -160,7 +171,7 @@ function lolitaMainScene:_updateScore(num)
 end 
 
 -- 游戏结束
-function lolitaMainScene:_GameOver()
+function lolitaMainScene:_gameOver()
     -- 停止定时器
     if self._timeScheduler ~= nil then 
         cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._timeScheduler)

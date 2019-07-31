@@ -14,7 +14,6 @@
   </data>
  </layer>
  <objectgroup id="4" name="star">
-  <object id="3" x="560.667" y="271.333"/>
   <object id="4" x="656.667" y="272"/>
   <object id="5" x="752.333" y="270.667"/>
   <object id="6" x="1039.33" y="271.667"/>
@@ -34,8 +33,5 @@
   <object id="22" x="2368" y="383.333" width="191.333" height="254.667"/>
   <object id="23" x="2664.67" y="385.333" width="114" height="100"/>
   <object id="24" x="2877.33" y="385.333" width="323.333" height="256.667"/>
- </objectgroup>
- <objectgroup id="7" name="role">
-  <object id="27" x="58.7879" y="319.576" width="60.6667" height="60.6667"/>
  </objectgroup>
 </map>
