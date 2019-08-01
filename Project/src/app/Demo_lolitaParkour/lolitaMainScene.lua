@@ -6,7 +6,6 @@ local BG_WIDTH, BG_HEIGHT = 1024, 516           -- 后，中背景大小
 local BACK_SPEED = 1                            -- 后背景移动速度
 local MID_SPEED = 5                             -- 中背景移动速度
 
-
 local lolitaMainScene = class("lolitaMainScene", function()
     return cc.Scene:create()
 end)
@@ -53,7 +52,7 @@ function lolitaMainScene:_init()
         self._frontMap:addChild(self._stars[i])
 
         local size = self._stars[i]:getContentSize()
-        self._starRects[i] = cc.rect(obj.x, obj.y, size.width, size.height)
+        self._starRects[i] = cc.rect(obj.x - size.width/2, obj.y - size.height/2, size.width, size.height)
     end 
 
     -- 获取碰撞对象数组
@@ -83,7 +82,7 @@ function lolitaMainScene:_init()
     -- 角色相关
     self._roleNode = UIRole.new()
     self._roleSize = self._roleNode:getContentSize()
-    self._roleNode:setPosition(cc.p(100, ts.width * 8 + self._roleSize.height/2))
+    self._roleNode:setPosition(cc.p(100, ts.height * 8 + self._roleSize.height/2))
     self._roleNode:changeRoleAction(ACTION.RUN)
     self:addChild(self._roleNode, 1)
 
@@ -157,16 +156,21 @@ end
 function lolitaMainScene:_update(dt)
     -- 将角色坐标转换为相对于地图的坐标
     local rolePos = self._frontMap:convertToNodeSpace(cc.p(self._roleNode:getPosition()))
-    local mapposx = self._voidNode:getPosition()
-    local rolerect = cc.rect(rolePos.x, rolePos.y, self._roleSize.width, self._roleSize.height)
+    -- 角色的碰撞区域存在瑕疵，只实现基本的效果算了
+    local rolerect = cc.rect(
+        rolePos.x, rolePos.y + self._roleNode:getRolePosY() - 10, 
+        self._roleSize.width*3/4, self._roleSize.height*2/3
+    )
 
     ------------------------- 检测玩家是否在地面上 -------------------------
     local isInWall = true 
     for i, wallrect in pairs(self._wallRects) do 
         -- 判定是否在非碰撞区域段
-        if rolerect.x >= wallrect.x and rolerect.x + self._roleSize.width * 0.4 <= wallrect.x + wallrect.width then 
-            isInWall = false 
-            break 
+        if rolerect.x >= wallrect.x and rolerect.x + self._roleSize.width <= wallrect.x + wallrect.width then 
+            if rolerect.y - 50 <= wallrect.y + wallrect.height then 
+                isInWall = false 
+                break
+            end  
         end 
     end 
 
@@ -174,22 +178,22 @@ function lolitaMainScene:_update(dt)
         -- 游戏结束
         self:_gameOver()
         -- 掉落下去
-        local function callFunc() 
-            local layer = require("app.Demo_lolitaParkour.lolitaReport"):create()
-            if layer ~= nil then 
-                self:addChild(layer, 1000)
-            end 
+        local layer = require("app.Demo_lolitaParkour.lolitaReport"):create()
+        if layer ~= nil then 
+            self:addChild(layer, 1000)
         end 
-        self._roleNode:changeRoleAction(ACTION.DIE, callFunc)
+        self._roleNode:changeRoleAction(ACTION.DIE)
         return 
     end 
 
     ------------------------- 检测玩家是否碰到星星 -------------------------
     local num = 0 
     for i, startrect in pairs(self._starRects) do 
-        if cc.rectIntersectsRect(startrect, rolerect) then 
-            self._stars[i]:setVisible(false)
-            num = num + 1
+        if rolerect.y >= startrect.y then 
+            if (rolerect.x >= startrect.x and rolerect.x <= startrect.x + startrect.width) or (rolerect.x + rolerect.width >= startrect.x and rolerect.x + rolerect.width <= startrect.x) then 
+                self._stars[i]:setVisible(false)
+                num = num + 1
+            end 
         end 
     end 
 

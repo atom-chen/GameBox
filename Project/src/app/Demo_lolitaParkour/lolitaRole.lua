@@ -53,7 +53,7 @@ function lolitaRole:changeRoleAction(state, callback)
         self._role:runAction(action)
     elseif state == ACTION.DIE then 
         self._role:setSpriteFrame("s_hurt.png")
-        local action1 = cc.MoveBy:create(3, cc.p(0, -400))
+        local action1 = cc.RotateBy:create(1, -90)
         local action2 = cc.CallFunc:create(function()
             self._role:stopAllActions()
             if callback then 
@@ -63,6 +63,10 @@ function lolitaRole:changeRoleAction(state, callback)
         local action = cc.Sequence:create(action1, action2)
         self._role:runAction(action)
     end 
+end 
+
+function lolitaRole:getRolePosY()
+    return self._role:getPositionY()
 end 
 
 return lolitaRole
