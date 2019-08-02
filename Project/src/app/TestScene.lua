@@ -9,6 +9,7 @@ local KeyboardTest = require("app.personTest.KeyboardTest")
 local ZombieShootTest = require("app.Demo_ZombieShoot.UI.MainScene") 
 local TetrisTest = require("app.Demo_Tetris.UITetrisMain")
 local LolitaTest = require("app.Demo_lolitaParkour.lolitaLoginScene")
+local FistFightTest = require("app.Demo_FistFight.Fist_Scene")
 
 local config = {
     --{title = "ClipTest", layer = ClipTest, state = "裁切图形相关"},
@@ -19,6 +20,7 @@ local config = {
     {title = "ZombieShootTest", layer = ZombieShootTest, state = "末日射击", type = "scene"},
     {title = "TetrisTest", layer = TetrisTest, state = "俄罗斯方块", type = "layer"},
     {title = "LolitaTest", layer = LolitaTest, state = "萝莉跑酷", type = "scene"},
+    {title = "FistFightTest", layer = FistFightTest, state = "简单的格斗", type = "scene"},
     --{title = "OpenGLTest", layer = OpenGLTest, state = "shaderDemo相关"},
     --{title = "ProcessorTest", layer = ProcessorTest, state = "进度条动画相关"},       -- 缺少资源
     --{title = "SpineTest", layer = SpineTest, state = "骨骼动画相关"},                 -- 读取资源失败
