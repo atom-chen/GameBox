@@ -1,6 +1,7 @@
 -- 格斗主场景
 
-local UIMap = require("app.Demo_FistFight.Fist_Map")
+local UIGame = require("app.Demo_FistFight.Fist_Game")
+local UIControl = require("app.Demo_FistFight.Fist_UI")
 
 
 local Fist_Scene = class("Fist_Scene", function()
@@ -8,14 +9,23 @@ local Fist_Scene = class("Fist_Scene", function()
 end)
 
 function Fist_Scene:ctor()
-    self._mapNode = nil             -- 地图节点
+    self._game = nil                -- 游戏相关
+    self._control = nil             -- 控制相关
 
     self:_init()
 end 
 
 function Fist_Scene:_init()
-    self._mapNode = UIMap.new()
-    self:addChild(self._mapNode, 0)
+    self._game = UIGame.new()
+    self:addChild(self._game, 0)
+
+    self._control = UIControl.new(self)
+    self:addChild(self._control, 1)
+end 
+
+-- 获取英雄节点
+function Fist_Scene:getHeroNode()
+    return self._game:getHeroNode()
 end 
 
 return Fist_Scene
