@@ -7,6 +7,7 @@ end)
 function Fist_UI:ctor(parent)
     self._parent = parent           -- 场景节点
     self._attackBtn = nil           -- 攻击按钮
+    self._attackScheduler = nil 
 
     self:_initUI()
 end 
@@ -33,10 +34,20 @@ end
 
 -- 攻击事件
 function Fist_UI:_attackEvent(sender, eventType)
-    if eventType ~= ccui.TouchEventType.ended then 
-        return 
+    if eventType == ccui.TouchEventType.began then 
+        local function update()
+            self._roleNode:attack()
+        end 
+        if self._attackScheduler == nil then 
+            self._attackScheduler = cc.Director:getInstance():getScheduler():scheduleScriptFunc(update, 0.3, false)
+        end 
+    elseif eventType == ccui.TouchEventType.ended or eventType == ccui.TouchEventType.canceled then 
+        if self._attackScheduler ~= nil then 
+            cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._attackScheduler)
+            self._attackScheduler = nil 
+        end 
     end 
-    self._roleNode:attack()
+    
 end 
 
 return Fist_UI
