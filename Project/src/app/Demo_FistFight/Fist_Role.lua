@@ -11,6 +11,7 @@ end
 function Fist_Role:_initAction()
     self._hpNum = 100               -- 血量
     self._damage = 20               -- 伤害值
+    self._walkSpeed = 2.0           -- 移动速度
     self:_initIdleAction()
     self:_initWalkAction()
     self:_initAttackAction()

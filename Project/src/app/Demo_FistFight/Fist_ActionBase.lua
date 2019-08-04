@@ -42,7 +42,7 @@ function Fist_ActionBase:idle()
     self:runAction(self._idleAction)
 end 
 
--- 走动
+-- 走动(方向相关)
 function Fist_ActionBase:walkWithDirection(direction)
     -- 判定是否为站立状态，若是的话，开始走动
     if self._actionState == ACTION.IDLE then 
@@ -51,23 +51,27 @@ function Fist_ActionBase:walkWithDirection(direction)
         self:runAction(self._walkAction)
     end 
 
-    -- 待处理
+    -- 
+    if direction.x >= 0 then 
+        self:setFlippedX(false)
+    else 
+        self:setFlippedX(true)
+    end 
     if self._actionState == ACTION.WALK then 
-        -- 设定移动相关
+        local curposx, curposy = self:getPosition()
+        local newpos = cc.p(direction.x * self._walkSpeed + curposx,  direction.y * self._walkSpeed + curposy)
+        self:setPosition(newpos)
     end 
 end 
 
 -- 攻击
 function Fist_ActionBase:attack()
-    print("播放攻击状态", self._actionState)
     -- 判定是否为死亡状态
     if self._actionState == ACTION.NONE or self._actionState == ACTION.DIE then 
         return
     end 
     self._actionState = ACTION.ATTACK
     self:stopAllActions()
-    print(tolua.type(self._attackAction))
-    print(tolua.isnull(self._attackAction))
     self:runAction(self._attackAction)
 end 
 

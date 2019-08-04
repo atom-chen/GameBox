@@ -1,7 +1,7 @@
 -- 格斗主场景
 
 local UIGame = require("app.Demo_FistFight.Fist_Game")
-local UIControl = require("app.Demo_FistFight.Fist_UI")
+local UIControl = require("app.Demo_FistFight.Fist_Control")
 
 
 local Fist_Scene = class("Fist_Scene", function()
