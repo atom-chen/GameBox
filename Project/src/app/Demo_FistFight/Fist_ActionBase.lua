@@ -17,7 +17,11 @@ function Fist_ActionBase:ctor()
     self._actionState = ACTION.NONE             -- 状态
     self._walkSpeed = nil                       -- 走动速度
     self._damage = nil                          -- 伤害值
-    self._hpNum = 100                           -- 血量
+    self._hpNum = nil                           -- 血量
+    self._centerToSide = nil                    -- 中心到侧面的偏移
+    self._centerToBottom = nil                  -- 中心到底部的偏移
+    self._desiredPos = cc.p(0, 0)               -- 
+    
 
     self:_init()
 end 
@@ -51,16 +55,10 @@ function Fist_ActionBase:walkWithDirection(direction)
         self:runAction(self._walkAction)
     end 
 
-    -- 
-    if direction.x >= 0 then 
-        self:setFlippedX(false)
-    else 
-        self:setFlippedX(true)
-    end 
     if self._actionState == ACTION.WALK then 
-        local curposx, curposy = self:getPosition()
-        local newpos = cc.p(direction.x * self._walkSpeed + curposx,  direction.y * self._walkSpeed + curposy)
-        self:setPosition(newpos)
+        -- 设置反转显示，true反转
+        --self:setFlippedX(direction.x >= 0 and false or true) 
+        self._desiredPos = cc.pAdd(cc.p(self:getPosition()), cc.pMul(direction, self._walkSpeed))
     end 
 end 
 
@@ -102,5 +100,15 @@ function Fist_ActionBase:die()
     self:stopAllActions()
     self:runAction(self._dieAction)
 end
+
+-- 设置动画位置
+function Fist_ActionBase:setAniPos(pos)
+    self._desiredPos = pos or cc.p(0, 0)
+end 
+
+-- 获取动画位置
+function Fist_ActionBase:getAniPos()
+    return self._desiredPos
+end 
 
 return Fist_ActionBase

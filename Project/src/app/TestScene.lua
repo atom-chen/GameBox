@@ -56,6 +56,8 @@ function TestScene:ctor()
 
     -- 返回按钮相关
     local backBtn = self._root:getChildByName("Button_Back")
+    local btnSize = backBtn:getContentSize()
+    backBtn:setPosition(cc.p(display.width - btnSize.width, btnSize.height))
     backBtn:addTouchEventListener(function(sender, eventType)
         if eventType == ccui.TouchEventType.ended then 
             cc.Director:getInstance():endToLua()

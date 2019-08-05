@@ -11,7 +11,9 @@ end
 function Fist_Role:_initAction()
     self._hpNum = 100               -- 血量
     self._damage = 20               -- 伤害值
-    self._walkSpeed = 2.0           -- 移动速度
+    self._walkSpeed = 4.0           -- 移动速度
+    self._centerToSide = 29         -- 中心到侧面的偏移
+    self._centerToBottom = 39       -- 中心到底部的偏移
     self:_initIdleAction()
     self:_initWalkAction()
     self:_initAttackAction()

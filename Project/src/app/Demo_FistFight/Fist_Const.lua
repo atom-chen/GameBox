@@ -11,4 +11,7 @@ const.ActionState = {
     DIE = 5,        -- 死亡
 }
 
+-- 敌人数目
+const.ENEMY_COUNT = 50
+
 return const 

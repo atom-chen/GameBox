@@ -1,12 +1,10 @@
 -- 控制类
 -- 参考：https://blog.csdn.net/lttree/article/details/47813095
--- 注意将Fist_UI移植过来
--- 完成摇杆的编写，人物的移动，地图的移动
 
 local RES_PATH = "fistFight/UI.plist"
 
 -- 摇杆方向
-local DIR = {
+local JOYSTICK_DIR = {
     STAY = 0,
     LEFT = 1,               -- 左
     LEFT_UP = 2,            -- 左上
@@ -16,6 +14,17 @@ local DIR = {
     RIGHT_DOWN = 6,         -- 右下
     DOWN = 7,               -- 下
     LEFT_DOWN = 8,          -- 左下
+}
+
+local DIR_NAME = {
+    [JOYSTICK_DIR.LEFT] = "左",
+    [JOYSTICK_DIR.LEFT_UP] = "左上",
+    [JOYSTICK_DIR.UP] = "上",
+    [JOYSTICK_DIR.RIGHT_UP] = "右上",
+    [JOYSTICK_DIR.RIGHT] = "右",
+    [JOYSTICK_DIR.RIGHT_DOWN] = "右下",
+    [JOYSTICK_DIR.DOWN] = "下",
+    [JOYSTICK_DIR.LEFT_DOWN] = "左下",
 }
 
 local PI = math.pi          -- 
@@ -36,12 +45,13 @@ function Fist_Control:ctor(parent)
     self._isCanMove = false             -- 摇杆是否可移动
     self._centerPos = nil               -- 摇杆中心点位置
     self._maxRadius = nil               -- 摇杆最大半径
-    self._direction = DIR.STAY          -- 摇杆方向
-    self._attackScheduler = nil         -- 攻击长按定时器
+    self._joyStickDir = JOYSTICK_DIR.STAY -- 摇杆方向
 
     self._roleNode = nil                -- 英雄节点
     self._roleDir = 1                   -- 英雄方向(1右 -1左)
     self._mapNode = nil                 -- 地图节点
+
+    self._attackScheduler = nil         -- 攻击定时器
 
     self:_init()
 end 
@@ -123,25 +133,43 @@ function Fist_Control:onTouchMoved(node, event)
     end 
 
     -- 设置方向
+    local roleDir = cc.p(0, 0)
     if radian >= -PI/8 and radian < PI/8 then 
-        self._direction = DIR.RIGHT                 -- 右
+        -- 左
+        self._joyStickDir = JOYSTICK_DIR.LEFT                 
+        roleDir = cc.p(-1, 0)
     elseif radian >= PI/8 and radian < 3*PI/8 then 
-        self._direction = DIR.RIGHT_UP              -- 右上
+        -- 左上
+        self._joyStickDir = JOYSTICK_DIR.LEFT_UP 
+        roleDir = cc.p(-1, 1)         
     elseif radian >= 3*PI/8 and radian < 5*PI/8 then 
-        self._direction = DIR.UP                    -- 上
+        -- 上
+        self._joyStickDir = JOYSTICK_DIR.UP 
+        roleDir = cc.p(0, 1)                
     elseif radian >= 5*PI/8 and radian < 7*PI/8 then 
-        self._direction = DIR.LEFT_UP               -- 左上
+        -- 右上
+        self._joyStickDir = JOYSTICK_DIR.LEFT_UP 
+        roleDir = cc.p(1, 1)          
     elseif (radian >= 7*PI/8 and radian <= PI) or (radian >= -PI and radian < -7*PI/8) then 
-        self._direction = DIR.LEFT                  -- 左
+        -- 右
+        self._joyStickDir = JOYSTICK_DIR.RIGHT 
+        roleDir = cc.p(1, 0)                
     elseif radian >= -7*PI/8 and radian < -5*PI/8 then 
-        self._direction = DIR.LEFT_DOWN             -- 左下
+        -- 右下
+        self._joyStickDir = JOYSTICK_DIR.RIGHT_DOWN 
+        roleDir = cc.p(1, -1)       
     elseif radian >= -5*PI/8 and radian < -3*PI/8 then 
-        self._direction = DIR.DOWN                  -- 下
+        -- 下
+        self._joyStickDir = JOYSTICK_DIR.DOWN 
+        roleDir = cc.p(0, -1)                 
     elseif radian >= -3*PI/8 and radian < -PI/8 then 
-        self._direction = DIR.RIGHT_DOWN            -- 右下
+        -- 左下
+        self._joyStickDir = JOYSTICK_DIR.LEFT_DOWN 
+        roleDir = cc.p(-1, -1)         
     end 
+
     -- 更新玩家位置
-    self:_updatePlayerPos(self._direction)
+    self._roleNode:walkWithDirection(roleDir)
 end 
 
 function Fist_Control:onTouchEnded(node, event)
@@ -150,7 +178,7 @@ function Fist_Control:onTouchEnded(node, event)
     end 
 
     self._isCanMove = false 
-    self._direction = DIR.STAY
+    self._joyStickDir = JOYSTICK_DIR.STAY
     self._joyStick:stopAllActions()
     self._joyStick:runAction(cc.MoveTo:create(0.08, cc.p(self._joyStickBg:getPosition())))
 
@@ -161,7 +189,7 @@ end
 -- 攻击事件
 function Fist_Control:_attackEvent(sender, eventType)
     if eventType == ccui.TouchEventType.began then 
-        local function update()
+        local function update(dt)
             self._roleNode:attack()
         end 
         if self._attackScheduler == nil then 
@@ -171,6 +199,11 @@ function Fist_Control:_attackEvent(sender, eventType)
         if self._attackScheduler ~= nil then 
             cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._attackScheduler)
             self._attackScheduler = nil 
+        end 
+
+        -- 添加，避免快速点击一次没有攻击
+        if eventType == ccui.TouchEventType.ended then 
+            self._roleNode:attack()
         end 
     end 
     
@@ -194,15 +227,8 @@ end
 function Fist_Control:_getPos(distance_z, radian)
     local point_x = math.cos(radian) * distance_z
     local point_y = math.sin(radian) * distance_z
-    --local angle = radian*180/PI                         -- 角度
+    --local angle = math.radian2angle(radian)               -- 弧度转角度
     return cc.p(-point_x, point_y)
 end 
-
--- 更新玩家位置(摇杆方向)
-function Fist_Control:_updatePlayerPos(joyStickDir)
-    local direction = cc.p(0,0)
-    -- 处理方向相关,待定
-    self._roleNode:walkWithDirection(direction)
-end
 
 return Fist_Control
