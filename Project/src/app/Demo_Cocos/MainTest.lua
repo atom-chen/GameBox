@@ -6,6 +6,7 @@ local OpenGLTest = require("app.Demo_Cocos.OpenGLTest")
 local ProcessorTest = require("app.Demo_Cocos.ProcessorTest")
 local SpineTest = require("app.Demo_Cocos.SpineTest")
 local KeyboardTest = require("app.Demo_Cocos.KeyboardTest")
+local ScheduleTest = require("app.Demo_Cocos.ScheduleTest")
 
 local tests = {
     {title = "ClipTest", layer = ClipTest, state = "裁切图形相关"},
@@ -15,6 +16,7 @@ local tests = {
     --{title = "ProcessorTest", layer = ProcessorTest, state = "进度条动画相关"},       -- 缺少资源
     {title = "SpineTest", layer = SpineTest, state = "骨骼动画相关"},                 -- 读取资源失败
     {title = "KeyboardTest", layer = KeyboardTest, state = "键盘事件相关"},
+    {title = "ScheduleTest", layer = ScheduleTest, state = "定时器相关"},
 }
 local LINE_SPACE = 40               -- 间隔
 local TEST_COUNT = #tests           -- 示例数目
