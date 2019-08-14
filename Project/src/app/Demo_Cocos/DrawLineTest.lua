@@ -11,7 +11,7 @@ end
 
 function DrawLineTest:_initUI()
     -- 返回按钮相关
-    local backBtn = ccui.Button:create("Default/Button_Normal.png", "Default/Button_Press.png", "Default/Button_Disable.png")
+    local backBtn = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
     backBtn:setPosition(cc.p(winSize.width - 30, 30))
     backBtn:setTitleFontSize(18)
     backBtn:setTitleColor(cc.c3b(0,0,0))

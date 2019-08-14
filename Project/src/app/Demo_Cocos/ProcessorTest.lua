@@ -3,7 +3,7 @@ require "cocos.spine.SpineConstants"
 local winSize = cc.Director:getInstance():getWinSize()
 
 local ProcessorTest = class("ProcessorTest",function()
-    return cc.Layer:create()
+    return newLayerColor(cc.size(display.width, display.height), 255)
 end)
 
 function ProcessorTest:ctor()
@@ -23,15 +23,6 @@ function ProcessorTest:init()
     item:setPosition(cc.p(winSize.width/2, winSize.height-20))
     self:addChild(item)
 
-    --[[
-    local listener = cc.EventListenerTouchOneByOne:create()
-    listener:registerScriptHandler(function (touch, event)
-        --
-    end,cc.Handler.EVENT_TOUCH_BEGAN)
-
-    local eventDispatcher = self:getEventDispatcher()
-    eventDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
-    ]]
     self:playProcessBarDemo()
     self:playLoadBarDemo()
 end
@@ -107,6 +98,7 @@ function ProcessorTest:_AddReduceEvt(sender,eventType)
     local scheduler = cc.Director:getInstance():getScheduler()
 
     if eventType == ccui.TouchEventType.began then
+        -- 定时器相关
         if self._timeScheduler ~= nil then 
             scheduler:unscheduleScriptEntry(self._timeScheduler)
             self._timeScheduler = nil

@@ -1,17 +1,17 @@
-local winSize = cc.Director:getInstance():getWinSize()
+-- 裁切Demo(资源丢失，使用其他资源替代吧)
+-- 博客地址：https://www.cnblogs.com/SkyflyBird/p/10166374.html
+
+local BG_RES = "Default/r2.png"
+local SPR_RES = "Default/r1.png"
+
 local ClipTest = class("ClipTest", function()
-	return cc.LayerColor:create(cc.c4b(0,0,0,255), winSize.width, winSize.height)
+	return cc.LayerColor:create(cc.c4b(0,0,0,255), display.width, display.height)
 end)
 
 function ClipTest:ctor()
-    self:_initUI()
-	self:creatClipWnd()
-end 
-
-function ClipTest:_initUI()
     -- 返回按钮相关
-    local backBtn = ccui.Button:create("Default/Button_Normal.png", "Default/Button_Press.png", "Default/Button_Disable.png")
-    backBtn:setPosition(cc.p(winSize.width - 30, 30))
+    local backBtn = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
+    backBtn:setPosition(cc.p(display.width - 30, 30))
     backBtn:setTitleFontSize(18)
     backBtn:setTitleColor(cc.c3b(0,0,0))
     backBtn:setTitleText("返 回")
@@ -22,13 +22,14 @@ function ClipTest:_initUI()
         self:removeFromParent()
     end)
     self:addChild(backBtn)
+
+	self:creatClipWnd()
 end 
-    
 
 function ClipTest:creatClipWnd()
 	-- 添加背景
-    local bgSprite = cc.Sprite:create("clip_2.png")
-    bgSprite:setPosition(cc.p(winSize.width/2, winSize.height/2))
+    local bgSprite = cc.Sprite:create(BG_RES)
+    bgSprite:setPosition(cc.p(display.width/2, display.height/2))
     self:addChild(bgSprite)
  
     local bgSize = bgSprite:getContentSize()
@@ -43,7 +44,7 @@ function ClipTest:creatClipWnd()
         [1] = {name = "攻击", pos = cc.p(bgPosX, bgPosY + radius+ 10)},
         [2] = {name = "防御", pos = cc.p(bgPosX + radius * math.cos(angle) + 20, bgPosY + radius/2)},
         [3] = {name = "生命", pos = cc.p(bgPosX + radius * math.cos(angle) + 20, bgPosY - radius/2)},
-        [4] = {name = "暴击", pos = cc.p(bgPosX,bgPosY - radius - 10)},
+        [4] = {name = "暴击", pos = cc.p(bgPosX, bgPosY - radius - 10)},
         [5] = {name = "闪避", pos = cc.p(bgPosX - radius * math.cos(angle) - 20, bgPosY - radius/2)},
         [6] = {name = "魅力", pos = cc.p(bgPosX - radius * math.cos(angle) - 20, bgPosY + radius/2)},
     }
@@ -55,7 +56,6 @@ function ClipTest:creatClipWnd()
     	self:addChild(label)
     end 
 
-    -- 使用DrawNode绘制六边形，可参考：https://www.cnblogs.com/SkyflyBird/p/10133960.html
     -- 每条半径点上的位置要进行等比换算，公式： X/num = radius/100， 求X
     -- 攻击
     local pos1 = {}
@@ -91,20 +91,16 @@ function ClipTest:creatClipWnd()
     drawnode:drawSolidPoly(vertices, 6, cc.c4b(0,1,0,1))
 
     -- 将绘制的六边形作为模版，对其clipSprite进行裁切
-    local clipSprite = cc.Sprite:create("clip_1.png")
+    local clipSprite = cc.Sprite:create(SPR_RES)
     clipSprite:setPosition(cc.p(bgPosX,bgPosY))
 
     -- 
     local clipnode = cc.ClippingNode:create()
     clipnode:setPosition(cc.p(0,0))
-    -- 设置alpha
-    clipnode:setAlphaThreshold(1) 
-    -- 添加底板       
-    clipnode:addChild(clipSprite) 
-    -- 设置模板         
-    clipnode:setStencil(drawnode) 
-    -- true底板可见，false模板可见    
-    clipnode:setInverted(false)            
+    clipnode:setAlphaThreshold(1)           -- 设置alpha
+    clipnode:addChild(clipSprite)           -- 添加底板       
+    clipnode:setStencil(drawnode)           -- 设置模板    
+    clipnode:setInverted(false)             -- true底板可见，false模板可见     
     self:addChild(clipnode,100)
 end
 

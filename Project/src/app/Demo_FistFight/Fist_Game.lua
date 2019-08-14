@@ -1,4 +1,5 @@
 -- 地图背景类
+-- 碰撞相关，可参考： https://blog.csdn.net/akof1314/article/details/8572546
 
 local const = require("app.Demo_FistFight.Fist_Const")
 local UIRole = require("app.Demo_FistFight.Fist_Role")

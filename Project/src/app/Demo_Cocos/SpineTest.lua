@@ -3,7 +3,7 @@ require "cocos.spine.SpineConstants"
 local winSize = cc.Director:getInstance():getWinSize()
 
 local SpineTest = class("SpineTest",function()
-    return cc.LayerColor:create(cc.c4b(0,0,0,255), winSize.width, winSize.height)
+    return cc.LayerColor:create(cc.c4b(0,0,0,255), display.width, display.height)
 end)
 
 function SpineTest:ctor()
@@ -18,7 +18,7 @@ end
 
 function SpineTest:init()
     -- 返回按钮相关
-    local backBtn = ccui.Button:create("Default/Button_Normal.png", "Default/Button_Press.png", "Default/Button_Disable.png")
+    local backBtn = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
     backBtn:setPosition(cc.p(winSize.width - 30, 30))
     backBtn:setTitleFontSize(18)
     backBtn:setTitleColor(cc.c3b(0,0,0))
@@ -31,12 +31,6 @@ function SpineTest:init()
     end)
     self:addChild(backBtn)
 
-    -- 
-    local item = ccui.Text:create()
-    item:setFontSize(24)
-    item:setString("骨骼动画")
-    item:setPosition(cc.p(winSize.width/2, winSize.height*4/5))
-    self:addChild(item)
     --[[
     帧动画与骨骼动画的区别：
     帧动画：每一帧都是角色特定姿势的一个快照，动画的流畅性和平滑效果都取决于帧数的多少。
@@ -50,9 +44,8 @@ function SpineTest:init()
     5. 不同动画可混合使用：不同的骨骼动画可以被结合到一起。比如一个角色可以转动头部、射击并且同时也在走路
     6. 程序动画：可以通过代码控制骨骼，比如可以实现跟随鼠标的射击，注视敌人，或者上坡时的身体前倾等效果
     ]]
-    local skeletonNode = sp.SkeletonAnimation:create("res/spine/spineboy.json", "res/spine/spineboy.atlas", 0.6)
-    skeletonNode:setPosition(cc.p(winSize.width / 2, 20))
-    skeletonNode:setScale(0.5)
+    local skeletonNode = sp.SkeletonAnimation:create("Default/spineboy.json", "Default/spineboy.atlas", 0.6)
+    skeletonNode:setPosition(cc.p(display.width/2, 20))
     --[[
     设置混合,避免衔接的动画不连贯
     参数1：起始动画
@@ -118,51 +111,3 @@ function SpineTest:init()
 end
 
 return SpineTest
-
-----
---[[
-local SpineTestLayerFFD = class("SpineTestLayerFFD",function()
-    return cc.Layer:create()
-end)
-
-function SpineTestLayerFFD:ctor()
-  local function onNodeEvent(event)
-    if event == "enter" then
-        self:init()
-    end
-  end
-
-  self:registerScriptHandler(onNodeEvent)
-end
-
-function SpineTestLayerFFD:init()
-  skeletonNode = sp.SkeletonAnimation:create("spine/goblins-ffd.json", "spine/goblins-ffd.atlas", 1.5)
-  skeletonNode:setAnimation(0, "walk", true)
-  skeletonNode:setSkin("goblin")
-    
-  skeletonNode:setScale(0.5)
-  local windowSize = cc.Director:getInstance():getWinSize()
-  skeletonNode:setPosition(cc.p(windowSize.width / 2, 20))
-  self:addChild(skeletonNode)
-    
-  local listener = cc.EventListenerTouchOneByOne:create()
-  listener:registerScriptHandler(function (touch, event)
-        if not skeletonNode:getDebugBonesEnabled() then
-            skeletonNode:setDebugBonesEnabled(true)
-        elseif skeletonNode:getTimeScale() == 1 then
-            skeletonNode:setTimeScale(0.3)
-        else
-            skeletonNode:setTimeScale(1)
-            skeletonNode:setDebugBonesEnabled(false)
-        end
-
-        return true
-    end,cc.Handler.EVENT_TOUCH_BEGAN )
-
-  local eventDispatcher = self:getEventDispatcher()
-  eventDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
-end
-]]
-
-
-
