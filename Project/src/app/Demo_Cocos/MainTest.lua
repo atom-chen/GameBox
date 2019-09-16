@@ -7,6 +7,7 @@ local ProcessorTest = require("app.Demo_Cocos.ProcessorTest")
 local SpineTest = require("app.Demo_Cocos.SpineTest")
 local KeyboardTest = require("app.Demo_Cocos.KeyboardTest")
 local ScheduleTest = require("app.Demo_Cocos.ScheduleTest")
+local OrbitCameraTest = require("app.Demo_Cocos.OrbitCameraTest")
 
 local tests = {
     {title = "ClipTest", layer = ClipTest, state = "裁切图形相关"},
@@ -17,6 +18,7 @@ local tests = {
     {title = "SpineTest", layer = SpineTest, state = "骨骼动画相关"},                 -- 读取资源失败
     {title = "KeyboardTest", layer = KeyboardTest, state = "键盘事件相关"},
     {title = "ScheduleTest", layer = ScheduleTest, state = "定时器相关"},
+    {title = "OrbitCameraTest", layer = OrbitCameraTest, state = "扑克翻转相关"},
 }
 local LINE_SPACE = 40               -- 间隔
 local TEST_COUNT = #tests           -- 示例数目
