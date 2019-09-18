@@ -9,6 +9,8 @@ local KeyboardTest = require("app.Demo_Cocos.KeyboardTest")
 local ScheduleTest = require("app.Demo_Cocos.ScheduleTest")
 local OrbitCameraTest = require("app.Demo_Cocos.OrbitCameraTest")
 local RubberTest = require("app.Demo_Cocos.RubberTest")
+local RubCardTest = require("app.Demo_Cocos.rubCard.RubCardTest")
+local ScreenShotTest = require("app.Demo_Cocos.ScreenShotTest")
 
 local tests = {
     {title = "ClipTest", layer = ClipTest, state = "裁切图形相关"},
@@ -20,7 +22,9 @@ local tests = {
     {title = "KeyboardTest", layer = KeyboardTest, state = "键盘事件相关"},
     {title = "ScheduleTest", layer = ScheduleTest, state = "定时器相关"},
     {title = "OrbitCameraTest", layer = OrbitCameraTest, state = "扑克翻转相关"},
+    {title = "RubCardTest", layer = RubCardTest, state = "搓牌效果相关"},
     {title = "RubberTest", layer = RubberTest, state = "橡皮擦效果"},
+    {title = "ScreenShotTest", layer = ScreenShotTest, state = "截图效果"},
 }
 local LINE_SPACE = 40               -- 间隔
 local TEST_COUNT = #tests           -- 示例数目

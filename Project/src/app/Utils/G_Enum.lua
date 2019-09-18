@@ -34,6 +34,8 @@ cc.exports.Res = {
     BTN_D = "Default/Button_Disable.png",
     -- 
     CLOSE_IMG = "art/public/close.png",
+    --
+    LOGO = "Default/cocos_logo.png",
 }
 
 
