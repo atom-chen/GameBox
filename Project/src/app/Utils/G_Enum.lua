@@ -35,7 +35,7 @@ cc.exports.Res = {
     -- 
     CLOSE_IMG = "art/public/close.png",
     --
-    LOGO = "Default/cocos_logo.png",
+    LOGO = "Default/res.png",
 }
 
 

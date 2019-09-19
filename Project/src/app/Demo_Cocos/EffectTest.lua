@@ -1,35 +1,22 @@
 --[[
-天气效果
-
-针对于粒子效果，写了三种：
+天气效果,针对于粒子效果，写了三种：
 1. 手动创建
 2. 通过cocos2d 自带的粒子系统创建
 3. 通过plist创建，推荐
 ]]
 
-local TYPE = {
-    NONE = 0,               -- 无
-    RAIN = 1,               -- 雨
-    SNOW = 2,               -- 雪
-    THUNDER = 4,            -- 雷
-}
-
-local LEVEL = {
-    NONE = 0,       -- 无
-    SMALL = 1,      -- 小
-    MID = 2,        -- 中
-    BIG = 3,        -- 大
-}
-
-local WeatherEffect = class("WeatherEffect", function()
+local EffectTest = class("EffectTest", function()
     return cc.LayerColor:create(cc.c4b(0,0,0,0),display.width,display.height)
 end)
 
-function WeatherEffect:ctor()
-    --self:setPosition(display.center)
-    --self:setAnchorPoint(cc.p(0,0))
+function EffectTest:ctor()
+    self._snow = nil                -- 雪
+    self._rain = nil                -- 雨
+    self._titleText = nil           -- 标题
+    self._playIndex = 0             -- 播放索引
 
-    self:_initData()
+    self._thunderScheduler = nil    
+
     local function onNodeEvent(event)
         if event == "enter" then
             self:onEnter()
@@ -37,28 +24,103 @@ function WeatherEffect:ctor()
             self:onExit()
         end
     end
-
     self:registerScriptHandler(onNodeEvent)
 end 
 
-function WeatherEffect:_initData()
-    self._snow = nil                -- 雪
-    self._rain = nil                -- 雨
+--[[
+@function: 显示指定类型的天气
+@pram: 天气类型， 参考 weatherType
+@pram: 天气程度，参考 levelType, 默认为SMALL
+@pram: 是否播放气象效果, 默认为false
+]]
+function EffectTest:onEnter()
+    -- 背景相关
+    local bgImg = ccui.ImageView:create(Res.BTN_D)
+    bgImg:setContentSize(cc.size(display.width, display.height))
+    bgImg:setPosition(display.center)
+    bgImg:setScale9Enabled(true)
+    self:addChild(bgImg)
 
-    self._thunderScheduler = nil    
+    -- 标题相关
+    self._titleText = ccui.Text:create("粒子效果", "Arial", 25)
+    self._titleText:setPosition(cc.p(display.width/2, display.height - 100))
+    self:addChild(self._titleText)
+
+    -- 下一个按钮
+    local nextBtn = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
+    nextBtn:setPosition(cc.p(display.width/2, 100))
+    nextBtn:setTitleFontSize(20)
+    nextBtn:setTitleColor(cc.c3b(0,0,0))
+    nextBtn:setTitleText("Next")
+    nextBtn:addTouchEventListener(handler(self, self._onClickNextEvent))
+    self:addChild(nextBtn)
+
+    -- 返回按钮
+    local backBtn = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
+    backBtn:setPosition(cc.p(display.width - 30, 30))
+    backBtn:setTitleFontSize(18)
+    backBtn:setTitleColor(cc.c3b(0,0,0))
+    backBtn:setTitleText("返 回")
+    backBtn:addTouchEventListener(function(sender, eventType)
+        if eventType == ccui.TouchEventType.ended then 
+            self:removeFromParent()
+        end 
+    end)
+    self:addChild(backBtn)
+
+    self:_onClickNextEvent(nextBtn, ccui.TouchEventType.ended)
 end 
 
--- 手动创建的粒子示例
-function WeatherEffect:_initCustomParticle()
-    --[[
-    通过 ParticleSystemQuad 手动创建
-    ]]
+function EffectTest:onExit()
+    if self._thunderScheduler ~= nil then
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._thunderScheduler)
+        self._thunderScheduler = nil
+    end
+end 
+
+function EffectTest:_onClickNextEvent(sender, eventType)
+    if eventType ~= ccui.TouchEventType.ended then 
+        return 
+    end 
+    
+    -- 判定数目
+    local PLAY_NUM = 5
+    if self._playIndex < PLAY_NUM then 
+        self._playIndex = self._playIndex + 1
+    else 
+        self._playIndex = 1
+    end 
+    -- 判定是否子节点不为空
+    if self:getChildByTag(1000) ~= nil then 
+        self:removeChildByTag(1000)
+    end 
+
+    if self._playIndex == 1 then 
+        self._titleText:setString("通过 ParticleSystemQuad 手动创建的粒子效果")
+        self:_initCustomParticle() 
+    elseif self._playIndex == 2 then 
+        self._titleText:setString("使用cocos2d自带的ParticleSnow，还有其它...")
+        self:_initSnow() 
+    elseif self._playIndex == 3 then
+        self._titleText:setString("使用plist粒子文件创建")
+        self:_initGraph() 
+    elseif self._playIndex == 4 then  
+        self._titleText:setString("action动画，随机播放4种")
+        self:_initThunderAni()
+    elseif self._playIndex == 5 then 
+        self._titleText:setString("使用cocos2d自带的ParticleSnow修改")
+        self:_initRain() 
+    end 
+end 
+
+-- 通过 ParticleSystemQuad 手动创建的粒子示例
+function EffectTest:_initCustomParticle()
     -- 缓存纹理
     local texture = cc.Director:getInstance():getTextureCache():addImage("effect/stars.png")
 
     -- 创建粒子数目
     local emitter = cc.ParticleSystemQuad:createWithTotalParticles(1000)
-    self:addChild(emitter, 10)
+    self:addChild(emitter, 10, 1000)
 
     -- 设置纹理
     emitter:setTexture(texture)
@@ -117,7 +179,7 @@ function WeatherEffect:_initCustomParticle()
 end 
 
 -- 初始化雪
-function WeatherEffect:_initSnow()
+function EffectTest:_initSnow()
     --[[
     通过cocos2d 自带的 粒子系统创建， 其它的还有:
         ParticleExplosion:爆炸粒子效果
@@ -137,7 +199,7 @@ function WeatherEffect:_initSnow()
     local emitter = cc.ParticleSnow:create()
     emitter:setPosition(cc.p(display.width/2, display.height))
     emitter:setTexture(texture)
-    self:addChild(emitter, 10)
+    self:addChild(emitter, 10, 1000)
     
     -- 设置粒子存在时间及存在时间变化率
     emitter:setLife(3)
@@ -163,7 +225,7 @@ function WeatherEffect:_initSnow()
 end 
 
 -- 初始化图形特效
-function WeatherEffect:_initGraph()
+function EffectTest:_initGraph()
     --[[
     使用.plist 文件加载粒子是最常用也最灵活的方式，其文件内容包含了相关的参数数据以及图片的存储等
     线上工具： http://www.effecthub.com/particle2dx
@@ -175,20 +237,22 @@ function WeatherEffect:_initGraph()
     emitter:setAutoRemoveOnFinish(true)
     -- 设置粒子持续的时间秒数
     emitter:setDuration(10)
-    self:addChild(emitter)
+    self:addChild(emitter, 10, 1000)
 end 
 
 -- 初始化雷电动画
-function WeatherEffect:_initThunderAni()
-    -- 加深背景透明度
-    self:setOpacity(200)
-    
-    local thunderSpr = cc.Sprite:create("effect/thunder/thunder_1.png")
+function EffectTest:_initThunderAni()
+    math.newrandomseed()
+
+    local randIndex = math.random(1, 4)
+    local strName = string.format("effect/thunder/thunder_%d.png", randIndex)
+    print(randIndex)
+    local thunderSpr = cc.Sprite:create(strName)
     thunderSpr:setScale(0.8)
     thunderSpr:setOpacity(100)
     local size = thunderSpr:getContentSize()
-    thunderSpr:setPosition(cc.p(display.width - size.width/3 * 0.8, display.height - size.height/2 * 0.8))
-    self:addChild(thunderSpr)
+    thunderSpr:setPosition(display.center)
+    self:addChild(thunderSpr, 10, 1000)
 
     local action1 = cc.FadeIn:create(0.5)           -- 渐现
     local action2 = cc.Blink:create(1.0, 5)         -- 闪烁
@@ -198,13 +262,13 @@ function WeatherEffect:_initThunderAni()
 end 
 
 -- 初始化雨
-function WeatherEffect:_initRain()
+function EffectTest:_initRain()
     local texture = cc.Director:getInstance():getTextureCache():addImage("effect/rain.png")
 
     local emitter = cc.ParticleSnow:create()
     emitter:setPosition(cc.p(display.width/2, display.height))
     emitter:setTexture(texture)
-    self:addChild(emitter, 10)
+    self:addChild(emitter, 10, 1000)
     
     -- 设置粒子存在时间及存在时间变化率
     emitter:setLife(4)
@@ -221,27 +285,5 @@ function WeatherEffect:_initRain()
     emitter:setEmissionRate(emitter:getTotalParticles() / emitter:getLife())
 end 
 
---[[
-@function: 显示指定类型的天气
-@pram: 天气类型， 参考 weatherType
-@pram: 天气程度，参考 levelType, 默认为SMALL
-@pram: 是否播放气象效果, 默认为false
-]]
-function WeatherEffect:onEnter(_type,level,isPlay)
-    self:_initRain()
-end 
+return EffectTest
 
-function WeatherEffect:onExit()
-    if self._thunderScheduler ~= nil then
-        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._thunderScheduler)
-        self._thunderScheduler = nil
-    end
-end 
-
-return WeatherEffect
-
---[[
--- 示例程序：
-local layer = require("app.Demo_ZombieShoot.UI.effect.WeatherEffect"):create()
-self:addChild(layer,1)
-]]

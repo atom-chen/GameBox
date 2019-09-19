@@ -16,7 +16,7 @@ end
 
 function LogoScene:init()
     -- 创建logo
-    local logoSprite = cc.Sprite:create("res/logo.png")
+    local logoSprite = cc.Sprite:create(Res.LOGO)
     if not logoSprite then 
         return 
     end 
