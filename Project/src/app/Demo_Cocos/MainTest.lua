@@ -28,8 +28,9 @@ local tests = {
     {title = "ScreenShotTest", layer = ScreenShotTest, state = "截图效果"},
     {title = "EffectTest", layer = EffectTest, state = "粒子效果"},
 }
-local LINE_SPACE = 40               -- 间隔
-local TEST_COUNT = #tests           -- 示例数目
+local TEST_COUNT = #tests                               -- 示例数目
+local SCROLL_WIDTH, SCROLL_HEIGHT = 600, 450            -- scroll可视大小
+local ITEM_WIDTH, ITEM_HEIGHT = SCROLL_WIDTH, 50        -- scroll Item大小
 
 local MainTest = class("MainTest", function()
     return newLayerColor(cc.size(display.width, display.height), 255)
@@ -49,31 +50,51 @@ function MainTest:ctor()
     end)
     self:addChild(backBtn)
 
-    local menu = cc.Menu:create()
-    menu:setContentSize(cc.size(display.width, (TEST_COUNT + 1) * LINE_SPACE))
-    menu:setPosition(cc.p(0,0))
-    self:addChild(menu, 0)
+    if TEST_COUNT <= 0 then 
+        return 
+    end 
 
-    for i, obj in pairs(tests) do 
-        local str = string.format("%s(%s)", obj.title, obj.state)
-        local label = ccui.Text:create(str, "Arial", 24)
-        label:setAnchorPoint(cc.p(0.5, 0.5))
+    -- ScrollView相关
+    local scroll = ccui.ScrollView:create()
+    scroll:setContentSize(cc.size(SCROLL_WIDTH, SCROLL_HEIGHT))
+    scroll:setPosition(cc.p(display.width/2 - SCROLL_WIDTH/2, 10))
+    scroll:setDirection(cc.SCROLLVIEW_DIRECTION_VERTICAL)                               -- 设置滚动方向:垂直
+    scroll:setBounceEnabled(true)                                                       -- 设置滚动条是否显示
+    scroll:setScrollBarWidth(10)                                                        -- 设置滚动条宽度
+    scroll:setScrollBarColor(cc.RED)                                                    -- 设置滚动条颜色
+    self:addChild(scroll)
+    
+    -- 设置滚动区域，针对于inerHeight 建议使用math.max否则，滚动区域小于可视区域的情况下，容易出现警告：
+    -- Warn: Inner height <= scrollView height, it will be force sized!
+    local inerHeight = math.max(SCROLL_HEIGHT, TEST_COUNT*(ITEM_HEIGHT))
+    scroll:setInnerContainerSize(cc.size(SCROLL_WIDTH, inerHeight))
 
-        -- 文本菜单
-        local menuItem = cc.MenuItemLabel:create(label)
-        menuItem:setPosition(cc.p(display.width/2, display.height - i * LINE_SPACE))
-        menuItem:registerScriptTapHandler(handler(self, self._menuEvent))
-        menu:addChild(menuItem, i+100, i)
+    -- 设置Item相关
+    for i = 1, TEST_COUNT do 
+        local panel = ccui.Layout:create()
+        panel:setContentSize(cc.size(ITEM_WIDTH, ITEM_HEIGHT))
+        panel:setPosition(cc.p(0, inerHeight - i * ITEM_HEIGHT))
+        panel:addTouchEventListener(handler(self, self._onClickItemEvent))
+        panel:setTouchEnabled(true)
+        panel:setTag(i)
+        scroll:addChild(panel)
+
+        local str = string.format("%s(%s)", tests[i].title, tests[i].state)
+        local stateText = ccui.Text:create(str, "Arial", 24)
+        stateText:setPosition(cc.p(ITEM_WIDTH/2, ITEM_HEIGHT/2))
+        panel:addChild(stateText)
     end 
 end 
 
-function MainTest:_menuEvent(tag, menuItem)
-    local node = tests[tag].layer:create()
-
-    if not node then 
+function MainTest:_onClickItemEvent(sender, event)
+    if event ~= ccui.TouchEventType.ended then 
         return 
     end 
-    self:addChild(node,1000)
+    local tag = sender:getTag()
+    local node = tests[tag].layer:create()
+    if node ~= nil then 
+        self:addChild(node,1000) 
+    end 
 end 
 
 return MainTest

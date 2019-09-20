@@ -40,29 +40,30 @@ local fragment= [[
     }  
 ]]
 
-local winSize = cc.Director:getInstance():getWinSize()
 local OpenGLTest = class("OpenGLTest",function()
-    return cc.Layer:create()
+    return newLayerColor(cc.size(display.width, display.height), 255)
 end)
 
 function OpenGLTest:ctor()
-    local function onNodeEvent(event)
-        if event == "enter" then
-            self:init()
-        end
-    end
-    self:registerScriptHandler(onNodeEvent)
-end
+    -- 返回按钮
+    local backBtn = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
+    backBtn:setPosition(cc.p(display.width - 30, 30))
+    backBtn:setTitleFontSize(18)
+    backBtn:setTitleColor(cc.c3b(0,0,0))
+    backBtn:setTitleText("返 回")
+    backBtn:addTouchEventListener(function(sender, eventType)
+        if eventType == ccui.TouchEventType.ended then 
+            self:removeFromParent()
+        end 
+    end)
+    self:addChild(backBtn)
 
-function OpenGLTest:init()
+    --
     local pProgram = cc.GLProgram:createWithByteArrays(vertex , fragment)
-
-    local ballSprite = cc.Sprite:create("res/Images/ball.png")
-    if ballSprite then 
-        ballSprite:setPosition(cc.p(winSize.width/2, winSize.height/2))
-        ballSprite:setGLProgram(pProgram)
-        --self:addChild(ball,100)
-    end 
+    local ballSprite = cc.Sprite:create("res/Default/r1.png")
+    ballSprite:setPosition(display.center)
+    ballSprite:setGLProgram(pProgram)
+    self:addChild(ballSprite,100)
 end
 
 return OpenGLTest
