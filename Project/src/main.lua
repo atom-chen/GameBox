@@ -46,6 +46,9 @@ __G__TRACKBACK__ = function(errorMessage)
     local msg = debug.traceback(errorMessage, 3)
     print(msg)
     print("----------------------------------------")
+
+    -- report lua exception
+    buglyReportLuaException(tostring(message), debug.traceback())
 end
 
 local status, msg = xpcall(main, __G__TRACKBACK__)
