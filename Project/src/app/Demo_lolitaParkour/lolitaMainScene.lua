@@ -1,5 +1,5 @@
 -- 萝莉跑酷主页面
-local ACTION = require("app.Demo_lolitaParkour.LOLITAconst").ACTION
+local ACTION = require("app.Demo_lolitaParkour.lolitaConst").ACTION
 local UIRole = require("app.Demo_lolitaParkour.lolitaRole")
 
 local BG_WIDTH, BG_HEIGHT = 1024, 516           -- 后，中背景大小

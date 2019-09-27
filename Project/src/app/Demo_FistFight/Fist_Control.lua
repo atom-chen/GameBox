@@ -91,6 +91,19 @@ function Fist_Control:_init()
     self._centerPos = cc.p(self._bgSize.width, self._bgSize.height)           -- 中心点位置
     self._maxRadius = self._bgSize.width/2                                    -- 摇杆半径
 
+    -- 退出按钮
+    local exitBtn = ccui.Button:create(Res.CLOSE_IMG, Res.CLOSE_IMG, Res.CLOSE_IMG)
+    exitBtn:setPosition(cc.p(display.width - 30, display.height - 30))
+    exitBtn:setTitleFontSize(18)
+    exitBtn:addTouchEventListener(function(sender, eventType)
+        if eventType ~= ccui.TouchEventType.ended then 
+            return 
+        end 
+        local scene = require("app.TestScene"):create()
+        display.runScene(scene)
+    end)
+    self:addChild(exitBtn)
+
     -- 触摸监听
     local listener = cc.EventListenerTouchOneByOne:create()
     listener:setSwallowTouches(true)

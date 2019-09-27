@@ -5,8 +5,8 @@ end)
 
 function lolitaLoginScene:ctor()
     -- 背景
-    local bgImg = cc.Sprite:create("lolitaParkour/bg_0.png")
-    bgImg:setScale(display.height/640)
+    local bgImg = ccui.ImageView:create("lolitaParkour/bg_0.png")
+    bgImg:setContentSize(cc.size(display.width, display.height))
     bgImg:setPosition(display.center)
     self:addChild(bgImg, 0)
 
@@ -17,6 +17,19 @@ function lolitaLoginScene:ctor()
     startBtn:addTouchEventListener(handler(self, self._startEvent))
     startBtn:setPosition(cc.p(display.width/2, display.height/2))
     self:addChild(startBtn, 1)
+
+    -- 退出按钮
+    local exitBtn = ccui.Button:create(Res.CLOSE_IMG, Res.CLOSE_IMG, Res.CLOSE_IMG)
+    exitBtn:setPosition(cc.p(display.width - 30, 30))
+    exitBtn:setTitleFontSize(18)
+    exitBtn:addTouchEventListener(function(sender, eventType)
+        if eventType ~= ccui.TouchEventType.ended then 
+            return 
+        end 
+        local scene = require("app.TestScene"):create()
+        display.runScene(scene)
+    end)
+    self:addChild(exitBtn)
 
     -- 警告文本
     local warnText = ccui.Text:create()

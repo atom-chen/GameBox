@@ -6,10 +6,23 @@ local SPACE = 2                     -- 每行/列间隔
 -- 左上方格子起始点位置
 local STARTPOS = cc.p(display.width/2 - BOX_W * COLUME/2, display.height - BOX_H)  
 -- 格子颜色
-SHOW_COLOR = cc.c3b(255, 0, 0)
-HIDE_COLOR = cc.c3b(255, 255, 255)
+local SHOW_COLOR = cc.c3b(255, 0, 0)
+local HIDE_COLOR = cc.c3b(255, 255, 255)
 -- 地图大小
 
+local KEY_INDEX = {
+    UP = 1,
+    DOWN = 2,
+    LEFT = 3,
+    RIGHT = 4,
+}
+
+local data = {
+    [KEY_INDEX.UP] = {title = "上", pos = cc.p(display.width*4/5, display.height/2 + 50)},
+    [KEY_INDEX.DOWN] = {title = "下", pos = cc.p(display.width*4/5, display.height/2 - 50)},
+    [KEY_INDEX.LEFT] = {title = "左", pos = cc.p(display.width*4/5 - 50, display.height/2)},
+    [KEY_INDEX.RIGHT] = {title = "右", pos = cc.p(display.width*4/5 + 50, display.height/2)},
+}
 
 local config = require("app.Demo_Tetris.GridConfig")
 local UITetrisMain = class("UITetrisMain", function()
@@ -24,6 +37,7 @@ function UITetrisMain:ctor()
     self._scoreLabel = nil          -- 分数
     self._map = {}                  -- 格子精灵集合
     self._gridImg = nil             -- 当前图形
+    self._handleBtns = {}           -- 操作按钮相关
     self._timeScheduler = nil       -- 时间定时器
 
     self._gridType = nil            -- 当前方块类型
@@ -43,6 +57,18 @@ function UITetrisMain:_init()
     self._startBtn:setTitleFontSize(18)
     self._startBtn:setTitleText("开 始")
     self:addChild(self._startBtn)
+    -- 操作按钮
+    for i = 1, 4 do 
+        self._handleBtns[i] = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
+        self._handleBtns[i]:addTouchEventListener(handler(self, self._onTouchEvent))
+        self._handleBtns[i]:setTitleColor(cc.c3b(0,0,0))
+        self._handleBtns[i]:setPosition(data[i].pos)
+        self._handleBtns[i]:setTitleFontSize(23)
+        self._handleBtns[i]:setTitleText(data[i].title)
+        self._handleBtns[i]:setTag(i)
+        self._handleBtns[i]:setVisible(false)
+        self:addChild(self._handleBtns[i])
+    end 
     -- 重玩按钮
     self._resetBtn = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
     self._resetBtn:addTouchEventListener(handler(self, self._resetEvent))
@@ -85,15 +111,21 @@ function UITetrisMain:_init()
     end 
 
     -- 键盘监听
-    local listener = cc.EventListenerKeyboard:create()
-    listener:registerScriptHandler(handler(self, self._onKeyReleased), cc.Handler.EVENT_KEYBOARD_RELEASED)
-    self:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self)
+    if device.platform == "windows" then 
+        local listener = cc.EventListenerKeyboard:create()
+        listener:registerScriptHandler(handler(self, self._onKeyReleased), cc.Handler.EVENT_KEYBOARD_RELEASED)
+        self:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self)
+    end 
 end 
 
 -- 开始按钮事件
 function UITetrisMain:_startEvent(sender, eventType)
     if eventType ~= ccui.TouchEventType.ended then 
         return 
+    end 
+
+    for i = 1, 4 do 
+        self._handleBtns[i]:setVisible(true)
     end 
 
     if self._timeScheduler == nil then 
@@ -118,6 +150,10 @@ function UITetrisMain:_resetEvent(sender, eventType)
         self._timeScheduler = nil 
     end 
 
+    for i = 1, 4 do 
+        self._handleBtns[i]:setVisible(true)
+    end 
+
     for i = 1, LINE do 
         for j = 1, COLUME do 
             self._map[i][j]:setColor(HIDE_COLOR)
@@ -140,12 +176,34 @@ function UITetrisMain:_exitEvent(sender, eventType)
         self._timeScheduler = nil 
     end 
     self:removeFromParent()
+end
+
+-- 按钮事件
+function UITetrisMain:_onTouchEvent(sender, eventType)
+    if eventType ~= ccui.TouchEventType.ended then 
+        return 
+    end 
+
+    local index = sender:getTag()
+    if not index then 
+        return 
+    end 
+
+    if index == KEY_INDEX.UP then 
+        self:_changeGrid()          -- 变换
+    elseif index == KEY_INDEX.DOWN then 
+        self:_updateDown()          -- 下
+    elseif index == KEY_INDEX.LEFT then 
+        self:_updateLeft()          -- 左
+    elseif index == KEY_INDEX.RIGHT then 
+        self:_updateRight()         -- 右
+    end 
 end 
  
--- 
+-- 键盘事件
 function UITetrisMain:_onKeyReleased(keyCode, event)
     if keyCode == cc.KeyCode.KEY_UP_ARROW or keyCode == cc.KeyCode.KEY_W then 
-        self:_changeGrid()
+        self:_changeGrid()          -- 变换
     elseif keyCode == cc.KeyCode.KEY_DOWN_ARROW or keyCode == cc.KeyCode.KEY_S then 
         self:_updateDown()          -- 下
     elseif keyCode == cc.KeyCode.KEY_LEFT_ARROW or keyCode == cc.KeyCode.KEY_A then 
@@ -158,7 +216,7 @@ end
 -- 新的方块
 function UITetrisMain:_newGrid()
     -- 若图形已存在，将图形所在区域颜色设置为SHOW_COLOR 
-    if self._gridImg ~= nil then 
+    if self._gridImg ~= nil and not tolua.isnull(self._gridImg) then 
         self._gridImg:removeFromParent()
         --print("当前行列数:", self._curLine, self._curColume)
         for gridline = 4, 1, -1 do 
@@ -173,20 +231,9 @@ function UITetrisMain:_newGrid()
                     end 
                     mapCol = self._curColume + gridcol - 1
                     
-                    --local str = string.format("地图新行列(%d:%d); 格子行列(%d：%d)", mapLine, mapCol, gridline, gridcol)
-                    --print(str)
-                    if self._map[mapLine][mapCol] then 
+                    if self._map[mapLine] and self._map[mapLine][mapCol] then 
                         self._map[mapLine][mapCol]:setColor(SHOW_COLOR)
                         self._map[mapLine][mapCol]:setTag(1)
-
-                        -- 创建测试文本
-                        --[[
-                        local tagText = ccui.Text:create()
-                        tagText:setPosition(cc.p(BOX_W/2, BOX_H/2))
-                        tagText:setString(string.format("%d:%d",mapLine, mapCol))
-                        tagText:setFontSize(10)
-                        self._map[mapLine][mapCol]:addChild(tagText)
-                        ]]
                     end 
                 end 
             end 
@@ -256,7 +303,7 @@ function UITetrisMain:_updateDown(dt)
                     mapLine = self._curLine - (self._gridMaxLine - gridline)
                 end 
                 mapCol = self._curColume + gridcol - 1
-                if mapLine >= 1 and mapCol >= 1 and self._map[mapLine + 1][mapCol] then 
+                if mapLine > 1 and mapCol >= 1 and self._map[mapLine + 1][mapCol] then 
                     local maptag = self._map[mapLine + 1][mapCol]:getTag()
                     if maptag == 1 then 
                         -- 生成新的方块
@@ -322,13 +369,11 @@ function UITetrisMain:_clearLine(startLine, endLine)
             if i >= 1 then 
                 local tag = self._map[i][j]:getTag()
                 if tag == 0 then 
-                    print(string.format("当前tag：%d 的行列:(%d：%d)",tag, i, j))
                     break 
                 end 
 
                 -- 清除一行
                 if j == COLUME then 
-                    print("开始执行消除,当前行为:", i)
                     for line = i, 1, -1 do 
                         self:_copyLine(line,i)
                     end 
@@ -377,7 +422,8 @@ end
 -- 检测是否结束
 function UITetrisMain:_checkIsEnd()
     local isEnd = false 
-    if self._curLine + self._gridMaxLine - 1 <= 0 then 
+    print("检测当前行为：", self._curLine, self._gridMaxLine)
+    if self._curLine - self._gridMaxLine <= 1 then 
         MsgTip("游戏结束")
         isEnd = true 
     end 
@@ -393,8 +439,13 @@ function UITetrisMain:_checkIsEnd()
     end 
 
     -- 显示开始按钮
-    self._startBtn:setVisible(true)
-    self._resetBtn:setVisible(false)
+    self._startBtn:setVisible(false)
+    self._resetBtn:setVisible(true)
+
+    -- 隐藏操作按钮
+    for i = 1, 4 do 
+        self._handleBtns[i]:setVisible(false)
+    end 
 end 
 
 -- 游戏结束

@@ -33,7 +33,7 @@ cc.exports.Res = {
     BTN_P = "Default/Button_Press.png",
     BTN_D = "Default/Button_Disable.png",
     -- 
-    CLOSE_IMG = "art/public/close.png",
+    CLOSE_IMG = "Default/close.png",
     --
     LOGO = "Default/res.png",
 }

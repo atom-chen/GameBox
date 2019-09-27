@@ -267,6 +267,10 @@ function display.wrapScene(scene, transition, time, more)
 end
 
 function display.runScene(newScene, transition, time, more)
+    if tolua.isnull(newScene) then 
+        error("display.runScene the first param is nill")
+        return 
+    end 
     if director:getRunningScene() then
         if transition then
             newScene = display.wrapScene(newScene, transition, time, more)

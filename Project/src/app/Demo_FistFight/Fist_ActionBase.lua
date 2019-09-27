@@ -1,7 +1,6 @@
 -- 角色动作基类
 -- 用于玩家或敌人通过切换状态来改变动作 共有5种状态，可参考：Fist_Const.ActionState
 
-local RES_PATH = "fistFight/pd_role.plist"
 local const = require("app.Demo_FistFight.Fist_Const")
 local ACTION = const.ActionState
 
@@ -30,6 +29,7 @@ function Fist_ActionBase:ctor()
 end 
 
 function Fist_ActionBase:_init()
+    local RES_PATH = "fistfight/pd_role.plist"
     local isLoad = cc.SpriteFrameCache:getInstance():isSpriteFramesWithFileLoaded(RES_PATH)
     if not isLoad then 
         cc.SpriteFrameCache:getInstance():addSpriteFrames(RES_PATH)

@@ -1,5 +1,5 @@
 -- 角色类
-local ACTION = require("app.Demo_lolitaParkour.LOLITAconst").ACTION
+local ACTION = require("app.Demo_lolitaParkour.lolitaConst").ACTION
 
 local lolitaRole = class("lolitaRole", function()
     return cc.Node:create()
