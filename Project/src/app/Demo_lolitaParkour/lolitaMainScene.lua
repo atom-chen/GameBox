@@ -23,6 +23,8 @@ function lolitaMainScene:ctor()
     self._backBtn = nil                 -- 返回按钮
     self._timeScheduler = nil           -- 定时器
 
+    self._curScore = 0                  -- 当前分数
+
     self:_init()
 end 
 
@@ -204,8 +206,8 @@ end
 
 -- 更新分数
 function lolitaMainScene:_updateScore(num)
-    local score = num * 100 
-    self._scoreLabel:setString("分数:" .. score)
+    self._curScore = self._curScore + num *100
+    self._scoreLabel:setString("分数:" .. self._curScore)
 end 
 
 -- 游戏结束

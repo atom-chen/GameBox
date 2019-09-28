@@ -82,9 +82,10 @@ function Fist_Game:_updatePositions(dt)
 end 
 
 -- 更新视图位置
-function Fist_Game:setViewpointCenter(pos)
-    local x1, x2 = MAX(pos.x, display.width/2), self._mapSize.width * self._tileSize.width - display.width/2
-    local y1, y2 = MAX(pos.y, display.height/2), self._mapSize.height * self._tileSize.height - display.height/2
+function Fist_Game:setViewpointCenter(rolepos)
+    local mapWidth, mapHight = self._mapSize.width * self._tileSize.width, self._mapSize.height * self._tileSize.height
+    local x1, x2 = MAX(rolepos.x, display.width/2), mapWidth - display.width/2
+    local y1, y2 = MAX(rolepos.y, display.height/2), mapHight - display.height/2
     local point = cc.p(MIN(x1, x2), MIN(y1, y2))
     local newpos = cc.pSub(display.center, point)
     self:setPosition(newpos)
@@ -102,9 +103,8 @@ function Fist_Game:_updateReorder()
     end 
 end 
 
-
 -- 获取英雄节点
-function Fist_Game:getHeroNode()
+function Fist_Game:getRoleNode()
     return self._roleNode
 end 
 

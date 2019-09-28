@@ -24,7 +24,7 @@ function Fist_ActionBase:ctor()
     self._desiredPos = cc.p(0, 0)               -- 
     self._hitBox = cc.rect(0,0,0,0)             -- 
     self._attackBox = cc.rect(0,0,0,0)          --
-    
+
     self:_init()
 end 
 
@@ -59,8 +59,11 @@ function Fist_ActionBase:walkWithDirection(direction)
     end 
 
     if self._actionState == ACTION.WALK then 
-        -- 设置反转显示，true反转
-        --self:setFlippedX(direction.x >= 0 and false or true) 
+        if direction.x >= 0 then 
+            self:setFlippedX(false) 
+        else 
+            self:setFlippedX(true) 
+        end 
         self._desiredPos = cc.pAdd(cc.p(self:getPosition()), cc.pMul(direction, self._walkSpeed))
     end 
 end 
@@ -78,7 +81,6 @@ end
 
 -- 被攻击
 function Fist_ActionBase:hurtWithDamage(damageNum)
-
     if self._actionState == ACTION.DIE then 
         return 
     end 

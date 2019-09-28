@@ -63,7 +63,7 @@ function Fist_Control:_init()
     end 
 
     -- 节点相关
-    self._roleNode = self._parent:getHeroNode()
+    self._roleNode = self._parent:getGameRoot():getRoleNode()
     self._mapNode = nil 
 
     -- 攻击按钮
@@ -91,19 +91,6 @@ function Fist_Control:_init()
     self._centerPos = cc.p(self._bgSize.width, self._bgSize.height)           -- 中心点位置
     self._maxRadius = self._bgSize.width/2                                    -- 摇杆半径
 
-    -- 退出按钮
-    local exitBtn = ccui.Button:create(Res.CLOSE_IMG, Res.CLOSE_IMG, Res.CLOSE_IMG)
-    exitBtn:setPosition(cc.p(display.width - 30, display.height - 30))
-    exitBtn:setTitleFontSize(18)
-    exitBtn:addTouchEventListener(function(sender, eventType)
-        if eventType ~= ccui.TouchEventType.ended then 
-            return 
-        end 
-        local scene = require("app.TestScene"):create()
-        display.runScene(scene)
-    end)
-    self:addChild(exitBtn)
-
     -- 触摸监听
     local listener = cc.EventListenerTouchOneByOne:create()
     listener:setSwallowTouches(true)
@@ -111,6 +98,9 @@ function Fist_Control:_init()
     listener:registerScriptHandler(handler(self, self.onTouchMoved),cc.Handler.EVENT_TOUCH_MOVED)
     listener:registerScriptHandler(handler(self, self.onTouchEnded),cc.Handler.EVENT_TOUCH_ENDED)
     self:getEventDispatcher():addEventListenerWithSceneGraphPriority(listener, self)
+
+    -- 添加帧刷新定时器
+    self:scheduleUpdateWithPriorityLua(handler(self, self._updateMove), 0)
 end 
 
 function Fist_Control:onTouchBegan(node, event)
@@ -120,6 +110,7 @@ function Fist_Control:onTouchBegan(node, event)
     if cc.rectContainsPoint(self._joyStick:getBoundingBox(), location) then 
         self._isCanMove = true 
     end 
+
     return true 
 end 
 
@@ -130,11 +121,13 @@ function Fist_Control:onTouchMoved(node, event)
     end 
     -- 获取触摸点坐标
     local point = node:getLocation()
+    if not cc.rectContainsPoint(self._joyStick:getBoundingBox(), point) then 
+        --print("触摸超出范围了...")
+        return 
+    end 
     
-    -- 获取摇杆中心点与触屏点形成的斜边长度，弧度
-    local distance_z, radian = self:_getRadian(self._centerPos, point)
-
     -- 判定移动距离是否大于半径长度
+    local distance_z, radian = self:_getRadian(self._centerPos, point)
     if distance_z >= self._maxRadius then 
         -- 重新设定摇杆位置，不可超越半径长度
         local pos1 = self:_getPos(self._maxRadius, radian)
@@ -146,49 +139,34 @@ function Fist_Control:onTouchMoved(node, event)
     end 
 
     -- 设置方向
-    local roleDir = cc.p(0, 0)
     if radian >= -PI/8 and radian < PI/8 then 
-        -- 左
         self._joyStickDir = JOYSTICK_DIR.LEFT                 
-        roleDir = cc.p(-1, 0)
     elseif radian >= PI/8 and radian < 3*PI/8 then 
-        -- 左上
         self._joyStickDir = JOYSTICK_DIR.LEFT_UP 
-        roleDir = cc.p(-1, 1)         
     elseif radian >= 3*PI/8 and radian < 5*PI/8 then 
-        -- 上
-        self._joyStickDir = JOYSTICK_DIR.UP 
-        roleDir = cc.p(0, 1)                
+        self._joyStickDir = JOYSTICK_DIR.UP         
     elseif radian >= 5*PI/8 and radian < 7*PI/8 then 
-        -- 右上
-        self._joyStickDir = JOYSTICK_DIR.LEFT_UP 
-        roleDir = cc.p(1, 1)          
+        self._joyStickDir = JOYSTICK_DIR.RIGHT_UP  
     elseif (radian >= 7*PI/8 and radian <= PI) or (radian >= -PI and radian < -7*PI/8) then 
-        -- 右
-        self._joyStickDir = JOYSTICK_DIR.RIGHT 
-        roleDir = cc.p(1, 0)                
+        self._joyStickDir = JOYSTICK_DIR.RIGHT     
     elseif radian >= -7*PI/8 and radian < -5*PI/8 then 
-        -- 右下
         self._joyStickDir = JOYSTICK_DIR.RIGHT_DOWN 
-        roleDir = cc.p(1, -1)       
     elseif radian >= -5*PI/8 and radian < -3*PI/8 then 
-        -- 下
-        self._joyStickDir = JOYSTICK_DIR.DOWN 
-        roleDir = cc.p(0, -1)                 
+        self._joyStickDir = JOYSTICK_DIR.DOWN  
     elseif radian >= -3*PI/8 and radian < -PI/8 then 
-        -- 左下
         self._joyStickDir = JOYSTICK_DIR.LEFT_DOWN 
-        roleDir = cc.p(-1, -1)         
     end 
-
-    -- 更新玩家位置
-    self._roleNode:walkWithDirection(roleDir)
 end 
 
 function Fist_Control:onTouchEnded(node, event)
     if not self._isCanMove then 
         return 
     end 
+
+    if self._moveScheduler ~= nil then 
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._moveScheduler)
+        self._moveScheduler = nil 
+    end
 
     self._isCanMove = false 
     self._joyStickDir = JOYSTICK_DIR.STAY
@@ -197,6 +175,35 @@ function Fist_Control:onTouchEnded(node, event)
 
     -- 玩家状态修改为站立
     self._roleNode:idle()
+end 
+
+-- 移动相关
+function Fist_Control:_updateMove(dt)
+    if not self._isCanMove then 
+        return 
+    end 
+
+    local roleDir = cc.p(0, 0)
+    if self._joyStickDir == JOYSTICK_DIR.LEFT then 
+        roleDir = cc.p(-1, 0)
+    elseif self._joyStickDir == JOYSTICK_DIR.LEFT_UP then 
+        roleDir = cc.p(-1, 1)  
+    elseif self._joyStickDir == JOYSTICK_DIR.UP then 
+        roleDir = cc.p(0, 1)
+    elseif self._joyStickDir == JOYSTICK_DIR.RIGHT_UP then 
+        roleDir = cc.p(1, 1)
+    elseif self._joyStickDir == JOYSTICK_DIR.RIGHT then 
+        roleDir = cc.p(1, 0) 
+    elseif self._joyStickDir == JOYSTICK_DIR.RIGHT_DOWN then 
+        roleDir = cc.p(1, -1)
+    elseif self._joyStickDir == JOYSTICK_DIR.DOWN then 
+        roleDir = cc.p(0, -1)  
+    elseif self._joyStickDir == JOYSTICK_DIR.LEFT_DOWN then 
+        roleDir = cc.p(-1, -1) 
+    end 
+
+    -- 更新玩家位置
+    self._roleNode:walkWithDirection(roleDir)
 end 
 
 -- 攻击事件
@@ -219,7 +226,6 @@ function Fist_Control:_attackEvent(sender, eventType)
             self._roleNode:attack()
         end 
     end 
-    
 end 
 
 -- 根据两个点的位置获取弧度(中心点，摇杆点位置)
@@ -242,6 +248,17 @@ function Fist_Control:_getPos(distance_z, radian)
     local point_y = math.sin(radian) * distance_z
     --local angle = math.radian2angle(radian)               -- 弧度转角度
     return cc.p(-point_x, point_y)
+end 
+
+-- 清空相关
+function Fist_Control:dispose()
+    -- 清空定时器相关
+    self:unscheduleUpdate()
+
+    if self._attackScheduler ~= nil then 
+        cc.Director:getInstance():getScheduler():unscheduleScriptEntry(self._attackScheduler)
+        self._attackScheduler = nil 
+    end 
 end 
 
 return Fist_Control
