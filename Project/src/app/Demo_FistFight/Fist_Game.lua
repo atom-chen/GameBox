@@ -48,7 +48,7 @@ function Fist_Game:_init()
         self:addChild(self._enemyNodes[i], 2)
 
         local cSide, cBottom = self._enemyNodes[i]._centerToSide, self._enemyNodes[i]._centerToBottom
-        local minX, maxX = display.width + cSide, self._mapSize.width * self._tileSize.width - cSide
+        local minX, maxX = display.width/2 + cSide, self._mapSize.width * self._tileSize.width - cSide
         local minY, maxY = cBottom + 20, 3 * self._tileSize.height + cBottom
         local pos = cc.p(RANDOM(minX, maxX), RANDOM(minY, maxY))
         self._enemyNodes[i]:setPosition(pos)
@@ -63,6 +63,7 @@ end
 function Fist_Game:_update(dt)
     self:_updatePositions(dt)
     self:_updateReorder()
+    self:_updateRobots(dt)
 end 
 
 -- 更新位置相关
@@ -82,9 +83,10 @@ function Fist_Game:_updatePositions(dt)
 end 
 
 -- 更新视图位置
-function Fist_Game:setViewpointCenter(pos)
-    local x1, x2 = MAX(pos.x, display.width/2), self._mapSize.width * self._tileSize.width - display.width/2
-    local y1, y2 = MAX(pos.y, display.height/2), self._mapSize.height * self._tileSize.height - display.height/2
+function Fist_Game:setViewpointCenter(rolepos)
+    local mapWidth, mapHight = self._mapSize.width * self._tileSize.width, self._mapSize.height * self._tileSize.height
+    local x1, x2 = MAX(rolepos.x, display.width/2), mapWidth - display.width/2
+    local y1, y2 = MAX(rolepos.y, display.height/2), mapHight - display.height/2
     local point = cc.p(MIN(x1, x2), MIN(y1, y2))
     local newpos = cc.pSub(display.center, point)
     self:setPosition(newpos)
@@ -92,7 +94,7 @@ end
 
 -- 更新层级
 function Fist_Game:_updateReorder()
-    do return end 
+    --do return end 
     for i = 1, ENEMY_COUNT do 
         local tag = self._enemyNodes[i]:getTag()
         if tag == 100 then 
@@ -102,9 +104,25 @@ function Fist_Game:_updateReorder()
     end 
 end 
 
+-- 更新机器人相关
+function Fist_Game:_updateRobots(dt)
+    local dieCount = 0             -- 死亡敌人数目
+    for i = 1, ENEMY_COUNT do 
+        local actionState = self._enemyNodes[i]:getActionState()
+        if actionState == const.ActionState.DIE then 
+            dieCount = dieCount + 1
+        end 
+
+        if dieCount >= ENEMY_COUNT then 
+            -- 游戏结束
+            break 
+        end 
+    end 
+
+end 
 
 -- 获取英雄节点
-function Fist_Game:getHeroNode()
+function Fist_Game:getRoleNode()
     return self._roleNode
 end 
 

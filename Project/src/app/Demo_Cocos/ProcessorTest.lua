@@ -37,6 +37,20 @@ end
 
 -- loadBar动画
 function ProcessorTest:playLoadBarDemo()
+    -- 返回按钮相关
+    local backBtn = ccui.Button:create(Res.BTN_N, Res.BTN_P, Res.BTN_D)
+    backBtn:setPosition(cc.p(display.width - 30, 30))
+    backBtn:setTitleFontSize(18)
+    backBtn:setTitleColor(cc.c3b(0,0,0))
+    backBtn:setTitleText("返 回")
+    backBtn:addTouchEventListener(function(sender, eventType)
+        if eventType ~= ccui.TouchEventType.ended then 
+            return 
+        end 
+        self:removeFromParent()
+    end)
+    self:addChild(backBtn)
+
     -- 按钮相关
     for i = 1, 2 do 
         local index = i == 1 and 1 or -1

@@ -4,6 +4,15 @@
 #include "cocos2d.h"
 #include "scripting/lua-bindings/manual/lua_module_register.h"
 
+// bugly相关
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+#include "bugly/CrashReport.h"
+#include "bugly/lua/BuglyLuaAgent.h"
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+//#include "CrashReport.h"
+//#include "BuglyLuaAgent.h"
+#endif
+
 using namespace CocosDenshion;
 
 USING_NS_CC;
@@ -58,7 +67,16 @@ bool AppDelegate::applicationDidFinishLaunching()
     LuaStack* stack = engine->getLuaStack();
     stack->setXXTEAKeyAndSign("2dxLua", strlen("2dxLua"), "XXTEA", strlen("XXTEA"));
 
-    //register custom function
+	// 初始化bugly
+#if (CC_TARGET_PLATFORM == CC_PLATFORM_ANDROID)
+	CrashReport::initCrashReport("b37f35daaf", false);
+	BuglyLuaAgent::registerLuaExceptionHandler(engine);
+#elif (CC_TARGET_PLATFORM == CC_PLATFORM_IOS)
+	//CrashReport::initCrashReport("dab8c3f417", false);
+	//BuglyLuaAgent::registerLuaExceptionHandler(engine);
+#endif
+
+    //register custom function				
     //LuaStack* stack = engine->getLuaStack();
     //register_custom_function(stack->getLuaState());
     

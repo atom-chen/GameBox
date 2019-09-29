@@ -1,7 +1,6 @@
 -- 角色动作基类
 -- 用于玩家或敌人通过切换状态来改变动作 共有5种状态，可参考：Fist_Const.ActionState
 
-local RES_PATH = "fistFight/pd_role.plist"
 local const = require("app.Demo_FistFight.Fist_Const")
 local ACTION = const.ActionState
 
@@ -25,11 +24,12 @@ function Fist_ActionBase:ctor()
     self._desiredPos = cc.p(0, 0)               -- 
     self._hitBox = cc.rect(0,0,0,0)             -- 
     self._attackBox = cc.rect(0,0,0,0)          --
-    
+
     self:_init()
 end 
 
 function Fist_ActionBase:_init()
+    local RES_PATH = "fistfight/pd_role.plist"
     local isLoad = cc.SpriteFrameCache:getInstance():isSpriteFramesWithFileLoaded(RES_PATH)
     if not isLoad then 
         cc.SpriteFrameCache:getInstance():addSpriteFrames(RES_PATH)
@@ -59,8 +59,11 @@ function Fist_ActionBase:walkWithDirection(direction)
     end 
 
     if self._actionState == ACTION.WALK then 
-        -- 设置反转显示，true反转
-        --self:setFlippedX(direction.x >= 0 and false or true) 
+        if direction.x >= 0 then 
+            self:setFlippedX(false) 
+        else 
+            self:setFlippedX(true) 
+        end 
         self._desiredPos = cc.pAdd(cc.p(self:getPosition()), cc.pMul(direction, self._walkSpeed))
     end 
 end 
@@ -78,7 +81,6 @@ end
 
 -- 被攻击
 function Fist_ActionBase:hurtWithDamage(damageNum)
-
     if self._actionState == ACTION.DIE then 
         return 
     end 
@@ -112,6 +114,11 @@ end
 -- 获取动画位置
 function Fist_ActionBase:getAniPos()
     return self._desiredPos
+end 
+
+-- 获取动画状态
+function Fist_ActionBase:getActionState()
+    return self._actionState
 end 
 
 -- 创建碰撞体

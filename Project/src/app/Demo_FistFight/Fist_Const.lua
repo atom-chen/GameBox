@@ -12,7 +12,7 @@ const.ActionState = {
 }
 
 -- 敌人数目
-const.ENEMY_COUNT = 50
+const.ENEMY_COUNT = 10
 
 
 
