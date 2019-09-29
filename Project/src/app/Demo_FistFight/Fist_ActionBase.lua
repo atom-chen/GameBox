@@ -116,6 +116,11 @@ function Fist_ActionBase:getAniPos()
     return self._desiredPos
 end 
 
+-- 获取动画状态
+function Fist_ActionBase:getActionState()
+    return self._actionState
+end 
+
 -- 创建碰撞体
 function Fist_ActionBase:createBoundingBoxWithOrigin(point, size)
     -- 碰撞检测区域
