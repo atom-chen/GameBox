@@ -14,26 +14,8 @@ Project:
 |- runtime 用于Win32，Mac开发存储的动态库文件 暂不赘述
 |- frameworks cocos C/C++库文件相关 暂不赘述
 |- src 脚本目录相关
-|- - app 
-|- - - Demo_Cocos 根据CocosLua Test项目编写的一些示例
-|- - - Demo_FistFight 学习有限状态机参考网友推荐编写的格斗Demo
-|- - - Demo_lolitaParkour 学习TileMap参考网友推荐编写的萝莉跑酷
-|- - - Demo_Tetris 参考网友推荐编写的俄罗斯方块
-|- - - Demo_ZombieShoot 参考网友推荐编写的僵尸射击游戏，以上三个均为此Demo服务
-|- - - Utils 工具类方法，全局变量声明等
-|- - cocos cocosLua底层的实现及拓展
-|- - debug visualCode使用luaIde调试的配置文件
-|- - main.lua 项目启动文件
-|- tool 工具相关
-|- - atlasSplit 将TexturePacker生成的图集文件拆分成小图，不支持最新版本, 暂且保留, 详细说明参考tool\README.txt
-|- - convertExcelLua 将Excel文件转换为lua文件, 详细说明参考tool\README.txt
+|- tool 工具相关，详情可参考tool/README.md文件
 |- res 资源相关
-|- - art/csd/Tile/qiangqiang.plist等 僵尸射击的资源文件
-|- - Default/fonts 从cocos示例项目中拷贝的一些资源
-|- - effect 存储的一些公有的特效文件
-|- - fistfight 对应Demo_FistFight的资源
-|- - lolitaParkour 对应Demo_lolitaParkour的资源
-|- - tetris: 俄罗斯方块资源
 |- document 文档相关
 |- - excel 僵尸射击游戏的配置表
 |- - sdk 接入SDK的文件及流程文档

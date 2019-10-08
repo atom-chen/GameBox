@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import os
+import sys 
 import json
 import requests
 
@@ -45,9 +46,10 @@ def analyzeText(content):
     return newstr
 
 # 启动  
-def start(filepath):
+def Start(filepath):
     # 读取文件
-    print(u'读取并翻译内容中...')
+    print(u'翻译文件：' + filepath)
+
     newContent = []
     with open(filepath, 'r') as f:
         for line in f:
@@ -63,8 +65,12 @@ def start(filepath):
 
 
     # 写入新文件中
-    print(u'生成新文件中...')
-    newfile = open('english.l', 'w')
+    dirs = os.path.split(filepath)
+    names = os.path.splitext(dirs[1])
+    print(names)
+    newfileName = 'out/{0}_English{1}'.format(names[0], names[1])
+    print(u'生成新文件:' + newfileName)
+    newfile = open(newfileName, 'w')
     newfile.write('return { \n')
     for i in range(count):
         newfile.write('\t' + newContent[i])
@@ -73,4 +79,19 @@ def start(filepath):
 
 
 if __name__ == '__main__':
-    start('demo.l')
+    if len(sys.argv) != 2:
+        print(u'请输入要您要翻译的目录!!!')
+        sys.exit()
+
+    path = sys.argv[1]
+    if os.path.isdir(path) is False:
+        print(u'目录不存在!!!')
+        sys.exit()
+    
+    print(u'您查找的目录为：' + path)
+    for root, dirs, files in os.walk(path):
+        for filename in files:
+            fullpath = os.path.join(root, filename)
+            if os.path.isfile(fullpath):
+                Start(fullpath)
+

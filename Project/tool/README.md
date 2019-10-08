@@ -64,9 +64,6 @@
 **Translate: 有道中英翻译**
 ```
 环境: python 2.x 3.x
-命令： python start.py 或者 直接点击start.py文件使用即可
-
-注意：
-1. 暂时未对指定目录文件进行处理，写死了文件路径， 需要优化
-2. 生成文件格式，固定命名为english.l，需要优化
+命令： python start.py 路径，比如 python start.py C:\Project\Demo
+会将翻译的文件放置到out目录下
 ```
