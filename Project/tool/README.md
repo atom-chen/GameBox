@@ -1,15 +1,14 @@
 #### 说明
-**atlasSplit: 将texturePacker图集文件拆分成散图文件**
+**PlistSplit: 将texturePacker图集文件拆分成散图文件**
 ```
 环境： python 3
 插件安装： pip3 install Pillow
 命令参考：python tool.py pd_sprites 
 网址参考：https://blog.csdn.net/sm9sun/article/details/77703551 
-
-问题较多，学习使用吧
+注意：问题较多
 ```
 
-**convertExcelLua: 将excel表转换为lua配置文件**
+**ExcelToLua: 将excel表转换为lua配置文件**
 ```
 目录结构：
 |- out 输出的lua文件
@@ -18,13 +17,14 @@
 
 环境： python 2
 命令： python excellua.py
+插件安装: pip install xlrd
 
 注意：
 1. 不可在打开excel文件的情况运行脚本文件，否则会报错
 2. 针对于excel命名建议为英文
 3. 如果excel表有多个sheet表，命名方式格式： excel名 + sheet名 + Config.lua 
 ```
-**qrcode： 将内容或者url转换为二维码图片**
+**QrCode 将内容或者url转换为二维码图片**
 ```
 环境: python 2
 命令： python start.py 或者直接点击start.py文件 使用
@@ -64,6 +64,12 @@
 **Translate: 有道中英翻译**
 ```
 环境: python 2.x 3.x
-命令： python start.py 路径，比如 python start.py C:\Project\Demo
+命令： python start.py 路径 (比如 python start.py C:\Project\Demo)
 会将翻译的文件放置到out目录下
+```
+**FindSameFile: 查找同名文件**
+```
+环境： python 2.x
+命令： python start.py 路径目录  (注意：路径目录可为空，为空时会默认搜索Project\res目录)
+原理： 将搜索的文件通过setdefault放置到map中，然后通过两次循环比较map即可
 ```
