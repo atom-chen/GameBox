@@ -12,6 +12,7 @@ local RubberTest = require("app.Demo_Cocos.RubberTest")
 local RubCardTest = require("app.Demo_Cocos.rubCard.RubCardTest")
 local ScreenShotTest = require("app.Demo_Cocos.ScreenShotTest")
 local EffectTest = require("app.Demo_Cocos.EffectTest")
+local MotionStreakTest = require("app.Demo_Cocos.MotionStreakTest")
 
 local tests = {
     {title = "ClipTest", layer = ClipTest, state = "裁切图形相关"},
@@ -27,6 +28,7 @@ local tests = {
     {title = "RubberTest", layer = RubberTest, state = "橡皮擦效果"},
     {title = "ScreenShotTest", layer = ScreenShotTest, state = "截图效果"},
     {title = "EffectTest", layer = EffectTest, state = "粒子效果"},
+    {title = "MotionStreakTest", layer = MotionStreakTest, state = "拖尾渐隐效果"},
 }
 local TEST_COUNT = #tests                               -- 示例数目
 local SCROLL_WIDTH, SCROLL_HEIGHT = 600, 450            -- scroll可视大小
