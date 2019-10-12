@@ -35,9 +35,11 @@ cc.exports.Res = {
     -- 
     CLOSE_IMG = "Default/close.png",
     --
-    LOGO = "Default/res.png",
+    LOGO = "Default/cocos_logo.png",
     STEAK = "Default/streak.png",
     STAR = "effect/stars.png",
+
+    MAN = "Default/grossini.png",
 }
 
 

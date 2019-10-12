@@ -64,7 +64,11 @@ function ScreenShotTest:_saveScreenShot(node, saveName)
     if not node or tolua.isnull(node) then 
         return 
     end
+
+    local size = node:getContentSize()
+    local posx, posy = node:getPosition()
     
+    -- 存储名字
     saveName = saveName or "screenshot.png"
 
     -- 判定文件是否存在
@@ -75,12 +79,16 @@ function ScreenShotTest:_saveScreenShot(node, saveName)
         cc.FileUtils:getInstance():removeFile(filepath)
     end 
 
-    -- 绘制截图
-    local size = node:getContentSize()
+    -- 绘制截图，其锚点默认为(0,0),位置默认为(0,0),故此要设置下绘制节点的位置，避免绘制无法出现图片的问题
+    -- 不可改变render的位置，否则依然无法绘制
     local render = cc.RenderTexture:create(size.width, size.height, cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A8888)
+    node:setPosition(cc.p(size.width/2, size.height/2))
     render:begin()
     node:visit()
     render:endToLua()
+
+    -- 将node恢复到原位置
+    node:setPosition(cc.p(posx, posy))
 
     --[[将纹理保存到文件中，操作成功后，将返回true。其参数有：
     1. 保存的文件名
@@ -89,7 +97,7 @@ function ScreenShotTest:_saveScreenShot(node, saveName)
     ]]
     local isSave = render:saveToFile(saveName, cc.IMAGE_FORMAT_PNG)
 
-    -- 检测文件是否已经存在
+    -- 图片的获取要再下一帧
     local timeScheduler = nil 
     timeScheduler = cc.Director:getInstance():getScheduler():scheduleScriptFunc(function()
         if cc.FileUtils:getInstance():isFileExist(filepath) then 

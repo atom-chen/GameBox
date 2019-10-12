@@ -3,15 +3,7 @@ local MotionStreakTest = class("MotionStreakTest", function()
     return cc.LayerColor:create(cc.c4b(0,0,0,255), display.width, display.height)
 end)
 
-local CARD_COUNT = 13               -- 牌张数目 
-local CARD_SPACE = 40               -- 牌张之间间隔
-local STARTPOS = cc.p(100, 100)      -- 首张牌的起始位置
-
 function MotionStreakTest:ctor()
-    self:_initUI()
-end 
-
-function MotionStreakTest:_initUI()
     -- 背景相关
     local bgImg = ccui.ImageView:create(Res.BTN_D)
     bgImg:setContentSize(cc.size(display.width, display.height))
@@ -33,7 +25,19 @@ function MotionStreakTest:_initUI()
     end)
     self:addChild(backBtn)
 
+    local listener = cc.EventListenerTouchOneByOne:create()
+    listener:registerScriptHandler(handler(self, self._onTouchBegan), cc.Handler.EVENT_TOUCH_BEGAN)
+    listener:registerScriptHandler(handler(self, self._onTouchMoved), cc.Handler.EVENT_TOUCH_MOVED)
+	listener:registerScriptHandler(handler(self, self._onTouchEnded), cc.Handler.EVENT_TOUCH_ENDED)
+	listener:setSwallowTouches(true)
 
+	local eventDispatcher = self:getEventDispatcher()
+	eventDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
+
+    self:_initUI()
+end 
+
+function MotionStreakTest:_initUI()
     -- 拖尾渐隐效果相关
     self._starSpr = cc.Sprite:create(Res.STAR)
     self:addChild(self._starSpr)
@@ -46,17 +50,7 @@ function MotionStreakTest:_initUI()
     self._steakNode = cc.MotionStreak:create(timeToFade, minSeg, strokeWidth, strokeColor, imagePath)
     -- 启用快速模式，添加新的顶点更快，但精度却会更低
     self._steakNode:setFastMode(true)
-    self:addChild(self._steakNode)
-
-
-    local listener = cc.EventListenerTouchOneByOne:create()
-    listener:registerScriptHandler(handler(self, self._onTouchBegan), cc.Handler.EVENT_TOUCH_BEGAN)
-    listener:registerScriptHandler(handler(self, self._onTouchMoved), cc.Handler.EVENT_TOUCH_MOVED)
-	listener:registerScriptHandler(handler(self, self._onTouchEnded), cc.Handler.EVENT_TOUCH_ENDED)
-	listener:setSwallowTouches(true)
-
-	local eventDispatcher = self:getEventDispatcher()
-	eventDispatcher:addEventListenerWithSceneGraphPriority(listener, self)
+    self:addChild(self._steakNode)    
 end 
 
 function MotionStreakTest:_onTouchBegan(sender, event)
