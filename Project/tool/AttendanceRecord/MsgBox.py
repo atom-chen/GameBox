@@ -6,16 +6,18 @@ import datetime
 import Tkinter
 from Tkinter import *
 import tkFileDialog
+from ExcelTool import *
+
 
 FORMATE = ['时长', '分钟长']
 
+# 说明内容
 content = '''
 1. 用于统计每个人在指定月份下的加班时间
 2. 工作日在19:30后打卡，算加班，加班时长为最后打卡时间 - 19:00
 3. 周六日必须保证有两次打卡时间，才算加班，否则加班无效
-4. 节假日时间，全天算加班，加班时长为8小时
+4. 节假日时间，全天算加班，加班时长计算为8小时
 '''
-
 
 # 消息框模块
 class MsgBox:
@@ -29,8 +31,6 @@ class MsgBox:
         self.showMsgBox()
         self.root.mainloop()
 
-
-    
     # 显示消息框
     def showMsgBox(self):
         line = 0
@@ -99,12 +99,17 @@ class MsgBox:
         isRestDay = True if self.chkVar2.get() == 1 else False 
         curMonth = self.monthVar.get()
         limitTime = self.limitVar.get()
+        '''
         print(u'选择路径为:' + path)
         print(u'时间类型(0-时长 1-分钟长):' + str(timeType))
         print(u'是否节假日算加班:' + str(isHoliday))
         print(u'是否周六日算加班:' + str(isRestDay))
         print(u'当前月份为:' + str(curMonth))
         print(u'加班限定:' + str(limitTime))
+        '''
+
+        excelTool = ExcelTool(path, timeType, isHoliday, isRestDay, curMonth, limitTime)
+        excelTool.AnalyzeFile()
 
 if __name__ == '__main__':
     box = MsgBox()
