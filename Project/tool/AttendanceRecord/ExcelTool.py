@@ -8,6 +8,22 @@ import json
 import urllib2
 import datetime
 import calendar
+from enum import Enum 
+
+# 日期类型
+class DATETYPE():
+   WORK = 0          # 工作日
+   REST = 1          # 休息日
+   HOLI = 2          # 节假日
+
+# 时间统计类型
+class TIMETYPE():
+   HOUR = 0             # 时长
+   MINUTE = 1           # 分钟长
+
+# 显示类型
+#class CELLTYPE(Enum):
+
 
 # 添加设置默认编码，避免：UnicodeEncodeError: 'ascii' codec can't encode characters ...
 import sys
@@ -27,8 +43,7 @@ class ExcelTool:
       self._isHoliday = isHoliDay   # 节假日是否算加班
       self._isRestDay = isRestDay   # 周六日是否算加班
       self._curMonth = curMonth     # 当前月份
-      self._limitTime = limitTime   # 加班限定时间
-
+      self._limitTime = limitTime   # 加班限定时间,比如19:30
 
    # 分析文件
    def AnalyzeFile(self):
@@ -57,78 +72,129 @@ class ExcelTool:
 
          # 遍历
          sheetData = []
-         for rowx in range(1, ROWS):      # 遍历行
-            rowData = []
-            for colx in range(0, COLS):   # 遍历列
+         for rowx in range(0, ROWS):       # 遍历行
+            rowData = []                   # 每行存储的数据
+            workOverTime = 0               # 工作日加班时间
+            restOverTime = 0               # 周六日加班时间
+            holidayOverTime = 0            # 节假日加班时间
+            totalOverTime = 0              # 总加班时间
+
+            for colx in range(0, COLS):    # 遍历列
                cell = sheet.cell(rowx, colx)
-               cellType = cell.ctype      # 单元格类型: 0-empty 1-string 2-number 3-date 4-boolean 5-error
-               cellValue = cell.value     # 单元格数值,unicode格式
-               if colx == 0:
-                  # 记录姓名信息
+               cellValue = str(cell.value).encode('utf-8')     # 单元格数值,unicode格式
+               if rowx == 0:
+                  # 记录标题信息
                   rowData.append(cellValue)
+                  if colx + 1 == COLS:
+                     rowData.append(u'工作日加班时间')
+                     rowData.append(u'休息日加班时间')
+                     rowData.append(u'节假日加班时间')
+                     rowData.append(u'总加班时间')
                else:
-                  # 记录加班时间
-                  overTime = self.CalculateOverTime(cellValue, dateDict[colx])
-                  rowData.append(overTime)
-            
-            # 存储每行数据
+                  if colx == 0:
+                     # 记录姓名信息
+                     rowData.append(cellValue)
+                  else:
+                     # 记录加班时间
+                     dateType = dateDict[colx]
+                     overTime = self.CalculateOverMinutes(cellValue, dateType)
+                     if self._timeType == TIMETYPE.HOUR:
+                        overTime = round(overTime*1.0/60, 2)
+                     rowData.append(overTime)
+
+                     # 统计各个加班分钟长
+                     if dateType == DATETYPE.WORK:
+                        workOverTime += overTime 
+                     elif dateType == DATETYPE.REST:
+                        restOverTime += overTime
+                     elif dateType == DATETYPE.HOLI:
+                        holidayOverTime += overTime
+                     else:
+                        totalOverTime += overTime
+                     
+                     if colx + 1 == COLS:
+                        rowData.append(round(workOverTime, 2))
+                        rowData.append(round(restOverTime, 2))
+                        rowData.append(round(holidayOverTime,2))
+                        rowData.append(round(totalOverTime, 2))
+            # 存储数据
             sheetData.append(rowData)
          
-         '''
-         # for i in range(len(sheetData)):
-         #    print(i, sheetData[i])
-
-         # 写入excel表中
-         newXlsName = 'New{0}_{1}.xls'.format(os.path.splitext(fileName)[0], index)
-         newSheetName = sheetNames[index]
-         newbook = xlwt.Workbook()
-         newSheet = newbook.add_sheet(newSheetName)
-         
-         # 写入行标题
-         for colx in range(0, COLS):
-            cell = sheet.cell(0, colx)
-            newSheet.write(0, colx, cell.value)
-         
-         # 写入内容
+         # 日志
          for rowx in range(len(sheetData)):
-            for colx in range(len(sheetData[rowx])):
-               newSheet.write(rowx+1, colx, sheetData[rowx][colx])
+            print(rowx, sheetData[rowx])
 
-         newbook.save(newXlsName)
-         print(u'生成新Excel表:{0}'.format(newXlsName))
-         '''
+         # 写入excel列表
+         self.WriteNewExcel(fileName, sheetNames[index], dateDict, sheetData)
 
    '''
-   @function: 计算加班时间，19:00后且加班30分钟后，算加班
-   @param: cellValue 单元格数值，根据最后一个时间段判定是否大于19：30,获取加班时间
+   @function: 写入新的excel列表
+   @param: fileName 原excel列表名
+   @param: sheetName 原excel列表sheet名
+   @param: dataDict 日期列表(0工作日 1周六日 2节假日)
+   @param: sheetData 加班数据
+   '''
+   def WriteNewExcel(self, fileName, sheetName, dateDict, sheetData):
+      # 创建新的excel
+      newbook = xlwt.Workbook(encoding = 'utf-8')
+      # 创建新的Sheet
+      newSheet = newbook.add_sheet(sheetName)
+      
+      # 写入内容
+      rowCount = len(sheetData) 
+      print(rowCount)
+      for rowx in range(rowCount):                    # 遍历每行
+         for colx in range(len(sheetData[rowx])):           # 遍历每列
+            newSheet.write(rowx, colx, sheetData[rowx][colx])
+
+      newXlsName = '{0}_New.xls'.format(os.path.splitext(fileName)[0])
+      newbook.save(newXlsName)
+      print(u'生成新Excel表:{0}'.format(newXlsName))
+
+   '''
+   @function: 计算加班分钟数
+   @param: cellValue 单元格数值，即打卡时间段
    @param: dateType, 日期类型 0-工作日 1-周六日 2-节假日
-   注意： 年份和日期暂定
    '''
-   def CalculateOverTime(self, cellValue, dateType):
-      minutes = []
+   def CalculateOverMinutes(self, cellValue, dateType):
       utfStr = cellValue.encode('utf-8')
+      strs = str.split(utfStr)         # 上班时间列表
+      clockTimeCount = len(strs)       # 打卡时间次数
 
-      if dateType == 2:
-         # 节假日
-         print(u'节假日时间，全天算加班，加班时长计算为8小时')
-         return 8 * 60
-      elif dateType == 1:
-         # 休息日
-         print(u'周六日必须保证有两次打卡时间，才算加班，否则加班无效')
-      else:
-         # 工作日
-         print(u'工作日在19:30后打卡，算加班，加班时长为最后打卡时间 - 19:00')
-         strs = str.split(utfStr)
+      # 每天打卡的分钟数
+      minutes = []
+      if clockTimeCount > 0:              
          for _str in strs:
             hour, minute = _str.strip().split(':')
-            minute = int(hour) * 60 + int(minute)       # 换算成分钟
+            minute = int(hour) * 60 + int(minute)
             minutes.append(minute)
 
+      if dateType == DATETYPE.HOLI:
+         # 节假日全天算加班，加班时长计算为8小时
+         if not self._isHoliday:
+            return 0
+         return 8 * 60
+      elif dateType == DATETYPE.REST:
+         # 休息日(周六日)必须保证有两次打卡时间，才算加班，否则加班无效
+         if not self._isRestDay:
+            return 0
+         elif clockTimeCount < 2:
+            return 0
+         else:
+            return minutes[-1] - minutes[0]
+      elif dateType == DATETYPE.WORK:
+         # 工作日,在19:30后打卡，算加班，加班时长为最后打卡时间 - 19:00
          # 判定最后一个时间段是否超过19:00且大于19:30
-         overTime = minutes[-1] - (19*60 + 30)
-         if overTime >= 0:
+         if clockTimeCount < 2:
+            return 0
+         
+         hour, minute = self._limitTime.strip().split(':')
+         limitMinute = int(hour) * 60 + int(minute)
+         if minutes[-1] - limitMinute >= 0:
             return minutes[-1] - 19*60
          return 0
+      
+      return 0
 
    '''
    @function: 获取指定列的日期数据
