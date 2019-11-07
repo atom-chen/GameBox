@@ -86,10 +86,10 @@ class ExcelTool:
                   # 记录标题信息
                   rowData.append(cellValue)
                   if colx + 1 == COLS:
-                     rowData.append(u'工作日加班时间')
-                     rowData.append(u'休息日加班时间')
-                     rowData.append(u'节假日加班时间')
-                     rowData.append(u'总加班时间')
+                     rowData.append(u'工作日时间')
+                     rowData.append(u'休息日时间')
+                     rowData.append(u'节假日时间')
+                     rowData.append(u'总时间')
                else:
                   if colx == 0:
                      # 记录姓名信息
@@ -121,8 +121,10 @@ class ExcelTool:
             sheetData.append(rowData)
          
          # 日志
+         '''
          for rowx in range(len(sheetData)):
             print(rowx, sheetData[rowx])
+         '''
 
          # 写入excel列表
          self.WriteNewExcel(fileName, sheetNames[index], dateDict, sheetData)
@@ -131,7 +133,7 @@ class ExcelTool:
    @function: 写入新的excel列表
    @param: fileName 原excel列表名
    @param: sheetName 原excel列表sheet名
-   @param: dataDict 日期列表(0工作日 1周六日 2节假日)
+   @param: dateDict 日期列表(0工作日 1周六日 2节假日)
    @param: sheetData 加班数据
    '''
    def WriteNewExcel(self, fileName, sheetName, dateDict, sheetData):
@@ -141,15 +143,93 @@ class ExcelTool:
       newSheet = newbook.add_sheet(sheetName)
       
       # 写入内容
+      dateLen = len(dateDict)
+      print(dateLen,dateDict)
       rowCount = len(sheetData) 
-      print(rowCount)
-      for rowx in range(rowCount):                    # 遍历每行
+      for rowx in range(rowCount):                          # 遍历每行
          for colx in range(len(sheetData[rowx])):           # 遍历每列
-            newSheet.write(rowx, colx, sheetData[rowx][colx])
+            cellValue = sheetData[rowx][colx]
+            if colx == 0:
+               newSheet.write(rowx, colx, cellValue)
+            else:
+               if colx <= dateLen:
+                  dateType = dateDict[colx]
+               else: 
+                  # 表示列表已超过该月份的最大天数了
+                  dateType = None
+               style = self.GetExcelStyle(rowx, colx, dateType, cellValue)
+               newSheet.write(rowx, colx, cellValue, style)
 
       newXlsName = '{0}_New.xls'.format(os.path.splitext(fileName)[0])
       newbook.save(newXlsName)
       print(u'生成新Excel表:{0}'.format(newXlsName))
+
+   '''
+   @function: 设置excel表格式相关
+   @param: rowIndex 行索引
+   @param: colIndex 列索引
+   @param: dateType 日期类型
+   @param: cellValue 数值
+   '''
+   def GetExcelStyle(self, rowIndex, colIndex, dateType, cellValue):
+      # 初始化样式
+      style = xlwt.XFStyle()
+   
+      '''
+      设置字体，属性有：
+         name:字体类型，比如宋体 
+         bold:是否为粗体 
+         colour_index:字体颜色 
+         height:字体大小 
+         italic:是否为斜体
+         struck_out:删除线 
+         underline:下划线
+      '''
+      font = xlwt.Font()
+
+      '''
+      设置排列格式，属性有:
+      '''
+      alignment = xlwt.Alignment()
+      alignment.horz = xlwt.Alignment.HORZ_CENTER  # 水平居中
+      alignment.vert = xlwt.Alignment.VERT_CENTER  # 垂直居中
+
+      '''
+      设置边框，属性有：
+      NO_LINE: 没有边框 THIN: 实线
+      '''
+      borders = xlwt.Borders()
+      
+      '''
+      # 为样式设置背景颜色,属性有：
+      # pattern: 色值颜色模式
+      # pattern_fore_colour: 背景颜色
+      '''
+      pattern = xlwt.Pattern()
+      
+      if rowIndex == 0:
+         font.name = 'Arial'
+         font.bold = True 
+      else:
+         if dateType != None :
+            if dateType == DATETYPE.WORK and cellValue <= 0:
+               pattern.pattern_fore_colour = 1     # 设置为红色
+            elif dateType == DATETYPE.REST and cellValue > 0:
+               font.bold = True
+               pattern.pattern_fore_colour = 4
+               pattern.pattern = xlwt.Pattern.SOLID_PATTERN
+            elif dateType == DATETYPE.HOLI and cellValue > 0:
+               font.bold = True 
+               pattern.pattern_fore_colour = 2
+               pattern.pattern = xlwt.Pattern.SOLID_PATTERN
+
+      # 定义格式
+      style.font = font 
+      style.borders = borders 
+      style.alignment = alignment
+      style.pattern = pattern
+      
+      return style 
 
    '''
    @function: 计算加班分钟数

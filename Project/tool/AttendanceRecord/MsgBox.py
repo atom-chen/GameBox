@@ -8,16 +8,7 @@ from Tkinter import *
 import tkFileDialog
 from ExcelTool import *
 
-
 FORMATE = ['时长', '分钟长']
-
-# 说明内容
-content = '''
-1. 用于统计每个人在指定月份下的加班时间
-2. 工作日在19:30后打卡，算加班，加班时长为最后打卡时间 - 19:00
-3. 周六日必须保证有两次打卡时间，才算加班，否则加班无效
-4. 节假日时间，全天算加班，加班时长计算为8小时
-'''
 
 # 消息框模块
 class MsgBox:
@@ -77,12 +68,24 @@ class MsgBox:
         line += 1
         
         # 说明
+        content = self.getHelpContent()
         label = Label(self.root, text=content, bg='gray', fg='red')
         label.grid(row=line, column=1, sticky='W')
         line += 1
 
         # 确定按钮
         Button(self.root, text='确认', command=self.sureEvent).grid(row=line, column=1)
+
+    # 获取文件说明内容
+    def getHelpContent(self):
+        fileName = os.getcwd() + '/res/help.l'
+        print(os.getcwd())
+        f = open(fileName, mode='r')
+        content = f.read()
+        print(content)
+        f.close()
+
+        return content 
 
     # 选择路径事件
     def onClickPathEvent(self):
