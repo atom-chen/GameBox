@@ -82,7 +82,6 @@ class MsgBox:
         print(os.getcwd())
         f = open(fileName, mode='r')
         content = f.read()
-        print(content)
         f.close()
 
         return content 
@@ -102,15 +101,8 @@ class MsgBox:
         isRestDay = True if self.chkVar2.get() == 1 else False 
         curMonth = self.monthVar.get()
         limitTime = self.limitVar.get()
-        '''
-        print(u'选择路径为:' + path)
-        print(u'时间类型(0-时长 1-分钟长):' + str(timeType))
-        print(u'是否节假日算加班:' + str(isHoliday))
-        print(u'是否周六日算加班:' + str(isRestDay))
-        print(u'当前月份为:' + str(curMonth))
-        print(u'加班限定:' + str(limitTime))
-        '''
 
+        # 调用excel解析工具
         excelTool = ExcelTool(path, timeType, isHoliday, isRestDay, curMonth, limitTime)
         excelTool.AnalyzeFile()
 

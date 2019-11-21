@@ -70,64 +70,67 @@ class ExcelTool:
          # 获取日期列表
          dateDict = self.getColHoliDayData(COLS)
 
-         # 遍历
-         sheetData = []
-         for rowx in range(0, ROWS):       # 遍历行
-            rowData = []                   # 每行存储的数据
-            workOverTime = 0               # 工作日加班时间
-            restOverTime = 0               # 周六日加班时间
-            holidayOverTime = 0            # 节假日加班时间
-            totalOverTime = 0              # 总加班时间
+         # 普通加班时间遍历，生成新的excel列表
+         # 获取指定月份下的19:00 ~ 21:00，以及周六日，节假日的加班数据
+         sheetData = self.getNormalSheetData(ROWS, COLS, sheet, dateDict)
+         self.WriteNormalNewExcel(fileName, sheetNames[index], dateDict, sheetData)
 
-            for colx in range(0, COLS):    # 遍历列
-               cell = sheet.cell(rowx, colx)
-               cellValue = str(cell.value).encode('utf-8')     # 单元格数值,unicode格式
-               if rowx == 0:
-                  # 记录标题信息
+   '''
+   @function: 获取指定月份下的19:00 ~ 21:00，以及周六日，节假日的加班数据
+   @param: ROWS excel列表的行数
+   @param: COLS excel列表的列数
+   @param: sheet sheet数据
+   @param: dateDict 日期列表数据
+   '''
+   def getNormalSheetData(self, ROWS, COLS, sheet, dateDict):
+      sheetData = []
+      for rowx in range(0, ROWS):       # 遍历行
+         rowData = []                   # 每行存储的数据
+         workOverTime = 0               # 工作日加班时间
+         restOverTime = 0               # 周六日加班时间
+         holidayOverTime = 0            # 节假日加班时间
+         totalOverTime = 0              # 总加班时间
+
+         for colx in range(0, COLS):    # 遍历列
+            cell = sheet.cell(rowx, colx)
+            cellValue = str(cell.value).encode('utf-8')     # 单元格数值,unicode格式
+            if rowx == 0:
+               # 记录标题信息
+               rowData.append(cellValue)
+               if colx + 1 == COLS:
+                  rowData.append(u'工作日时间')
+                  rowData.append(u'休息日时间')
+                  rowData.append(u'节假日时间')
+                  rowData.append(u'总时间')
+            else:
+               if colx == 0:
+                  # 记录姓名信息
                   rowData.append(cellValue)
-                  if colx + 1 == COLS:
-                     rowData.append(u'工作日时间')
-                     rowData.append(u'休息日时间')
-                     rowData.append(u'节假日时间')
-                     rowData.append(u'总时间')
                else:
-                  if colx == 0:
-                     # 记录姓名信息
-                     rowData.append(cellValue)
-                  else:
-                     # 记录加班时间
-                     dateType = dateDict[colx]
-                     overTime = self.CalculateOverMinutes(cellValue, dateType)
-                     if self._timeType == TIMETYPE.HOUR:
-                        overTime = round(overTime*1.0/60, 2)
-                     rowData.append(overTime)
+                  # 记录加班时间
+                  dateType = dateDict[colx]
+                  overTime = self.CalculateOverMinutes(cellValue, dateType)
+                  if self._timeType == TIMETYPE.HOUR:
+                     overTime = round(overTime*1.0/60, 2)
+                  rowData.append(overTime)
 
-                     # 统计各个加班分钟长
-                     if dateType == DATETYPE.WORK:
-                        workOverTime += overTime 
-                     elif dateType == DATETYPE.REST:
-                        restOverTime += overTime
-                     elif dateType == DATETYPE.HOLI:
-                        holidayOverTime += overTime
-                     else:
-                        totalOverTime += overTime
+                  # 统计各个加班分钟长
+                  totalOverTime += overTime
+                  if dateType == DATETYPE.WORK:
+                     workOverTime += overTime 
+                  elif dateType == DATETYPE.REST:
+                     restOverTime += overTime
+                  elif dateType == DATETYPE.HOLI:
+                     holidayOverTime += overTime
                      
-                     if colx + 1 == COLS:
-                        rowData.append(round(workOverTime, 2))
-                        rowData.append(round(restOverTime, 2))
-                        rowData.append(round(holidayOverTime,2))
-                        rowData.append(round(totalOverTime, 2))
-            # 存储数据
-            sheetData.append(rowData)
-         
-         # 日志
-         '''
-         for rowx in range(len(sheetData)):
-            print(rowx, sheetData[rowx])
-         '''
-
-         # 写入excel列表
-         self.WriteNewExcel(fileName, sheetNames[index], dateDict, sheetData)
+                  if colx + 1 == COLS:
+                     rowData.append(round(workOverTime, 2))
+                     rowData.append(round(restOverTime, 2))
+                     rowData.append(round(holidayOverTime,2))
+                     rowData.append(round(totalOverTime, 2))
+         # 存储数据
+         sheetData.append(rowData) 
+      return sheetData
 
    '''
    @function: 写入新的excel列表
@@ -136,7 +139,7 @@ class ExcelTool:
    @param: dateDict 日期列表(0工作日 1周六日 2节假日)
    @param: sheetData 加班数据
    '''
-   def WriteNewExcel(self, fileName, sheetName, dateDict, sheetData):
+   def WriteNormalNewExcel(self, fileName, sheetName, dateDict, sheetData):
       # 创建新的excel
       newbook = xlwt.Workbook(encoding = 'utf-8')
       # 创建新的Sheet
