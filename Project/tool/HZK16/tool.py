@@ -6,9 +6,9 @@
 https://blog.twofei.com/embedded/hzk.html
 https://www.jb51.net/article/155543.htm
 '''
-
-import binascii
 import os
+import math
+import binascii
 from PIL import Image
 
 # 用于解决错误：UnicodeEncodeError: 'ascii' codec encode characters in position 31-57: ordinal not in range(128)
@@ -17,27 +17,37 @@ import sys
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-#颜色列表
-COLORTAB = [
-    '#FFFACD',      # 黄色
-    '#F0FFFF',      # 白色
-    '#BFEFFF',      # 蓝色
-    '#b7facd',      # 青色
-    '#ffe7cc',      # 浅橙色
-    '#fbccff',      # 浅紫色
-    '#d1ffb8',      # 淡绿色
-    '#febec0',      # 淡红色
-    '#E0EEE0',      # 灰色
-]
+# 每张头像裁剪后尺寸
+HEAD_CLIPSIZE = 75
 
-#设置头像裁剪后尺寸
-eachSize = 75
+# 每行列头像数目，即每点：2*2
+HEAD_NUM = 2
 
-RECT_HEIGHT = 16
-RECT_WIDTH = 16
+#
+RECT_WIDTH = 16                          
+RECT_HEIGHT = 16                     
 BYTE_COUNT_PER_ROW = RECT_WIDTH/8
 BYTE_COUNT_PER_FONT = BYTE_COUNT_PER_ROW*RECT_HEIGHT
 
+'''
+HZK16字库是符合GB2312国家标准的16×16点阵字库，HZK16的GB2312-80支持的汉字有6763个，符号682个
+GB2312汉字是由两个字节编码的，范围为0xA1A1~0xFEFE。A1-A9为符号区，B0-F7为汉字区.
+汉字占两个字节，这两个中前一个字节为该汉字的区号，后一个字节为该字的位号.其中，每个区记录94个汉字，位号为该字在该区中的位置。
+
+要获取一个汉字的位置，就需要得到他的区码和位码
+* 区码：汉字的第一个字节-0xA0，因为汉字编码是从0xA0区开始的，所以文件最前面就是从0xA0区开始，要算出相对区码
+* 位码：汉字的第二个字节-0xA0
+这样我们就可以得到汉字在HZK16中的绝对偏移位置：offset = (94*(区码-1)+(位码-1))*32。
+
+注解：
+* 区码减1是因为数组是以0为开始而区号位号是以1为开始的
+* (94*(区号-1)+位号-1)是一个汉字字模占用的字节数
+* 最后乘以32是因为汉字库文应从该位置起的32字节信息记录该字的字模信息(前面提到一个汉字要有32个字节显示)
+
+摘抄于：https://blog.twofei.com/embedded/hzk.html
+'''
+# 将文字转换为点阵
+# 代码参考：https://www.jb51.net/article/155543.htm
 def char2bit(textStr):
     KEYS = [0x80, 0x40, 0x20, 0x10, 0x08, 0x04, 0x02, 0x01]
     target = []
@@ -53,9 +63,11 @@ def char2bit(textStr):
         gb2312 = text.encode('gb2312')
         hex_str = binascii.b2a_hex(gb2312)
         result = str(hex_str)
-        # 区码：
-        area = eval('0x' + result[:2]) - 0xA0           
+        # 区码
+        area = eval('0x' + result[:2]) - 0xA0       
+        # 位码    
         index = eval('0x' + result[2:]) - 0xA0
+        # 绝对偏移值
         offset = (94 * (area-1) + (index-1)) * BYTE_COUNT_PER_FONT
 
         font_rect = None
@@ -87,7 +99,7 @@ def char2bit(textStr):
         target.append(''.join(output))
     return target
 
-def head2char(num, outlist):
+def head2char(index, outlist):
     # 获取资源列表
     imgList = []
     workspace = os.getcwd()
@@ -96,62 +108,41 @@ def head2char(num, outlist):
         for filename in files:
             imgList.append(os.path.join(root, filename))
 
+    # 图片数目
     imgCount = len(imgList)
 
     #变量n用于循环遍历头像图片，即当所需图片大于头像总数时，循环使用头像图片
-    n=0
+    n = 0
 
-    #变量count用于为最终生成的单字图片编号
-    count = 0
-
-    #index用来改变不同字的背景颜色
-    index = 0
-    #每个item对应不同字的点阵信息
     for item in outlist:
-        #新建一个带有背景色的画布，16*16点阵，每个点处填充2*2张头像图片，故长为16*2*100
-        canvasSize = 16*2*eachSize
-        canvas = Image.new('RGB', (canvasSize, canvasSize), COLORTAB[index])  # 新建一块画布
-        #index变换，用于变换背景颜色
-        index = (index+1)%9
-        count += 1
-
-        #每个16*16点阵中的点，用四张100*100的头像来填充
-        for i in range(16*16):
+        # 创建新图片
+        canvasWidth = RECT_WIDTH * HEAD_NUM * HEAD_CLIPSIZE
+        canvasHeight = RECT_HEIGHT * HEAD_NUM * HEAD_CLIPSIZE
+        canvas = Image.new('RGB', (canvasWidth, canvasHeight), '#E0EEE0')
+        # 遍历 RECT_WIDTH * RECT_HEIGHT 矩阵
+        for i in range(RECT_WIDTH * RECT_HEIGHT):
             #点阵信息为1，即代表此处要显示头像来组字
             if item[i] != '1':
                 continue 
 
-            #循环读取连续的四张头像图片
-            x1 = n % imgCount
-            x2 = (n+1) % imgCount
-            x3 = (n+2) % imgCount
-            x4 = (n+3) % imgCount
-
-            #点阵处左上角图片1/4
-            img = Image.open(imgList[x1])                                           # 打开图片
-            img = img.resize((eachSize, eachSize), Image.ANTIALIAS)                 # 缩小图片
-            canvas.paste(img, ((i % 16) * 2 * eachSize, (i // 16) * 2 * eachSize))  # 拼接图片
-                
-            # 点阵处右上角图片2/4
-            img = Image.open(imgList[x2])
-            img = img.resize((eachSize, eachSize), Image.ANTIALIAS)
-            canvas.paste(img, (((i % 16) * 2 + 1) * eachSize, (i // 16) * 2 * eachSize))
-            
-            # 点阵处左下角图片3/4
-            img = Image.open(imgList[x3])
-            img = img.resize((eachSize, eachSize), Image.ANTIALIAS)
-            canvas.paste(img, ((i % 16) * 2 * eachSize, ((i // 16) * 2 + 1 ) * eachSize))
-
-            # 点阵处右下角图片4/4
-            img = Image.open(imgList[x4])
-            img = img.resize((eachSize, eachSize), Image.ANTIALIAS) 
-            canvas.paste(img, (((i % 16) * 2 + 1) * eachSize, ((i // 16) * 2 + 1) * eachSize)) 
+            # 每个点使用放置几个矩阵，比如2*2，3*3
+            for count in range(pow(HEAD_NUM, 2)):
+                # 获取图片索引
+                imgIndex = (n + count) % imgCount
+                # 读取图片          
+                headImg = Image.open(imgList[imgIndex])  
+                # 重置图片大小       
+                headImg = headImg.resize((HEAD_CLIPSIZE, HEAD_CLIPSIZE), Image.ANTIALIAS)
+                # 拼接图片
+                posx = ((i % RECT_WIDTH) * HEAD_NUM + (count%HEAD_NUM)) * HEAD_CLIPSIZE
+                posy = ((i // RECT_HEIGHT) * HEAD_NUM + (count//HEAD_NUM)) * HEAD_CLIPSIZE
+                canvas.paste(headImg, (posx, posy))
 
             #调整n以读取后续图片
-            n= (n+4) % len(imgList)
+            n = (n+4) % imgCount
 
         # 保存图片 quality代表图片质量，1-100
-        canvas.save('result_{0}.jpg'.format(num), quality=100)
+        canvas.save('result_{0}.jpg'.format(index), quality=100)
 
 # 将gbk转换为unicode格式
 def transGbk2Unicode(str_v):
