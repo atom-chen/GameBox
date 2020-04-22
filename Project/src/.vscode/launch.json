@@ -25,6 +25,7 @@
             "localRoot": "${workspaceRoot}/../",
             "mainFileDesc": "-- 先填 启动的lua 文件名 运行程序支持 workdir 当做 file 进行传入 不支持可不填",
             "mainFile": "src/main.lua",
+            "commandLine": "-workdir ${workspaceRoot}/../ -file src/main.lua",
             "portDesc": "--必填 调试器的端口 可修改 与调用LuaDebug 的端口对应",
             "port": 7003,
             "exePathDesc1": "--必填 执行文件路径",

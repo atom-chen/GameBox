@@ -21,6 +21,10 @@ function TestScene:ctor()
     self._root = cc.CSLoader:createNode("res/csd/UITest.csb")
     self:addChild(self._root)
 
+    -- 测试
+    local uiLayer = require("app.BaseTest.UILayer").new()
+    uiLayer:setName()
+
     -- listView相关
     self._listView = ccui.Helper:seekNodeByName(self._root, "ListView_1")
     self._listView:setDirection(cc.SCROLLVIEW_DIRECTION_VERTICAL)             -- 设置方向
