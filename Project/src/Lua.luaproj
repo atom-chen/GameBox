@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>E439935D-B2A2-46AE-856D-2AA408428F33</ProjectGuid>
+    <!--$guid1$-->
+    <ProjectHome>.</ProjectHome>
+    <StartupFile>
+    </StartupFile>
+    <SearchPath>
+    </SearchPath>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <DebugSymbols>true</DebugSymbols>
+    <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="app\BaseTest\UIBase.lua" />
+    <Compile Include="app\BaseTest\UILayer.lua" />
+    <Compile Include="app\Demo_Cocos\ClipTest.lua" />
+    <Compile Include="app\Demo_Cocos\DrawGraphTest.lua" />
+    <Compile Include="app\Demo_Cocos\DrawLineTest.lua" />
+    <Compile Include="app\Demo_Cocos\EffectTest.lua" />
+    <Compile Include="app\Demo_Cocos\GhostTest.lua" />
+    <Compile Include="app\Demo_Cocos\KeyboardTest.lua" />
+    <Compile Include="app\Demo_Cocos\MainTest.lua" />
+    <Compile Include="app\Demo_Cocos\MotionStreakTest.lua" />
+    <Compile Include="app\Demo_Cocos\OpenGLTest.lua" />
+    <Compile Include="app\Demo_Cocos\OrbitCameraTest.lua" />
+    <Compile Include="app\Demo_Cocos\ProcessorTest.lua" />
+    <Compile Include="app\Demo_Cocos\RubberTest.lua" />
+    <Compile Include="app\Demo_Cocos\rubCard\RubCardTest.lua" />
+    <Compile Include="app\Demo_Cocos\rubCard\Shader_RubCard.lua" />
+    <Compile Include="app\Demo_Cocos\ScheduleTest.lua" />
+    <Compile Include="app\Demo_Cocos\ScreenShotTest.lua" />
+    <Compile Include="app\Demo_Cocos\SpineTest.lua" />
+    <Compile Include="app\Demo_FistFight\Fist_ActionBase.lua" />
+    <Compile Include="app\Demo_FistFight\Fist_Const.lua" />
+    <Compile Include="app\Demo_FistFight\Fist_Control.lua" />
+    <Compile Include="app\Demo_FistFight\Fist_Enemy.lua" />
+    <Compile Include="app\Demo_FistFight\Fist_Game.lua" />
+    <Compile Include="app\Demo_FistFight\Fist_Role.lua" />
+    <Compile Include="app\Demo_FistFight\Fist_Scene.lua" />
+    <Compile Include="app\Demo_lolitaParkour\lolitaConst.lua" />
+    <Compile Include="app\Demo_lolitaParkour\lolitaLoginScene.lua" />
+    <Compile Include="app\Demo_lolitaParkour\lolitaMainScene.lua" />
+    <Compile Include="app\Demo_lolitaParkour\lolitaReport.lua" />
+    <Compile Include="app\Demo_lolitaParkour\lolitaRole.lua" />
+    <Compile Include="app\Demo_Tetris\GridConfig.lua" />
+    <Compile Include="app\Demo_Tetris\UITetrisMain.lua" />
+    <Compile Include="app\Demo_ZombieShoot\config\AchieveConfig.lua" />
+    <Compile Include="app\Demo_ZombieShoot\config\chapterConfig.lua" />
+    <Compile Include="app\Demo_ZombieShoot\config\MonsterConfig.lua" />
+    <Compile Include="app\Demo_ZombieShoot\config\noticeConfig.lua" />
+    <Compile Include="app\Demo_ZombieShoot\config\shieldConfig.lua" />
+    <Compile Include="app\Demo_ZombieShoot\config\SkillConfig.lua" />
+    <Compile Include="app\Demo_ZombieShoot\Service\AcheiveService.lua" />
+    <Compile Include="app\Demo_ZombieShoot\Service\AttackObject.lua" />
+    <Compile Include="app\Demo_ZombieShoot\Service\CampaignData.lua" />
+    <Compile Include="app\Demo_ZombieShoot\Service\ChapterService.lua" />
+    <Compile Include="app\Demo_ZombieShoot\Service\RoleService.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\battle\BattleScene.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\battle\Hero.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\battle\Monster.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\battle\UIBattle_Control.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\battle\UIBattle_Main.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\battle\UIBattle_Map.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\battle\UIBattle_Report.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\battle\UIBattle_Set.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\chapter\ChapterScene.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\chapter\UIChapterEach.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\eliminate\EliminateAbout.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\eliminate\EliminatePlay.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\eliminate\EliminateScene.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\LogoScene.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\MainScene.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\UIAchieve.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\UIMore.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\UIQuit.lua" />
+    <Compile Include="app\Demo_ZombieShoot\UI\UISelectRole.lua" />
+    <Compile Include="app\MyApp.lua" />
+    <Compile Include="app\TestScene.lua" />
+    <Compile Include="app\Utils\GlobalRequire.lua" />
+    <Compile Include="app\Utils\GlobalUtil.lua" />
+    <Compile Include="app\Utils\G_Enum.lua" />
+    <Compile Include="app\Utils\NumUtil.lua" />
+    <Compile Include="app\Utils\StringUtil.lua" />
+    <Compile Include="app\Utils\UIBase.lua" />
+    <Compile Include="cocos\3d\3dConstants.lua" />
+    <Compile Include="cocos\cocos2d\bitExtend.lua" />
+    <Compile Include="cocos\cocos2d\Cocos2d.lua" />
+    <Compile Include="cocos\cocos2d\Cocos2dConstants.lua" />
+    <Compile Include="cocos\cocos2d\deprecated.lua" />
+    <Compile Include="cocos\cocos2d\DeprecatedCocos2dClass.lua" />
+    <Compile Include="cocos\cocos2d\DeprecatedCocos2dEnum.lua" />
+    <Compile Include="cocos\cocos2d\DeprecatedCocos2dFunc.lua" />
+    <Compile Include="cocos\cocos2d\DeprecatedOpenglEnum.lua" />
+    <Compile Include="cocos\cocos2d\DrawPrimitives.lua" />
+    <Compile Include="cocos\cocos2d\functions.lua" />
+    <Compile Include="cocos\cocos2d\json.lua" />
+    <Compile Include="cocos\cocos2d\luaj.lua" />
+    <Compile Include="cocos\cocos2d\luaoc.lua" />
+    <Compile Include="cocos\cocos2d\Opengl.lua" />
+    <Compile Include="cocos\cocos2d\OpenglConstants.lua" />
+    <Compile Include="cocos\cocosbuilder\CCBReaderLoad.lua" />
+    <Compile Include="cocos\cocosbuilder\DeprecatedCocosBuilderClass.lua" />
+    <Compile Include="cocos\cocosdenshion\AudioEngine.lua" />
+    <Compile Include="cocos\cocosdenshion\DeprecatedCocosDenshionClass.lua" />
+    <Compile Include="cocos\cocosdenshion\DeprecatedCocosDenshionFunc.lua" />
+    <Compile Include="cocos\cocostudio\CocoStudio.lua" />
+    <Compile Include="cocos\cocostudio\DeprecatedCocoStudioClass.lua" />
+    <Compile Include="cocos\cocostudio\DeprecatedCocoStudioFunc.lua" />
+    <Compile Include="cocos\cocostudio\StudioConstants.lua" />
+    <Compile Include="cocos\controller\ControllerConstants.lua" />
+    <Compile Include="cocos\extension\DeprecatedExtensionClass.lua" />
+    <Compile Include="cocos\extension\DeprecatedExtensionEnum.lua" />
+    <Compile Include="cocos\extension\DeprecatedExtensionFunc.lua" />
+    <Compile Include="cocos\extension\ExtensionConstants.lua" />
+    <Compile Include="cocos\framework\audio.lua" />
+    <Compile Include="cocos\framework\components\event.lua" />
+    <Compile Include="cocos\framework\device.lua" />
+    <Compile Include="cocos\framework\display.lua" />
+    <Compile Include="cocos\framework\extends\LayerEx.lua" />
+    <Compile Include="cocos\framework\extends\MenuEx.lua" />
+    <Compile Include="cocos\framework\extends\NodeEx.lua" />
+    <Compile Include="cocos\framework\extends\SpriteEx.lua" />
+    <Compile Include="cocos\framework\extends\UICheckBox.lua" />
+    <Compile Include="cocos\framework\extends\UIEditBox.lua" />
+    <Compile Include="cocos\framework\extends\UIListView.lua" />
+    <Compile Include="cocos\framework\extends\UIPageView.lua" />
+    <Compile Include="cocos\framework\extends\UIScrollView.lua" />
+    <Compile Include="cocos\framework\extends\UISlider.lua" />
+    <Compile Include="cocos\framework\extends\UITextField.lua" />
+    <Compile Include="cocos\framework\extends\UIWidget.lua" />
+    <Compile Include="cocos\framework\init.lua" />
+    <Compile Include="cocos\framework\package_support.lua" />
+    <Compile Include="cocos\framework\transition.lua" />
+    <Compile Include="cocos\init.lua" />
+    <Compile Include="cocos\network\DeprecatedNetworkClass.lua" />
+    <Compile Include="cocos\network\DeprecatedNetworkEnum.lua" />
+    <Compile Include="cocos\network\DeprecatedNetworkFunc.lua" />
+    <Compile Include="cocos\network\NetworkConstants.lua" />
+    <Compile Include="cocos\physics3d\physics3d-constants.lua" />
+    <Compile Include="cocos\spine\SpineConstants.lua" />
+    <Compile Include="cocos\ui\DeprecatedUIEnum.lua" />
+    <Compile Include="cocos\ui\DeprecatedUIFunc.lua" />
+    <Compile Include="cocos\ui\experimentalUIConstants.lua" />
+    <Compile Include="cocos\ui\GuiConstants.lua" />
+    <Compile Include="cocos\__state.lua" />
+    <Compile Include="config.lua" />
+    <Compile Include="debug\LuaDebug.lua" />
+    <Compile Include="debug\LuaDebugjit.lua" />
+    <Compile Include="debug\luaideReLoadFile.lua" />
+    <Compile Include="main.lua" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include=".vscode\launch.json" />
+    <Content Include=".vscode\settings.json" />
+    <Content Include="Lua.luaproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".vscode\" />
+    <Folder Include="app\" />
+    <Folder Include="app\BaseTest\" />
+    <Folder Include="app\Demo_Cocos\" />
+    <Folder Include="app\Demo_Cocos\rubCard\" />
+    <Folder Include="app\Demo_FistFight\" />
+    <Folder Include="app\Demo_lolitaParkour\" />
+    <Folder Include="app\Demo_Tetris\" />
+    <Folder Include="app\Demo_ZombieShoot\" />
+    <Folder Include="app\Demo_ZombieShoot\config\" />
+    <Folder Include="app\Demo_ZombieShoot\Service\" />
+    <Folder Include="app\Demo_ZombieShoot\UI\" />
+    <Folder Include="app\Demo_ZombieShoot\UI\battle\" />
+    <Folder Include="app\Demo_ZombieShoot\UI\chapter\" />
+    <Folder Include="app\Demo_ZombieShoot\UI\eliminate\" />
+    <Folder Include="app\Utils\" />
+    <Folder Include="cocos\" />
+    <Folder Include="cocos\3d\" />
+    <Folder Include="cocos\cocos2d\" />
+    <Folder Include="cocos\cocosbuilder\" />
+    <Folder Include="cocos\cocosdenshion\" />
+    <Folder Include="cocos\cocostudio\" />
+    <Folder Include="cocos\controller\" />
+    <Folder Include="cocos\extension\" />
+    <Folder Include="cocos\framework\" />
+    <Folder Include="cocos\framework\components\" />
+    <Folder Include="cocos\framework\extends\" />
+    <Folder Include="cocos\network\" />
+    <Folder Include="cocos\physics3d\" />
+    <Folder Include="cocos\spine\" />
+    <Folder Include="cocos\ui\" />
+    <Folder Include="debug\" />
+    <Folder Include="obj\" />
+    <Folder Include="obj\Debug\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
+</Project>

@@ -22,7 +22,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libbullet", "..\..\cocos2d-
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "librecast", "..\..\cocos2d-x\external\recast\proj.win32\librecast.vcxproj", "{41E34993-647E-4282-8384-4AB1AE31A452}"
 EndProject
-Project("{5697748A-77EF-44CA-8824-4F5637E5945B}") = "LuaProject", "..\..\..\LuaProject.luaproj", "{E439935D-B2A2-46AE-856D-2AA408428F33}"
+Project("{5697748A-77EF-44CA-8824-4F5637E5945B}") = "Lua", "..\..\..\src\Lua.luaproj", "{E439935D-B2A2-46AE-856D-2AA408428F33}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
