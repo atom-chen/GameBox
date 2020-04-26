@@ -24,6 +24,7 @@
   <ItemGroup>
     <Compile Include="app\BaseTest\UIBase.lua" />
     <Compile Include="app\BaseTest\UILayer.lua" />
+    <Compile Include="app\Demo_Cocos\BaseTest.lua" />
     <Compile Include="app\Demo_Cocos\ClipTest.lua" />
     <Compile Include="app\Demo_Cocos\DrawGraphTest.lua" />
     <Compile Include="app\Demo_Cocos\DrawLineTest.lua" />
@@ -40,6 +41,7 @@
     <Compile Include="app\Demo_Cocos\rubCard\Shader_RubCard.lua" />
     <Compile Include="app\Demo_Cocos\ScheduleTest.lua" />
     <Compile Include="app\Demo_Cocos\ScreenShotTest.lua" />
+    <Compile Include="app\Demo_Cocos\SliderTest.lua" />
     <Compile Include="app\Demo_Cocos\SpineTest.lua" />
     <Compile Include="app\Demo_FistFight\Fist_ActionBase.lua" />
     <Compile Include="app\Demo_FistFight\Fist_Const.lua" />

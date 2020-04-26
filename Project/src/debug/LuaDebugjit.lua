@@ -1,9 +1,5 @@
 local debugger_reLoadFile =nil
-xpcall(function() 
-    debugger_reLoadFile = require("luaideReLoadFile")
-end,function() 
-    debugger_reLoadFile = function() print("未实现代码重载") end
-end)
+local debugger_xpcall = nil
 local sethook = debug.sethook
 local debugger_stackInfo = nil
 local coro_debugger = nil
@@ -707,7 +703,15 @@ coroutine.resume = function(co, ...)
     end
     return _resume(co, ...)
 end
-
+local oldXpcall = xpcall
+xpcall = function(runFun,errFun,...)
+   return oldXpcall(runFun,function(err)
+        if(debugger_xpcall) then
+            debugger_xpcall()
+        end
+        errFun(err)
+    end,...)
+end
 LuaDebugger.event = {
 	S2C_SetBreakPoints = 1,
 	C2S_SetBreakPoints = 2,
@@ -2240,7 +2244,11 @@ debug_hook = function(event, line)
 					end
 					if(checkCount>0) then
 						break;
-					end
+                    end
+                    if(checkCount==0) then
+                        breakData = nil
+                        -- break;
+                    end
 				else
 					breakData = nil
 				end
@@ -2359,7 +2367,7 @@ debug_hook = function(event, line)
 end
 
 
-local function debugger_xpcall()
+debugger_xpcall = function()
 	--调用 coro_debugger 并传入 参数
     local data = debugger_stackInfo(4, LuaDebugger.event.C2S_HITBreakPoint)
     if(data.stack and data.stack[1]) then
@@ -2413,7 +2421,7 @@ local function start()
 		end
 	end
 end
-function StartDebug(host, port)
+function StartDebug(host, port,isReLoad)
 	
 
 	if(not host) then
@@ -2429,12 +2437,25 @@ function StartDebug(host, port)
 		print("error host not number")
 	end
 	controller_host = host
-	controller_port = port
+    controller_port = port
+    
+
 	xpcall(start, function(error)
 		-- body
 		print(error)
-	end)
-	return debugger_receiveDebugBreakInfo, debugger_xpcall
+    end)
+    --代码重载
+    if(isReLoad) then
+        xpcall(function() 
+            debugger_reLoadFile = require("luaideReLoadFile")
+        end,function() 
+            print("左侧luaide按钮->打开luaIde最新调试文件所在文件夹->luaideReLoadFile.lua->拷贝到项目中")
+            print("具体使用方式请看luaideReLoadFile中文件注释")
+            debugger_reLoadFile = function() print("未实现代码重载") end
+        end)
+    end
+	local tempFun = function() end
+    return debugger_receiveDebugBreakInfo, tempFun
 end
 
 

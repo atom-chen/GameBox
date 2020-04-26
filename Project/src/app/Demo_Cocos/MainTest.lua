@@ -14,8 +14,10 @@ local ScreenShotTest = require("app.Demo_Cocos.ScreenShotTest")
 local EffectTest = require("app.Demo_Cocos.EffectTest")
 local MotionStreakTest = require("app.Demo_Cocos.MotionStreakTest")
 local GhostTest = require("app.Demo_Cocos.GhostTest")
+local SliderTest = require("app.Demo_Cocos.SliderTest")
 
 local tests = {
+    {title = "SliderTest", layer = SliderTest, state = "拖曳条相关"},
     {title = "ClipTest", layer = ClipTest, state = "裁切图形相关"},
     {title = "DrawGraphTest", layer = DrawGraphTest, state = "cocos自带的绘制图形相关"}, -- Demo代码不对
     {title = "DrawLineTest", layer = DrawLineTest, state = "cocos自带的绘制线段相关"},
