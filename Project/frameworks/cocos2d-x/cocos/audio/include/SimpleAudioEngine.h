@@ -259,6 +259,9 @@ protected:
     * Destructor of SimpleAudioEngine.
     */
     virtual ~SimpleAudioEngine();
+
+private:
+	float m_effectVolume;
 };
 
 } // end of namespace CocosDenshion
