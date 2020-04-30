@@ -21,9 +21,9 @@ function TestScene:ctor()
     self._root = cc.CSLoader:createNode("res/csd/UITest.csb")
     self:addChild(self._root)
 
-    -- 测试
-    local uiLayer = require("app.BaseTest.UILayer").new()
-    uiLayer:setName()
+    local StringUtil = require("app.Utils.StringUtil")
+    print(StringUtil.CheckStrIsLegal("阿德撒发生"))
+    print(StringUtil.CheckStrIsLegal("JB"))
 
     -- listView相关
     self._listView = ccui.Helper:seekNodeByName(self._root, "ListView_1")

@@ -1,8 +1,9 @@
-
+local sensitiveConfig = require("app.config.SensitiveConfig")
 local StringUtil = {}
 
+---------------------- 字符串相关 ----------------------
 -- 字符串保存到table
-local function stringToTable(s)
+StringUtil.stringToTable = function(s)
     local tb = {}
 
     --[[
@@ -18,10 +19,9 @@ local function stringToTable(s)
 
     return tb
 end
-StringUtil.stringToTable = stringToTable
 
 -- 获取字符串长度,英文字符为一个单位长, 中文字符为2个单位长
-local function getUTFLen(s)
+StringUtil.getUTFLen = function(s)
     local sTable = StringUtil.stringToTable(s)
     local len = 0
     local charLen = 0
@@ -40,10 +40,9 @@ local function getUTFLen(s)
 
     return len
 end
-StringUtil.getUTFLen = getUTFLen
 
 -- 获取字符串长度,中文，英文均为一个字符为1单位长
-local function getNewUTFLen(s)
+StringUtil.getNewUTFLen = function(s)
     local sTable = StringUtil.stringToTable(s)
     local len = 0
     local charLen = 0
@@ -58,9 +57,28 @@ local function getNewUTFLen(s)
 
         len = len + charLen
     end
-
     return len
 end
-StringUtil.getNewUTFLen = getNewUTFLen
 
+-------------------- 非法字符检测相关 --------------------
+-- 检测字符串是否合法, 合法返回true，否则返回false
+StringUtil.CheckStrIsLegal = function(str)
+    str = tostring(str)
+    assert(str ~= nil, "[CheckStrIsLegal] str inValid")
+
+    for i, v in pairs(sensitiveConfig) do 
+        -- 查找是否存在匹配，若存在则返回具体位置，否则返回nil
+        local startIndex, endIndex = string.find(str, v)
+        if startIndex then 
+            return false
+        end 
+    end 
+    return true 
+end 
+
+--[[
+local StringUtil = require("app.Utils.StringUtil")
+print(StringUtil.CheckStrIsLegal("阿德撒发生"))
+print(StringUtil.CheckStrIsLegal("JB"))
+]]
 return StringUtil
