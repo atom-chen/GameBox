@@ -14,7 +14,7 @@ function lolitaLoginScene:ctor()
     local normal = "lolitaParkour/newgameA.png"
     local press = "lolitaParkour/newgameB.png"
     local startBtn = ccui.Button:create(normal, press, normal)
-    startBtn:addTouchEventListener(handler(self, self._startEvent))
+    BindTouchEvent(startBtn, handler(self, self._startEvent))
     startBtn:setPosition(cc.p(display.width/2, display.height/2))
     self:addChild(startBtn, 1)
 

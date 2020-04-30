@@ -1,6 +1,6 @@
 require("cocos/init")
 require("cocos/framework/init")
-require("app.Utils.GlobalRequire")
+require("app.manager.GlobalRequire")
 
 
 local MyApp = class("MyApp")

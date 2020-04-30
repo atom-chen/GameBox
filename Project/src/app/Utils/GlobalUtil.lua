@@ -36,36 +36,25 @@ end
 -- @func:触摸注册事件
 -- @param: node 注册节点
 -- @param: callback 回调接口
--- @param: eventType 事件类型,可为nil
--- @param: scale 缩放, 可为nil
-cc.exports.BindTouchEvent = function(register,callback,eventType,scale)
-	if tolua.isnull(register) then 
-		print("buttonTouchListener failed, the cboj is nill")
-		return 
-	end 
+-- @param: event 事件类型,可为nil，默认：ccui.TouchEventType.ended
+-- @param: 按钮按下缩放，可为nil，默认：-0.1
+cc.exports.BindTouchEvent = function(register,callback,event,zoomScale)
+	assert(not tolua.isnull(register), "Error:BindTouchEvent register inValid")
 
-	-- 设置点击音效
-	local soundRes = ""
-	if soundRes ~= nil and string.len(soundRes) > 0 then 
-		-- do something 
-	end 
+	zoomScale = zoomScale or -0.1
+	event = event or ccui.TouchEventType.ended
+	local callFunc = function(sender, eventType)
+		if eventType == ccui.TouchEventType.began then 
+			AudioEngine.playEffect("res/sound/click.wav", false)
+		end 
 
-	-- 设置按钮缩放
-	if scale then
-		-- 设置按钮开启按下缩放效果
-		node:setPressedActionEnabled(true)
-		-- 设置按钮缩放
-		node:setZoomScale(scale)
-	end
-
-	-- 设置回调
-	eventType = eventType or ccui.TouchEventType.ended
-	local touchEvent = function(sender, event)
-		if event == eventType then 
-			callback(sender)
+		if event == ccui.TouchEventType.ended then 
+			callback(sender, eventType)
 		end 
 	end 
-	register:addTouchEventListener(touchEvent)
+	register:addTouchEventListener(callFunc)
+	register:setPressedActionEnabled(true)
+	register:setZoomScale(zoomScale)
 end
 
 -- @function: 切换场景
